@@ -1,0 +1,108 @@
+# Få oversikt over datasettet
+
+
+```{r}
+library(tidyverse)
+library(haven)
+library(labelled)
+```
+
+
+```{r}
+norlag <- read_stata("data/norlag_panel2022.dta")
+```
+
+
+Vi har nå et datasett i minnet og vi bør ta en titt på det. Nå er det mange hundre variable i datasettet, så det er lite hensiktsmessig å printe det til konsollen fordi det er rett og slett ikke plass. I tidligere kurs skal dere ha lært å bruke funksjonen `glimpse()`, men også her blir det mest rotete fordi det er så mange variable. 
+
+En enkel løsning er å bare se på noen få variable om gangen. Med klammeparentes kan vi angi hvilke radnummer og kolonnenummer vi ønsker se på med følgende syntax: `datasett[rader, kolonner]` der altså komma skiller mellom rader og kolonner. Følgende eksempel viser hvordan man kan bruke `head()` for å vise de første observasjonene i datasettet med bare de første 5 variablene (altså: kollonne nr 1-5). 
+
+```{r}
+#| message: false 
+#| warning: false
+head(norlag[, 1:5])
+
+```
+
+Legg merke til at under hvert variabelnavn står det en liten tekst, f.eks. <dbl> eller <S3: haven_labelled>. Det kan også stå andre ting. dbl betyr at det er en kontinuerlig variabel, mens haven_labelled betyr at det er labler til alle eller noe verdier i variabelen. 
+
+En tilsvarende variant er å bruke `glimpse()` bare på et utvalg variable på tilsvarende måte. Her er et eksempel, men der vi ser på de 10 første variablene. 
+
+```{r}
+#| message: false 
+#| warning: false
+glimpse(norlag[, 1:20])
+
+```
+
+
+I denne output'en er den første kollonnen altså variabelnavnene, deretter er det en kollonne som viser hva slags type variabel det er, og deretter de første observasjonene på hver variabel slik at man får et inntrykk av hvordan det ser ut. `glimpse()` gir altså omtrent samme informasjon som `head()`, men er nok mer hensiktsmessig hvis mange variable. 
+
+
+For å se nærmere på en variabel går an å bruke funksjonen `look_for()`, som primært er en søke-funksjon, men det gir også informasjon om variabelen.
+
+
+```{r}
+#| message: false 
+#| warning: false
+look_for(norlag, "iokjonn")
+
+```
+I output fremgår det at dette er den 10'ende variabelen, inneholder informasjonen "IOs kjønn", er av typen numerisk med tilhørende labler, og verdiene er 1 = Mann og 2 = Kvinne. 
+
+
+Det går også an å bare få ut variabel-label med funksjonen `var_label()` slik: 
+
+```{r}
+#| message: false 
+#| warning: false
+var_label(norlag$iokjonn)
+
+```
+
+For å se labels på *verdiene* bruk **val_labels()**.
+```{r}
+#| message: false 
+#| warning: false
+val_labels(norlag$iokjonn)
+
+```
+
+
+### Alternativ: pakken {memisc} og `codebook()`
+Man vil klare seg greit med det vi har vist ovenfor. Men det finnes flere måter å gjøre det på. Pakken {memisc} inneholder en rekke funksjoner for å håndtere surveydata, som vi ikke skal gå nærmere inn på her. Men akkurat funksjonen `codebook()` gir litt mer informativt output enn `look_for()`. 
+
+For å bruke denne må du installere pakken først. I eksempelet nedenfor er pakken ikke lastet med library(), men angitt pakken direkte med `memisc::` først. Dette kan være nyttig hvis man ikke skal bruke noen andre funksjoner fra denne pakken.
+
+```{r}
+#| message: false 
+#| warning: false
+memisc::codebook(norlag$iokjonn)
+
+```
+
+Poenget her er altså bare å få en penere output og litt deskriptiv statistikk samtidig. 
+
+
+
+## Søke i datasettet etter variable
+Alle datasett skal komme med en dokumentasjon som sier hva hver variabel inneholder og hvilke verdier som finnes i hver variable, og hva de betyr. Dette leveres gjerne som en separat fil, ganske ofte i pdf eller html format. NSD/Sikt leverer dokumentasjonen for Norlag i html-format. (Ideelt burde det vært i et enkelt maskinlesbart format egnet til å bruke til omkoding og labler for de som ønsker det, men de har valgt en annen løsning). 
+
+Du kan søke i dokumentasjonen på samme måte som i andre filer, men det kan være litt knotete. Et godt alternativ er å søke direkte i datasettet. Funksjonen `look_for()` søker både i variabelnavn, verdier og labler. Her er et eksempel for hvordan finne variabler som inneholder ordet "yrkesinntekt". Du kan også søke på kortere eller lengre tekststrenger. (Søker du f.eks. bare på "innt" eller "yrke" så får du opp langt flere variable, så du må kanskje prøve deg litt frem).
+
+```{r}
+#| message: false 
+#| warning: false
+look_for(norlag, "Yrkesinntekt")
+```
+
+Det er to variable som inneholder teksten "yrkesinntekt". Den første variabelen har posisjon 353 i datasettet og har variabelnavnet inwyrkinnt.  Den andre variabelen har posisjon 371 og har navnet inpartwyrkinnt. Vi fokuserer på den første.
+
+Merk at når labelen avsluttes med ~ (uttales "tilde") indikerer det at teksten er avkortet i outputvinduet. Du får opp hele teksten ved å bruke `val_label()` slik: 
+
+```{r}
+#| message: false 
+#| warning: false
+var_label(norlag$inwyrkinnt)
+```
+

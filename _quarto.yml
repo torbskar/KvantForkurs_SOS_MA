@@ -1,0 +1,50 @@
+project: 
+  type: book
+  output-dir: docs
+
+book:
+  navbar:
+    search: true
+  title: "Forkurs for kvantitativ metode"
+  subtitle: "Forkurs til SOS4020"
+  author: "Torbjørn Skardhamar"
+  date: today
+  version: 0.1
+  page-navigation: true
+  chapters:
+    - index.qmd
+    - part: "Del 1: Kom igang"
+      chapters: 
+       - Installering.qmd 
+       - innlesning_data.qmd
+       - oversikt_datasettet.qmd
+    - part: "Del 2: Deskriptive teknikker"
+      chapters: 
+        - grafikk.qmd
+        - deskriptive_tabeller.qmd
+    - part: "Del 3: Flere variable på en gang"
+      chapters: 
+        - kontrollerefor.qmd
+        - linearRegresjon.qmd
+    - part: "Del 4: statistisk tolkning"
+      chapters: 
+        - grunnleggendeDesign.qmd
+        - statistiskTolkning.qmd
+    - part: "Del 5: Setter det hele sammen"
+      chapters: 
+        - praktiskStatistikk.qmd
+    - part: "Del 6: Omkoding og datahåndtering"
+      chapters: 
+        - tidyverse.qmd
+        - omkode_factor.qmd
+  appendices:
+   - import_metadata.qmd
+
+  
+format:
+  html:
+    theme: cosmo
+    code-copy: true
+
+
+#Sys.setlocale(locale='no_NB.utf8')

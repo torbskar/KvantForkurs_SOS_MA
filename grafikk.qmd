@@ -1,0 +1,40 @@
+# Grafikk med ggplot
+
+
+
+
+## Kategoriske variabel  
+
+### Stolpediagram 
+
+
+### Kakediagram og satans verk 
+
+
+
+
+## Kontinuerlige variable 
+
+
+### Histogram 
+
+### Density plot 
+
+
+### Flere variable samtidig 
+
+####  Boksplot 
+
+#### Scatterplot 
+
+#### Ridgeplot 
+
+
+## Andre greier 
+
+
+## Grammar of graphics
+
+
+
+

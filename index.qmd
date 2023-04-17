@@ -1,0 +1,23 @@
+# Forord {.unnumbered}
+
+Dette materialet er beregnet på et forkurs for masterstudenter i sosiologi ved universitet i Oslo som skal ta emnet SOS4020. Forkurset dekker de mest sentrale elementene fra BA-nivået som er helt nødvendig for å MA-kurset. 
+
+Læringsmålene er som følger: 
+
+1) Bli kjent med R og Rstudio, mappestruktur og jobbe med *Rstudio projects* 
+1) Kunne lese inn data i vanlige formater
+1) Ha lest inn og bli kjent med datasettet som skal brukes videre i SOS4020
+1) Kunne lage grunnleggende grafikk med `ggplot`
+1) Kunne lage deskriptive tabeller med `gtsummary` (og litt andre funksjoner)
+1) Kunne lage 3-veis krysstabeller 
+1) Kunne lage grafisk fremstilling av sammenheng mellom inntil 4 variable 
+1) Kunne beskrive sammenhengen mellom variable med lineær regresjon 
+1) Kjenne grunnleggende sammenhengen mellom hvordan *dataene ble til* og hvordan analysene kan *tolkes*
+1) Kjenne til hva en samplingfordeling er og kunne tolke standardfeil, konfidensintervall og p-verdier 
+1) Kunne gjennomføre en t-test for gjennomsnitt og for regresjonsparametre 
+1) Kunne grunnleggende datahåndtering med `tidyverse` for å kunne gjøre de aktuelle analyser på egenhånd 
+1) Kunne eksportere alle resultater fra R til Word på en effektiv måte
+
+Det anbefales at dere repeterer materiale fra metodekurs på bachelornivå. Forkurset er en oppfrisker av det aller viktigste materialet fra [SOSGEO1120](https://www.uio.no/studier/emner/sv/iss/SOSGEO1120/) som er aller mest nyttig for å ta SOS4020. 
+
+For de som ikke har erfaring med bruk av R fra før vil her lære akkurat nok, men vil nok oppleve det som en litt bratt læringskurve. 

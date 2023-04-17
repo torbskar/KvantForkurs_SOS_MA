@@ -1,0 +1,29 @@
+# Deskriptive tabeller 
+
+
+## Quick-and-dirty oppsummeringer 
+
+### Enkeltvariable med $ 
+
+### summary 
+
+
+
+## Manuelle tabeller
+Noen ganger trenger man å lage ganske spesifikke ting. 
+
+### For datasettet totalt 
+
+
+### Grupperte statistikker 
+
+
+
+## Professjonelle tabeller med gtsummary 
+
+
+
+## Noen andre muligheter
+
+
+

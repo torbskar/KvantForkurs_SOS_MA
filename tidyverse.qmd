@@ -1,0 +1,64 @@
+# Datahåndtering med *Tidyverse*
+Et helt vanlig problem er at data i den virkelige verden ofte er ganske grisete. Det er mye rot, manglende verdier, andre kategorier enn du er interessert i osv. Kort sagt: dataene er ikke helt slik de bør være for at du skal kunne gjøre den analysen du har tenkt til. Altså må du fikse dataene før du får estimert det du har tenkt. Enten dette gjelder grafikk, tabeller eller regresjonsmodeller. 
+
+*Tidyverse* er en rekke funksjoner som til sammen utgjør et programmeringsspråk for datahåndtering. Dette er en variant av R, som vi kan si er en dialekt av R. Det finnes andre dialekter, men vi anbefaler sterkt å lære tidyverse godt først. 
+
+De grunnleggende *verbene* gjør noe med dataene, så da er altså dataene *substantivene*. 
+
+
+## Lage ny variabel: `mutate` 
+Alle verbene i tidyverse starter med å angi hvilket objekt man skal gjøre noe med, altså datasettet. 
+
+Her er et eksempel der man lager en ny variable som summen av eksisterende variablene *x* og *z*. 
+```{r}
+#| eval: false
+nyttobjekt <- mutate(dinedata, nyvariabel = x + z)
+
+```
+
+
+Her er et eksempel der man lager to variable samtidig der den andre er  *x* delt på  *z*. 
+```{r}
+#| eval: false
+nyttobjekt <- mutate(dinedata, nyvariabel = x / z,
+                     nyvariabel2 = x + z)
+
+```
+
+
+## Rørlegging: Hva i alle dager betyr `%>%`  ?? 
+Symbolet `%>%` kalles in "pipe" eller på norsk: rørlegging. Det betyr at det som står til venstre flyttes over til høyre. Eller sagt på en annen måte betyr det: "Gjør deretter følgende". Vi vil bruke denne syntaxen konsekvent fra nå når vi introduserer de ulike "verbene". 
+
+```{r}
+#| eval: false
+
+nyttobjekt <- dinedata %>% 
+  mutate(nyvariabel = x / z,
+         nyvariabel2 = x + z)
+
+```
+
+Denne koden sier følgende, linje for linje: 
+
+* lag en kopi av `dinedata` og lagre det i `nyttobjekt` *^deretter gjør du følgende:^* 
+* lag de nye variablene `nyvariabel` som får verdier fra variablene x delt på y
+* og `nyvariabel2`som summen av x og z
+
+
+
+## Beholde og slette variable: `select` 
+
+
+
+## Aggregere: `summarise` 
+
+
+
+## Grupperte utregninger: `group_by`
+
+
+
+## Sette det hele sammen 
+
+
+

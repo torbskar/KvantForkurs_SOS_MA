@@ -1,0 +1,126 @@
+# Omkoding av variable 
+
+```{r }
+#| warning: false
+#| message: false
+library(haven)       # Importere data fra SAS, SPSS og Stata
+library(tidyverse)   # Pakker for generell datahåndtering og grafikk
+library(labelled)    # Håndtering av variable med labler, importert fra annen software
+library(forcats)     # Lettere omkoding av faktorvariable
+
+```
+
+
+
+## Endre variabelnavn
+`rename` og `mutate`
+
+
+
+
+## Kontinuerlige variable 
+
+
+
+
+## Tekstvariable (strings)
+
+
+
+
+## Factorvariable 
+
+
+
+
+## Bruke kataloger for kodeverk 
+
+
+
+
+
+
+## Factorvariable med skikkelig lang tekst
+```{r}
+#| message: false 
+#| warning: false
+norlag <- read_stata("data/norlag_panel2022.dta") %>% 
+    mutate(across( where(is.labelled) ,  ~replace(., 
+                                        . %in% c(997, 998, 999, 99999, 999999), 
+                                        NA))) %>%
+  # For hele datasettet fjernes ikke-brukte labler 
+  drop_unused_value_labels() %>% 
+  # Så gjør alle variable om til mer ordinære R-format. Dvs. gjøre labler om til factor
+  unlabelled()
+
+```
+
+
+Noen ganger har man et datasett som allerede er omgjort med factor-variable. Eller du har en eller annen grunn til å ikke gå tilbake til et tidligere steg for å omkode. Men du har factor-levels med skikkelig lang tekst kan det være noe drit å kode om. Kan man gjøre dette på en lurere måte? Minst mulig tårer? Ja, selvsagt. 
+
+I NorLAG er variabelen wr117zz svar på et spørsmål om "Mulighet for å redusert arbeidstid (deltid)". Når denne variabelen er gjort om til factor kan man se hvilke verdier variabelen har med bruke av funksjonen *levels()* slik: 
+
+```{r}
+#| message: false 
+#| warning: false
+levels(norlag$wr117zz)
+
+table(norlag$wr117zz)
+
+``` 
+
+La oss si at vi vil kode om slik at vi får en variabel som bare er om vedkommende har mulighet til å jobbe deltid eller ikke. De som allerede jobber deltid har jo åpenbart mulighet til det, så de skal kodes om til "Ja". De andre kategoriene er egentlig grunner til at det mangler data, så de skal settes til NA. En mulighet er da å omkode som følger: 
+
+
+
+```{r}
+#| message: false 
+#| warning: false
+norlag_omkodet <- norlag %>%
+  mutate(redarbtid = replace(wr117zz, wr117zz == "filter: jobber deltid", "Ja"), 
+         redarbtid = replace(redarbtid, redarbtid == "filter: selvstendig næringsdrivende (NorLAG3 inkl frilanser/annet)", NA), 
+         redarbtid = replace(redarbtid, redarbtid == "filter: ikke i arbeid", NA), 
+         redarbtid = replace(redarbtid, redarbtid == "vil ikke svare", NA),
+         redarbtid = replace(redarbtid, redarbtid == "vet ikke", NA),
+         redarbtid = replace(redarbtid, redarbtid == "mangler data", NA),
+         redarbtid = replace(redarbtid, redarbtid == "Deltok ikke i runden", NA)) %>% 
+  droplevels()
+
+```
+
+Dette funker, men blir ganske mye tekst å skrive, og da kan man også lett gjøre skrivefeil. Husk at faktornivåene må angis helt nøyaktig slik de er skrevet! 
+Merk at den siste funksjone, *droplevels()*, bare fjerner faktor-levels som ikke er i bruk. 
+
+I output for faktor-levels angir klammeparentesen gir rekkefølgen på disse verdiene. Vi kan bruke denne informasjonen direkte i omkodingen for å unngå å skrive så veldig mye. Når man bruker levels() får man en liten vektor med verdier, og disse kan man altså henvise til med rekkefølgen. Her er et eksempel for bare å bytte ut de som jobber deltid til "Ja": 
+
+
+```{r}
+#| message: false 
+#| warning: false
+norlag_omkodet <- norlag %>%
+  mutate(redarbtid = replace(wr117zz, wr117zz == levels(wr117zz)[3], "Ja")) %>% 
+  droplevels()
+
+
+```
+
+Trikset her er altså å bruke levels() og vise til hvilket nummer i rekkefølgen. Da unngår vi også faren for skrivefeil.  
+
+Vi vil også kode om alle de andre verdiene, nummer 4-9 til NA. Det kan vi gjøre på samme måte, men vi behøver ikke skrive en ny linje for hver verdi. Den logiske operatoren == kan man bruke når man skal sjekke om to verdier er like. Hvis vi skal se om en verdi er lik en av flere mulige kan vi bruke %in% og så en liste med verdier. levels() gir en liste med verdier, så da kan vi angi den direkte og alle verdiene 4 til 9 ved å skrive 4:9. Samlet blir det da slik: 
+
+```{r}
+#| message: false 
+#| warning: false
+norlag_omkodet <- norlag %>%
+  mutate(redarbtid = replace(wr117zz, wr117zz == levels(wr117zz)[3], "Ja"), 
+         redarbtid = replace(redarbtid, redarbtid %in% levels(wr117zz)[4:9], NA)) %>% 
+  droplevels()
+
+memisc::codebook(norlag_omkodet$redarbtid)
+
+```
+
+
+
+
+

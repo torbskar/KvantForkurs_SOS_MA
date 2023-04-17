@@ -1,0 +1,56 @@
+# Statistisk tolkning
+Det vi omtaler som *statistisk tolkning* eller *statistisk inferens* handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. I praksis handler dette om (på dette nivået) følgende: 
+
+1) standardfeil  
+1) konfidensintervall
+1) p-verdi 
+
+Disse tre henger nøye sammen. Vi vil her bare se på det grunnleggende som baserer seg på *normalfordelingen* hvis vi har stort nok datamateriale. Disse kaller vi t-test fordi det egentlig er en *t-fordeling* som ligger under. Det finnes en hel rekke statistiske tester som er varianter av samme tankegang, men det som skiller seg fra dette er stort sette hvordan standardfeilen regnes ut og hvilken sannsynlighetsfordeling man tolker test-statistikken ut fra. For å lære mer om slik kan du slå opp i hvilken som helst grunding innføringsbok i statistikk og kvantitative metoder. 
+
+
+## Tilfeldigheter og systematikk 
+
+### Samplingfordeling og Sentralgrenseteoremet 
+
+Standard*feilen* er ikke det samme som standardavvik, og det er viktig at du vet forskjellen på disse. 
+
+
+### Standard*feil* 
+Standard*feilen* uttrykker usikkerheten ved *estimatet*. La oss si at du ønsker å si noe om gjennomsnittet i *populasjonen*, men har bare data om et tilfeldig *utvalg* fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et *estimat*. 
+
+
+### Er man "95% sikker"?
+Det sies ofte at feilmarginen uttrykker hvor sikker man er. Det er jo ikke helt riktig - eller det er riktig under noen spesielle forutsetninger om hva man mener med "sikker". La oss derfor ta dette med en gang og starter med konfidensintervallet. 
+
+Et 95% konfidensintervall er vårt anslag på hvor god vår målemetode er. Vi har jo regnet ut f.eks. et gjennomsnitt og det er jo greit nok. Usikkerheten kommer fra utvalgsprosedyren og variasjonen i data. 
+
+Vi vet ikke hvorvidt vårt estimat ligger nærme eller langt unna den sanne verdien. Det vi derimot vet noe om er påliteligheten i den metoden vi har brukt. Det viktigste her er altså tilfeldig utvalg, og hvis utvalget ikke er tilnærmet tilfeldig trukket, så bryter det hele sammen.
+
+Når man sier at konfidensintervallet uttrykker at man er "95% sikker" på at den sanne verdien ligger i det intervallet mener man da følgende: Man har brukt en *metode* (dvs utvalg og utregninger og det hele) som har en *feilmargin*. Denne feilmarginen er slik at hvis man gjorde estimeringen (altså nytt utvalg hver gang) på samme måte svært mange ganger (f.eks. uendelig mange ganger), så ville 95% av resultatene ligget innenfor et slikt intervall. 
+
+
+## T-test 
+
+T-testen er i prinsippet en sammenligning mellom estimatets størrelse og standardfeilen til estimatet
+
+
+$$
+ \frac{\mu}{SE(\mu)} = t 
+$$
+
+Eller sagt på en annen måte: 
+$$
+ \frac{estimat}{standardfeil} = t 
+$$
+
+Det betyr at $t$ uttrykker forholdstallet mellom estimatet og standardfeilen. Intuitivt kan man vel forstå at hvis usikkerheten bør være mindre enn estimatet. Men hvor mye mindre? 
+
+Fra samplingfordelingen og sentralgrenesteoremet ved vi jo at $1.96 \times SE(\mu)$ 
+
+
+
+## Statistiske tester 
+
+
+
+

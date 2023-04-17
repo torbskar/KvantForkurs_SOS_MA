@@ -1,0 +1,254 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Forkurs for kvantitativ metode",
+    "section": "",
+    "text": "Forord\nDette materialet er beregnet på et forkurs for masterstudenter i sosiologi ved universitet i Oslo som skal ta emnet SOS4020. Forkurset dekker de mest sentrale elementene fra BA-nivået som er helt nødvendig for å MA-kurset.\nLæringsmålene er som følger:\n\nBli kjent med R og Rstudio, mappestruktur og jobbe med Rstudio projects\nKunne lese inn data i vanlige formater\nHa lest inn og bli kjent med datasettet som skal brukes videre i SOS4020\nKunne lage grunnleggende grafikk med ggplot\nKunne lage deskriptive tabeller med gtsummary (og litt andre funksjoner)\nKunne lage 3-veis krysstabeller\nKunne lage grafisk fremstilling av sammenheng mellom inntil 4 variable\nKunne beskrive sammenhengen mellom variable med lineær regresjon\nKjenne grunnleggende sammenhengen mellom hvordan dataene ble til og hvordan analysene kan tolkes\nKjenne til hva en samplingfordeling er og kunne tolke standardfeil, konfidensintervall og p-verdier\nKunne gjennomføre en t-test for gjennomsnitt og for regresjonsparametre\nKunne grunnleggende datahåndtering med tidyverse for å kunne gjøre de aktuelle analyser på egenhånd\nKunne eksportere alle resultater fra R til Word på en effektiv måte\n\nDet anbefales at dere repeterer materiale fra metodekurs på bachelornivå. Forkurset er en oppfrisker av det aller viktigste materialet fra SOSGEO1120 som er aller mest nyttig for å ta SOS4020.\nFor de som ikke har erfaring med bruk av R fra før vil her lære akkurat nok, men vil nok oppleve det som en litt bratt læringskurve."
+  },
+  {
+    "objectID": "innlesning_data.html#de-mest-vanlige-dataformatene",
+    "href": "innlesning_data.html#de-mest-vanlige-dataformatene",
+    "title": "2  Innlesning av data",
+    "section": "2.1 De mest vanlige dataformatene",
+    "text": "2.1 De mest vanlige dataformatene\n\n2.1.1 csv-filer\n\n\n2.1.2 rds\n\n\n2.1.3 Excel"
+  },
+  {
+    "objectID": "innlesning_data.html#laste-workspace-med-load",
+    "href": "innlesning_data.html#laste-workspace-med-load",
+    "title": "2  Innlesning av data",
+    "section": "2.2 Laste workspace med load()",
+    "text": "2.2 Laste workspace med load()\n\n2.2.1 Proprietære format: Stata, SPSS og SAS"
+  },
+  {
+    "objectID": "innlesning_data.html#datasettet-norlag",
+    "href": "innlesning_data.html#datasettet-norlag",
+    "title": "2  Innlesning av data",
+    "section": "2.3 Datasettet NorLAG",
+    "text": "2.3 Datasettet NorLAG\n\n\n\nDette datasettet skal benyttes videre i SOS4020 og vi bruker litt tid på dette for å spare tid senere. Da blir det et problem mindre når SOS4020 starter for alvor."
+  },
+  {
+    "objectID": "innlesning_data.html#en-rimelig-ryddet-versjon-av-datasettet",
+    "href": "innlesning_data.html#en-rimelig-ryddet-versjon-av-datasettet",
+    "title": "2  Innlesning av data",
+    "section": "2.4 En rimelig ryddet versjon av datasettet",
+    "text": "2.4 En rimelig ryddet versjon av datasettet\nDet viktigste for dette kurset er at dere har et rimelig ryddig datasett å jobbe med slik at dere kan fokusere på estimering. Det opprinnelige datasettet er levert i Stata-format (se over) og det er en del utfordringer med å importere disse dataene bl.a. på grunn av hvordan de har valgt å kode missing og filterverdier og lagt denne typen metadata inn i Stataformatet. Disse tingene er ryddet opp i her. Datasettet norlag_panel.rds er altså konvertert til R-formatet rds. Dette datasettet kan da enkelt leses inn med readRDS() som følger:\n\nnorlag <- readRDS(\"data/norlag_panel.rds\")\ndim(norlag)\n\n[1] 20892   434"
+  },
+  {
+    "objectID": "oversikt_datasettet.html#søke-i-datasettet-etter-variable",
+    "href": "oversikt_datasettet.html#søke-i-datasettet-etter-variable",
+    "title": "3  Få oversikt over datasettet",
+    "section": "3.1 Søke i datasettet etter variable",
+    "text": "3.1 Søke i datasettet etter variable\nAlle datasett skal komme med en dokumentasjon som sier hva hver variabel inneholder og hvilke verdier som finnes i hver variable, og hva de betyr. Dette leveres gjerne som en separat fil, ganske ofte i pdf eller html format. NSD/Sikt leverer dokumentasjonen for Norlag i html-format. (Ideelt burde det vært i et enkelt maskinlesbart format egnet til å bruke til omkoding og labler for de som ønsker det, men de har valgt en annen løsning).\nDu kan søke i dokumentasjonen på samme måte som i andre filer, men det kan være litt knotete. Et godt alternativ er å søke direkte i datasettet. Funksjonen look_for() søker både i variabelnavn, verdier og labler. Her er et eksempel for hvordan finne variabler som inneholder ordet “yrkesinntekt”. Du kan også søke på kortere eller lengre tekststrenger. (Søker du f.eks. bare på “innt” eller “yrke” så får du opp langt flere variable, så du må kanskje prøve deg litt frem).\n\nlook_for(norlag, \"Yrkesinntekt\")\n\n pos variable       label                   col_type values                 \n 353 inwyrkinnt     Yrkesinntekter NorLAG ~ dbl+lbl  [-5000] Value <0 >-5000\n                                                     [5000] Value >0 <5000  \n                                                     [999999999] Mangler da~\n 371 inpartwyrkinnt Partner: yrkesinntekte~ dbl+lbl  [99999996] Filter: IO ~\n                                                     [99999999] Mangler data\n                                                     [999999999] Deltok ikk~\n\n\nDet er to variable som inneholder teksten “yrkesinntekt”. Den første variabelen har posisjon 353 i datasettet og har variabelnavnet inwyrkinnt. Den andre variabelen har posisjon 371 og har navnet inpartwyrkinnt. Vi fokuserer på den første.\nMerk at når labelen avsluttes med ~ (uttales “tilde”) indikerer det at teksten er avkortet i outputvinduet. Du får opp hele teksten ved å bruke val_label() slik:\n\nvar_label(norlag$inwyrkinnt)\n\n[1] \"Yrkesinntekter NorLAG longitudinell\""
+  },
+  {
+    "objectID": "grafikk.html#kategoriske-variabel",
+    "href": "grafikk.html#kategoriske-variabel",
+    "title": "4  Grafikk med ggplot",
+    "section": "4.1 Kategoriske variabel",
+    "text": "4.1 Kategoriske variabel\n\n4.1.1 Stolpediagram\n\n\n4.1.2 Kakediagram og satans verk"
+  },
+  {
+    "objectID": "grafikk.html#kontinuerlige-variable",
+    "href": "grafikk.html#kontinuerlige-variable",
+    "title": "4  Grafikk med ggplot",
+    "section": "4.2 Kontinuerlige variable",
+    "text": "4.2 Kontinuerlige variable\n\n4.2.1 Histogram\n\n\n4.2.2 Density plot\n\n\n4.2.3 Flere variable samtidig\n\n4.2.3.1 Boksplot\n\n\n4.2.3.2 Scatterplot\n\n\n4.2.3.3 Ridgeplot"
+  },
+  {
+    "objectID": "grafikk.html#andre-greier",
+    "href": "grafikk.html#andre-greier",
+    "title": "4  Grafikk med ggplot",
+    "section": "4.3 Andre greier",
+    "text": "4.3 Andre greier"
+  },
+  {
+    "objectID": "grafikk.html#grammar-of-graphics",
+    "href": "grafikk.html#grammar-of-graphics",
+    "title": "4  Grafikk med ggplot",
+    "section": "4.4 Grammar of graphics",
+    "text": "4.4 Grammar of graphics"
+  },
+  {
+    "objectID": "deskriptive_tabeller.html#quick-and-dirty-oppsummeringer",
+    "href": "deskriptive_tabeller.html#quick-and-dirty-oppsummeringer",
+    "title": "5  Deskriptive tabeller",
+    "section": "5.1 Quick-and-dirty oppsummeringer",
+    "text": "5.1 Quick-and-dirty oppsummeringer\n\n5.1.1 Enkeltvariable med $\n\n\n5.1.2 summary"
+  },
+  {
+    "objectID": "deskriptive_tabeller.html#manuelle-tabeller",
+    "href": "deskriptive_tabeller.html#manuelle-tabeller",
+    "title": "5  Deskriptive tabeller",
+    "section": "5.2 Manuelle tabeller",
+    "text": "5.2 Manuelle tabeller\nNoen ganger trenger man å lage ganske spesifikke ting.\n\n5.2.1 For datasettet totalt\n\n\n5.2.2 Grupperte statistikker"
+  },
+  {
+    "objectID": "deskriptive_tabeller.html#professjonelle-tabeller-med-gtsummary",
+    "href": "deskriptive_tabeller.html#professjonelle-tabeller-med-gtsummary",
+    "title": "5  Deskriptive tabeller",
+    "section": "5.3 Professjonelle tabeller med gtsummary",
+    "text": "5.3 Professjonelle tabeller med gtsummary"
+  },
+  {
+    "objectID": "deskriptive_tabeller.html#noen-andre-muligheter",
+    "href": "deskriptive_tabeller.html#noen-andre-muligheter",
+    "title": "5  Deskriptive tabeller",
+    "section": "5.4 Noen andre muligheter",
+    "text": "5.4 Noen andre muligheter"
+  },
+  {
+    "objectID": "kontrollerefor.html#simpsons-paradox",
+    "href": "kontrollerefor.html#simpsons-paradox",
+    "title": "6  Kontrollere for bakenforliggende variable",
+    "section": "6.1 Simpson’s paradox",
+    "text": "6.1 Simpson’s paradox"
+  },
+  {
+    "objectID": "linearRegresjon.html#scatterplot",
+    "href": "linearRegresjon.html#scatterplot",
+    "title": "7  Regresjon: Sammenheng mellom variable",
+    "section": "7.1 Scatterplot",
+    "text": "7.1 Scatterplot"
+  },
+  {
+    "objectID": "linearRegresjon.html#regresjonslinja",
+    "href": "linearRegresjon.html#regresjonslinja",
+    "title": "7  Regresjon: Sammenheng mellom variable",
+    "section": "7.2 Regresjonslinja",
+    "text": "7.2 Regresjonslinja"
+  },
+  {
+    "objectID": "linearRegresjon.html#flere-variable",
+    "href": "linearRegresjon.html#flere-variable",
+    "title": "7  Regresjon: Sammenheng mellom variable",
+    "section": "7.3 Flere variable",
+    "text": "7.3 Flere variable"
+  },
+  {
+    "objectID": "statistiskTolkning.html#tilfeldigheter-og-systematikk",
+    "href": "statistiskTolkning.html#tilfeldigheter-og-systematikk",
+    "title": "9  Statistisk tolkning",
+    "section": "9.1 Tilfeldigheter og systematikk",
+    "text": "9.1 Tilfeldigheter og systematikk\n\n9.1.1 Samplingfordeling og Sentralgrenseteoremet\nStandardfeilen er ikke det samme som standardavvik, og det er viktig at du vet forskjellen på disse.\n\n\n9.1.2 Standardfeil\nStandardfeilen uttrykker usikkerheten ved estimatet. La oss si at du ønsker å si noe om gjennomsnittet i populasjonen, men har bare data om et tilfeldig utvalg fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et estimat.\n\n\n9.1.3 Er man “95% sikker”?\nDet sies ofte at feilmarginen uttrykker hvor sikker man er. Det er jo ikke helt riktig - eller det er riktig under noen spesielle forutsetninger om hva man mener med “sikker”. La oss derfor ta dette med en gang og starter med konfidensintervallet.\nEt 95% konfidensintervall er vårt anslag på hvor god vår målemetode er. Vi har jo regnet ut f.eks. et gjennomsnitt og det er jo greit nok. Usikkerheten kommer fra utvalgsprosedyren og variasjonen i data.\nVi vet ikke hvorvidt vårt estimat ligger nærme eller langt unna den sanne verdien. Det vi derimot vet noe om er påliteligheten i den metoden vi har brukt. Det viktigste her er altså tilfeldig utvalg, og hvis utvalget ikke er tilnærmet tilfeldig trukket, så bryter det hele sammen.\nNår man sier at konfidensintervallet uttrykker at man er “95% sikker” på at den sanne verdien ligger i det intervallet mener man da følgende: Man har brukt en metode (dvs utvalg og utregninger og det hele) som har en feilmargin. Denne feilmarginen er slik at hvis man gjorde estimeringen (altså nytt utvalg hver gang) på samme måte svært mange ganger (f.eks. uendelig mange ganger), så ville 95% av resultatene ligget innenfor et slikt intervall."
+  },
+  {
+    "objectID": "statistiskTolkning.html#t-test",
+    "href": "statistiskTolkning.html#t-test",
+    "title": "9  Statistisk tolkning",
+    "section": "9.2 T-test",
+    "text": "9.2 T-test\nT-testen er i prinsippet en sammenligning mellom estimatets størrelse og standardfeilen til estimatet\n\\[\n\\frac{\\mu}{SE(\\mu)} = t\n\\]\nEller sagt på en annen måte: \\[\n\\frac{estimat}{standardfeil} = t\n\\]\nDet betyr at \\(t\\) uttrykker forholdstallet mellom estimatet og standardfeilen. Intuitivt kan man vel forstå at hvis usikkerheten bør være mindre enn estimatet. Men hvor mye mindre?\nFra samplingfordelingen og sentralgrenesteoremet ved vi jo at \\(1.96 \\times SE(\\mu)\\)"
+  },
+  {
+    "objectID": "statistiskTolkning.html#statistiske-tester",
+    "href": "statistiskTolkning.html#statistiske-tester",
+    "title": "9  Statistisk tolkning",
+    "section": "9.3 Statistiske tester",
+    "text": "9.3 Statistiske tester"
+  },
+  {
+    "objectID": "tidyverse.html#lage-ny-variabel-mutate",
+    "href": "tidyverse.html#lage-ny-variabel-mutate",
+    "title": "11  Datahåndtering med Tidyverse",
+    "section": "11.1 Lage ny variabel: mutate",
+    "text": "11.1 Lage ny variabel: mutate\nAlle verbene i tidyverse starter med å angi hvilket objekt man skal gjøre noe med, altså datasettet.\nHer er et eksempel der man lager en ny variable som summen av eksisterende variablene x og z.\n\nnyttobjekt <- mutate(dinedata, nyvariabel = x + z)\n\nHer er et eksempel der man lager to variable samtidig der den andre er x delt på z.\n\nnyttobjekt <- mutate(dinedata, nyvariabel = x / z,\n                     nyvariabel2 = x + z)"
+  },
+  {
+    "objectID": "tidyverse.html#rørlegging-hva-i-alle-dager-betyr",
+    "href": "tidyverse.html#rørlegging-hva-i-alle-dager-betyr",
+    "title": "11  Datahåndtering med Tidyverse",
+    "section": "11.2 Rørlegging: Hva i alle dager betyr %>% ??",
+    "text": "11.2 Rørlegging: Hva i alle dager betyr %>% ??\nSymbolet %>% kalles in “pipe” eller på norsk: rørlegging. Det betyr at det som står til venstre flyttes over til høyre. Eller sagt på en annen måte betyr det: “Gjør deretter følgende”. Vi vil bruke denne syntaxen konsekvent fra nå når vi introduserer de ulike “verbene”.\n\nnyttobjekt <- dinedata %>% \n  mutate(nyvariabel = x / z,\n         nyvariabel2 = x + z)\n\nDenne koden sier følgende, linje for linje:\n\nlag en kopi av dinedata og lagre det i nyttobjekt ^deretter gjør du følgende:^\nlag de nye variablene nyvariabel som får verdier fra variablene x delt på y\nog nyvariabel2som summen av x og z"
+  },
+  {
+    "objectID": "tidyverse.html#beholde-og-slette-variable-select",
+    "href": "tidyverse.html#beholde-og-slette-variable-select",
+    "title": "11  Datahåndtering med Tidyverse",
+    "section": "11.3 Beholde og slette variable: select",
+    "text": "11.3 Beholde og slette variable: select"
+  },
+  {
+    "objectID": "tidyverse.html#aggregere-summarise",
+    "href": "tidyverse.html#aggregere-summarise",
+    "title": "11  Datahåndtering med Tidyverse",
+    "section": "11.4 Aggregere: summarise",
+    "text": "11.4 Aggregere: summarise"
+  },
+  {
+    "objectID": "tidyverse.html#grupperte-utregninger-group_by",
+    "href": "tidyverse.html#grupperte-utregninger-group_by",
+    "title": "11  Datahåndtering med Tidyverse",
+    "section": "11.5 Grupperte utregninger: group_by",
+    "text": "11.5 Grupperte utregninger: group_by"
+  },
+  {
+    "objectID": "tidyverse.html#sette-det-hele-sammen",
+    "href": "tidyverse.html#sette-det-hele-sammen",
+    "title": "11  Datahåndtering med Tidyverse",
+    "section": "11.6 Sette det hele sammen",
+    "text": "11.6 Sette det hele sammen"
+  },
+  {
+    "objectID": "omkode_factor.html#endre-variabelnavn",
+    "href": "omkode_factor.html#endre-variabelnavn",
+    "title": "12  Omkoding av variable",
+    "section": "12.1 Endre variabelnavn",
+    "text": "12.1 Endre variabelnavn\nrename og mutate"
+  },
+  {
+    "objectID": "omkode_factor.html#kontinuerlige-variable",
+    "href": "omkode_factor.html#kontinuerlige-variable",
+    "title": "12  Omkoding av variable",
+    "section": "12.2 Kontinuerlige variable",
+    "text": "12.2 Kontinuerlige variable"
+  },
+  {
+    "objectID": "omkode_factor.html#tekstvariable-strings",
+    "href": "omkode_factor.html#tekstvariable-strings",
+    "title": "12  Omkoding av variable",
+    "section": "12.3 Tekstvariable (strings)",
+    "text": "12.3 Tekstvariable (strings)"
+  },
+  {
+    "objectID": "omkode_factor.html#factorvariable",
+    "href": "omkode_factor.html#factorvariable",
+    "title": "12  Omkoding av variable",
+    "section": "12.4 Factorvariable",
+    "text": "12.4 Factorvariable"
+  },
+  {
+    "objectID": "omkode_factor.html#bruke-kataloger-for-kodeverk",
+    "href": "omkode_factor.html#bruke-kataloger-for-kodeverk",
+    "title": "12  Omkoding av variable",
+    "section": "12.5 Bruke kataloger for kodeverk",
+    "text": "12.5 Bruke kataloger for kodeverk"
+  },
+  {
+    "objectID": "omkode_factor.html#factorvariable-med-skikkelig-lang-tekst",
+    "href": "omkode_factor.html#factorvariable-med-skikkelig-lang-tekst",
+    "title": "12  Omkoding av variable",
+    "section": "12.6 Factorvariable med skikkelig lang tekst",
+    "text": "12.6 Factorvariable med skikkelig lang tekst\n\nnorlag <- read_stata(\"data/norlag_panel2022.dta\") %>% \n    mutate(across( where(is.labelled) ,  ~replace(., \n                                        . %in% c(997, 998, 999, 99999, 999999), \n                                        NA))) %>%\n  # For hele datasettet fjernes ikke-brukte labler \n  drop_unused_value_labels() %>% \n  # Så gjør alle variable om til mer ordinære R-format. Dvs. gjøre labler om til factor\n  unlabelled()\n\nNoen ganger har man et datasett som allerede er omgjort med factor-variable. Eller du har en eller annen grunn til å ikke gå tilbake til et tidligere steg for å omkode. Men du har factor-levels med skikkelig lang tekst kan det være noe drit å kode om. Kan man gjøre dette på en lurere måte? Minst mulig tårer? Ja, selvsagt.\nI NorLAG er variabelen wr117zz svar på et spørsmål om “Mulighet for å redusert arbeidstid (deltid)”. Når denne variabelen er gjort om til factor kan man se hvilke verdier variabelen har med bruke av funksjonen levels() slik:\n\nlevels(norlag$wr117zz)\n\n[1] \"Nei\"                                                               \n[2] \"Ja\"                                                                \n[3] \"filter: jobber deltid\"                                             \n[4] \"filter: selvstendig næringsdrivende (NorLAG3 inkl frilanser/annet)\"\n[5] \"filter: ikke i arbeid\"                                             \n\ntable(norlag$wr117zz)\n\n\n                                                               Nei \n                                                              1360 \n                                                                Ja \n                                                              4146 \n                                             filter: jobber deltid \n                                                              1964 \nfilter: selvstendig næringsdrivende (NorLAG3 inkl frilanser/annet) \n                                                              1171 \n                                             filter: ikke i arbeid \n                                                              6238 \n\n\nLa oss si at vi vil kode om slik at vi får en variabel som bare er om vedkommende har mulighet til å jobbe deltid eller ikke. De som allerede jobber deltid har jo åpenbart mulighet til det, så de skal kodes om til “Ja”. De andre kategoriene er egentlig grunner til at det mangler data, så de skal settes til NA. En mulighet er da å omkode som følger:\n\nnorlag_omkodet <- norlag %>%\n  mutate(redarbtid = replace(wr117zz, wr117zz == \"filter: jobber deltid\", \"Ja\"), \n         redarbtid = replace(redarbtid, redarbtid == \"filter: selvstendig næringsdrivende (NorLAG3 inkl frilanser/annet)\", NA), \n         redarbtid = replace(redarbtid, redarbtid == \"filter: ikke i arbeid\", NA), \n         redarbtid = replace(redarbtid, redarbtid == \"vil ikke svare\", NA),\n         redarbtid = replace(redarbtid, redarbtid == \"vet ikke\", NA),\n         redarbtid = replace(redarbtid, redarbtid == \"mangler data\", NA),\n         redarbtid = replace(redarbtid, redarbtid == \"Deltok ikke i runden\", NA)) %>% \n  droplevels()\n\nDette funker, men blir ganske mye tekst å skrive, og da kan man også lett gjøre skrivefeil. Husk at faktornivåene må angis helt nøyaktig slik de er skrevet! Merk at den siste funksjone, droplevels(), bare fjerner faktor-levels som ikke er i bruk.\nI output for faktor-levels angir klammeparentesen gir rekkefølgen på disse verdiene. Vi kan bruke denne informasjonen direkte i omkodingen for å unngå å skrive så veldig mye. Når man bruker levels() får man en liten vektor med verdier, og disse kan man altså henvise til med rekkefølgen. Her er et eksempel for bare å bytte ut de som jobber deltid til “Ja”:\n\nnorlag_omkodet <- norlag %>%\n  mutate(redarbtid = replace(wr117zz, wr117zz == levels(wr117zz)[3], \"Ja\")) %>% \n  droplevels()\n\nTrikset her er altså å bruke levels() og vise til hvilket nummer i rekkefølgen. Da unngår vi også faren for skrivefeil.\nVi vil også kode om alle de andre verdiene, nummer 4-9 til NA. Det kan vi gjøre på samme måte, men vi behøver ikke skrive en ny linje for hver verdi. Den logiske operatoren == kan man bruke når man skal sjekke om to verdier er like. Hvis vi skal se om en verdi er lik en av flere mulige kan vi bruke %in% og så en liste med verdier. levels() gir en liste med verdier, så da kan vi angi den direkte og alle verdiene 4 til 9 ved å skrive 4:9. Samlet blir det da slik:\n\nnorlag_omkodet <- norlag %>%\n  mutate(redarbtid = replace(wr117zz, wr117zz == levels(wr117zz)[3], \"Ja\"), \n         redarbtid = replace(redarbtid, redarbtid %in% levels(wr117zz)[4:9], NA)) %>% \n  droplevels()\n\nmemisc::codebook(norlag_omkodet$redarbtid)\n\n================================================================================\n\n   norlag_omkodet$redarbtid\n\n--------------------------------------------------------------------------------\n\n   Storage mode: integer\n   Factor with 2 levels\n\n   Levels and labels     N Valid Total\n                                      \n    1 'Nei'           1360  18.2   4.1\n    2 'Ja'            6110  81.8  18.5\n   NA                25614        77.4"
+  },
+  {
+    "objectID": "import_metadata.html#hvordan-fungerer-koden-ovenfor-avansert-omkoding",
+    "href": "import_metadata.html#hvordan-fungerer-koden-ovenfor-avansert-omkoding",
+    "title": "Appendix A — Import av data fra Sikt - håndtering av formater med metadata",
+    "section": "A.1 Hvordan fungerer koden ovenfor?? Avansert omkoding",
+    "text": "A.1 Hvordan fungerer koden ovenfor?? Avansert omkoding\n\nA.1.1 Sjekk datastruktur og bruk av filter\n\n\nA.1.2 Omkode bruker-spesifiserte missing-verdier til NA\n\n\nA.1.3 Kode om på tvers av mange variable med across\n\n\nA.1.4 Fjerne nivåer som ikke brukes: drop_unused_value_labels\n\n\nA.1.5 Gjør om til factor med unlabelled"
+  },
+  {
+    "objectID": "import_metadata.html#for-spesielt-interesserte-jobbe-med-labelled-data",
+    "href": "import_metadata.html#for-spesielt-interesserte-jobbe-med-labelled-data",
+    "title": "Appendix A — Import av data fra Sikt - håndtering av formater med metadata",
+    "section": "A.2 For spesielt interesserte: jobbe med labelled-data",
+    "text": "A.2 For spesielt interesserte: jobbe med labelled-data"
+  },
+  {
+    "objectID": "import_metadata.html#hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling",
+    "href": "import_metadata.html#hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling",
+    "title": "Appendix A — Import av data fra Sikt - håndtering av formater med metadata",
+    "section": "A.1 Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling",
+    "text": "A.1 Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling\n\nA.1.1 Sjekk datastruktur og bruk av filter\n\n\nA.1.2 Omkode bruker-spesifiserte missing-verdier til NA\n\n\nA.1.3 Kode om på tvers av mange variable med across\n\n\nA.1.4 Fjerne nivåer som ikke brukes: drop_unused_value_labels\n\n\nA.1.5 Gjør om til factor med unlabelled"
+  }
+]

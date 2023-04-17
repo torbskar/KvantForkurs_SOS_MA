@@ -1,0 +1,4 @@
+# Kontrollere for bakenforliggende variable 
+
+## Simpson's paradox
+
