@@ -319,8 +319,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#kontinuerlige-variable" id="toc-kontinuerlige-variable" class="nav-link" data-scroll-target="#kontinuerlige-variable"><span class="toc-section-number">13.2</span>  Kontinuerlige variable</a></li>
   <li><a href="#tekstvariable-strings" id="toc-tekstvariable-strings" class="nav-link" data-scroll-target="#tekstvariable-strings"><span class="toc-section-number">13.3</span>  Tekstvariable (strings)</a></li>
   <li><a href="#factorvariable" id="toc-factorvariable" class="nav-link" data-scroll-target="#factorvariable"><span class="toc-section-number">13.4</span>  Factorvariable</a></li>
-  <li><a href="#bruke-kataloger-for-kodeverk" id="toc-bruke-kataloger-for-kodeverk" class="nav-link" data-scroll-target="#bruke-kataloger-for-kodeverk"><span class="toc-section-number">13.5</span>  Bruke kataloger for kodeverk</a></li>
-  <li><a href="#factorvariable-med-skikkelig-lang-tekst" id="toc-factorvariable-med-skikkelig-lang-tekst" class="nav-link" data-scroll-target="#factorvariable-med-skikkelig-lang-tekst"><span class="toc-section-number">13.6</span>  Factorvariable med skikkelig lang tekst</a></li>
+  <li><a href="#factorvariable-med-skikkelig-lang-tekst" id="toc-factorvariable-med-skikkelig-lang-tekst" class="nav-link" data-scroll-target="#factorvariable-med-skikkelig-lang-tekst"><span class="toc-section-number">13.5</span>  Factorvariable med skikkelig lang tekst</a></li>
+  <li><a href="#spesielle-problemstillinger-ved-veldig-mange-kategorier" id="toc-spesielle-problemstillinger-ved-veldig-mange-kategorier" class="nav-link" data-scroll-target="#spesielle-problemstillinger-ved-veldig-mange-kategorier"><span class="toc-section-number">13.6</span>  Spesielle problemstillinger ved veldig mange kategorier</a>
+  <ul class="collapse">
+  <li><a href="#hierarkisk-strukturerte-tall-som-tekststrenger" id="toc-hierarkisk-strukturerte-tall-som-tekststrenger" class="nav-link" data-scroll-target="#hierarkisk-strukturerte-tall-som-tekststrenger"><span class="toc-section-number">13.6.1</span>  Hierarkisk strukturerte tall som tekststrenger</a></li>
+  </ul></li>
+  <li><a href="#bruke-kataloger-for-kodeverk" id="toc-bruke-kataloger-for-kodeverk" class="nav-link" data-scroll-target="#bruke-kataloger-for-kodeverk"><span class="toc-section-number">13.7</span>  Bruke kataloger for kodeverk</a></li>
   </ul>
 </nav>
     </div>
@@ -348,7 +352,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)       <span class="co"># Importere data fra SAS, SPSS og Stata</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># Pakker for generell datahåndtering og grafikk</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)    <span class="co"># Håndtering av variable med labler, importert fra annen software</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)     <span class="co"># Lettere omkoding av faktorvariable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)     <span class="co"># Lettere omkoding av faktorvariable</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="endre-variabelnavn" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="endre-variabelnavn"><span class="header-section-number">13.1</span> Endre variabelnavn</h2>
@@ -363,11 +368,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="factorvariable" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="factorvariable"><span class="header-section-number">13.4</span> Factorvariable</h2>
 </section>
-<section id="bruke-kataloger-for-kodeverk" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="bruke-kataloger-for-kodeverk"><span class="header-section-number">13.5</span> Bruke kataloger for kodeverk</h2>
-</section>
-<section id="factorvariable-med-skikkelig-lang-tekst" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="factorvariable-med-skikkelig-lang-tekst"><span class="header-section-number">13.6</span> Factorvariable med skikkelig lang tekst</h2>
+<section id="factorvariable-med-skikkelig-lang-tekst" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="factorvariable-med-skikkelig-lang-tekst"><span class="header-section-number">13.5</span> Factorvariable med skikkelig lang tekst</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>norlag <span class="ot">&lt;-</span> <span class="fu">read_stata</span>(<span class="st">"data/norlag_panel2022.dta"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>( <span class="fu">where</span>(is.labelled) ,  <span class="sc">~</span><span class="fu">replace</span>(., </span>
@@ -447,6 +449,1073 @@ filter: selvstendig næringsdrivende (NorLAG3 inkl frilanser/annet)
     1 'Nei'           1360  18.2   4.1
     2 'Ja'            6110  81.8  18.5
    NA                25614        77.4</code></pre>
+</div>
+</div>
+</section>
+<section id="spesielle-problemstillinger-ved-veldig-mange-kategorier" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="spesielle-problemstillinger-ved-veldig-mange-kategorier"><span class="header-section-number">13.6</span> Spesielle problemstillinger ved veldig mange kategorier</h2>
+<p>For disse eksemplene skal vi bruke et litt annet datasett, nemlig et lite uttrekk fra European Social Survey. Her er det 3 variable: yrkeskode, kjønn og politisk interesse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>polit <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"data/politics.csv"</span>, <span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(polit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 49,519
+Columns: 3
+$ isco08  &lt;chr&gt; "3333", "7122", "4221", "4311", "6130", "7212", "5131", "5223"…
+$ gndr    &lt;chr&gt; "1", "1", "2", "1", "2", "1", "1", "2", "1", "2", "1", "2", "1…
+$ polintr &lt;chr&gt; "3", "2", "4", "3", "2", "2", "4", "3", "3", "4", "2", "2", "1…</code></pre>
+</div>
+</div>
+<p>Vi kan sjekke hvor mange kategorier det er ved å lage en tabell over kodene og se hvor mange det er. Det er imidlertid upraktisk da den tabellen tar veldig mye plass. Koden nedenfor gjør en enklere opptelling ved å trekke ut unike verdier og telle hvor mange det er:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>antall_koder <span class="ot">&lt;-</span> polit <span class="sc">%&gt;%</span>  </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(isco08) <span class="sc">%&gt;%</span>   <span class="co"># trekker ut en vektor med kun en variabel </span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span>       <span class="co"># beholder kun unike verdier </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>()           <span class="co"># lengden på gjenværende vektor </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>antall_koder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 561</code></pre>
+</div>
+</div>
+<p>Det er altså 561 unike yrkeskoder i datasettet.</p>
+<section id="hierarkisk-strukturerte-tall-som-tekststrenger" class="level3" data-number="13.6.1">
+<h3 data-number="13.6.1" class="anchored" data-anchor-id="hierarkisk-strukturerte-tall-som-tekststrenger"><span class="header-section-number">13.6.1</span> Hierarkisk strukturerte tall som tekststrenger</h3>
+<p>Noen ganger er det hundrevis av verdier. Et slik eksempel er <a href="http://www.ilo.org/public/english/bureau/stat/isco/isco88/major.htm">yrkesklassifisering</a> der hver type yrke har en spesifikk kode. Det finnes mange typer yrker, så det er omlag 800 koder. For de fleste typer analyser er dette altfor detaljert og du trenger å gruppere til færre kategorier. SSB har en <a href="https://www.ssb.no/arbeid-og-lonn/sysselsetting/artikler/yrkeskatalogen">kodeliste offentlig tilgjengelig</a>. Kort fortalt er det en kode med 4 siffer, der det første sifferet er en grov gruppering, og de etterfølgende sifrene innebærer en økt detaljeringsgrad innenfor grupperingen angitt ved første siffer.</p>
+<p>Hvis du skulle omkodet yrker slik som forklart i et tidligere avsnitt om omkoding ville det tatt veldig lang tid, men det ville også være veldig lett å gjøre feil. Det vil rett og slett være et mareritt å de-bugge koden for å finne feil eller kvalitetssjekke. Altså: en slik tilnærming er helt uaktuelt. En langt bedre tilnærming er å bare trekke ut det første sifferet fra koden. Funksjonen <code>str_sub()</code> gjør akkurat slike ting ved å angi hvilken del av tekststrengen du vil trekke ut, angitt ved posisjonen du starter ved og slutter ved. Her er det altså første posisjon.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>polit <span class="ot">&lt;-</span> polit <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">occupation =</span> <span class="fu">str_sub</span>(isco08, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">1</span>)) </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>polit <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gndr, occupation) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> gndr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'sass':
+  method    from  
+  print.css memisc</code></pre>
+</div>
+<div class="cell-output-display">
+
+<div id="jxydqdtejl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#jxydqdtejl) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+:where(#jxydqdtejl) .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+:where(#jxydqdtejl) .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+:where(#jxydqdtejl) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#jxydqdtejl) .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#jxydqdtejl) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#jxydqdtejl) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#jxydqdtejl) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#jxydqdtejl) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+:where(#jxydqdtejl) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#jxydqdtejl) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#jxydqdtejl) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#jxydqdtejl) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#jxydqdtejl) .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#jxydqdtejl) .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#jxydqdtejl) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#jxydqdtejl) .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#jxydqdtejl) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#jxydqdtejl) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#jxydqdtejl) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#jxydqdtejl) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#jxydqdtejl) .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#jxydqdtejl) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#jxydqdtejl) .gt_left {
+  text-align: left;
+}
+
+:where(#jxydqdtejl) .gt_center {
+  text-align: center;
+}
+
+:where(#jxydqdtejl) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#jxydqdtejl) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#jxydqdtejl) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#jxydqdtejl) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#jxydqdtejl) .gt_super {
+  font-size: 65%;
+}
+
+:where(#jxydqdtejl) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#jxydqdtejl) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#jxydqdtejl) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#jxydqdtejl) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#jxydqdtejl) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#jxydqdtejl) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#jxydqdtejl) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>1</strong>, N = 23,020<sup class=&quot;gt_footnote_marks&quot;>1</sup>"><strong>1</strong>, N = 23,020<sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>2</strong>, N = 26,499<sup class=&quot;gt_footnote_marks&quot;>1</sup>"><strong>2</strong>, N = 26,499<sup class="gt_footnote_marks">1</sup></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">occupation</td>
+<td headers="stat_1" class="gt_row gt_center"></td>
+<td headers="stat_2" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td headers="stat_1" class="gt_row gt_center">1,847 (8.0%)</td>
+<td headers="stat_2" class="gt_row gt_center">2,947 (11%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;0</td>
+<td headers="stat_1" class="gt_row gt_center">5 (&lt;0.1%)</td>
+<td headers="stat_2" class="gt_row gt_center">1 (&lt;0.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;1</td>
+<td headers="stat_1" class="gt_row gt_center">2,185 (9.5%)</td>
+<td headers="stat_2" class="gt_row gt_center">1,350 (5.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;2</td>
+<td headers="stat_1" class="gt_row gt_center">3,665 (16%)</td>
+<td headers="stat_2" class="gt_row gt_center">5,018 (19%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;3</td>
+<td headers="stat_1" class="gt_row gt_center">2,736 (12%)</td>
+<td headers="stat_2" class="gt_row gt_center">3,250 (12%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;4</td>
+<td headers="stat_1" class="gt_row gt_center">1,071 (4.7%)</td>
+<td headers="stat_2" class="gt_row gt_center">2,862 (11%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;5</td>
+<td headers="stat_1" class="gt_row gt_center">2,418 (11%)</td>
+<td headers="stat_2" class="gt_row gt_center">5,569 (21%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;6</td>
+<td headers="stat_1" class="gt_row gt_center">704 (3.1%)</td>
+<td headers="stat_2" class="gt_row gt_center">445 (1.7%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;7</td>
+<td headers="stat_1" class="gt_row gt_center">4,162 (18%)</td>
+<td headers="stat_2" class="gt_row gt_center">1,158 (4.4%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;8</td>
+<td headers="stat_1" class="gt_row gt_center">2,495 (11%)</td>
+<td headers="stat_2" class="gt_row gt_center">966 (3.6%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;9</td>
+<td headers="stat_1" class="gt_row gt_center">1,732 (7.5%)</td>
+<td headers="stat_2" class="gt_row gt_center">2,933 (11%)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="3"><sup class="gt_footnote_marks">1</sup> n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="bruke-kataloger-for-kodeverk" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="bruke-kataloger-for-kodeverk"><span class="header-section-number">13.7</span> Bruke kataloger for kodeverk</h2>
+<p>Sometimes, such long list of unique codes have a standard grouping that are not hierarchical. One such example is the <strong>ordc class schema</strong> as developed by the <a href="https://www.sv.uio.no/iss/english/research/projects/histclass/">HISTCLASS-project homepage</a>. This is a coding schema for isco-codes to classes, and a catalogue is available from the homepage. As there are about 800 unique values and they are stored in Excel-format with corresponding grouping for each code. The first lines in Excel-file looks lik this:</p>
+<p><img src="images/isco_excel.png" class="img-fluid" style="width:60.0%"></p>
+<p>This file can be read into R using <code>read_excel()</code>, where the first line is typically read as variable names. But the first lines are not to be used, and neither are several columns.</p>
+<p>To read it into R, we need to skip the lines not needed and change the variable names. In this example, we only need the isco-kodes and the ordc_yrk codes. Variable names should not include spaces, so we include an argument for ensuring universal valid variable names. That substitutes white space with punctuation. We also specify <code>col_types = "text"</code> to avoid the values being interpreted as numeric.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>isco <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"data/3_codes_isco88_ordc.xlsx"</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">.name_repair =</span> <span class="st">"universal"</span>, <span class="at">col_types =</span> <span class="st">"text"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span>,<span class="dv">9</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `ISCO-88 Title EN` -&gt; `ISCO.88.Title.EN`
+• `ISCO-88 code` -&gt; `ISCO.88.code`
+• `ISCO 08 Code` -&gt; `ISCO.08.Code`
+• `ISCO-08 part` -&gt; `ISCO.08.part`
+• `ISCO-08 Title EN` -&gt; `ISCO.08.Title.EN`
+• `` -&gt; `...7`
+• `ORDC for relativ inntekt` -&gt; `ORDC.for.relativ.inntekt`
+• `ORDC for relativ inntekt (bortsett fra 3)` -&gt;
+  `ORDC.for.relativ.inntekt..bortsett.fra.3.`
+• `Bare basert på yrker` -&gt; `Bare.basert.på.yrker`
+• `` -&gt; `...12`
+• `` -&gt; `...13`
+• `` -&gt; `...14`
+• `Hele øk.fraksjon er satt til 6` -&gt; `Hele.øk.fraksjon.er.satt.til.6`
+• `` -&gt; `...16`
+• `` -&gt; `...17`
+• `` -&gt; `...18`
+• `` -&gt; `...19`
+• `filter for å velge unike, hvis &gt;0` -&gt; `filter.for.å.velge.unike..hvis..0`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(isco)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  ISCO.88.code ORDC_YRK
+  &lt;chr&gt;        &lt;chr&gt;   
+1 1237         1       
+2 2141         1       
+3 2310         1       
+4 2351         1       
+5 2442         1       
+6 2443         1       </code></pre>
+</div>
+</div>
+<p>Now, we can merge the data with this catalogue. So that every record in the catalogue is merged to each record with the same code. To do this, we use <code>left_join()</code>, and store in a new object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>isco <span class="ot">&lt;-</span> isco <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">isco08 =</span> ISCO.<span class="fl">88.</span>code)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>polit2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(polit, isco, <span class="at">by =</span> <span class="st">"isco08"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(polit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  isco08 gndr polintr occupation ORDC_YRK
+1   3333    1       3          3     &lt;NA&gt;
+2   7122    1       2          7       10
+3   7122    1       2          7       10
+4   4221    2       4          4        8
+5   4311    1       3          4     &lt;NA&gt;
+6   6130    2       2          6       12</code></pre>
+</div>
+</div>
+<p>What happened here is that the recoding happened almost automatically by adding a new column with the new variable.</p>
+<p>Now, you can make e.g.&nbsp;a cross-tabulation of social class by gender.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>polit2 <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ORDC_YRK, gndr) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> gndr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="cinmysbqbx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#cinmysbqbx) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+:where(#cinmysbqbx) .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+:where(#cinmysbqbx) .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+:where(#cinmysbqbx) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#cinmysbqbx) .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#cinmysbqbx) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#cinmysbqbx) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#cinmysbqbx) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#cinmysbqbx) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+:where(#cinmysbqbx) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#cinmysbqbx) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#cinmysbqbx) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#cinmysbqbx) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#cinmysbqbx) .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#cinmysbqbx) .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#cinmysbqbx) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#cinmysbqbx) .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#cinmysbqbx) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#cinmysbqbx) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#cinmysbqbx) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#cinmysbqbx) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#cinmysbqbx) .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#cinmysbqbx) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#cinmysbqbx) .gt_left {
+  text-align: left;
+}
+
+:where(#cinmysbqbx) .gt_center {
+  text-align: center;
+}
+
+:where(#cinmysbqbx) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#cinmysbqbx) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#cinmysbqbx) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#cinmysbqbx) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#cinmysbqbx) .gt_super {
+  font-size: 65%;
+}
+
+:where(#cinmysbqbx) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#cinmysbqbx) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#cinmysbqbx) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#cinmysbqbx) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#cinmysbqbx) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#cinmysbqbx) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#cinmysbqbx) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>1</strong>, N = 29,285<sup class=&quot;gt_footnote_marks&quot;>1</sup>"><strong>1</strong>, N = 29,285<sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>2</strong>, N = 33,950<sup class=&quot;gt_footnote_marks&quot;>1</sup>"><strong>2</strong>, N = 33,950<sup class="gt_footnote_marks">1</sup></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">ORDC_YRK</td>
+<td headers="stat_1" class="gt_row gt_center"></td>
+<td headers="stat_2" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;1</td>
+<td headers="stat_1" class="gt_row gt_center">448 (2.4%)</td>
+<td headers="stat_2" class="gt_row gt_center">364 (2.0%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;10</td>
+<td headers="stat_1" class="gt_row gt_center">5,887 (32%)</td>
+<td headers="stat_2" class="gt_row gt_center">3,222 (17%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;11</td>
+<td headers="stat_1" class="gt_row gt_center">3,757 (20%)</td>
+<td headers="stat_2" class="gt_row gt_center">5,563 (30%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;12</td>
+<td headers="stat_1" class="gt_row gt_center">1,222 (6.6%)</td>
+<td headers="stat_2" class="gt_row gt_center">1,187 (6.4%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;2</td>
+<td headers="stat_1" class="gt_row gt_center">1,367 (7.4%)</td>
+<td headers="stat_2" class="gt_row gt_center">1,333 (7.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;3</td>
+<td headers="stat_1" class="gt_row gt_center">30 (0.2%)</td>
+<td headers="stat_2" class="gt_row gt_center">13 (&lt;0.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;4</td>
+<td headers="stat_1" class="gt_row gt_center">561 (3.0%)</td>
+<td headers="stat_2" class="gt_row gt_center">1,251 (6.7%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;5</td>
+<td headers="stat_1" class="gt_row gt_center">2,000 (11%)</td>
+<td headers="stat_2" class="gt_row gt_center">2,669 (14%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;6</td>
+<td headers="stat_1" class="gt_row gt_center">1,681 (9.1%)</td>
+<td headers="stat_2" class="gt_row gt_center">1,850 (9.9%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;7</td>
+<td headers="stat_1" class="gt_row gt_center">180 (1.0%)</td>
+<td headers="stat_2" class="gt_row gt_center">267 (1.4%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;8</td>
+<td headers="stat_1" class="gt_row gt_center">1,129 (6.1%)</td>
+<td headers="stat_2" class="gt_row gt_center">726 (3.9%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;9</td>
+<td headers="stat_1" class="gt_row gt_center">134 (0.7%)</td>
+<td headers="stat_2" class="gt_row gt_center">105 (0.6%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;996</td>
+<td headers="stat_1" class="gt_row gt_center">84 (0.5%)</td>
+<td headers="stat_2" class="gt_row gt_center">109 (0.6%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;997</td>
+<td headers="stat_1" class="gt_row gt_center">5 (&lt;0.1%)</td>
+<td headers="stat_2" class="gt_row gt_center">1 (&lt;0.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td headers="stat_1" class="gt_row gt_center">10,800</td>
+<td headers="stat_2" class="gt_row gt_center">15,290</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="3"><sup class="gt_footnote_marks">1</sup> n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
 </div>
 </div>
 

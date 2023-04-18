@@ -7,6 +7,7 @@ library(haven)       # Importere data fra SAS, SPSS og Stata
 library(tidyverse)   # Pakker for generell datahåndtering og grafikk
 library(labelled)    # Håndtering av variable med labler, importert fra annen software
 library(forcats)     # Lettere omkoding av faktorvariable
+library(gtsummary)
 
 ```
 
@@ -29,11 +30,6 @@ library(forcats)     # Lettere omkoding av faktorvariable
 
 
 ## Factorvariable 
-
-
-
-
-## Bruke kataloger for kodeverk 
 
 
 
@@ -119,6 +115,99 @@ norlag_omkodet <- norlag %>%
 memisc::codebook(norlag_omkodet$redarbtid)
 
 ```
+
+
+
+
+## Spesielle problemstillinger ved veldig mange kategorier
+
+For disse eksemplene skal vi bruke et litt annet datasett, nemlig et lite uttrekk fra European Social Survey. Her er det 3 variable: yrkeskode, kjønn og politisk interesse. 
+
+```{r}
+polit <- read.csv2("data/politics.csv", colClasses = "character")
+
+glimpse(polit)
+```
+
+Vi kan sjekke hvor mange kategorier det er ved å lage en tabell over kodene og se hvor mange det er. Det er imidlertid upraktisk da den tabellen tar veldig mye plass. Koden nedenfor gjør en enklere opptelling ved å trekke ut unike verdier og telle hvor mange det er: 
+
+```{r}
+antall_koder <- polit %>%  
+  pull(isco08) %>%   # trekker ut en vektor med kun en variabel 
+  unique() %>%       # beholder kun unike verdier 
+  length()           # lengden på gjenværende vektor 
+
+antall_koder
+
+```
+
+Det er altså `r antall_koder` unike yrkeskoder i datasettet. 
+
+
+
+### Hierarkisk strukturerte tall som tekststrenger
+
+Noen ganger er det hundrevis av verdier. Et slik eksempel er [yrkesklassifisering](http://www.ilo.org/public/english/bureau/stat/isco/isco88/major.htm) der hver type yrke har en spesifikk kode. Det finnes mange typer yrker, så det er omlag 800 koder. For de fleste typer analyser er dette altfor detaljert og du trenger å gruppere til færre kategorier. SSB har en [kodeliste offentlig tilgjengelig](https://www.ssb.no/arbeid-og-lonn/sysselsetting/artikler/yrkeskatalogen). Kort fortalt er det en kode med 4 siffer, der det første sifferet er en grov gruppering, og de etterfølgende sifrene innebærer en økt detaljeringsgrad innenfor grupperingen angitt ved første siffer.
+
+Hvis du skulle omkodet yrker slik som forklart i et tidligere avsnitt om omkoding ville det tatt veldig lang tid, men det ville også være veldig lett å gjøre feil. Det vil rett og slett være et mareritt å de-bugge koden for å finne feil eller kvalitetssjekke. Altså: en slik tilnærming er helt uaktuelt. En langt bedre tilnærming er å bare trekke ut det første sifferet fra koden. Funksjonen `str_sub()` gjør akkurat slike ting ved å angi hvilken del av tekststrengen du vil trekke ut, angitt ved posisjonen du starter ved og slutter ved. Her er det altså første posisjon. 
+
+
+
+```{r}
+polit <- polit %>% 
+  mutate(occupation = str_sub(isco08, start = 1, end = 1)) 
+
+polit %>% 
+  select(gndr, occupation) %>% 
+  tbl_summary(by = gndr)
+
+
+```
+
+
+
+## Bruke kataloger for kodeverk 
+Sometimes, such long list of unique codes have a standard grouping that are not hierarchical. One such example is the **ordc class schema** as developed by the [HISTCLASS-project homepage](https://www.sv.uio.no/iss/english/research/projects/histclass/). This is a coding schema for isco-codes to classes, and a catalogue is available from the homepage. As there are about 800 unique values and they are stored in Excel-format with corresponding grouping for each code. The first lines in Excel-file looks lik this:  
+
+![](images/isco_excel.png){width=60%} 
+
+This file can be read into R using `read_excel()`, where the first line is typically read as variable names. But the first lines are not to be used, and neither are several columns. 
+
+To read it into R, we need to skip the lines not needed and change the variable names. In this example, we only need the isco-kodes and the ordc_yrk codes. Variable names should not include spaces, so we include an argument for ensuring universal valid variable names. That substitutes white space with punctuation. 
+We also specify `col_types = "text"` to avoid the values being interpreted as numeric. 
+
+```{r, echo=TRUE, warning=FALSE}
+isco <- readxl::read_excel(path = "data/3_codes_isco88_ordc.xlsx", skip = 4, .name_repair = "universal", col_types = "text") %>% 
+  select(2,9) 
+head(isco)
+```
+
+Now, we can merge the data with this catalogue. So that every record in the catalogue is merged to each record with the same code. To do this, we use `left_join()`, and store in a new object. 
+
+
+```{r, echo=TRUE, warning=FALSE}
+isco <- isco %>% 
+  rename(isco08 = ISCO.88.code)
+
+polit2 <- left_join(polit, isco, by = "isco08")
+
+head(polit2)
+
+```
+
+What happened here is that the recoding happened almost automatically by adding a new column with the new variable. 
+
+Now, you can make e.g. a cross-tabulation of social class by gender. 
+
+```{r, echo=TRUE, warning=FALSE}
+polit2 %>% 
+  select(ORDC_YRK, gndr) %>% 
+  tbl_summary(by = gndr)
+
+```
+
+
+
 
 
 
