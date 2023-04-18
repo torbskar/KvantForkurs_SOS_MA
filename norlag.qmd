@@ -1,0 +1,100 @@
+# Datasettet [NorLAG](https://norlag.nsd.no/)
+
+På SOS4020 skal vi bruke et datasett fra surveyen NorLAG. Vi bruker det også i forkurset slik at du vil spare litt tid og arbeid når SOS4020 starter for alvor. Dette er ikke offentlig tilgjengelige data, så det er en prosedyre for å få tilgang. Her er instruksjonene for dette kurset. 
+
+Det viktigste for dette kurset er at dere har et rimelig ryddig datasett slik at dere kan fokusere på andre ting. Det opprinnelige datasettet er levert i Stata-format og det er en del utfordringer med å importere disse dataene bl.a. på grunn av hvordan de har valgt å kode [missing og filterverdier](https://norlag.nsd.no/filterverdier) og lagt denne typen metadata inn i Stataformatet. I R er det en lite hensiktsmessig måte å jobbe med dataene på, så disse tingene er ryddet opp i her. 
+
+
+* Gi emneansvarlig din epostadresse
+* Last opp signert samtykkeskjema 
+* Få levert ut bearbeidet datasett fra emneansvarlig
+
+Så kan du begynne å jobbe med dataene. 
+
+## Tilgang og lagring 
+NorLAG er [gule data](https://www.uio.no/tjenester/it/sikkerhet/lsis/tillegg/lagring/infoklasser.html) og har restriksjoner på bruk og lagring. Du er pliktet til å sette deg inn i retningslinjene som du finner [på denne siden](https://www.uio.no/tjenester/it/sikkerhet/lsis/tillegg/lagringsguide.html). 
+
+I denne sammenhengen betyr det i praksis at du bør jobbe på UiO-OneDrive. Altså, ikke lagre data på din personlige datamaskin og ikke en personlig skytjeneste. Merk at det er *forskjell* på f.eks. OneDrive gjennom UiO og privat. 
+
+
+### Signere samtykkeskjema
+For å få tilgang på datasettet må du oppgi din uio-epostadresse i [dette nettskjemaet](https://nettskjema.no/a/336610), så vil emneansvarlig legge deg inn i systemet. Du får så tilsendt en lenke fra Sikt med videre instruksjoner. Du skal signere et samtykkeskjema. 
+
+Etter at du har signert samtykkeskjema laster du ned dette som en pdf-fil og laster dette opp i [dette skjemaet](https://nettskjema.no/a/336612). 
+
+
+
+### Nedlasting av data
+Du kan laste ned et datasett fra plattformen til Sikt, men ikke gjør det. Datasettet trenger litt opprydning først. Etter at du har signert samtykket, så blir datasettet delt med deg fra emneansvarlige via OneDrive. Du må da laste ned en kopi av datasettet til ditt eget område etter anvisninger ovenfor. 
+
+
+
+
+## Innlesning av data
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| error: false 
+
+
+## OBS! Det er noen nummeriske med filter-verdier
+library(tidyverse)
+library(haven)
+norlag <- read_stata("data/norlag_panel2022.dta", encoding = "utf-8") %>% 
+  filter(iodeltagelse == 1 |  
+           iodeltagelse == 2 & round %in% c(1, 3) | 
+           iodeltagelse == 3 & round %in% c(2, 3) |
+           iodeltagelse == 4 & round %in% c(1) |
+           iodeltagelse == 5 & round %in% c(1, 2) |
+           iodeltagelse == 6 & round %in% c(2)
+         ) %>% 
+  # generelle missing
+    mutate(across( where(is.labelled) ,  ~replace(., 
+                                        . %in% c(997, 998, 999, 99999, 999999), 
+                                        NA))) %>%
+  # noen spesielle missing - som kanskje gjelder overalt?
+      mutate(across(where(is.labelled) ,  ~replace(., 
+                                        . %in% c(994, 995, 996, 9996), 
+                                        NA))) %>%
+    # noen spesielle missing - som kanskje gjelder overalt?
+      mutate(across(where(is.labelled) ,  ~replace(., 
+                                        . %in% c(9993, 9994, 9995, 9996, 9997, 9998, 999), 
+                                        NA))) %>%
+  # inpartbankinnsk og fremover
+        mutate(across(where(is.labelled) ,  ~replace(., 
+                                        . %in% c(99999996,
+                                                 999999995,
+                                                 999999996,
+                                                 999999999), 
+                                        NA))) %>%
+  mutate(across(where(is.labelled), ~replace(. ,
+                                             str_sub(., 1, 7) == "filter:", NA))) %>% 
+  labelled::drop_unused_value_labels() %>% 
+  labelled::unlabelled()
+
+saveRDS(norlag, "data/norlag_panel.rds")
+
+# norlag %>% 
+#   select(iodeltagelse, round) %>% 
+#   table()
+
+```
+
+
+
+Datasettet norlag_panel.rds er altså konvertert til R-formatet rds. Dette datasettet kan da enkelt leses inn med `readRDS()` som følger: 
+
+```{r}
+norlag <- readRDS("data/norlag_panel.rds")
+dim(norlag)
+
+```
+
+
+
+
+
+
+

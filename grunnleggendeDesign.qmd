@@ -1,2 +1,13 @@
 # Design og tolkning
 
+
+## Ikke-tilfeldige utvalg eller fra en ikke-veldefinert populasjon 
+
+
+## Tilfeldige utvalg fra en veldefinert populasjon 
+
+
+## Eksperimenter og randomiserte forsøk 
+
+
+

@@ -29,9 +29,13 @@ Vi vet ikke hvorvidt vårt estimat ligger nærme eller langt unna den sanne verd
 Når man sier at konfidensintervallet uttrykker at man er "95% sikker" på at den sanne verdien ligger i det intervallet mener man da følgende: Man har brukt en *metode* (dvs utvalg og utregninger og det hele) som har en *feilmargin*. Denne feilmarginen er slik at hvis man gjorde estimeringen (altså nytt utvalg hver gang) på samme måte svært mange ganger (f.eks. uendelig mange ganger), så ville 95% av resultatene ligget innenfor et slikt intervall. 
 
 
-## T-test 
+## Konfidensintervaller 
 
-T-testen er i prinsippet en sammenligning mellom estimatets størrelse og standardfeilen til estimatet
+
+
+## T-test og p-verdier 
+
+T-testen er i prinsippet en sammenligning mellom estimatets størrelse og standardfeilen til estimatet. 
 
 
 $$
@@ -49,7 +53,22 @@ Fra samplingfordelingen og sentralgrenesteoremet ved vi jo at $1.96 \times SE(\m
 
 
 
-## Statistiske tester 
+Tolkningen av p-verdien er i hvilken grad det er sannsynlig å få det observerte resultatet *ved en tilfeldighet* hvis NULL-hypotesen er riktig. Dette høres ganske pussig ut. Tanken er at man nesten alltid vil observere noe forskjell fra null, og det kan skje ved en tilfeldighet. Hvis null-hypotesen er riktig er det mindre sannsynlig at vi observerer en veldig stor forskjell. Men hvor stor forskjell er det, egentlig? Løsningen er å se avstanden fra null i lys av standardfeilen. Hvis man bruker en usikker målemetode, så er det mer sannsynlig å observere en stor forskjell ved tilfeldigheter enn om man bruker en veldig nøyaktig målemetode. 
+
+I praksis: Tenk at du observerer en stor forskjell mellom to grupper. Med "stor" mener vi f.eks. at forskjellen er over dobbelt så stor som standardfeilen. Da får vi en p-verdi som er $p < 0.05$. Da kan vi si at hvis nullhypotesen er sann, så er det lite sannsynlig at vi ville fått et slikt resultat på grunn av tilfeldigheter.^(Hvis vi ønsker være pinlig korrekte kan vi også si noe slikt som at hvis man gjorde målingen tusenvis av ganger, så ville 5% av resultatene ligge så langt unna null (eller lengre).) 
+
+Så er logikken videre at vi som hovedregel ikke tror på resultater som er usannsynlige. Så i stedet for å holde fast på nullhypotesen velger vi i stedet å tro på den alternative hypotesen. 
+
+
+
+## Statistiske tester generelt 
+
+Det finnes en hel haug av statistiske tester. Prinsippet er gjerne variasjoner av t-testen og har disse komponentene: 
+
+1. en nullhypotese og et alternativ 
+1. en *statistikk*, altså et måltall som er et avstandsmål mellom observert resultat og hva man forventer under nullhypotesen 
+1. en statistisk modell for samplingfordelingen som sier noe om fordelingen av tilfeldige feil 
+1. en uttalt beslutningsregel for konklusjonen. Et vanlig mål er at hvis p < 0.05, så forkastes nullhypotesen. 
 
 
 

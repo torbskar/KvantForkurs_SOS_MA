@@ -13,41 +13,6 @@ library(labelled)
 
 
 
-Data kan være lagret i mange ulike formater, men det er også problemstillinger knyttet til *hvordan* dataene er lagret i et gitt format. Dette handler delvis om hvordan noen har valgt å lagre og distribuere data, ikke bare om dataformatet i seg selv. 
-
-Det kan være vanskelig å skille mellom hvorvidt utfordringene du møter skyldes dataformatet, softwaren man bruker eller valg andre har tatt. Det kan være flere av disse, men som hovedregel er problemet at data ofte ikke er distribuert i et universelt format. Permanent lagring og distribusjon av data er krevende, men ikke temaet her. 
-
-Uansett: du vil ofte få data i et format som ikke er tilrettelagt verken i eller for R. Å gjøre om data fra et format til et annet kan være en avgjørende oppgave for å få gjort noe som helst. 
-
-Dette kan være krøkete og du har virkelig muligheten til å kløne det til skikkelig. For at du skal slippe det gir dette kapittelet en oppskrift for å håndtere slike data slik at du kan jobbe videre med dem i R på en hensiktsmessig måte. 
-
-R kan imidlertid håndtere det aller meste av dataformater på en eller annen måte, men vi ser bare på de aller mest vanlige her. 
-
-
-## De mest vanlige dataformatene 
-
-
-### csv-filer 
-
-
-### rds
-
-
-
-### Excel
-
-
-
-## Laste workspace med `load()` 
-
-
-### Proprietære format: Stata, SPSS og SAS
-
-
-
-
-## Datasettet [NorLAG](https://norlag.nsd.no/)
-
 ```{r}
 #| echo: false
 #| warning: false
@@ -57,6 +22,7 @@ R kan imidlertid håndtere det aller meste av dataformater på en eller annen m�
 ## OBS! Det er noen nummeriske med filter-verdier
 library(tidyverse)
 library(haven)
+
 norlag <- read_stata("data/norlag_panel2022.dta", encoding = "utf-8") %>% 
   filter(iodeltagelse == 1 |  
            iodeltagelse == 2 & round %in% c(1, 3) | 
@@ -87,29 +53,110 @@ norlag <- read_stata("data/norlag_panel2022.dta", encoding = "utf-8") %>%
   mutate(across(where(is.labelled), ~replace(. ,
                                              str_sub(., 1, 7) == "filter:", NA))) %>% 
   labelled::drop_unused_value_labels() %>% 
-  labelled::unlabelled()
+  labelled::unlabelled() %>% 
+  select(ref_nr, round, ioalder, iolandb, iokjonn, pa001c, pa300, yrke_panel)
+
+
+# glimpse(norlag)
+# 
+# library(labelled)
+# 
+# look_for(norlag, "uenighet")
+
 
 saveRDS(norlag, "data/norlag_panel.rds")
 
-# norlag %>% 
-#   select(iodeltagelse, round) %>% 
-#   table()
+save(norlag, file = "data/norlag_panel.Rdata")
+
+write_csv(norlag, "data/norlag_panel.csv")
+
+openxlsx::write.xlsx(norlag, file = "data/norlag_panel.xlsx")
+
+
+write_dta(norlag, path = "data/norlag_panel.dta")
+
+write_sav(norlag, path = "data/norlag_panel.sav")
+
+write_sas(norlag, path = "data/norlag_panel.sas7bdat")
+
 
 ```
 
-Dette datasettet skal benyttes videre i SOS4020 og vi bruker litt tid på dette for å spare tid senere. Da blir det et problem mindre når SOS4020 starter for alvor. 
 
 
-Det viktigste for dette kurset er at dere har et rimelig ryddig datasett å jobbe med slik at dere kan fokusere på estimering. Det opprinnelige datasettet er levert i Stata-format (se over) og det er en del utfordringer med å importere disse dataene bl.a. på grunn av hvordan de har valgt å kode [missing og filterverdier](https://norlag.nsd.no/filterverdier) og lagt denne typen metadata inn i Stataformatet. Disse tingene er ryddet opp i her. Datasettet norlag_panel.rds er altså konvertert til R-formatet rds. Dette datasettet kan da enkelt leses inn med `readRDS()` som følger: 
+Data kan være lagret i mange ulike formater, men det er også problemstillinger knyttet til *hvordan* dataene er lagret i et gitt format. Dette handler delvis om hvordan noen har valgt å lagre og distribuere data, ikke bare om dataformatet i seg selv. 
 
+Det kan være vanskelig å skille mellom hvorvidt utfordringene du møter skyldes dataformatet, softwaren man bruker eller valg andre har tatt. Det kan være flere av disse, men som hovedregel er problemet at data ofte ikke er distribuert i et universelt format. Permanent lagring og distribusjon av data er krevende, men ikke temaet her. 
+
+Uansett: du vil ofte få data i et format som ikke er tilrettelagt verken i eller for R. Å gjøre om data fra et format til et annet kan være en avgjørende oppgave for å få gjort noe som helst. 
+
+Dette kan være krøkete og du har virkelig muligheten til å kløne det til skikkelig. For at du skal slippe det gir dette kapittelet en oppskrift for å håndtere slike data slik at du kan jobbe videre med dem i R på en hensiktsmessig måte. 
+
+R kan imidlertid håndtere det aller meste av dataformater på en eller annen måte, men vi ser bare på de aller mest vanlige her. 
+
+
+## Generelt om ulike dataformat
+
+
+### rds
+Rds-formatet er et format særlig egnet for R. 
+
+
+
+### Laste workspace med `load()` 
+Filer av typen .Rdat eller .Rdata er egentlig ikke et dataformat, men brukes tidvis for å lagre datafiler. Man kan lagre en eller flere datafiler i samme .Rdat fil på disk. 
+
+
+
+
+
+Du kan også lagre et "speilbilde" av hele ditt workspace på denne måten slik at du kan lukke R og så åpne R senere akkurat på det stedet du var i arbeidet. Det kan være kjekt, men forutsetter at du husker hva du drev med forrige gang. Den klare anbefalingen er derfor å ikke bruke dette rutinemessig. 
+
+
+
+### csv-filer 
+Såkalte csv-format er ren tekstformat der verdiene i kollonnene har skilletegn. Skilletegnet er nesten alltid komma eller semikolon, men kan i prinsippet være hva som helst. Noen ganger vil slike 
+
+
+
+
+### Excel
+Forbløffende mye data foreligger i Excel-format. Det finnes egne funksjoner for å jobbe direkte med excel-filer. 
+
+
+
+
+### Proprietære format: Stata, SPSS og SAS
+
+
+#### Stata
 ```{r}
-norlag <- readRDS("data/norlag_panel.rds")
-dim(norlag)
+norlag_dta <- read_stata("data/norlag_panel.dta")
+glimpse(norlag_dta)
+```
 
+
+#### SPSS 
+```{r}
+# norlag_sav <- read_stata("data/norlag_panel.sav")
+# glimpse(norlag_sav)
+```
+
+
+#### SAS
+```{r}
+# norlag_sas <- read_stata("data/norlag_panel.sas7bdat")
+# glimpse(norlag_sas)
 ```
 
 
 
+### Dataformater for store data
+Det finnes en hel rekke andre formater for spesielle formål, derav formater for store data. 
+
+Formatene feather og parquet er varianter av det samme og håndteres med pakken *Arrow*. 
+
+For mer spesielle behov går det også an å koble mot databaser som MySQL, Spark, Oracle eller noe helt annet, og en oversikt [finnes her](https://cran.r-project.org/web/views/Databases.html). 
 
 
 
