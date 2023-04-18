@@ -14,3 +14,38 @@
 
 
 
+## Eksport av resultater til fil 
+Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på "klipp og lim" eller skjermbilde etc er uaktuelt og unngå det for nærmest enhver pris.^[Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.] Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for dere, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt.
+
+Her presenteres noen pakker som eksporterer til de viktigste formatene som er: 
+
+* MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.  
+* rtf - rikt tekstformat. Er et enklere format som fungerer på tvers av de fleste programmer. Kan brukes i Word også. 
+* html - for websider
+* latex - for mer tekniske dokumenter, særlig hvis du har mye formler og stæsj
+* Markdown - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater^[F.eks. dette dokumentet er skrevet i Quarto] Det som fungerer med Markdown fungerer også med Quarto for samme formål. 
+
+
+
+
+### Alt 1: Bruke `modelsummary()`
+Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown 
+
+Fordel: Kan lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket `gt`
+Ulempe: 
+
+### Alt 2: Bruke `stargazer()`
+Eksporterer til bl.a. følgende formater: rtf, html, latex, markdown 
+
+Fordel: Er en stand-alone pakke men gir enkelt veldig fine tabeller som antakeligvis er det du trenger
+Ulempe: Eksport til Word er ikke den beste, men god nok. 
+
+
+### Alt 3: Bruke `gtsummary()`
+Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown 
+
+Fordel: Kan lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket `gt`. Bruker samme rammeverk som for deskriptive tabeller med `tbl_summary`. 
+Ulempe: Litt mer mikk-makk enn `modelsummary` og `stargazer` 
+
+
+

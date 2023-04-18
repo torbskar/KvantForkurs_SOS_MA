@@ -1,13 +1,71 @@
 # Design og tolkning
 
 
-## Ikke-tilfeldige utvalg eller fra en ikke-veldefinert populasjon 
+## Tre nivåer av regresjonanalyse
+
+Richard Berk beskriver i sin lærebok tre nivåer av regresjonsanalyse basert på hvordan dataene ble til. Dette er et godt utgangspunkt som burde klargjøre betydelig, i hvert fall som et først skritt.
+
+### Nivå I: Ikke tilfeldig utvalg fra en veldefinert populasjon
+
+Grunnlaget for statistisk tolkning (sannsynligheter, p-verdier og sånn) er at dataene er en tilfeldig realisering av en underliggende sann verdi. Typisk betyr dette bare at man har trukket et tilfeldig utvalg fra en populasjon. Da vil man få et godt mål på f.eks. gjennomsnittsverdi i populasjonen, men på grunn av tilfeldighet vil det være en feilmargin på denne målingen.
+
+Det avgjørende er altså at det finnes en veldefinert populasjon som det kan generaliseres til. Grunnen til å bruke begrepet *veldefinert* er at det må være rimelig spesifisert.
+
+Hvis dataene *ikke* er fra en veldefinert populasjon kalles dette noen ganger for *convenience sample*. Altså, at man gjorde et uttrekk av beleilighetsgrunner, men uten at det var en veldefinert populasjon.
+
+Et eksempel kan være en arbeidsmiljøundersøkelse i en bestemt bedrift. Det skal litt til at disse resultatene skal gjelde utover denne bedriften. Man kan selvsagt argumentere for at erfaringene gjelder med generelt, men en slik slutning vil da hvile først og fremst på disse argumentene - ikke på statistiske utregninger.
+
+Det kan være veldig nyttig å analysere slike data, og det kan bringe innsikt og kunnskaper. Men med slike data gir det ikke mye mening å regne på statistisk usikkerhet. Hvis man ikke skal si noe utover de dataene man har (ikke generalisere), så er det heller ikke denne typen usikkerhet i målingene.
+
+Slike ikke-tilfeldige utvalg kan betraktes nærmest som case-studier. En dataanalyse vil gi oss kunnskaper om de erfaringene som gjøre akkurat der. Størrelsen på datasettet kan gi oss mer pålitelig informasjon om dette caset, men hjelper ikke for å generalisere utover caset.
+
+### Nivå II: Tilfeldig utvalg fra en veldefinert populasjon
+
+Tilfeldig utvalg er akkurat det det høres ut som, og er den foretrukne metoden for alle surveyundersøkelser. Teorien bak er at utvalget vil gjenspeile populasjonen, og avvik fra "de sanne verdiene" skyldes tilfeldigheter. Disse tilfeldighetene er grunnlaget for statistisk tolkning ved at vi kan si noe om *samplingfordelingen* (se annet kapittel) og dermed har grunnlag for å regne på standardfeil og p-verdier osv. Med andre ord: generalisering til populasjonen. 
+
+Så er det viktig å påpeke at forutsetningen her er at det må være et utvalg fra en *veldefinert* populasjon. Hvis vi ikke vet hvem resultatene generaliserer til, så blir det jo tullete, og vi er egentlig på nivå 1. 
 
 
-## Tilfeldige utvalg fra en veldefinert populasjon 
+### Nivå III: Estimering av kausale effekter
+
+Fra et teknisk perspektiv er det ingenting som skiller studier av eksperimenter fra observasjonsstudier. De samme regresjonsmodellene kan estimeres og de samme utregningene av usikkerhet. Hva som bestemmer tolknigen (og hvorvidt modellspesifikasjonen er rimelig etc) avhenger av forskningsdesignet. Kort sagt kreves det et eksperiment. Hvis man har en *treatment*-gruppe og en kontrollgruppe, så vil $\beta$ beskrive forskjellen mellom disse gruppene som i andre typer data. Det som gir $\beta$ en *kausal* tolkning er om dataene tilfredsstiller kravene til et eksperiment.
+
+Vi kan også regne inn kvasi-eksperimentelle studier eller naturlige eksperimenter her. Enten er disse studiene gode nok til å kvalifisere til å tolke som kausaleffekter - eller så er de det ikke, men da hører de hjemme på nivå II. 
+
+### Mot et nivå IV?  
+
+I Berk sin fremstilling av de tre nivåene får man en følelse av at den vitenskapelige verdien øker ved hvert nivå. Mange vil da også mene akkurat det. Men logisk sett er det litt mer tvetydig enn som så.
+
+Vi har snakket om to dimensjoner: kausalitet (ja/nei) og generalisering (ja/nei). Dette gir fire logisk mulige kombinasjoner.
+
+```{=html}
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+```
+|            | Ikke tilfeldig utvalg fra veldefinert populasjon | Tilfeldig utvalg fra veldefinert populasjon |
+|------------------|----------------------------|--------------------------|
+| Deskriptiv | Overraskende mange                               | Det aller meste                             |
+| Kausal     | Mye, men burde nok vært mer                      | Ganske sjelden                              |
+
+: Nivåer av regresjonsanalyse og hvor vanlige de er {#tbl-}
+
+Jeg har ingen empiri for å si hvor vanlig hver enkelt type analyse er. Men jeg tror det nokså omtrentlige angivelsen i tabellen er ganske riktig, basert på egen erfaring fra studier jeg har lest og presentasjoner jeg har sett.
+
+I Berk sin fremstilling er Nivå III hele nederste rad, men da er det altså ikke gjort skille mellom om resultatene kan generaliseres videre eller ikke. Et slik skille bør man nok gjøre.
+
+Eksperimenter omtales noen ganger - og i noen fagmiljøer - som *gullstandarden*. Men altså: ethvert eksperiment kan ikke være en gullstandard, ikke engang når formålet er å estimere kausaleffekter. Nivå IV er i så fall det vi ser etter, da nivå III har begrenset gyldighet. I tilsvarende ånd omtaler Berk eksperimenter som *bronsestandarden*, med den begrunnelse at det i praksis ikke er noe på palleplassene sølv og gull. 
 
 
-## Eksperimenter og randomiserte forsøk 
+
+## Hva er poenget her, egentlig? 
+Poenget er at tolkning av resultatene handler vel så mye om hvordan dataene har *blitt til* som hvordan de er *analysert*. Hvis du har data på nivå I, så finnes det ingen statistiske krumspring du kan gjøre som løfter det til et annet nivå. Det samme gjelder nivå II og nivå III. Du kan fremdeles gjøre svært så nyttige og informative analyser på det nivået du har data på. De statistiske analyseteknikkene er det ellers ikke så stor forskjell på. 
 
 
 

@@ -1,5 +1,5 @@
 # Statistisk tolkning
-Det vi omtaler som *statistisk tolkning* eller *statistisk inferens* handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. I praksis handler dette om (på dette nivået) følgende: 
+Det vi omtaler som *statistisk tolkning* eller *statistisk inferens* handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. Dette er relevant for analyser på nivå II og III (se forrige kapittel). På nivå II handler det om å *generalisere* til en veldefinert populasjon, mens det på nivå III handler om å skille ut den kausale effekten fra tilfeldig støy. Teknikkene er imidlertid de samme. I praksis handler dette om (på dette nivået) følgende: 
 
 1) standardfeil  
 1) konfidensintervall
@@ -9,14 +9,27 @@ Disse tre henger nøye sammen. Vi vil her bare se på det grunnleggende som base
 
 
 ## Tilfeldigheter og systematikk 
+Standard*feilen* er ikke det samme som standard*avviket*, og det er viktig at du vet forskjellen på disse. 
 
-### Samplingfordeling og Sentralgrenseteoremet 
+* Standardavvik: beskriver variasjonen rundt gjennomsnittet i utvalget, altså i dataene du har. Det er litt omtrentlig sagt et mål på hvor langt fra gjennomsnittet datapunktene ligger.  
+* Standardfeilen: beskriver en *hypotetisk fordeling* av hvordan man kan regne med at mulige estimater kan være fordelt rundt den sanne verdien. Denne fordelingen kalles en samplingfordeling og krever litt mer forklaring - men standardfeilen er estimatet på standardavviket i samplingfordelingen.
 
-Standard*feilen* er ikke det samme som standardavvik, og det er viktig at du vet forskjellen på disse. 
+Hvis du synes at denne forklaringen ikke hjalp, så er det med god grunn. Det er nemlig vanskelig å forstå. Det har en begrunnelse i sannsynlighetsteori som vi ikke skal gå veldig i dypbden på her. Men du trenger å forstå hva *samplingfordeling* er, og så gir *sentralgrenseteoremet* det vi trenger for å regne ut slike ting som p-verdier og konfidensintervall. 
+
+
+### Samplingfordeling og sentralgrenseteoremet 
+#### Samplingfordeling
+
+
+#### Sentralgrenseteoremet 
+
 
 
 ### Standard*feil* 
-Standard*feilen* uttrykker usikkerheten ved *estimatet*. La oss si at du ønsker å si noe om gjennomsnittet i *populasjonen*, men har bare data om et tilfeldig *utvalg* fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et *estimat*. 
+Standard*feilen* uttrykker usikkerheten ved *estimatet*. La oss si at du ønsker å si noe om gjennomsnittet i *populasjonen*, men har bare data om et tilfeldig *utvalg* fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et *estimat*. Standardfeilen til estimatet er et mål på usikkerheten ved målemetoden. Usikker målemetode gjør at feilen kan være større. 
+
+
+
 
 
 ### Er man "95% sikker"?

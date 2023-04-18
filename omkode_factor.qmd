@@ -13,13 +13,15 @@ library(gtsummary)
 
 
 
-## Endre variabelnavn
-`rename` og `mutate`
+## Endre variabelnavn med `rename` og `mutate`
+
 
 
 
 
 ## Kontinuerlige variable 
+Å omkode kontinuerlige variable er i utgangspunktet det enkleste. Dette er tall og man kan gjøre normale regneoperasjoner på dem. 
+
 
 
 
@@ -30,10 +32,29 @@ library(gtsummary)
 
 
 ## Factorvariable 
+R har en egen variabeltype for kategoriske variable som kalles "factor". I utgangspunktet er kategoriske variable mer å regne som tekstvariable enn som tall, men i en del beregninger vil softwaren bruke numeriske verdier uansett. Hvis man gjør om en tekst-variabel til en factor-variabel beholdes teksten, men kategoriene numeriske verdier 1, 2, 3, ... osv. Disse tallene kan du tenke på som rekkefølgen på kategoriene. For kategoriske variable er det jo ikke noen egentlig rekkefølge, men det kan være grunner til å foretrekke rekkfølgen av andre grunner som vi kommer tilbake til. 
+
+Hvis variabelen er ordnet f.eks. på en skala fra 1 til 5 eller annen naturlig rekkefølge^[Noen ganger kalles slike variable å være på  "ordinalnivå"], så kan man også angi dette. 
+
+
+### Få oversikt over factor-levels med `levels()`
+
+
+
+### Enkel omkoding med `fct_recode()` og `fct_collapse()` 
+
+
+### Endre rekkefølgen på faktorene med `fct_reorder()`
+
+
+
+## Betinget omkoding med `ifelse()` og `case_when()`
 
 
 
 
+
+Du kan lære mer om effektiv håndtering av kategoriske variable med [forcats-pakken](https://forcats.tidyverse.org/articles/forcats.html), som er en del av "tidyverse". 
 
 
 ## Factorvariable med skikkelig lang tekst
@@ -100,7 +121,7 @@ norlag_omkodet <- norlag %>%
 
 ```
 
-Trikset her er altså å bruke levels() og vise til hvilket nummer i rekkefølgen. Da unngår vi også faren for skrivefeil.  
+Trikset her er altså å bruke `levels()` og vise til hvilket nummer i rekkefølgen. Da unngår vi også faren for skrivefeil.  
 
 Vi vil også kode om alle de andre verdiene, nummer 4-9 til NA. Det kan vi gjøre på samme måte, men vi behøver ikke skrive en ny linje for hver verdi. Den logiske operatoren == kan man bruke når man skal sjekke om to verdier er like. Hvis vi skal se om en verdi er lik en av flere mulige kan vi bruke %in% og så en liste med verdier. levels() gir en liste med verdier, så da kan vi angi den direkte og alle verdiene 4 til 9 ved å skrive 4:9. Samlet blir det da slik: 
 
@@ -166,17 +187,20 @@ polit %>%
 
 
 
-## Bruke kataloger for kodeverk 
+### Bruke kataloger for kodeverk 
 Sometimes, such long list of unique codes have a standard grouping that are not hierarchical. One such example is the **ordc class schema** as developed by the [HISTCLASS-project homepage](https://www.sv.uio.no/iss/english/research/projects/histclass/). This is a coding schema for isco-codes to classes, and a catalogue is available from the homepage. As there are about 800 unique values and they are stored in Excel-format with corresponding grouping for each code. The first lines in Excel-file looks lik this:  
 
-![](images/isco_excel.png){width=60%} 
+![](images/isco_excel.png) 
 
 This file can be read into R using `read_excel()`, where the first line is typically read as variable names. But the first lines are not to be used, and neither are several columns. 
 
 To read it into R, we need to skip the lines not needed and change the variable names. In this example, we only need the isco-kodes and the ordc_yrk codes. Variable names should not include spaces, so we include an argument for ensuring universal valid variable names. That substitutes white space with punctuation. 
 We also specify `col_types = "text"` to avoid the values being interpreted as numeric. 
 
-```{r, echo=TRUE, warning=FALSE}
+```{r}
+#| echo: TRUE
+#| warning: FALSE
+
 isco <- readxl::read_excel(path = "data/3_codes_isco88_ordc.xlsx", skip = 4, .name_repair = "universal", col_types = "text") %>% 
   select(2,9) 
 head(isco)
@@ -209,6 +233,7 @@ polit2 %>%
 
 
 
+## Gjøre samme ting med mange variable med `across()`
 
 
 

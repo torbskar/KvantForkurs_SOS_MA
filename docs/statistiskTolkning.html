@@ -255,7 +255,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#tilfeldigheter-og-systematikk" id="toc-tilfeldigheter-og-systematikk" class="nav-link active" data-scroll-target="#tilfeldigheter-og-systematikk"><span class="toc-section-number">10.1</span>  Tilfeldigheter og systematikk</a>
   <ul class="collapse">
-  <li><a href="#samplingfordeling-og-sentralgrenseteoremet" id="toc-samplingfordeling-og-sentralgrenseteoremet" class="nav-link" data-scroll-target="#samplingfordeling-og-sentralgrenseteoremet"><span class="toc-section-number">10.1.1</span>  Samplingfordeling og Sentralgrenseteoremet</a></li>
+  <li><a href="#samplingfordeling-og-sentralgrenseteoremet" id="toc-samplingfordeling-og-sentralgrenseteoremet" class="nav-link" data-scroll-target="#samplingfordeling-og-sentralgrenseteoremet"><span class="toc-section-number">10.1.1</span>  Samplingfordeling og sentralgrenseteoremet</a></li>
   <li><a href="#standardfeil" id="toc-standardfeil" class="nav-link" data-scroll-target="#standardfeil"><span class="toc-section-number">10.1.2</span>  Standard<em>feil</em></a></li>
   <li><a href="#er-man-95-sikker" id="toc-er-man-95-sikker" class="nav-link" data-scroll-target="#er-man-95-sikker"><span class="toc-section-number">10.1.3</span>  Er man “95% sikker”?</a></li>
   </ul></li>
@@ -285,7 +285,7 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Det vi omtaler som <em>statistisk tolkning</em> eller <em>statistisk inferens</em> handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. I praksis handler dette om (på dette nivået) følgende:</p>
+<p>Det vi omtaler som <em>statistisk tolkning</em> eller <em>statistisk inferens</em> handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. Dette er relevant for analyser på nivå II og III (se forrige kapittel). På nivå II handler det om å <em>generalisere</em> til en veldefinert populasjon, mens det på nivå III handler om å skille ut den kausale effekten fra tilfeldig støy. Teknikkene er imidlertid de samme. I praksis handler dette om (på dette nivået) følgende:</p>
 <ol type="1">
 <li>standardfeil<br>
 </li>
@@ -295,13 +295,25 @@ ul.task-list li input[type="checkbox"] {
 <p>Disse tre henger nøye sammen. Vi vil her bare se på det grunnleggende som baserer seg på <em>normalfordelingen</em> hvis vi har stort nok datamateriale. Disse kaller vi t-test fordi det egentlig er en <em>t-fordeling</em> som ligger under. Det finnes en hel rekke statistiske tester som er varianter av samme tankegang, men det som skiller seg fra dette er stort sette hvordan standardfeilen regnes ut og hvilken sannsynlighetsfordeling man tolker test-statistikken ut fra. For å lære mer om slik kan du slå opp i hvilken som helst grunding innføringsbok i statistikk og kvantitative metoder.</p>
 <section id="tilfeldigheter-og-systematikk" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="tilfeldigheter-og-systematikk"><span class="header-section-number">10.1</span> Tilfeldigheter og systematikk</h2>
+<p>Standard<em>feilen</em> er ikke det samme som standard<em>avviket</em>, og det er viktig at du vet forskjellen på disse.</p>
+<ul>
+<li>Standardavvik: beskriver variasjonen rundt gjennomsnittet i utvalget, altså i dataene du har. Det er litt omtrentlig sagt et mål på hvor langt fra gjennomsnittet datapunktene ligger.<br>
+</li>
+<li>Standardfeilen: beskriver en <em>hypotetisk fordeling</em> av hvordan man kan regne med at mulige estimater kan være fordelt rundt den sanne verdien. Denne fordelingen kalles en samplingfordeling og krever litt mer forklaring - men standardfeilen er estimatet på standardavviket i samplingfordelingen.</li>
+</ul>
+<p>Hvis du synes at denne forklaringen ikke hjalp, så er det med god grunn. Det er nemlig vanskelig å forstå. Det har en begrunnelse i sannsynlighetsteori som vi ikke skal gå veldig i dypbden på her. Men du trenger å forstå hva <em>samplingfordeling</em> er, og så gir <em>sentralgrenseteoremet</em> det vi trenger for å regne ut slike ting som p-verdier og konfidensintervall.</p>
 <section id="samplingfordeling-og-sentralgrenseteoremet" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="samplingfordeling-og-sentralgrenseteoremet"><span class="header-section-number">10.1.1</span> Samplingfordeling og Sentralgrenseteoremet</h3>
-<p>Standard<em>feilen</em> er ikke det samme som standardavvik, og det er viktig at du vet forskjellen på disse.</p>
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="samplingfordeling-og-sentralgrenseteoremet"><span class="header-section-number">10.1.1</span> Samplingfordeling og sentralgrenseteoremet</h3>
+<section id="samplingfordeling" class="level4" data-number="10.1.1.1">
+<h4 data-number="10.1.1.1" class="anchored" data-anchor-id="samplingfordeling"><span class="header-section-number">10.1.1.1</span> Samplingfordeling</h4>
+</section>
+<section id="sentralgrenseteoremet" class="level4" data-number="10.1.1.2">
+<h4 data-number="10.1.1.2" class="anchored" data-anchor-id="sentralgrenseteoremet"><span class="header-section-number">10.1.1.2</span> Sentralgrenseteoremet</h4>
+</section>
 </section>
 <section id="standardfeil" class="level3" data-number="10.1.2">
 <h3 data-number="10.1.2" class="anchored" data-anchor-id="standardfeil"><span class="header-section-number">10.1.2</span> Standard<em>feil</em></h3>
-<p>Standard<em>feilen</em> uttrykker usikkerheten ved <em>estimatet</em>. La oss si at du ønsker å si noe om gjennomsnittet i <em>populasjonen</em>, men har bare data om et tilfeldig <em>utvalg</em> fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et <em>estimat</em>.</p>
+<p>Standard<em>feilen</em> uttrykker usikkerheten ved <em>estimatet</em>. La oss si at du ønsker å si noe om gjennomsnittet i <em>populasjonen</em>, men har bare data om et tilfeldig <em>utvalg</em> fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et <em>estimat</em>. Standardfeilen til estimatet er et mål på usikkerheten ved målemetoden. Usikker målemetode gjør at feilen kan være større.</p>
 </section>
 <section id="er-man-95-sikker" class="level3" data-number="10.1.3">
 <h3 data-number="10.1.3" class="anchored" data-anchor-id="er-man-95-sikker"><span class="header-section-number">10.1.3</span> Er man “95% sikker”?</h3>

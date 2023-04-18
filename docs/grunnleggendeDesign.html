@@ -61,6 +61,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -252,9 +253,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ikke-tilfeldige-utvalg-eller-fra-en-ikke-veldefinert-populasjon" id="toc-ikke-tilfeldige-utvalg-eller-fra-en-ikke-veldefinert-populasjon" class="nav-link active" data-scroll-target="#ikke-tilfeldige-utvalg-eller-fra-en-ikke-veldefinert-populasjon"><span class="toc-section-number">9.1</span>  Ikke-tilfeldige utvalg eller fra en ikke-veldefinert populasjon</a></li>
-  <li><a href="#tilfeldige-utvalg-fra-en-veldefinert-populasjon" id="toc-tilfeldige-utvalg-fra-en-veldefinert-populasjon" class="nav-link" data-scroll-target="#tilfeldige-utvalg-fra-en-veldefinert-populasjon"><span class="toc-section-number">9.2</span>  Tilfeldige utvalg fra en veldefinert populasjon</a></li>
-  <li><a href="#eksperimenter-og-randomiserte-forsøk" id="toc-eksperimenter-og-randomiserte-forsøk" class="nav-link" data-scroll-target="#eksperimenter-og-randomiserte-forsøk"><span class="toc-section-number">9.3</span>  Eksperimenter og randomiserte forsøk</a></li>
+  <li><a href="#tre-nivåer-av-regresjonanalyse" id="toc-tre-nivåer-av-regresjonanalyse" class="nav-link active" data-scroll-target="#tre-nivåer-av-regresjonanalyse"><span class="toc-section-number">9.1</span>  Tre nivåer av regresjonanalyse</a>
+  <ul class="collapse">
+  <li><a href="#nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" id="toc-nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="nav-link" data-scroll-target="#nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="toc-section-number">9.1.1</span>  Nivå I: Ikke tilfeldig utvalg fra en veldefinert populasjon</a></li>
+  <li><a href="#nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" id="toc-nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="nav-link" data-scroll-target="#nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="toc-section-number">9.1.2</span>  Nivå II: Tilfeldig utvalg fra en veldefinert populasjon</a></li>
+  <li><a href="#nivå-iii-estimering-av-kausale-effekter" id="toc-nivå-iii-estimering-av-kausale-effekter" class="nav-link" data-scroll-target="#nivå-iii-estimering-av-kausale-effekter"><span class="toc-section-number">9.1.3</span>  Nivå III: Estimering av kausale effekter</a></li>
+  <li><a href="#mot-et-nivå-iv" id="toc-mot-et-nivå-iv" class="nav-link" data-scroll-target="#mot-et-nivå-iv"><span class="toc-section-number">9.1.4</span>  Mot et nivå IV?</a></li>
+  </ul></li>
+  <li><a href="#hva-er-poenget-her-egentlig" id="toc-hva-er-poenget-her-egentlig" class="nav-link" data-scroll-target="#hva-er-poenget-her-egentlig"><span class="toc-section-number">9.2</span>  Hva er poenget her, egentlig?</a></li>
   </ul>
 </nav>
     </div>
@@ -278,14 +284,78 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="ikke-tilfeldige-utvalg-eller-fra-en-ikke-veldefinert-populasjon" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="ikke-tilfeldige-utvalg-eller-fra-en-ikke-veldefinert-populasjon"><span class="header-section-number">9.1</span> Ikke-tilfeldige utvalg eller fra en ikke-veldefinert populasjon</h2>
+<section id="tre-nivåer-av-regresjonanalyse" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="tre-nivåer-av-regresjonanalyse"><span class="header-section-number">9.1</span> Tre nivåer av regresjonanalyse</h2>
+<p>Richard Berk beskriver i sin lærebok tre nivåer av regresjonsanalyse basert på hvordan dataene ble til. Dette er et godt utgangspunkt som burde klargjøre betydelig, i hvert fall som et først skritt.</p>
+<section id="nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="header-section-number">9.1.1</span> Nivå I: Ikke tilfeldig utvalg fra en veldefinert populasjon</h3>
+<p>Grunnlaget for statistisk tolkning (sannsynligheter, p-verdier og sånn) er at dataene er en tilfeldig realisering av en underliggende sann verdi. Typisk betyr dette bare at man har trukket et tilfeldig utvalg fra en populasjon. Da vil man få et godt mål på f.eks. gjennomsnittsverdi i populasjonen, men på grunn av tilfeldighet vil det være en feilmargin på denne målingen.</p>
+<p>Det avgjørende er altså at det finnes en veldefinert populasjon som det kan generaliseres til. Grunnen til å bruke begrepet <em>veldefinert</em> er at det må være rimelig spesifisert.</p>
+<p>Hvis dataene <em>ikke</em> er fra en veldefinert populasjon kalles dette noen ganger for <em>convenience sample</em>. Altså, at man gjorde et uttrekk av beleilighetsgrunner, men uten at det var en veldefinert populasjon.</p>
+<p>Et eksempel kan være en arbeidsmiljøundersøkelse i en bestemt bedrift. Det skal litt til at disse resultatene skal gjelde utover denne bedriften. Man kan selvsagt argumentere for at erfaringene gjelder med generelt, men en slik slutning vil da hvile først og fremst på disse argumentene - ikke på statistiske utregninger.</p>
+<p>Det kan være veldig nyttig å analysere slike data, og det kan bringe innsikt og kunnskaper. Men med slike data gir det ikke mye mening å regne på statistisk usikkerhet. Hvis man ikke skal si noe utover de dataene man har (ikke generalisere), så er det heller ikke denne typen usikkerhet i målingene.</p>
+<p>Slike ikke-tilfeldige utvalg kan betraktes nærmest som case-studier. En dataanalyse vil gi oss kunnskaper om de erfaringene som gjøre akkurat der. Størrelsen på datasettet kan gi oss mer pålitelig informasjon om dette caset, men hjelper ikke for å generalisere utover caset.</p>
 </section>
-<section id="tilfeldige-utvalg-fra-en-veldefinert-populasjon" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="tilfeldige-utvalg-fra-en-veldefinert-populasjon"><span class="header-section-number">9.2</span> Tilfeldige utvalg fra en veldefinert populasjon</h2>
+<section id="nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="header-section-number">9.1.2</span> Nivå II: Tilfeldig utvalg fra en veldefinert populasjon</h3>
+<p>Tilfeldig utvalg er akkurat det det høres ut som, og er den foretrukne metoden for alle surveyundersøkelser. Teorien bak er at utvalget vil gjenspeile populasjonen, og avvik fra “de sanne verdiene” skyldes tilfeldigheter. Disse tilfeldighetene er grunnlaget for statistisk tolkning ved at vi kan si noe om <em>samplingfordelingen</em> (se annet kapittel) og dermed har grunnlag for å regne på standardfeil og p-verdier osv. Med andre ord: generalisering til populasjonen.</p>
+<p>Så er det viktig å påpeke at forutsetningen her er at det må være et utvalg fra en <em>veldefinert</em> populasjon. Hvis vi ikke vet hvem resultatene generaliserer til, så blir det jo tullete, og vi er egentlig på nivå 1.</p>
 </section>
-<section id="eksperimenter-og-randomiserte-forsøk" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="eksperimenter-og-randomiserte-forsøk"><span class="header-section-number">9.3</span> Eksperimenter og randomiserte forsøk</h2>
+<section id="nivå-iii-estimering-av-kausale-effekter" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="nivå-iii-estimering-av-kausale-effekter"><span class="header-section-number">9.1.3</span> Nivå III: Estimering av kausale effekter</h3>
+<p>Fra et teknisk perspektiv er det ingenting som skiller studier av eksperimenter fra observasjonsstudier. De samme regresjonsmodellene kan estimeres og de samme utregningene av usikkerhet. Hva som bestemmer tolknigen (og hvorvidt modellspesifikasjonen er rimelig etc) avhenger av forskningsdesignet. Kort sagt kreves det et eksperiment. Hvis man har en <em>treatment</em>-gruppe og en kontrollgruppe, så vil <span class="math inline">\(\beta\)</span> beskrive forskjellen mellom disse gruppene som i andre typer data. Det som gir <span class="math inline">\(\beta\)</span> en <em>kausal</em> tolkning er om dataene tilfredsstiller kravene til et eksperiment.</p>
+<p>Vi kan også regne inn kvasi-eksperimentelle studier eller naturlige eksperimenter her. Enten er disse studiene gode nok til å kvalifisere til å tolke som kausaleffekter - eller så er de det ikke, men da hører de hjemme på nivå II.</p>
+</section>
+<section id="mot-et-nivå-iv" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="mot-et-nivå-iv"><span class="header-section-number">9.1.4</span> Mot et nivå IV?</h3>
+<p>I Berk sin fremstilling av de tre nivåene får man en følelse av at den vitenskapelige verdien øker ved hvert nivå. Mange vil da også mene akkurat det. Men logisk sett er det litt mer tvetydig enn som så.</p>
+<p>Vi har snakket om to dimensjoner: kausalitet (ja/nei) og generalisering (ja/nei). Dette gir fire logisk mulige kombinasjoner.</p>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<div id="tbl-" class="anchored">
+<table class="table">
+<caption>Table&nbsp;9.1: Nivåer av regresjonsanalyse og hvor vanlige de er</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 38%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Ikke tilfeldig utvalg fra veldefinert populasjon</th>
+<th>Tilfeldig utvalg fra veldefinert populasjon</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Deskriptiv</td>
+<td>Overraskende mange</td>
+<td>Det aller meste</td>
+</tr>
+<tr class="even">
+<td>Kausal</td>
+<td>Mye, men burde nok vært mer</td>
+<td>Ganske sjelden</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Jeg har ingen empiri for å si hvor vanlig hver enkelt type analyse er. Men jeg tror det nokså omtrentlige angivelsen i tabellen er ganske riktig, basert på egen erfaring fra studier jeg har lest og presentasjoner jeg har sett.</p>
+<p>I Berk sin fremstilling er Nivå III hele nederste rad, men da er det altså ikke gjort skille mellom om resultatene kan generaliseres videre eller ikke. Et slik skille bør man nok gjøre.</p>
+<p>Eksperimenter omtales noen ganger - og i noen fagmiljøer - som <em>gullstandarden</em>. Men altså: ethvert eksperiment kan ikke være en gullstandard, ikke engang når formålet er å estimere kausaleffekter. Nivå IV er i så fall det vi ser etter, da nivå III har begrenset gyldighet. I tilsvarende ånd omtaler Berk eksperimenter som <em>bronsestandarden</em>, med den begrunnelse at det i praksis ikke er noe på palleplassene sølv og gull.</p>
+</section>
+</section>
+<section id="hva-er-poenget-her-egentlig" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="hva-er-poenget-her-egentlig"><span class="header-section-number">9.2</span> Hva er poenget her, egentlig?</h2>
+<p>Poenget er at tolkning av resultatene handler vel så mye om hvordan dataene har <em>blitt til</em> som hvordan de er <em>analysert</em>. Hvis du har data på nivå I, så finnes det ingen statistiske krumspring du kan gjøre som løfter det til et annet nivå. Det samme gjelder nivå II og nivå III. Du kan fremdeles gjøre svært så nyttige og informative analyser på det nivået du har data på. De statistiske analyseteknikkene er det ellers ikke så stor forskjell på.</p>
 
 
 </section>
