@@ -53,7 +53,7 @@
     "href": "norlag.html#innlesning-av-data",
     "title": "3  Datasettet NorLAG",
     "section": "3.2 Innlesning av data",
-    "text": "3.2 Innlesning av data\n\n\n\nDatasettet norlag_panel.rds er altså konvertert til R-formatet rds. Dette datasettet kan da enkelt leses inn med readRDS() som følger:\n\nnorlag <- readRDS(\"data/norlag_panel.rds\")\ndim(norlag)\n\n[1] 20892   434"
+    "text": "3.2 Innlesning av data\nDatasettet norlag.rds er altså konvertert til R-formatet rds. Dette datasettet kan da enkelt leses inn med readRDS() som følger:\n\nnorlag <- readRDS(\"data/norlag.rds\")\ndim(norlag)\n\n[1] 20892  2605"
   },
   {
     "objectID": "oversikt_datasettet.html#søke-i-datasettet-etter-variable",

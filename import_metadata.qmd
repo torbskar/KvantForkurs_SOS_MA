@@ -47,6 +47,7 @@ library(labelled)
 faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
 lang <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
 
+
 norlag <- merge(faste, lang, by = "ref_nr") %>% 
   filter(iodeltakelse == 1 |  
            iodeltakelse == 2 & round %in% c(1, 3) | 
@@ -65,7 +66,7 @@ norlag <- merge(faste, lang, by = "ref_nr") %>%
                                                NA))) %>%
   # noen spesielle missing - som kanskje gjelder overalt?
   mutate(across(where(is.labelled) ,  ~replace(., 
-                                               . %in% c(9993, 9994, 9995, 9996, 9997, 9998, 999), 
+                                               . %in% c(9993, 9994, 9995, 9996, 9997, 9998, 9999), 
                                                NA))) %>%
   # inpartbankinnsk og fremover
   mutate(across(where(is.labelled) ,  ~replace(., 
@@ -75,7 +76,7 @@ norlag <- merge(faste, lang, by = "ref_nr") %>%
                                                         999999999), 
                                                NA))) %>%
   mutate(across(where(is.labelled), ~replace(. ,
-                                             str_sub(., 1, 7) == "filter:", NA))) %>% 
+                                             str_sub(tolower(.), 1, 7) == "filter:", NA))) %>% 
   #mutate(across(where(is.labelled), ~drop_unused_value_labels(.))) %>% 
   # Noen spesielle der drop_unused_value_labels() ikke funker (f.eks. hc135). Gjør til factor og rydder etterpå. 
   mutate(across(where(is.labelled), ~as_factor(.))) %>% 
@@ -84,6 +85,7 @@ norlag <- merge(faste, lang, by = "ref_nr") %>%
 
 ## Omkoder hovedaktivitet ####
 fs <- lvls_union( list(norlag$wr001, norlag$wr002, norlag$wr003c)) %>% tolower() %>% unique()
+
 norlag <- norlag %>% 
   mutate(across(wr001:wr003c, ~factor(tolower(.), levels=fs))) %>% 
   mutate(hovedaktivitet = case_when(round == 1 ~ wr001, 
@@ -102,6 +104,15 @@ norlag <- norlag %>%
 saveRDS(norlag, paste0(utfilbane, "norlag.rds"))
 ```
 
+```{r}
+# glimpse(norlag[,30:40])
+# 
+# levels(norlag$pr003c)
+# summary(norlag$pr003c)
+# 
+# look_for(norlag, "994")
+
+```
 
 
 
