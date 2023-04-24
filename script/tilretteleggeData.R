@@ -1,51 +1,16 @@
-# Import av data fra Sikt - håndtering av formater med metadata 
+# Innlesning av originale data fra Sikt ####
 
 
-```{r}
-#| warning: false
-#| echo: false
-#| error: false
+
+## OBS! Det er noen nummeriske med filter-verdier
 library(tidyverse)
 library(haven)
 library(labelled)
 
-```
+filbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/rOBH3y10/"
 
-
-For de som vil ha en litt mer utfordring kan man lese inn filen i Stata-format. Dette er slik det blir levert fra Sikt^[Det kan sies mye om å levere ut data på denne måten, men det vil ikke ta seg ut å gjøre det i undervisningsmateriale.]
-
-Stata-formatet dta har to utfordringer når vi importerer til R. Det er tilsvarende problemstilling hvis man importerer fra SPSS eller SAS. For det første er det noen ganger gitt en egen kode for manglende verdi, såkalt "missing". For det andre lagres informasjonen på en annen måte enn i R. I Stata er ofte kategoriske variable lagret som en numerisk variabel med en tilhørende "label". Når man leser inn dta-fil til R vil disse variablene være av typen "labelled". I R er det langt bedre å gjøre de om til factor-variable, men det er litt styr å kode om hvis det er veldig mange variable i datasettet - slik det ofte er i surveydata. 
-
-Vi presenterer en samlet løsning først, så tar vi hver del for seg etterpå for å forklare. Nedenforstående kode gjør omtrent følgende: 
-
-* Leser inn en dta-fil
-* Omkoder alle spesifiserte missing-verdier til NA. Dette gjøres for *alle* variable i hele datasettet (altså hundrevis av variable)
-* Fjerner alle labler som ikke er i bruk (altså: labler for ulike missing-verdier)
-* Gjør om alle variable av typen "labelled" til factor-variable 
-
-```{r}
-#| warning: false
-#| echo: false
-#| error: false
-infilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/rOBH3y10/"
-
-utfilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/"
-
-
-```
-
-
-```{r}
-#| eval: false
-#| warning: false
-#| error: false
-library(tidyverse)
-library(haven)
-library(labelled)
-
-
-faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
-lang <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
+faste <- read_stata( paste0(filbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
+lang <- read_stata( paste0(filbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
 
 norlag <- merge(faste, lang, by = "ref_nr") %>% 
   filter(iodeltakelse == 1 |  
@@ -99,35 +64,9 @@ norlag <- norlag %>%
                                       is.na(hovedaktivitet) ~ "Trygdet/arbeidsledig/stud/annet") %>% as_factor())
 
 
-saveRDS(norlag, paste0(utfilbane, "norlag.rds"))
-```
+saveRDS(norlag, paste0(filbane, "../data_tilDeling/norlag.rds"))
 
 
 
-
-
-Og dermed har vi et datasett i et svært så ryddig R-format. 
-
-
-
-## Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling
-
-
-### Sjekk datastruktur og bruk av `filter`
-
-
-### Omkode bruker-spesifiserte missing-verdier til `NA`
-
-
-### Kode om på tvers av mange variable med `across` 
-
-
-### Fjerne nivåer som ikke brukes: `drop_unused_value_labels`
-
-
-### Gjør om til factor med `unlabelled`
-
-
-## For spesielt interesserte: jobbe med labelled-data
 
 
