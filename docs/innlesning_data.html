@@ -324,6 +324,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#proprietære-format-stata-spss-og-sas" id="toc-proprietære-format-stata-spss-og-sas" class="nav-link" data-scroll-target="#proprietære-format-stata-spss-og-sas"><span class="toc-section-number">2.1.5</span>  Proprietære format: Stata, SPSS og SAS</a></li>
   <li><a href="#dataformater-for-store-data" id="toc-dataformater-for-store-data" class="nav-link" data-scroll-target="#dataformater-for-store-data"><span class="toc-section-number">2.1.6</span>  Dataformater for store data</a></li>
   </ul></li>
+  <li><a href="#oppgaver" id="toc-oppgaver" class="nav-link" data-scroll-target="#oppgaver"><span class="toc-section-number">2.2</span>  Oppgaver</a></li>
   </ul>
 </nav>
     </div>
@@ -378,52 +379,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="excel" class="level3" data-number="2.1.4">
 <h3 data-number="2.1.4" class="anchored" data-anchor-id="excel"><span class="header-section-number">2.1.4</span> Excel</h3>
-<p>Forbløffende mye data foreligger i Excel-format. Det finnes egne funksjoner for å jobbe direkte med excel-filer.</p>
+<p>Forbløffende mye data foreligger i Excel-format. Det finnes egne funksjoner for å jobbe direkte med excel-filer. Blant annet pakken <code>readxl</code> gir funksjoner til å lese inn denne typen filer. Her er et eksempel.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>norlag_xlsx <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/norlag_panel.xlsx"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(norlag_xlsx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 20,892
+Columns: 12
+$ ref_nr  &lt;dbl&gt; 5, 5, 10, 10, 10, 12, 12, 15, 15, 18, 18, 22, 23, 23, 25, 27, …
+$ round   &lt;dbl&gt; 1, 2, 3, 2, 1, 3, 1, 1, 2, 3, 2, 1, 3, 1, 1, 3, 2, 1, 2, 1, 3,…
+$ ioalder &lt;chr&gt; "68", "72", "59", "49", "44", "61", "47", "58", "63", "67", "5…
+$ iolandb &lt;chr&gt; NA, "Norskfødt", NA, "Norskfødt", NA, NA, NA, NA, "Norskfødt",…
+$ iokjonn &lt;chr&gt; "Mann", "Mann", "Kvinne", "Kvinne", "Kvinne", "Kvinne", "Kvinn…
+$ pa001c  &lt;chr&gt; "Ja", "Ja", "Ja", "Ja", "Nei", "Ja", "Ja", "Nei", "Nei", "Ja",…
+$ pa300   &lt;chr&gt; "Partner gjør mest", NA, NA, NA, NA, NA, "IO gjør mest", NA, N…
+$ hc230   &lt;chr&gt; "En gang i uken", "En gang i uken", "2-3 ganger i måneden", "E…
+$ hc231   &lt;chr&gt; "2-3 ganger i måneden", "2-3 ganger i måneden", NA, "2-3 gange…
+$ va207   &lt;chr&gt; "Ganske viktig", "Litt viktig", "Litt viktig", "Ikke viktig", …
+$ hcMCS12 &lt;chr&gt; "59.7766", "60.68044", "58.74768", "60.69717", "55.86777", "53…
+$ hcPCS12 &lt;chr&gt; "54.83583", "51.03453", "55.92348", "55.25834", "55.91285", "5…</code></pre>
+</div>
+</div>
+<p>Men Excel-filer kan ha en litt mer komplisert struktur enn dette eksempelet. Data kan ligge i ulike faner i Excel-filen, men det kan da håndteres med å legge til argumentet <code>sheet = ...</code>. Hvis excel-arket inneholder mye tekst eller andre ting som gjør at de faktiske dataene kommer litt lengre ned, så kan det spesifiseres hvilket celleområde som det skal leses inn fra ved <code>range = ...</code> eller bare hoppe over noen rader med <code>skip = ...</code>.</p>
+<p>På dette kurset skal vi ikke bruke Excel-filer, men det er stor sannsynlighet for at du vil få bruk for dette senere en gang.</p>
 </section>
 <section id="proprietære-format-stata-spss-og-sas" class="level3" data-number="2.1.5">
 <h3 data-number="2.1.5" class="anchored" data-anchor-id="proprietære-format-stata-spss-og-sas"><span class="header-section-number">2.1.5</span> Proprietære format: Stata, SPSS og SAS</h3>
 <section id="stata" class="level4" data-number="2.1.5.1">
 <h4 data-number="2.1.5.1" class="anchored" data-anchor-id="stata"><span class="header-section-number">2.1.5.1</span> Stata</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>norlag_dta <span class="ot">&lt;-</span> <span class="fu">read_stata</span>(<span class="st">"data/norlag_panel.dta"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(norlag_dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>norlag_dta <span class="ot">&lt;-</span> <span class="fu">read_stata</span>(<span class="st">"data/norlag_panel.dta"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(norlag_dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 20,892
-Columns: 8
-$ ref_nr     &lt;dbl&gt; 5, 5, 10, 10, 10, 12, 12, 15, 15, 18, 18, 22, 23, 23, 25, 2…
-$ round      &lt;dbl&gt; 1, 2, 1, 2, 3, 1, 3, 1, 2, 2, 3, 1, 1, 3, 1, 1, 2, 3, 1, 2,…
-$ ioalder    &lt;dbl&gt; 68, 72, 44, 49, 59, 47, 61, 58, 63, 57, 67, 63, 55, 69, 71,…
-$ iolandb    &lt;dbl+lbl&gt;  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, NA,  1,  1,…
-$ iokjonn    &lt;dbl+lbl&gt; 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2…
-$ pa001c     &lt;dbl+lbl&gt; 2, 2, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 2, 1, 2, 2, 2, 1…
-$ pa300      &lt;dbl+lbl&gt;  1, NA, NA, NA, NA,  2, NA, NA, NA, NA, NA,  3, NA, NA,…
-$ yrke_panel &lt;dbl+lbl&gt;  4, NA,  6,  6,  6,  4,  6,  3,  3,  4, NA, NA,  4, NA,…</code></pre>
+Columns: 12
+$ ref_nr  &lt;dbl&gt; 5, 5, 10, 10, 10, 12, 12, 15, 15, 18, 18, 22, 23, 23, 25, 27, …
+$ round   &lt;dbl&gt; 1, 2, 3, 2, 1, 3, 1, 1, 2, 3, 2, 1, 3, 1, 1, 3, 2, 1, 2, 1, 3,…
+$ ioalder &lt;dbl+lbl&gt; 29, 33, 20, 10,  5, 22,  8, 19, 24, 28, 18, 24, 30, 16, 32…
+$ iolandb &lt;dbl+lbl&gt; NA,  1, NA,  1, NA, NA, NA, NA,  1, NA,  1, NA, NA, NA, NA…
+$ iokjonn &lt;dbl+lbl&gt; 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2…
+$ pa001c  &lt;dbl+lbl&gt; 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1…
+$ pa300   &lt;dbl+lbl&gt;  1, NA, NA, NA, NA, NA,  2, NA, NA, NA, NA,  3, NA, NA, NA…
+$ hc230   &lt;dbl+lbl&gt;  3,  3,  4,  3,  3, NA, NA,  1,  1, NA, NA,  1, NA,  3,  4…
+$ hc231   &lt;dbl+lbl&gt;  4,  4, NA,  4,  3, NA, NA,  2,  1, NA, NA,  2, NA,  4,  5…
+$ va207   &lt;dbl+lbl&gt;  2,  3,  3,  4,  3, NA, NA,  3,  4, NA, NA,  1, NA,  3,  3…
+$ hcMCS12 &lt;dbl+lbl&gt; 6350, 6647, 5994, 6650, 4891, 4121, 6672, 4736, 3529, 4632…
+$ hcPCS12 &lt;dbl+lbl&gt; 7085, 6420, 7258, 7149, 7255, 7544, 7355, 6956, 7368, 7342…</code></pre>
 </div>
 </div>
+<p>Legg merke til at den andre kolonnen her viser hva slags variabeltype det er. <code>&lt;dbl&gt;</code> betyr at det er numerisk variabel^(Det finnes flere typer numeriske variable som vi for praktiske analyser sjelden behøver å forholde oss til. <code>&lt;dbl&gt;</code> står for <em>Double</em> som er et lagringsformat som kan ta svært mange desimaler. Det kan også stå <code>&lt;num&gt;</code> som håndterer færre desimaler. Det er også vanlig med <code>&lt;int&gt;</code> som står for <em>Integer</em>, altså heltall uten desimaler.) På noen variable står det også <code>&lt;dbl+lbl&gt;</code> der <code>lbl</code> står for <em>labelled</em> som betyr at det finnes såkalte labler tilhørende variabelen. <em>Labler</em> er vanlig å bruke i programmene Stata og SPSS, men er ikke noe som vanligvis brukes i R. Men R leser det inn og kan håndtere dette helt fint. Men som hovedregel er det bedre å rydde opp slik at dataene blir slik vi vanligvis bruker det i R. Dette er grunnen til at dere får en bearbeidet versjon av NorLAG datasettet!</p>
+<p>Neste kapittel er spesielt om NorLAG i formatet <code>.rds</code>. Hvordan effektivt lese inn fra Stata til R og gjøre om labler er dekket i et appendiks. De av dere som senere skal jobbe med data levert ut fra Sikt kan ha behov for dette, og da kan dere ta en nærmere titt på appedikset. For dette forkurset og SOS4020 vil dere ikke trenge kunne akkurat det.</p>
 </section>
-<section id="spss" class="level4" data-number="2.1.5.2">
-<h4 data-number="2.1.5.2" class="anchored" data-anchor-id="spss"><span class="header-section-number">2.1.5.2</span> SPSS</h4>
+<section id="spss-og-sas" class="level4" data-number="2.1.5.2">
+<h4 data-number="2.1.5.2" class="anchored" data-anchor-id="spss-og-sas"><span class="header-section-number">2.1.5.2</span> SPSS og SAS</h4>
+<p>Andre vanlige dataformater er formater fra statistikkpakkene SPSS og SAS, med filhalene henholdsvis <em>.sav</em> og <em>.sas7bdat</em>. De leses inn på tilsvarende funksjoner tilpasset disse dataformatene. Her er eksempel for innlesning av SPSS-fil:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># norlag_sav &lt;- read_stata("data/norlag_panel.sav")</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># glimpse(norlag_sav)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>norlag_sav <span class="ot">&lt;-</span> <span class="fu">read_spss</span>(<span class="st">"data/norlag_panel.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="sas" class="level4" data-number="2.1.5.3">
-<h4 data-number="2.1.5.3" class="anchored" data-anchor-id="sas"><span class="header-section-number">2.1.5.3</span> SAS</h4>
+<p>Her er eksempel for innlesning av SAS-fil:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># norlag_sas &lt;- read_stata("data/norlag_panel.sas7bdat")</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># glimpse(norlag_sas)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>norlag_sas <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"data/norlag_panel.sas7bdat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="dataformater-for-store-data" class="level3" data-number="2.1.6">
 <h3 data-number="2.1.6" class="anchored" data-anchor-id="dataformater-for-store-data"><span class="header-section-number">2.1.6</span> Dataformater for store data</h3>
-<p>Det finnes en hel rekke andre formater for spesielle formål, derav formater for store data.</p>
-<p>Formatene feather og parquet er varianter av det samme og håndteres med pakken <em>Arrow</em>.</p>
+<p>Det finnes en hel rekke andre formater for spesielle formål, derav formater for store data. Med store data mener vi her enten at de er så store at det upraktisk lang tid å lese det inn - eller så store at det ikke er plass i minnet på datamaskinen. Formatene <code>feather</code> og <code>parquet</code> er varianter av det samme og håndteres med pakken <em>Arrow</em>. Det finnes også andre pakker for store data, men <em>Arrow</em> er nå den anbefalte. En annen grunn til det er at disse datasettene tillater sømløs bytte mellom programmeringsspråkene R og Python. Men det går laaaagt utenfor formålet med dette forkurset.</p>
 <p>For mer spesielle behov går det også an å koble mot databaser som MySQL, Spark, Oracle eller noe helt annet, og en oversikt <a href="https://cran.r-project.org/web/views/Databases.html">finnes her</a>.</p>
-
-
+<p>Eneste du trenger være klar over akkurat nå er at R kan håndtere svært mange forskjellige dataformater og koble mot andre løsninger. Kanskje vil du trenge det en gang - kanskje ikke.</p>
 </section>
+</section>
+<section id="oppgaver" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="oppgaver"><span class="header-section-number">2.2</span> Oppgaver</h2>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.1 </strong></span>Les inn datasettet… i rds-format</p>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.2 </strong></span>Les inn datasettet… i xlsx-format</p>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.3 </strong></span>Noen ganger vil datamaskiner være konfigurert slik at filhalene ikke synes. Det betyr jo ikke at de ikke er der, men du ser ikke umiddelbart hva slags fil det er. Finn ut hvordan du endrer dette på din datamaskin. Prøv å skru det av og på. For å finne det ut, søk på internett med søkestrengen “how to display file extension” eller tilsvarende.</p>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

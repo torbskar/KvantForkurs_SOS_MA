@@ -1,14 +1,68 @@
 # Grafikk med ggplot
 
 
+```{r}
+#| echo: false
+library(tidyverse)
+library(ggthemes)
+library(ggforce)
+
+utfilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/"
+
+norlag <- readRDS(paste0(utfilbane, "norlag.rds")) %>% 
+  select(ref_nr, round, iodeltakelse, ioalder, iolandb, iokjonn, pa001c, pa300, hc230, hc231, va207, hcMCS12, hcPCS12 ) %>% 
+  mutate(hcPCS12 = as.numeric(hcPCS12), 
+         hcMCS12 = as.numeric(hcMCS12),
+         ioalder = as.numeric(ioalder)) %>% 
+  filter(!is.na(hc231))
+
+
+# glimpse(norlag)
+# levels(norlag$hc231)
+
+```
+
 
 
 ## Kategoriske variabel  
 
 ### Stolpediagram 
 
+```{r}
+ggplot(norlag, aes(x = hc231)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+
 
 ### Kakediagram og satans verk 
+
+Generelt er ikke kakediagram å anbefale da korrekt tolkning involverer å tolke et areal som inneholder vinkel. Med få kategorier som er rimelig forskjellig kan det gi et ok inntrykk, men ofte ender man opp med å måtte skrive på tallene likevel. 
+
+```{r}
+pc <- norlag %>% 
+  group_by(hc231) %>% 
+  summarise(n = n()) %>% 
+  mutate(pct = n/sum(n)*100) %>% 
+  ungroup()
+
+
+ggplot(pc, aes(x = "", y = pct, fill = (hc231))) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme_void()+
+  geom_text( aes(label = paste0( round(pct,1), "%"), x = 1.4), 
+            position = position_stack(vjust=.5), check_overlap = F) +
+  labs(x = NULL, y = NULL, fill = NULL)+
+  theme(axis.line = element_blank(),
+          axis.text = element_blank(),
+          axis.ticks = element_blank()) +
+  scale_fill_brewer(palette="Blues", direction = -1)
+
+
+
+```
 
 
 
@@ -18,23 +72,163 @@
 
 ### Histogram 
 
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+ggplot(norlag, aes(x = hcPCS12)) +
+  geom_histogram()
+```
+
+Det er også vanlig å fremstille det samme på en "tetthetsskala", der arealet summeres til 1. Det betyr at arealet for hvert intervall tilsvarer en andel. Visuelt sett er det vel så mye arealet vi oppfatter som høyden på stolpene. Men det er bare skalaen på y-aksen som har endret seg. Visuelt sett, ser histogrammene helt like ut. 
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+ggplot(norlag, aes(x = hcPCS12, y = ..density..)) +
+  geom_histogram()
+```
+
+
+
 ### Density plot 
+Density plot er en måte å fremstille det samme på, men i stedet for å dele inn i intervaller som i histogram lager vi en glattet kurve. Det blir på skalaen "tetthet" som i histogrammet ovenfor. 
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+ggplot(norlag, aes(x = hcPCS12)) +
+  geom_density()
+
+```
+
+
+
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+ggplot(norlag, aes(x = hcPCS12)) +
+  geom_histogram(aes(y = ..density..), fill = "lightgrey", col = "grey") +
+  geom_density(col = "red", linewidth = 1) +
+  theme_minimal()
+```
+
+En fordel med denne fremstillingen er at det er lettere å sammenligne grupper. Her er et eksempel med density plot etter hvor mye man drikker. 
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+#| 
+ggplot(norlag, aes(x = hcPCS12, group = hc231, linetype = hc231)) +
+  geom_density(linewidth = 1)+
+  guides(fill = guide_legend(override.aes = list(shape = 1 ) ) ) +
+  theme_minimal()
+
+
+```
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+#| 
+ggplot(norlag, aes(x = hcPCS12)) +
+  geom_density(linewidth = 1)+
+  theme_minimal()+
+  facet_wrap(~hc231, scales="free")
+
+```
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+#| 
+ggplot(norlag, aes(x = hcPCS12,  fill = iokjonn)) +
+  geom_density(alpha = .3)+
+  guides(fill=guide_legend(title="Kjønn"))+
+  theme_minimal()
+
+
+```
 
 
 ### Flere variable samtidig 
 
+
 ####  Boksplot 
+
+
+```{r}
+#| warning: false
+#| message: false
+#| error : false
+ggplot(norlag, aes(x = hcPCS12, group = hc231)) +
+  geom_boxplot()+
+  theme_minimal()+
+  coord_flip()
+```
+
+
+
+
 
 #### Scatterplot 
 
+```{r}
+#| warning: false
+#| message: false
+#| error : false
+glimpse(norlag)
+
+ggplot(norlag, aes(x = ioalder, y = hcPCS12)) +
+  geom_point(alpha=.3)+
+  theme_minimal()
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| error : false
+ggplot(norlag, aes(x = ioalder, y = hcPCS12)) +
+  geom_jitter(alpha=.1, width = .3)+
+  theme_minimal()
+```
+
+
+
 #### Ridgeplot 
+
+Ridgeplot er en annen måte å sammenligne en kontinuerlig fordeling betinget på en gruppering. 
+```{r}
+#| warning: false
+#| message: false
+#| error : false
+library(ggridges)
+ggplot( filter(norlag, !is.na(iolandb)),  aes(y = iolandb, x = hcPCS12)) +
+  geom_density_ridges() 
+```
 
 
 ## Andre greier 
 
 
 ## Grammar of graphics
+Funksjonen *ggplot* er bygget opp som en *gramatikk* for grafisk fremstilling. Det ligger en teori til grunn som er utledet i boken ved omtrent samme navn: [The grammar of graphics](https://link.springer.com/book/10.1007/0-387-28695-0). Det er mye som kan sies om dette, men det viktige er at grafikken er bygget opp rundt noen bestanddeler. Når du behersker disse kan du fremstille nær sagt hva som helst av kvantitativ informasjon grafisk. 
 
-
+* Det første argumentet i `ggplot` er data. Altså: hvilket datasett informasjonen hentes fra. 
+* `aes()` spesifiserer *aestethics*, som er *hva* som skal plottes. Først og fremst hva som skal på x-akse og y-akse (og evt. z-akse), men også spesifikasjon av linjer (farge, linjetype) og fyllfarger, gjerne etter en angitt gruppering. 
+* `geom_*` står for *geometric* og sier noe om hvordan data skal se ut. Det kan være punkter, histogram, stolper, linjer osv. 
+* `coord_*` definerer koordinatsystemet. Stort sett blir dette bestemt av variablene. Men du kan også snu grafen eller definere sirkulært koordinatsystem, eller andre enklere ting. 
+* `facet_*` definerer hvordan du vil dele opp grafikken i undergrupper
 
 

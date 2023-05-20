@@ -20,69 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -317,10 +254,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#tilgang-og-lagring" id="toc-tilgang-og-lagring" class="nav-link active" data-scroll-target="#tilgang-og-lagring"><span class="toc-section-number">3.1</span>  Tilgang og lagring</a>
   <ul class="collapse">
-  <li><a href="#signere-samtykkeskjema" id="toc-signere-samtykkeskjema" class="nav-link" data-scroll-target="#signere-samtykkeskjema"><span class="toc-section-number">3.1.1</span>  Signere samtykkeskjema</a></li>
-  <li><a href="#nedlasting-av-data" id="toc-nedlasting-av-data" class="nav-link" data-scroll-target="#nedlasting-av-data"><span class="toc-section-number">3.1.2</span>  Nedlasting av data</a></li>
+  <li><a href="#innlesning-av-data" id="toc-innlesning-av-data" class="nav-link" data-scroll-target="#innlesning-av-data"><span class="toc-section-number">3.1.1</span>  Innlesning av data</a></li>
   </ul></li>
-  <li><a href="#innlesning-av-data" id="toc-innlesning-av-data" class="nav-link" data-scroll-target="#innlesning-av-data"><span class="toc-section-number">3.2</span>  Innlesning av data</a></li>
   </ul>
 </nav>
     </div>
@@ -355,35 +290,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="tilgang-og-lagring" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="tilgang-og-lagring"><span class="header-section-number">3.1</span> Tilgang og lagring</h2>
 <p>NorLAG er <a href="https://www.uio.no/tjenester/it/sikkerhet/lsis/tillegg/lagring/infoklasser.html">gule data</a> og har restriksjoner på bruk og lagring. Du er pliktet til å sette deg inn i retningslinjene som du finner <a href="https://www.uio.no/tjenester/it/sikkerhet/lsis/tillegg/lagringsguide.html">på denne siden</a>.</p>
-<p>I denne sammenhengen betyr det i praksis at du bør jobbe på UiO-OneDrive. Altså, ikke lagre data på din personlige datamaskin og ikke en personlig skytjeneste. Merk at det er <em>forskjell</em> på f.eks. OneDrive gjennom UiO og privat.</p>
-<section id="signere-samtykkeskjema" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="signere-samtykkeskjema"><span class="header-section-number">3.1.1</span> Signere samtykkeskjema</h3>
-<p>For å få tilgang på datasettet må du oppgi din uio-epostadresse i <a href="https://nettskjema.no/a/336610">dette nettskjemaet</a>, så vil emneansvarlig legge deg inn i systemet. Du får så tilsendt en lenke fra Sikt med videre instruksjoner. Du skal signere et samtykkeskjema.</p>
-<p>Etter at du har signert samtykkeskjema laster du ned dette som en pdf-fil og laster dette opp i <a href="https://nettskjema.no/a/336612">dette skjemaet</a>. Hvis du ikke lastet det ned som pdf-fil med en gang, så finner du det igjen ved å logge inn på <a href="https://minside.nsd.no/data-access">Sikt sine sider for data access</a>.</p>
-</section>
-<section id="nedlasting-av-data" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="nedlasting-av-data"><span class="header-section-number">3.1.2</span> Nedlasting av data</h3>
-<p>Du kan laste ned et datasett fra plattformen til Sikt, men ikke gjør det. Datasettet trenger litt opprydning først. Etter at du har signert samtykket, så blir datasettet delt med deg fra emneansvarlige via OneDrive. Du må da laste ned en kopi av datasettet til ditt eget område etter anvisninger ovenfor.</p>
-<p><strong>OBS!!</strong> Dere signerer en avtale om bruk av data som er begrenset til å brukes til metodeundervisningen på master i sosiologi ved UiO. Den avtalen har også en begrensning i tid. Les avtalen nøye. Dere har et selvstendig ansvar for å overholde betingelsene, herunder at dataene skal slettes innen angitt dato. Det er fult mulig å bruke disse dataene til senere prosjekter, f.eks. til masteroppgave, men da må det søkes på nytt.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-</section>
-</section>
-<section id="innlesning-av-data" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="innlesning-av-data"><span class="header-section-number">3.2</span> Innlesning av data</h2>
-<p>Datasettet norlag.rds er altså konvertert til R-formatet rds. Dette datasettet kan da enkelt leses inn med <code>readRDS()</code> som følger:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>norlag <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/norlag.rds"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(norlag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 20892  2605</code></pre>
-</div>
-</div>
+<p>I denne sammenhengen betyr det i praksis at du bør jobbe på UiO-OneDrive. Altså: ikke lagre data på din personlige datamaskin og ikke en personlig skytjeneste. Merk at det er <em>forskjell</em> på f.eks. OneDrive gjennom UiO og privat.</p>
+<p>For å få tilgang på datasettet må du gjøre følgende:</p>
+<ol type="1">
+<li>Oppgi din uio-epostadresse i <a href="https://nettskjema.no/a/336610">dette nettskjemaet</a>. Emneansvarlig legge deg inn i systemet.</li>
+<li>Du får tilsendt en lenke fra Sikt med videre instruksjoner om hvordan du signerer en avtale. Les avtalen og signer digitalt.</li>
+<li>Last ned pdf-versjon av den signerte avtalen og behold den for senere referanse. Du kan også gjøre det senere ved å logge inn på <a href="https://minside.nsd.no/data-access">Sikt sine sider for data access</a>.</li>
+<li>Laster opp den signerte avtalen i <a href="https://nettskjema.no/a/336612">dette skjemaet</a>.</li>
+<li>Emneansvarlig vil dele en mappe med deg i Sharepoint der du kun har lesetilgang. Her ligger tilrettelagte versjoner av datasettet.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Kopier alle filene over til en lokal mappe i din UiO-OneDrive (se ovenfor).</li>
+</ol>
+<p><strong>OBS!!</strong> Dere signerer en avtale om bruk av data som er begrenset til å brukes til metodeundervisningen på master i sosiologi ved UiO. Den avtalen har også en begrensning i tid. Les avtalen nøye. Dere har et selvstendig ansvar for å overholde betingelsene, herunder at dataene skal slettes innen angitt dato. Det er fult mulig å bruke disse dataene til senere prosjekter, f.eks. til masteroppgave, men da må det søkes på nytt.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<section id="innlesning-av-data" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="innlesning-av-data"><span class="header-section-number">3.1.1</span> Innlesning av data</h3>
+<p>Datasettet norlag.rds er altså konvertert til R-formatet rds. Når dette er gjort er du klar for både forkurset og SOS4020.</p>
+<p>Nest økt vil omhandle innlesning av data: både rds og andre vanlige formater.</p>
 
 
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Hvis dere skriver ryddige script nå, så kan alt dere gjør lett reproduseres senere slik at ny søknad og ny utlevering av data ikke skal medføre merarbeid med data.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Du kan også laste ned et datasett fra plattformen til Sikt, men vi skal kun bruke de tilrettelagte dataene i forkurset. Som du vil lære om i dette kurset er det ikke alltid import av data helt lett.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Hvis dere skriver ryddige script nå, så kan alt dere gjør lett reproduseres senere slik at ny søknad og ny utlevering av data ikke skal medføre merarbeid med data.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
