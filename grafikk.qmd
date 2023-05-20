@@ -1,8 +1,30 @@
 # Grafikk med ggplot
 
 
+## Grammar of graphics
+I R er det mange funksjoner for å lage grafikk. Noen er spesialiserte og knyttet til spesielle analysemetoder og gir deg akkurat det du trenger. Vi skal her bruke et *generelt system* for grafikk som heter `ggplot` som kan brukes til all slags grafikk. Funksjonen *ggplot* er bygget opp som en *gramatikk* for grafisk fremstilling. Det ligger en teori til grunn som er utledet i boken ved omtrent samme navn: [The grammar of graphics](https://link.springer.com/book/10.1007/0-387-28695-0). Det er mye som kan sies om dette, men det viktige er at grafikken er bygget opp rundt noen bestanddeler. Når du behersker disse kan du fremstille nær sagt hva som helst av kvantitativ informasjon grafisk. 
+
+Systemet er bygd opp med lagvis kode. Selve grafikken kan også legges på gradvis hvis man ønsker plotte flere ting i samme plot og følger da rekkefølgen på koden. For enkle plot som vi skal bruke her angir man i denne rekkefølgen og med en `+` mellom hver del (vanligvis per linje, men linjeskift spiller ingen rolle): 
+
+1) Angi data og *hva* som skal plottes
+1) Angi *hvordan* det skal plottes
+1) Angi andre spesifikasjoner (farger, titler, koordinatsystemer osv)
+
+Dette blir tydeligere i eksemplene og forklares underveis. 
+
+* Det første argumentet i `ggplot` er data. Altså: hvilket datasett informasjonen hentes fra. 
+* `aes()` spesifiserer *aestethics*, som er *hva* som skal plottes. Først og fremst hva som skal på x-akse og y-akse (og evt. z-akse), men også spesifikasjon av linjer (farge, linjetype) og fyllfarger, gjerne etter en angitt gruppering. 
+* `geom_*` står for *geometric* og sier noe om hvordan data skal se ut. Det kan være punkter, histogram, stolper, linjer osv. 
+* `coord_*` definerer koordinatsystemet. Stort sett blir dette bestemt av variablene. Men du kan også snu grafen eller definere sirkulært koordinatsystem, eller andre enklere ting. * `facet_*` definerer hvordan du vil dele opp grafikken i undergrupper
+
+
+
+
+
 ```{r}
 #| echo: false
+#| warning: false
+#| message: false
 library(tidyverse)
 library(ggthemes)
 library(ggforce)
@@ -33,6 +55,35 @@ ggplot(norlag, aes(x = hc231)) +
   geom_bar() +
   theme(axis.text.x = element_text(angle = 90))
 ```
+
+Noen ganger ønsker man å vise fordelingen for to ulike grupper, la oss si for kjønn. En mulighet er da å rett og slett lage to stolpediagram ved siden av hverandre. Til dette kan man legge til `facet_wrap(~iokjonn)` der altså *iokjonn* er variabelnavnet for kjønn. Hvert plot får da en automatisk tittel basert på verdiene på den variabelen (dvs. her: "factor levels"). 
+
+
+```{r}
+ggplot(norlag, aes(x = hc231)) +
+  geom_bar(position="dodge") +
+  facet_wrap(~iokjonn)+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 90))
+
+```
+
+Det kan da være en fordel å bruke farger ved å spesifisere `fill = ...`. Her er et eksempel: 
+
+```{r}
+ggplot(norlag, aes(x = hc231, fill = iokjonn)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+Et automatisk forvalg for `geom_bar()` er hvordan gruppene plasseres som er `position="stack"`. Det betyr at gruppene stables oppå hverandre. Dette er godt egnet hvis poenget er å vise hvor mange av hvert kjønn som er i hver gruppe. Det er mindre egnet hvis du ønsker å sammenligne menn og kvinner. Da er alternativet å velge `position="dodge"` som følger:  
+
+```{r}
+ggplot(norlag, aes(x = hc231, fill = iokjonn)) +
+  geom_bar(position="dodge") +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
 
 
 
@@ -220,15 +271,5 @@ ggplot( filter(norlag, !is.na(iolandb)),  aes(y = iolandb, x = hcPCS12)) +
 
 
 ## Andre greier 
-
-
-## Grammar of graphics
-Funksjonen *ggplot* er bygget opp som en *gramatikk* for grafisk fremstilling. Det ligger en teori til grunn som er utledet i boken ved omtrent samme navn: [The grammar of graphics](https://link.springer.com/book/10.1007/0-387-28695-0). Det er mye som kan sies om dette, men det viktige er at grafikken er bygget opp rundt noen bestanddeler. Når du behersker disse kan du fremstille nær sagt hva som helst av kvantitativ informasjon grafisk. 
-
-* Det første argumentet i `ggplot` er data. Altså: hvilket datasett informasjonen hentes fra. 
-* `aes()` spesifiserer *aestethics*, som er *hva* som skal plottes. Først og fremst hva som skal på x-akse og y-akse (og evt. z-akse), men også spesifikasjon av linjer (farge, linjetype) og fyllfarger, gjerne etter en angitt gruppering. 
-* `geom_*` står for *geometric* og sier noe om hvordan data skal se ut. Det kan være punkter, histogram, stolper, linjer osv. 
-* `coord_*` definerer koordinatsystemet. Stort sett blir dette bestemt av variablene. Men du kan også snu grafen eller definere sirkulært koordinatsystem, eller andre enklere ting. 
-* `facet_*` definerer hvordan du vil dele opp grafikken i undergrupper
 
 
