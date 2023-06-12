@@ -1,21 +1,74 @@
 # Få oversikt over datasettet
 
-
 ```{r}
+#| warning: false
+#| message: false
+#| error: false
+#| echo: false
 library(tidyverse)
 library(haven)
 library(labelled)
-```
 
-
-```{r}
 norlag <- read_stata("data/norlag_panel2022.dta")
 ```
 
+Hvis man jobber med større spørreskjemaundersøkelser kan det være svært mange variable i datasettet, kanskje hundrevis, og det er vanskelig å ha en oversikt over datasettet. NorLAG er et eksempel på et slikt datasett. Det vil normalt følge med et dokumentasjonsnotat eller -rapport med oversikt over alle variable. Ofte til det være mest hensiktsmessig å slå opp i denne, men vi kan også ha behov for å se nærmere på dataene i R. En første ting man bør sjekke er om dataene er lest inn riktig og at det rett og slett ser greit ut.
 
-Vi har nå et datasett i minnet og vi bør ta en titt på det. Nå er det mange hundre variable i datasettet, så det er lite hensiktsmessig å printe det til konsollen fordi det er rett og slett ikke plass. I tidligere kurs skal dere ha lært å bruke funksjonen `glimpse()`, men også her blir det mest rotete fordi det er så mange variable. 
+I det følgende er utgangspunktet at man har lest inn hele datasettet og lagret det i et objekt med navn *norlag*.
 
-En enkel løsning er å bare se på noen få variable om gangen. Med klammeparentes kan vi angi hvilke radnummer og kolonnenummer vi ønsker se på med følgende syntax: `datasett[rader, kolonner]` der altså komma skiller mellom rader og kolonner. Følgende eksempel viser hvordan man kan bruke `head()` for å vise de første observasjonene i datasettet med bare de første 5 variablene (altså: kollonne nr 1-5). 
+## Sjekk om innlesning ble riktig
+Det første man bør sjekke er jo om innlesning av datasettet ble riktig. Skjer det noe feil her, så blir selvsagt alt annet feil. Men det er lite som kan gå galt når man leser inn fra datasett. Et unntak er csv-filer som ikke har metadata inkludert. 
+
+Funksjonen `class()` gir informasjon om hva slags objekt man har. Altså: etter at man har lest inn dataene og lagt det i et objekt. Her sjekkes objektet *norlag*:
+
+```{r}
+class(norlag)
+```
+I dette tilfellet får vi tre beskjeder. Det er en kombinert objekttype av *tibble* og *data.frame*. Mens *data.frame* er standard datasett tilsvarende som et regneark, så er *tibble* en utvidelse med noen ekstra funksjoner som er nyttige for avanserte brukere, men er å regne som en utvidelse av *data.frame*. For vårt formål vil det i praksis være det samme. Et datasett som leses inn i R bør altså være av typen tbl eller data.frame. Data kan også ha andre typer strukturer og da vil `class()` rapportere noe annet. 
+
+Når man bruker funksjoner i R, så vil noen ganger resultatet avhenge av hva slags type objekt det er. 
+
+For å vite hvor mange rader og kolonner det er i datasettet kan man bruke funksjonen `dim()` slik: 
+
+```{r}
+dim(norlag)
+```
+
+Her får vi vite at det er `dim(norlag)[1]` rader (dvs. observasjoner) og `dim(norlag)[2]` kollonner (dvs. variable). 
+
+
+### Bruke `View()`
+Særlig når man er uvant med å jobbe i R vil man kunne ha behov for å *se på dataene* slik man er vant til fra regneark eller software som SPSS eller Stata. En mulighet er å bruke funksjonen `View()` så vil hele datafilen åpnes i eget vindu. Dette er kun egnet for å se på dataene og du kan lukke vinduet uten at det påvirker dataene. Dataene ligger fremdeles i det samme objektet på samme måte som før.
+
+```{r}
+#| eval: false
+View(norlag)
+```
+
+Hvis variablene ser ut til å ha forventede variabelnavn og verdier, så er det antakeligvis ok.
+
+Et slikt datasett tar imidlertid stor plass og det er vanligvis mer hensiktsmessige måter å se på dataene på som også gir mer informasjon.
+
+
+### Bruke `head()`
+
+Funksjonen `head()` skriver ut de første 6 observasjonenen til konsollen i Rstudio. Det gir et første inntrykk av datasettet med variabelnavn og de første verdiene uten å åpne hele datasettet. Hva som faktisk vises vil avhenge av hvor stor skjerm du har, men R vil bare vise de første variablene etter hva som er plass til på skjermen din. Med en liten skjerm kan dette da se omtrent slik ut: 
+
+```{r}
+#| eval: false
+head(norlag)
+```
+
+![](images/head_skjermdump.png)
+
+
+Legg merke til at under hvert variabelnavn er det en indikasjon på hva slags variabeltype det er. For eksempel betyr `<dbl>` at det er en numerisk variabel mens `<dbl+lbl>` indikerer at variabelen inneholder *labels*. 
+
+Det er lite hensiktsmessig å vise alt i konsollen fordi det rett og slett ikke er plass. Nerst står det derfor angitt at det er flere variable som ikke vises og navnet på de første av disse. 
+
+### Subset med klammeparenteser
+
+En enkel løsning er å bare se på noen få variable om gangen. Med klammeparentes kan vi angi hvilke radnummer og kolonnenummer vi ønsker se på med følgende syntax: `datasett[rader, kolonner]` der altså komma skiller mellom rader og kolonner. Følgende eksempel viser hvordan man kan bruke `head()` for å vise de første observasjonene i datasettet med bare de første 5 variablene (altså: kollonne nr 1-5).
 
 ```{r}
 #| message: false 
@@ -23,10 +76,25 @@ En enkel løsning er å bare se på noen få variable om gangen. Med klammeparen
 head(norlag[, 1:5])
 
 ```
+Vi kan altså også angi både rader og kollonner på denne måten. Her er eksempel som viser første 3 rader og variabelnummer 40 til 44. 
 
-Legg merke til at under hvert variabelnavn står det en liten tekst, f.eks. <dbl> eller <S3: haven_labelled>. Det kan også stå andre ting. dbl betyr at det er en kontinuerlig variabel, mens haven_labelled betyr at det er labler til alle eller noe verdier i variabelen. 
+```{r}
+#| message: false 
+#| warning: false
+head(norlag[1:3, 40:44])
 
-En tilsvarende variant er å bruke `glimpse()` bare på et utvalg variable på tilsvarende måte. Her er et eksempel, men der vi ser på de 10 første variablene. 
+```
+
+
+Legg merke til at under hvert variabelnavn står det en liten tekst, f.eks. <dbl> eller \<S3: haven_labelled\>. Det kan også stå andre ting. dbl betyr at det er en kontinuerlig variabel, mens haven_labelled betyr at det er labler til alle eller noe verdier i variabelen.
+
+
+### Bruke 'glimpse()'
+
+I tidligere kurs skal dere ha lært å bruke funksjonen `glimpse()`, men også her blir det mest rotete fordi det er så mange variable.
+
+
+En  variant er å bruke `glimpse()` bare på et utvalg variable på tilsvarende måte. Her er et eksempel, men der vi ser på de 10 første variablene.
 
 ```{r}
 #| message: false 
@@ -35,42 +103,17 @@ glimpse(norlag[, 1:20])
 
 ```
 
-
-I denne output'en er den første kollonnen altså variabelnavnene, deretter er det en kollonne som viser hva slags type variabel det er, og deretter de første observasjonene på hver variabel slik at man får et inntrykk av hvordan det ser ut. `glimpse()` gir altså omtrent samme informasjon som `head()`, men er nok mer hensiktsmessig hvis mange variable. 
-
-
-For å se nærmere på en variabel går an å bruke funksjonen `look_for()`, som primært er en søke-funksjon, men det gir også informasjon om variabelen.
+I denne output'en er den første kollonnen altså variabelnavnene, deretter er det en kollonne som viser hva slags type variabel det er, og deretter de første observasjonene på hver variabel slik at man får et inntrykk av hvordan det ser ut. `glimpse()` gir altså omtrent samme informasjon som `head()`, men er nok mer hensiktsmessig hvis mange variable.
 
 
-```{r}
-#| message: false 
-#| warning: false
-look_for(norlag, "iokjonn")
 
-```
-I output fremgår det at dette er den 10'ende variabelen, inneholder informasjonen "IOs kjønn", er av typen numerisk med tilhørende labler, og verdiene er 1 = Mann og 2 = Kvinne. 
+### Undersøke enkeltvariable med `codebook()` fra pakken {memisc}
+Noen ganger vil man ha litt mer informasjon om enkeltvariablene. Noen datasett vil komme med labler (omtalt annet sted) eller faktorvariable, som gjør at variablene inneholder både tallverdier og tekst. 
 
 
-Det går også an å bare få ut variabel-label med funksjonen `var_label()` slik: 
+Å få ut noe deskriptiv statistikk og se på fordelinger er da gjerne neste steg som vil bli behandlet i de etterfølgende kapitlene. 
 
-```{r}
-#| message: false 
-#| warning: false
-var_label(norlag$iokjonn)
-
-```
-
-For å se labels på *verdiene* bruk **val_labels()**.
-```{r}
-#| message: false 
-#| warning: false
-val_labels(norlag$iokjonn)
-
-```
-
-
-### Alternativ: pakken {memisc} og `codebook()`
-Man vil klare seg greit med det vi har vist ovenfor. Men det finnes flere måter å gjøre det på. Pakken {memisc} inneholder en rekke funksjoner for å håndtere surveydata, som vi ikke skal gå nærmere inn på her. Men akkurat funksjonen `codebook()` gir litt mer informativt output enn `look_for()`. 
+Man vil klare seg greit med det vi har vist ovenfor. Men det finnes flere måter å gjøre det på. Pakken {memisc} inneholder en rekke funksjoner for å håndtere surveydata, som vi ikke skal gå nærmere inn på her. Men akkurat funksjonen `codebook()` gir litt mer informativt output enn `look_for()`.
 
 For å bruke denne må du installere pakken først. I eksempelet nedenfor er pakken ikke lastet med library(), men angitt pakken direkte med `memisc::` først. Dette kan være nyttig hvis man ikke skal bruke noen andre funksjoner fra denne pakken.
 
@@ -81,12 +124,40 @@ memisc::codebook(norlag$iokjonn)
 
 ```
 
-Poenget her er altså bare å få en penere output og litt deskriptiv statistikk samtidig. 
-
-
+Poenget her er altså bare å få en penere output og litt deskriptiv statistikk samtidig.
 
 ## Søke i datasettet etter variable
-Alle datasett skal komme med en dokumentasjon som sier hva hver variabel inneholder og hvilke verdier som finnes i hver variable, og hva de betyr. Dette leveres gjerne som en separat fil, ganske ofte i pdf eller html format. NSD/Sikt leverer dokumentasjonen for Norlag i html-format. (Ideelt burde det vært i et enkelt maskinlesbart format egnet til å bruke til omkoding og labler for de som ønsker det, men de har valgt en annen løsning). 
+For å se nærmere på en variabel går an å bruke funksjonen `look_for()`, som primært er en søke-funksjon, men det gir også informasjon om variabelen.
+
+```{r}
+#| message: false 
+#| warning: false
+look_for(norlag, "iokjonn")
+
+```
+
+I output fremgår det at dette er den 10'ende variabelen, inneholder informasjonen "IOs kjønn", er av typen numerisk med tilhørende labler, og verdiene er 1 = Mann og 2 = Kvinne.
+
+Det går også an å bare få ut variabel-label med funksjonen `var_label()` slik:
+
+```{r}
+#| message: false 
+#| warning: false
+var_label(norlag$iokjonn)
+
+```
+
+For å se labels på *verdiene* bruk **val_labels()**.
+
+```{r}
+#| message: false 
+#| warning: false
+val_labels(norlag$iokjonn)
+
+```
+
+
+Alle datasett skal komme med en dokumentasjon som sier hva hver variabel inneholder og hvilke verdier som finnes i hver variable, og hva de betyr. Dette leveres gjerne som en separat fil, ganske ofte i pdf eller html format. NSD/Sikt leverer dokumentasjonen for Norlag i html-format. (Ideelt burde det vært i et enkelt maskinlesbart format egnet til å bruke til omkoding og labler for de som ønsker det, men de har valgt en annen løsning).
 
 Du kan søke i dokumentasjonen på samme måte som i andre filer, men det kan være litt knotete. Et godt alternativ er å søke direkte i datasettet. Funksjonen `look_for()` søker både i variabelnavn, verdier og labler. Her er et eksempel for hvordan finne variabler som inneholder ordet "yrkesinntekt". Du kan også søke på kortere eller lengre tekststrenger. (Søker du f.eks. bare på "innt" eller "yrke" så får du opp langt flere variable, så du må kanskje prøve deg litt frem).
 
@@ -96,13 +167,12 @@ Du kan søke i dokumentasjonen på samme måte som i andre filer, men det kan v�
 look_for(norlag, "Yrkesinntekt")
 ```
 
-Det er to variable som inneholder teksten "yrkesinntekt". Den første variabelen har posisjon 353 i datasettet og har variabelnavnet inwyrkinnt.  Den andre variabelen har posisjon 371 og har navnet inpartwyrkinnt. Vi fokuserer på den første.
+Det er to variable som inneholder teksten "yrkesinntekt". Den første variabelen har posisjon 353 i datasettet og har variabelnavnet inwyrkinnt. Den andre variabelen har posisjon 371 og har navnet inpartwyrkinnt. Vi fokuserer på den første.
 
-Merk at når labelen avsluttes med ~ (uttales "tilde") indikerer det at teksten er avkortet i outputvinduet. Du får opp hele teksten ved å bruke `val_label()` slik: 
+Merk at når labelen avsluttes med \~ (uttales "tilde") indikerer det at teksten er avkortet i outputvinduet. Du får opp hele teksten ved å bruke `val_label()` slik:
 
 ```{r}
 #| message: false 
 #| warning: false
 var_label(norlag$inwyrkinnt)
 ```
-

@@ -1,4 +1,5 @@
 # Grafikk med ggplot
+NorLAG har blitt brukt til veldig mange analyser og en oversikt finner dere på [denne siden](https://norlag.nsd.no/publications). I det følgende vil vi ta utgangspunkt i noen variable som har blitt brukt tidligere og som gir mulighet til å demonstrere en del teknikker med bruk av R. Til dette bruker vi publikasjonen av Trond Nordfjær ["Religiosity and Alcohol Use: Is Religiosity Important for Abstention and Consumption Levels in the Second Half of Life?"](https://www-tandfonline-com.ezproxy.uio.no/doi/full/10.1080/10826084.2018.1473431). Utgangspunktet er dermed et utvalg variable som har med alkoholkonsum å gjøre. 
 
 
 ## Grammar of graphics
@@ -89,7 +90,19 @@ ggplot(norlag, aes(x = hc231, fill = iokjonn)) +
 
 ### Kakediagram og satans verk 
 
-Generelt er ikke kakediagram å anbefale da korrekt tolkning involverer å tolke et areal som inneholder vinkel. Med få kategorier som er rimelig forskjellig kan det gi et ok inntrykk, men ofte ender man opp med å måtte skrive på tallene likevel. 
+Generelt er ikke kakediagram å anbefale da korrekt tolkning involverer å tolke et areal som inneholder vinkel. Med få kategorier som er rimelig forskjellig kan det gi et ok inntrykk, men ofte ender man opp med å måtte skrive på tallene likevel. Vi tar det med her egentlig bare fordi mange insisterer på å bruke det. Så vet du at det er mulig. 
+
+Det enkleste er å bruke funksjonen `pie()` som gir følgende resultat. 
+
+```{r}
+tab <- table(norlag$hc231) 
+tab
+
+pie(tab)
+```
+
+Men hvis man skal bruke ggplot er det litt mer jobb. Fordelen med ggplot er at du har bedre kontroll for å lage publiserbar kvalitet. (Akkurat for kakediagram er det kanskje ikke så farlige, for du bør ikke bruke det i publikasjoner hvis du kan la være).
+
 
 ```{r}
 pc <- norlag %>% 
@@ -97,7 +110,6 @@ pc <- norlag %>%
   summarise(n = n()) %>% 
   mutate(pct = n/sum(n)*100) %>% 
   ungroup()
-
 
 ggplot(pc, aes(x = "", y = pct, fill = (hc231))) +
   geom_bar(stat="identity", width=1) +

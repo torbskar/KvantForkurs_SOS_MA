@@ -1,20 +1,15 @@
-# Datasettet [NorLAG](https://norlag.nsd.no/)
+# Datasettet NorLAG
 
-På SOS4020 skal vi bruke et datasett fra surveyen NorLAG. Vi bruker det også i forkurset slik at du vil spare litt tid og arbeid når SOS4020 starter for alvor. Dette er ikke offentlig tilgjengelige data, så det er en prosedyre for å få tilgang. Her er instruksjonene for dette kurset.
+På SOS4020 skal vi bruke et datasett fra surveyen [NorLAG]((https://norlag.nsd.no/). Vi bruker det også i forkurset slik at du vil spare litt tid og arbeid når SOS4020 starter for alvor. Dette er ikke offentlig tilgjengelige data, så det er en prosedyre for å få tilgang. Her er instruksjonene for dette kurset.
 
 Det viktigste for dette kurset er at dere har et rimelig ryddig datasett slik at dere kan fokusere på andre ting. Det opprinnelige datasettet er levert i Stata-format og det er en del utfordringer med å importere disse dataene bl.a. på grunn av hvordan de har valgt å kode [missing og filterverdier](https://norlag.nsd.no/filterverdier) og lagt denne typen metadata inn i Stataformatet. I R er det en lite hensiktsmessig måte å jobbe med dataene på, så disse tingene er ryddet opp i her.
 
--   Gi emneansvarlig din epostadresse
--   Last opp signert samtykkeskjema
--   Få levert ut bearbeidet datasett fra emneansvarlig
 
-Så kan du begynne å jobbe med dataene.
 
 ## Tilgang og lagring
-
 NorLAG er [gule data](https://www.uio.no/tjenester/it/sikkerhet/lsis/tillegg/lagring/infoklasser.html) og har restriksjoner på bruk og lagring. Du er pliktet til å sette deg inn i retningslinjene som du finner [på denne siden](https://www.uio.no/tjenester/it/sikkerhet/lsis/tillegg/lagringsguide.html).
 
-I denne sammenhengen betyr det i praksis at du bør jobbe på UiO-OneDrive. Altså: ikke lagre data på din personlige datamaskin og ikke en personlig skytjeneste. Merk at det er *forskjell* på f.eks. OneDrive gjennom UiO og privat.
+I denne sammenhengen betyr det i praksis at du bør jobbe på UiO-OneDrive. Altså: ikke lagre data på din personlige datamaskin og ikke skytjeneste med en personlig konto. Merk at det er *forskjell* på f.eks. OneDrive gjennom UiO og privat, og privat konto er ikke tillatt for slike data. 
 
 For å få tilgang på datasettet må du gjøre følgende:
 
@@ -31,7 +26,6 @@ For å få tilgang på datasettet må du gjøre følgende:
 [^norlag-2]: Hvis dere skriver ryddige script nå, så kan alt dere gjør lett reproduseres senere slik at ny søknad og ny utlevering av data ikke skal medføre merarbeid med data.
 
 ### Innlesning av data
-
 Datasettet norlag.rds er altså konvertert til R-formatet rds. Når dette er gjort er du klar for både forkurset og SOS4020.
 
-Nest økt vil omhandle innlesning av data: både rds og andre vanlige formater.
+Nest økt vil omhandle innlesning av data: både rds og andre vanlige formater. For eksemplene her vil det brukes noen forenklede datasett med færre variable.
