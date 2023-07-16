@@ -304,6 +304,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./import_metadata.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./createDictionary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -321,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#bruke-head" id="toc-bruke-head" class="nav-link" data-scroll-target="#bruke-head"><span class="toc-section-number">4.1.2</span>  Bruke <code>head()</code></a></li>
   <li><a href="#subset-med-klammeparenteser" id="toc-subset-med-klammeparenteser" class="nav-link" data-scroll-target="#subset-med-klammeparenteser"><span class="toc-section-number">4.1.3</span>  Subset med klammeparenteser</a></li>
   <li><a href="#bruke-glimpse" id="toc-bruke-glimpse" class="nav-link" data-scroll-target="#bruke-glimpse"><span class="toc-section-number">4.1.4</span>  Bruke ‘glimpse()’</a></li>
-  <li><a href="#alternativ-pakken-memisc-og-codebook" id="toc-alternativ-pakken-memisc-og-codebook" class="nav-link" data-scroll-target="#alternativ-pakken-memisc-og-codebook"><span class="toc-section-number">4.1.5</span>  Alternativ: pakken {memisc} og <code>codebook()</code></a></li>
+  <li><a href="#undersøke-enkeltvariable-med-codebook-fra-pakken-memisc" id="toc-undersøke-enkeltvariable-med-codebook-fra-pakken-memisc" class="nav-link" data-scroll-target="#undersøke-enkeltvariable-med-codebook-fra-pakken-memisc"><span class="toc-section-number">4.1.5</span>  Undersøke enkeltvariable med <code>codebook()</code> fra pakken {memisc}</a></li>
   </ul></li>
   <li><a href="#søke-i-datasettet-etter-variable" id="toc-søke-i-datasettet-etter-variable" class="nav-link" data-scroll-target="#søke-i-datasettet-etter-variable"><span class="toc-section-number">4.2</span>  Søke i datasettet etter variable</a></li>
   </ul>
@@ -350,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 
 </div>
-<p>Hvis man jobber med større spørreskjemaundersøkelser kan det være svært mange variable i datasettet, kanskje hundrevis, og det er vanskelig å ha en oversikt over datasettet. NorLAG er et eksempel på et slikt datasett. Det vil normalt følge med et dokumentasjonsnotat eller -rapport med oversikt over alle variable. Ofte til det være mest hensiktsmessig å slå opp i denne, men vi kan også ha behov for å se nærmere på dataene i R. En første ting man bør sjekke er om dataene er lest inn riktig og at det rett og slett ser greit ut.</p>
+<p>Hvis man jobber med større spørreskjemaundersøkelser kan det være svært mange variable i datasettet, kanskje hundrevis, og det er vanskelig å ha en oversikt over datasettet. Bare det å finne riktig variabel kan være en utfordring. NorLAG er et eksempel på et slikt datasett. Det vil normalt følge med et dokumentasjonsnotat eller -rapport med oversikt over alle variable. Ofte til det være mest hensiktsmessig å slå opp i denne, men vi kan også ha behov for å se nærmere på dataene i R. En første ting man bør sjekke er om dataene er lest inn riktig og at det rett og slett ser greit ut.</p>
 <p>I det følgende er utgangspunktet at man har lest inn hele datasettet og lagret det i et objekt med navn <em>norlag</em>.</p>
 <section id="sjekk-om-innlesning-ble-riktig" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sjekk-om-innlesning-ble-riktig"><span class="header-section-number">4.1</span> Sjekk om innlesning ble riktig</h2>
@@ -371,7 +376,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 33084   434</code></pre>
 </div>
 </div>
-<p>Her får vi vite at det er <code>dim(norlag)[1]</code> rader (dvs. observasjoner) og <code>dim(norlag)[2]</code> kollonner (dvs. variable).</p>
+<p>Her får vi vite at det er 33084 rader (dvs. observasjoner) og 434 kollonner (dvs. variable).</p>
 <section id="bruke-view" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="bruke-view"><span class="header-section-number">4.1.1</span> Bruke <code>View()</code></h3>
 <p>Særlig når man er uvant med å jobbe i R vil man kunne ha behov for å <em>se på dataene</em> slik man er vant til fra regneark eller software som SPSS eller Stata. En mulighet er å bruke funksjonen <code>View()</code> så vil hele datafilen åpnes i eget vindu. Dette er kun egnet for å se på dataene og du kan lukke vinduet uten at det påvirker dataene. Dataene ligger fremdeles i det samme objektet på samme måte som før.</p>
@@ -379,11 +384,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(norlag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Hvis variablene ser ut til å ha forventede variabelnavn og verdier, så er det antakeligvis ok.</p>
-<p>Et slikt datasett tar imidlertid stor plass og det er vanligvis mer hensiktsmessige måter å se på dataene på som også gir mer informasjon.</p>
+<p>Et slikt datasett tar imidlertid stor plass og det er vanligvis mer hensiktsmessige måter å se på dataene på som også gir mer informasjon. I R er det ikke meningen at du skal “sitte og se på dataene” på den måten mens man jobber. Men ta gjerne en titt for å få et bedre inntrykk av hvordan dataene ser ut.</p>
+<p>Du kan lukke det vinduet med dataene uten at det har noe å si for dataene, som fremdeles er tilgjengelig i minnet på datamaskinen på samme måte som før.</p>
 </section>
 <section id="bruke-head" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="bruke-head"><span class="header-section-number">4.1.2</span> Bruke <code>head()</code></h3>
-<p>Funksjonen <code>head()</code> skriver ut de første 6 observasjonenen til konsollen i Rstudio. Det gir et første inntrykk av datasettet med variabelnavn og de første verdiene uten å åpne hele datasettet. Hva som faktisk vises vil avhenge av hvor stor skjerm du har, men R vil bare vise de første variablene etter hva som er plass til på skjermen din. Med en liten skjerm kan dette da se omtrent slik ut:</p>
+<p>Funksjonen <code>head()</code> skriver de første 6 observasjonenen til konsollen i Rstudio. Det gir et første inntrykk av datasettet med variabelnavn og de første verdiene uten å åpne hele datasettet. Hva som faktisk vises vil avhenge av hvor stor skjerm du har, men R vil bare vise de første variablene etter hva som er plass til på skjermen din. For datasett med mer enn noen få variable er ikke dette veldig nyttig, men noen ganger har man små datasett. Med en liten skjerm kan dette da se omtrent slik ut:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(norlag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -422,11 +428,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Legg merke til at under hvert variabelnavn står det en liten tekst, f.eks. <dbl> eller &lt;S3: haven_labelled&gt;. Det kan også stå andre ting. dbl betyr at det er en kontinuerlig variabel, mens haven_labelled betyr at det er labler til alle eller noe verdier i variabelen.</dbl></p>
+<p>Vi skal primært jobbe med data som ikke er “labelled”, men du vil noen ganger komme borti dette, spesielt hvis du importerer data fra andre statistikksoftware.</p>
 </section>
 <section id="bruke-glimpse" class="level3" data-number="4.1.4">
 <h3 data-number="4.1.4" class="anchored" data-anchor-id="bruke-glimpse"><span class="header-section-number">4.1.4</span> Bruke ‘glimpse()’</h3>
-<p>I tidligere kurs skal dere ha lært å bruke funksjonen <code>glimpse()</code>, men også her blir det mest rotete fordi det er så mange variable.</p>
-<p>En variant er å bruke <code>glimpse()</code> bare på et utvalg variable på tilsvarende måte. Her er et eksempel, men der vi ser på de 10 første variablene.</p>
+<p>I tidligere kurs skal dere ha lært å bruke funksjonen <code>glimpse()</code>, men også her blir det mest rotete fordi det er så mange variable. Det tar rett og slett veldig stor plass på skjermen.</p>
+<p>En variant er å bruke <code>glimpse()</code> bare på et utvalg variable på tilsvarende måte. Her er et eksempel, men der vi ser på de 20 første variablene ved bruk av klammeparentes tilsvarende som vist over.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(norlag[, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -455,38 +462,15 @@ $ pa003           &lt;dbl+lbl&gt;     60,     66, 999999,    996,     57,     67
 </div>
 </div>
 <p>I denne output’en er den første kollonnen altså variabelnavnene, deretter er det en kollonne som viser hva slags type variabel det er, og deretter de første observasjonene på hver variabel slik at man får et inntrykk av hvordan det ser ut. <code>glimpse()</code> gir altså omtrent samme informasjon som <code>head()</code>, men er nok mer hensiktsmessig hvis mange variable.</p>
-<p>For å se nærmere på en variabel går an å bruke funksjonen <code>look_for()</code>, som primært er en søke-funksjon, men det gir også informasjon om variabelen.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(norlag, <span class="st">"iokjonn"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> pos variable label     col_type values    
- 10  iokjonn  IOs kjønn dbl+lbl  [1] Mann  
-                                 [2] Kvinne</code></pre>
-</div>
-</div>
-<p>I output fremgår det at dette er den 10’ende variabelen, inneholder informasjonen “IOs kjønn”, er av typen numerisk med tilhørende labler, og verdiene er 1 = Mann og 2 = Kvinne.</p>
-<p>Det går også an å bare få ut variabel-label med funksjonen <code>var_label()</code> slik:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var_label</span>(norlag<span class="sc">$</span>iokjonn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "IOs kjønn"</code></pre>
-</div>
-</div>
-<p>For å se labels på <em>verdiene</em> bruk <strong>val_labels()</strong>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">val_labels</span>(norlag<span class="sc">$</span>iokjonn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Mann Kvinne 
-     1      2 </code></pre>
-</div>
-</div>
 </section>
-<section id="alternativ-pakken-memisc-og-codebook" class="level3" data-number="4.1.5">
-<h3 data-number="4.1.5" class="anchored" data-anchor-id="alternativ-pakken-memisc-og-codebook"><span class="header-section-number">4.1.5</span> Alternativ: pakken {memisc} og <code>codebook()</code></h3>
+<section id="undersøke-enkeltvariable-med-codebook-fra-pakken-memisc" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="undersøke-enkeltvariable-med-codebook-fra-pakken-memisc"><span class="header-section-number">4.1.5</span> Undersøke enkeltvariable med <code>codebook()</code> fra pakken {memisc}</h3>
+<p>Noen ganger vil man ha litt mer informasjon om enkeltvariablene. Noen datasett vil komme med labler (omtalt annet sted) eller faktorvariable, som gjør at variablene inneholder både tallverdier og tekst.</p>
+<p>Å få ut noe deskriptiv statistikk og se på fordelinger er da gjerne neste steg som vil bli behandlet i de etterfølgende kapitlene.</p>
 <p>Man vil klare seg greit med det vi har vist ovenfor. Men det finnes flere måter å gjøre det på. Pakken {memisc} inneholder en rekke funksjoner for å håndtere surveydata, som vi ikke skal gå nærmere inn på her. Men akkurat funksjonen <code>codebook()</code> gir litt mer informativt output enn <code>look_for()</code>.</p>
 <p>For å bruke denne må du installere pakken først. I eksempelet nedenfor er pakken ikke lastet med library(), men angitt pakken direkte med <code>memisc::</code> først. Dette kan være nyttig hvis man ikke skal bruke noen andre funksjoner fra denne pakken.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>memisc<span class="sc">::</span><span class="fu">codebook</span>(norlag<span class="sc">$</span>iokjonn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>memisc<span class="sc">::</span><span class="fu">codebook</span>(norlag<span class="sc">$</span>iokjonn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>================================================================================
 
@@ -508,6 +492,31 @@ $ pa003           &lt;dbl+lbl&gt;     60,     66, 999999,    996,     57,     67
 </section>
 <section id="søke-i-datasettet-etter-variable" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="søke-i-datasettet-etter-variable"><span class="header-section-number">4.2</span> Søke i datasettet etter variable</h2>
+<p>For å se nærmere på en variabel går an å bruke funksjonen <code>look_for()</code>, som primært er en søke-funksjon, men det gir også informasjon om variabelen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(norlag, <span class="st">"iokjonn"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> pos variable label     col_type values    
+ 10  iokjonn  IOs kjønn dbl+lbl  [1] Mann  
+                                 [2] Kvinne</code></pre>
+</div>
+</div>
+<p>I output fremgår det at dette er den 10’ende variabelen, inneholder informasjonen “IOs kjønn”, er av typen numerisk med tilhørende labler, og verdiene er 1 = Mann og 2 = Kvinne.</p>
+<p>Det går også an å bare få ut variabel-label med funksjonen <code>var_label()</code> slik:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var_label</span>(norlag<span class="sc">$</span>iokjonn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "IOs kjønn"</code></pre>
+</div>
+</div>
+<p>For å se labels på <em>verdiene</em> bruk <strong>val_labels()</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">val_labels</span>(norlag<span class="sc">$</span>iokjonn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Mann Kvinne 
+     1      2 </code></pre>
+</div>
+</div>
 <p>Alle datasett skal komme med en dokumentasjon som sier hva hver variabel inneholder og hvilke verdier som finnes i hver variable, og hva de betyr. Dette leveres gjerne som en separat fil, ganske ofte i pdf eller html format. NSD/Sikt leverer dokumentasjonen for Norlag i html-format. (Ideelt burde det vært i et enkelt maskinlesbart format egnet til å bruke til omkoding og labler for de som ønsker det, men de har valgt en annen løsning).</p>
 <p>Du kan søke i dokumentasjonen på samme måte som i andre filer, men det kan være litt knotete. Et godt alternativ er å søke direkte i datasettet. Funksjonen <code>look_for()</code> søker både i variabelnavn, verdier og labler. Her er et eksempel for hvordan finne variabler som inneholder ordet “yrkesinntekt”. Du kan også søke på kortere eller lengre tekststrenger. (Søker du f.eks. bare på “innt” eller “yrke” så får du opp langt flere variable, så du må kanskje prøve deg litt frem).</p>
 <div class="cell">

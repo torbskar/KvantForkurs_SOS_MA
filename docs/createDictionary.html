@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forkurs for kvantitativ metode - 12&nbsp; Datahåndtering med Tidyverse</title>
+<title>Forkurs for kvantitativ metode - Appendix B — Lage dictionary-fil</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./omkode_factor.html" rel="next">
-<link href="./praktiskStatistikk.html" rel="prev">
+<link href="./import_metadata.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -143,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datahåndtering med <em>Tidyverse</em></span></h1>
+      <h1 class="quarto-secondary-nav-title">Appendix B — Lage dictionary-fil</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -281,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datahåndtering med <em>Tidyverse</em></span></a>
+  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datahåndtering med <em>Tidyverse</em></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -306,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./createDictionary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></a>
+  <a href="./createDictionary.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></a>
   </div>
 </li>
       </ul>
@@ -320,12 +319,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lage-ny-variabel-mutate" id="toc-lage-ny-variabel-mutate" class="nav-link active" data-scroll-target="#lage-ny-variabel-mutate"><span class="toc-section-number">12.1</span>  Lage ny variabel: <code>mutate</code></a></li>
-  <li><a href="#rørlegging-hva-i-alle-dager-betyr" id="toc-rørlegging-hva-i-alle-dager-betyr" class="nav-link" data-scroll-target="#rørlegging-hva-i-alle-dager-betyr"><span class="toc-section-number">12.2</span>  Rørlegging: Hva i alle dager betyr <code>%&gt;%</code> ??</a></li>
-  <li><a href="#beholde-og-slette-variable-select" id="toc-beholde-og-slette-variable-select" class="nav-link" data-scroll-target="#beholde-og-slette-variable-select"><span class="toc-section-number">12.3</span>  Beholde og slette variable: <code>select</code></a></li>
-  <li><a href="#aggregere-summarise" id="toc-aggregere-summarise" class="nav-link" data-scroll-target="#aggregere-summarise"><span class="toc-section-number">12.4</span>  Aggregere: <code>summarise</code></a></li>
-  <li><a href="#grupperte-utregninger-group_by" id="toc-grupperte-utregninger-group_by" class="nav-link" data-scroll-target="#grupperte-utregninger-group_by"><span class="toc-section-number">12.5</span>  Grupperte utregninger: <code>group_by</code></a></li>
-  <li><a href="#sette-det-hele-sammen" id="toc-sette-det-hele-sammen" class="nav-link" data-scroll-target="#sette-det-hele-sammen"><span class="toc-section-number">12.6</span>  Sette det hele sammen</a></li>
+  <li><a href="#lese-inn-html-dokumentasjonen" id="toc-lese-inn-html-dokumentasjonen" class="nav-link active" data-scroll-target="#lese-inn-html-dokumentasjonen"><span class="toc-section-number">B.1</span>  Lese inn html-dokumentasjonen</a>
+  <ul class="collapse">
+  <li><a href="#legge-det-hele-i-en-funksjon" id="toc-legge-det-hele-i-en-funksjon" class="nav-link" data-scroll-target="#legge-det-hele-i-en-funksjon"><span class="toc-section-number">B.1.1</span>  Legge det hele i en funksjon</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -334,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datahåndtering med <em>Tidyverse</em></span></h1>
+<h1 class="title d-none d-lg-block">Appendix B — Lage dictionary-fil</h1>
 </div>
 
 
@@ -349,50 +346,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Et helt vanlig problem er at data i den virkelige verden ofte er ganske grisete. Det er mye rot, manglende verdier, andre kategorier enn du er interessert i osv. Kort sagt: dataene er ikke helt slik de bør være for at du skal kunne gjøre den analysen du har tenkt til. Altså må du fikse dataene før du får estimert det du har tenkt. Enten dette gjelder grafikk, tabeller eller regresjonsmodeller.</p>
-<p><em>Tidyverse</em> er en rekke funksjoner som til sammen utgjør et programmeringsspråk for datahåndtering. Dette er en variant av R, som vi kan si er en dialekt av R. Det finnes andre dialekter, men vi anbefaler sterkt å lære tidyverse godt først.</p>
-<p>De grunnleggende <em>verbene</em> gjør noe med dataene, så da er altså dataene <em>substantivene</em>.</p>
-<section id="lage-ny-variabel-mutate" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="lage-ny-variabel-mutate"><span class="header-section-number">12.1</span> Lage ny variabel: <code>mutate</code></h2>
-<p>Alle verbene i tidyverse starter med å angi hvilket objekt man skal gjøre noe med, altså datasettet.</p>
-<p>Her er et eksempel der man lager en ny variable som summen av eksisterende variablene <em>x</em> og <em>z</em>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nyttobjekt <span class="ot">&lt;-</span> <span class="fu">mutate</span>(dinedata, <span class="at">nyvariabel =</span> x <span class="sc">+</span> z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Her er et eksempel der man lager to variable samtidig der den andre er <em>x</em> delt på <em>z</em>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nyttobjekt <span class="ot">&lt;-</span> <span class="fu">mutate</span>(dinedata, <span class="at">nyvariabel =</span> x <span class="sc">/</span> z,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nyvariabel2 =</span> x <span class="sc">+</span> z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="rørlegging-hva-i-alle-dager-betyr" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="rørlegging-hva-i-alle-dager-betyr"><span class="header-section-number">12.2</span> Rørlegging: Hva i alle dager betyr <code>%&gt;%</code> ??</h2>
-<p>Symbolet <code>%&gt;%</code> kalles in “pipe” eller på norsk: rørlegging. Det betyr at det som står til venstre flyttes over til høyre. Eller sagt på en annen måte betyr det: “Gjør deretter følgende”. Vi vil bruke denne syntaxen konsekvent fra nå når vi introduserer de ulike “verbene”.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nyttobjekt <span class="ot">&lt;-</span> dinedata <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nyvariabel =</span> x <span class="sc">/</span> z,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">nyvariabel2 =</span> x <span class="sc">+</span> z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Denne koden sier følgende, linje for linje:</p>
+<p>Dokumentasjonen som følger med NorLAG og andre datasett fra Sikt er en html-fil (dvs. web-side) med en oversikt over alle variable og hvordan de er kodet. Dette er fint for manuelt oppslag, men er ikke ideelt til bruk for maskinell behandling.</p>
+<p>Det vi ideelt skulle hatt er et samlet datasett der kodeskjemaet er knyttet til variabelnavnene. Dette kalles noen ganger en “dictionary” fil. All informasjonen vi trenger for å lage en slik ligger i html-filen man får sammen med datasettet fra Sikt, bare på en knotete form. Det skal vi fikse.</p>
+<p>Nedenfor skal vi vise hvordan vi gjør følgende:</p>
 <ul>
-<li>lag en kopi av <code>dinedata</code> og lagre det i <code>nyttobjekt</code> <em>^deretter gjør du følgende:^</em></li>
-<li>lag de nye variablene <code>nyvariabel</code> som får verdier fra variablene x delt på y</li>
-<li>og <code>nyvariabel2</code>som summen av x og z</li>
+<li>Leser inn en fullstendig html-fil, inkludert alle html-kodene</li>
+<li>Identifiserer den delen av html-filen som inneholder kodeskjema og begrenser filen til disse</li>
+<li>Plukker ut alle tabeller og gjør dem om til data.frame-struktur i R</li>
+<li>Rensker opp i filen til å bare beholde de relevante radene</li>
 </ul>
-</section>
-<section id="beholde-og-slette-variable-select" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="beholde-og-slette-variable-select"><span class="header-section-number">12.3</span> Beholde og slette variable: <code>select</code></h2>
-</section>
-<section id="aggregere-summarise" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="aggregere-summarise"><span class="header-section-number">12.4</span> Aggregere: <code>summarise</code></h2>
-</section>
-<section id="grupperte-utregninger-group_by" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="grupperte-utregninger-group_by"><span class="header-section-number">12.5</span> Grupperte utregninger: <code>group_by</code></h2>
-</section>
-<section id="sette-det-hele-sammen" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="sette-det-hele-sammen"><span class="header-section-number">12.6</span> Sette det hele sammen</h2>
+<p>Dette er egentlig en svært enkel introduksjon til webscraping for et spesfikt formål. Vi skal bruke pakken <code>rvest</code> som er laget nettopp for webscraping.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "LC_COLLATE=no_NB.utf8;LC_CTYPE=no_NB.utf8;LC_MONETARY=no_NB.utf8;LC_NUMERIC=C;LC_TIME=no_NB.utf8"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)       <span class="co"># scrape html-sider</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># generell databehandling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="lese-inn-html-dokumentasjonen" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="lese-inn-html-dokumentasjonen"><span class="header-section-number">B.1</span> Lese inn html-dokumentasjonen</h2>
+<p>Første sted er å lese inn html-filen. Funksjonen <code>read_html()</code> gjør dette. For å skjønne litt mer av hvordan dette ser ut kan du åpne den opprinnelige html-filen i ren tekst, f.eks. med bruk av Notepad. Det er dette som leses inn. Jeg legger det i et nytt objekt som jeg har kalt <code>cb</code> (forkortelse for codebook).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(XML)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read html file</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="st">"C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/Kodebok.html"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>cb <span class="ot">&lt;-</span> <span class="fu">read_html</span>(u)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For NorLAG er dokumentasjonsdokumentet inndelt i flere deler, og det er bare den siste delen som inneholder kodeskjemaene. Det er denne siste delen vi trenger, så første utfordring er å plukke ut denne delen.</p>
+<p>En html-fil er strukturert innenfor “noder” som har en start og en slutt. Et avsnitt starter med en kode <code>&lt;a&gt;</code> og avsluttes med <code>&lt;/a&gt;</code>. Tilsvarende koder finnes for tabeller og andre elementer. Disse delene har er oftest gitt et navn som man kan identififiseres og brukes til lage lenker til spesifikke deler av siden (jf. innholdsfortegnelsen). Vi bruker denne til å filtrere filen.</p>
+<p>I akkurat denne filen trenger vi informasjonen som ligger etter overskriften “Variables Description”. For å finne navnet på dette avsnittet kan man undersøke lenken i innholdsfortegnelsen der det fremkommer som <code>#variables</code>. Eller man kan åpne html-filen i et tekstdokument og søke opp tittelen, så finner man koden <code>name='variables</code> innenfor det avsnittet.</p>
+<p>Vi bruker <code>html_nodes</code> til å trekke ut bare dette avsnittet som følger.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the specific heading</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> cb <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"a[name='variables']"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I denne dokumentasjonen er hver variabel lagret i en egen tabell. I html-kode angis begynnelsen av en tabell med <code>&lt;table&gt;</code> og denne brukes til å trekke ut bare tabellene.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tables <span class="ot">&lt;-</span> variables <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">#html_node(xpath = "//a[@name='variables']") %&gt;% </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">"./following::table"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Så kan vi bruke funksjonen <code>html_table</code> til å trekke ut hver enkelt tabell i en struktur som er lettere å jobbe med, nemlig en “data.frame”, altså en rektangulær struktur med rader og kolonner slik datasett vanligvis ser ut. Hver tabell blir et eget data.frame-objekt, og når man legger dette i et nytt objekt blir det av typen “list”. En “list” er en samling objekter som har hver sin plass i det samme objektet. (Du kan tenke på det som en eske med flere mindre ekster oppi). Vi kommer tilbake til hvordan de slås sammen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> <span class="fu">html_table</span>(tables)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="legge-det-hele-i-en-funksjon" class="level3" data-number="B.1.1">
+<h3 data-number="B.1.1" class="anchored" data-anchor-id="legge-det-hele-i-en-funksjon"><span class="header-section-number">B.1.1</span> Legge det hele i en funksjon</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the heading exists</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(variables) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Find the tables after the heading</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  tables <span class="ot">&lt;-</span> variables <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_node</span>(<span class="at">xpath =</span> <span class="st">"//a[@name='variables']"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">"./following::table"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the table data</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  table_data <span class="ot">&lt;-</span> <span class="fu">html_table</span>(tables)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"The specified heading was not found."</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>tbslist <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(table_data)){ </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="st">"X2"</span> <span class="sc">%in%</span> <span class="fu">names</span>(table_data[[i]]) <span class="sc">&amp;</span> </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>     <span class="st">"X3"</span> <span class="sc">%in%</span> <span class="fu">names</span>(table_data[[i]]) <span class="sc">&amp;</span> </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>     <span class="sc">!</span>(<span class="st">"X4"</span> <span class="sc">%in%</span> <span class="fu">names</span>(table_data[[i]])) ){</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    tbslist[[i]] <span class="ot">&lt;-</span> table_data[[i]] <span class="sc">%&gt;%</span> </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">col_nm =</span> <span class="fu">strsplit</span>(<span class="fu">as.character</span>(.[<span class="dv">1</span>,<span class="dv">1</span>]), <span class="at">split =</span> <span class="st">":"</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>],</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">spm =</span> <span class="fu">strsplit</span>(<span class="fu">as.character</span>(.[<span class="dv">1</span>,<span class="dv">1</span>]), <span class="at">split =</span> <span class="st">":"</span>)[[<span class="dv">1</span>]][<span class="dv">2</span>]) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rename</span>( <span class="at">value =</span> X2, </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> X3) <span class="sc">%&gt;%</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>( <span class="fu">str_detect</span>(X1, <span class="st">"Values and categories"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>( <span class="sc">!</span><span class="fu">is.na</span>(value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">-</span>X1)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>{</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(i<span class="sc">==</span><span class="dv">1</span>){</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>      teller <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    teller <span class="ot">&lt;-</span> teller <span class="sc">+</span> <span class="dv">1</span> </span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="fu">length</span>(table_data)){</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Antall variable som ikke har omkodinger: "</span>, teller)) </span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Antall variable som ikke har omkodinger:  1"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dat_dict <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(tbslist) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(col_nm, value, label, spm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -531,14 +587,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./praktiskStatistikk.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Statistikk i praksis</span></span>
+      <a href="./import_metadata.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./omkode_factor.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Omkoding av variable</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

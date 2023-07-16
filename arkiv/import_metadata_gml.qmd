@@ -31,7 +31,7 @@ En første sted er å lese inn dokumentasjonsrapporten fra en html-fil slik den 
 
 Det er noen verdier som i dokumentasjonen er spesifisert som spesielle typer missing. Disse skal vi kode om til NA. Disse verdiene har labler som starter med "filter:" eller "vil ikke svare" etc. Disse danner basis for omkoding til NA. 
 
-Funksjonen nedenfor skal brukes innenfor et steg der man går gjennom alle variablene en om gangen. For hver variabel slås det opp de aktuelle missing-verdiene som gjelder for denne og bruker `replace()` til å omkode til NA for disse verdiene. Når denne funksjonen kalles for hver variabel senere, så brukes det altså ulike definisjoner av missing-verdier for hver variabel.^(Basert på kode fra https://tim-tiefenbach.de/post/2023-recode-columns/ ) 
+Funksjonen nedenfor skal brukes innenfor et steg der man går gjennom alle variablene en om gangen. For hver variabel slås det opp de aktuelle missing-verdiene som gjelder for denne og bruker `replace()` til å omkode til NA for disse verdiene. Når denne funksjonen kalles for hver variabel senere, så brukes det altså ulike definisjoner av missing-verdier for hver variabel. 
 
 ```{r}
 # leser inn kodeliste/dokumentasjon
@@ -54,6 +54,12 @@ recode_col_na <- function(x, dict) {
   replace(x, x %in% recode_vec, NA)
 }
 
+# vektorer av variable som skal omkodes
+cols_vec_all <- unique(dat_dict$col_nm)
+vars <- unique(names(norlag))
+cols_vec <- cols_vec_all[cols_vec_all %in% vars]
+cols_vec_na <- cols_vec[(cols_vec %in% unique(dat_dict_na$col_nm))]
+
 ```
 
 
@@ -71,6 +77,7 @@ utfilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Under
 
 
 ```{r}
+#| eval: false
 #| warning: false
 #| error: false
 library(tidyverse)
@@ -90,25 +97,38 @@ norlag <- merge(faste, lang, by = "ref_nr") %>%
            iodeltakelse == 4 & round %in% c(1) |
            iodeltakelse == 5 & round %in% c(1, 2) |
            iodeltakelse == 6 & round %in% c(2)
-  ) 
-
-# vektorer av variable som skal omkodes
-cols_vec_all <- unique(dat_dict$col_nm)
-vars <- unique(names(norlag))
-cols_vec <- cols_vec_all[cols_vec_all %in% vars]
-cols_vec_na <- cols_vec[(cols_vec %in% unique(dat_dict_na$col_nm))]
-
-norlag <- norlag %>% 
+  ) %>% 
   mutate(across(all_of(cols_vec_na), 
               \(x,dic) recode_col_na(x, .env$dat_dict_na))) %>% 
+  # # generelle missing
+  # mutate(across( where(is.labelled) ,  ~replace(., 
+  #                                               . %in% c(997, 998, 999, 99999, 999999), 
+  #                                               NA))) %>%
+  # # noen spesielle missing - som kanskje gjelder overalt?
+  # mutate(across(where(is.labelled) ,  ~replace(., 
+  #                                              . %in% c(994, 995, 996, 9996), 
+  #                                              NA))) %>%
+  # # noen spesielle missing - som kanskje gjelder overalt?
+  # mutate(across(where(is.labelled) ,  ~replace(., 
+  #                                              . %in% c(9993, 9994, 9995, 9996, 9997, 9998, 9999), 
+  #                                              NA))) %>%
+  # # inpartbankinnsk og fremover
+  # mutate(across(where(is.labelled) ,  ~replace(., 
+  #                                              . %in% c(99999996,
+  #                                                       999999995,
+  #                                                       999999996,
+  #                                                       999999999), 
+  #                                              NA))) %>%
+  # mutate(across(where(is.labelled), ~replace(. ,
+  #                                            str_sub(tolower(.), 1, 7) == "filter:", NA))) %>% 
+  #mutate(across(where(is.labelled), ~drop_unused_value_labels(.))) %>% 
+  # Noen spesielle der drop_unused_value_labels() ikke funker (f.eks. hc135). Gjør til factor og rydder etterpå. 
   mutate(across(where(is.labelled), ~as_factor(.))) %>% 
   mutate(across(where(is.factor), ~fct_drop(.)))
-```
 
-I tilegg skal vi lage en variabel for det vi kan kalle hovedaktivitet som sysselsettingsstatus. Det er om man er yrkesaktiv, arbeidsledig, student eller annet. I hver runde av NorLAG ble svarkategoriene utformet litt forskjellig, så derfor er svarene fordelt over tre variable. Nedenfor samles disse sammen og kodes om basert på tekststrenger. 
+glimpse(norlag[1:6,1:18])
 
-```{r}
-## Omkoder hovedaktivitet 
+## Omkoder hovedaktivitet ####
 fs <- lvls_union( list(norlag$wr001, norlag$wr002, norlag$wr003c)) %>% tolower() %>% unique()
 
 norlag <- norlag %>% 
@@ -126,21 +146,10 @@ norlag <- norlag %>%
                                       is.na(hovedaktivitet) ~ "Trygdet/arbeidsledig/stud/annet") %>% as_factor())
 
 
-
-```
-
-
-```{r}
-#| echo: false
-#| eval: false
 saveRDS(norlag, paste0(utfilbane, "norlag.rds"))
-saveRDS(norlag, "data/norlag.rds")
 ```
 
-
 ```{r}
-#| echo: false
-#| eval: false
 # glimpse(norlag[,30:40])
 # 
 # levels(norlag$pr003c)

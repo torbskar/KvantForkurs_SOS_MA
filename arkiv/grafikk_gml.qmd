@@ -1,24 +1,5 @@
 # Grafikk med ggplot
-
-Resten av dette heftet belager seg på å bruke datasettet abu89 som er benyttet i en annen lærebok. Dataene kan lastes ned fra [den bokens hjemmeside](https://stata.fagbokforlaget.no/).
-
-Først må dataene leses inn. Siden dette er data i stata-formatet dta, så brukes importfunksjonen `read_stata()`. Som nevnt tidligere bør variabler av typen labelled gjøres om til factor. Vi sletter også labler som ikke er i faktisk bruk. Disse to tingene gjørs med `as_factor()` og `fct_drop()`, men de er lagt inn i en funksjon som går gjennom alle variable i datasettet, `across()` og sjekker om de er av labelled-typen `where(is.labelled)`. Detaljene her er ikke sentrale for dette kurset: bare se å få lest inn dataene i R. 
-
-```{r}
-#| warning: false
-#| error: false
-#| message: false
-library(haven)
-library(tidyverse)
-
-abu89 <- read_stata("data/abu89.dta") %>% 
-  mutate(across(where(is.labelled), ~as_factor(.)),
-         across(where(is.factor), ~fct_drop(.)))
-
-glimpse(abu89)
-
-```
-
+NorLAG har blitt brukt til veldig mange analyser og en oversikt finner dere på [denne siden](https://norlag.nsd.no/publications). I det følgende vil vi ta utgangspunkt i noen variable som har blitt brukt tidligere og som gir mulighet til å demonstrere en del teknikker med bruk av R. Til dette bruker vi publikasjonen av Trond Nordfjær ["Religiosity and Alcohol Use: Is Religiosity Important for Abstention and Consumption Levels in the Second Half of Life?"](https://www-tandfonline-com.ezproxy.uio.no/doi/full/10.1080/10826084.2018.1473431). Utgangspunktet er dermed et utvalg variable som har med alkoholkonsum å gjøre. 
 
 
 ## Lagvis grafikk
@@ -42,50 +23,80 @@ Dette blir tydeligere i eksemplene og forklares underveis.
 
 
 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse)
+library(ggthemes)
+library(ggforce)
+
+utfilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/"
+
+norlag <- readRDS(paste0(utfilbane, "norlag.rds")) %>% 
+  select(ref_nr, round, iodeltakelse, ioalder, iolandb, iokjonn, pa001c, pa300, hc230, hc231, va207, hcMCS12, hcPCS12 ) %>% 
+  mutate(hcPCS12 = as.numeric(hcPCS12), 
+         hcMCS12 = as.numeric(hcMCS12),
+         ioalder = as.numeric(ioalder)) %>% 
+  filter(!is.na(hc231))
+
+
+# glimpse(norlag)
+# levels(norlag$hc231)
+
+```
+
+
+
 ## Kategoriske variabel  
 
 ### Stolpediagram 
 
 ```{r}
-library(ggforce)
-ggplot(abu89, aes(x = klasse89)) +
+ggplot(norlag, aes(x = hc231)) +
   geom_bar() +
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-Noen ganger ønsker man å vise fordelingen for to ulike grupper, la oss si for kjønn. En mulighet er da å rett og slett lage to stolpediagram ved siden av hverandre. Til dette kan man spesifisere at dataene er gruppert etter variabelen *female* og at fyllfargen skal settes etter denne variablen med `fill = factor(female)`. Merk bruken av `factor(female)` fordi variabelen er *numerisk* og det vil da ellers brukes en kontinuerlig fargeskale, mens å gjøre om variabelen til kategorisk brukes en annen fargeskala. 
+Noen ganger ønsker man å vise fordelingen for to ulike grupper, la oss si for kjønn. En mulighet er da å rett og slett lage to stolpediagram ved siden av hverandre. Til dette kan man legge til `facet_wrap(~iokjonn)` der altså *iokjonn* er variabelnavnet for kjønn. Hvert plot får da en automatisk tittel basert på verdiene på den variabelen (dvs. her: "factor levels"). 
 
-I tillegg gjør vi her to ting til: setter et annet grafisk tema med `theme_minimal()` og snur plotvinduet slik at kategoriene er litt lettere å lese. Dette er smak og behag. 
 
 ```{r}
-ggplot(abu89, aes(x = klasse89, group = female, fill = factor(female))) +
+ggplot(norlag, aes(x = hc231)) +
   geom_bar(position="dodge") +
+  facet_wrap(~iokjonn)+
   theme_minimal()+
-  theme(axis.text.x = element_text(angle = 90))+
-  coord_flip()
+  theme(axis.text.x = element_text(angle = 90))
 
 ```
 
-Et alternativ er å plassere grafikken for menn og kvinner ved siden av hverandre. Å legge til `facet_wrap()` gjør dette. 
+Det kan da være en fordel å bruke farger ved å spesifisere `fill = ...`. Her er et eksempel: 
 
 ```{r}
-ggplot(abu89, aes(x = klasse89)) +
+ggplot(norlag, aes(x = hc231, fill = iokjonn)) +
   geom_bar() +
-  facet_wrap(~factor(female)) +
   theme(axis.text.x = element_text(angle = 90))
 ```
 
 Et automatisk forvalg for `geom_bar()` er hvordan gruppene plasseres som er `position="stack"`. Det betyr at gruppene stables oppå hverandre. Dette er godt egnet hvis poenget er å vise hvor mange av hvert kjønn som er i hver gruppe. Det er mindre egnet hvis du ønsker å sammenligne menn og kvinner. Da er alternativet å velge `position="dodge"` som følger:  
 
+```{r}
+ggplot(norlag, aes(x = hc231, fill = iokjonn)) +
+  geom_bar(position="dodge") +
+  theme(axis.text.x = element_text(angle = 90))
+```
 
-### Kakediagram  
+
+
+
+### Kakediagram og satans verk 
 
 Generelt er ikke kakediagram å anbefale da korrekt tolkning involverer å tolke et areal som inneholder vinkel. Med få kategorier som er rimelig forskjellig kan det gi et ok inntrykk, men ofte ender man opp med å måtte skrive på tallene likevel. Vi tar det med her egentlig bare fordi mange insisterer på å bruke det. Så vet du at det er mulig. 
 
 Det enkleste er å bruke funksjonen `pie()` som gir følgende resultat. 
 
 ```{r}
-tab <- table(abu89$klasse89) 
+tab <- table(norlag$hc231) 
 tab
 
 pie(tab)
@@ -95,13 +106,13 @@ Men hvis man skal bruke ggplot er det litt mer jobb. Fordelen med ggplot er at d
 
 
 ```{r}
-pc <- abu89 %>% 
-  group_by(klasse89) %>% 
+pc <- norlag %>% 
+  group_by(hc231) %>% 
   summarise(n = n()) %>% 
   mutate(pct = n/sum(n)*100) %>% 
   ungroup()
 
-ggplot(pc, aes(x = "", y = pct, fill = (klasse89))) +
+ggplot(pc, aes(x = "", y = pct, fill = (hc231))) +
   geom_bar(stat="identity", width=1) +
   coord_polar("y", start=0) +
   theme_void()+
@@ -114,6 +125,7 @@ ggplot(pc, aes(x = "", y = pct, fill = (klasse89))) +
   scale_fill_brewer(palette="Blues", direction = -1)
 
 
+
 ```
 
 
@@ -122,15 +134,13 @@ ggplot(pc, aes(x = "", y = pct, fill = (klasse89))) +
 ## Kontinuerlige variable 
 
 
-
-
 ### Histogram 
 
 ```{r}
 #| warning: false
 #| error: false
 #| message: false
-ggplot(abu89, aes(x = time89)) +
+ggplot(norlag, aes(x = hcPCS12)) +
   geom_histogram()
 ```
 
@@ -140,7 +150,7 @@ Det er også vanlig å fremstille det samme på en "tetthetsskala", der arealet 
 #| warning: false
 #| error: false
 #| message: false
-ggplot(abu89, aes(x = time89, y = ..density..)) +
+ggplot(norlag, aes(x = hcPCS12, y = ..density..)) +
   geom_histogram()
 ```
 
@@ -154,7 +164,7 @@ Density plot er en måte å fremstille det samme på, men i stedet for å dele i
 #| warning: false
 #| error: false
 #| message: false
-ggplot(abu89, aes(x = time89)) +
+ggplot(norlag, aes(x = hcPCS12)) +
   geom_density()
 
 ```
@@ -167,7 +177,7 @@ ggplot(abu89, aes(x = time89)) +
 #| warning: false
 #| error: false
 #| message: false
-ggplot(abu89, aes(x = time89)) +
+ggplot(norlag, aes(x = hcPCS12)) +
   geom_histogram(aes(y = ..density..), fill = "lightgrey", col = "grey") +
   geom_density(col = "red", linewidth = 1) +
   theme_minimal()
@@ -180,7 +190,7 @@ En fordel med denne fremstillingen er at det er lettere å sammenligne grupper. 
 #| error: false
 #| message: false
 #| 
-ggplot(abu89, aes(x = time89, group = klasse89, linetype = klasse89)) +
+ggplot(norlag, aes(x = hcPCS12, group = hc231, linetype = hc231)) +
   geom_density(linewidth = 1)+
   guides(fill = guide_legend(override.aes = list(shape = 1 ) ) ) +
   theme_minimal()
@@ -193,10 +203,11 @@ ggplot(abu89, aes(x = time89, group = klasse89, linetype = klasse89)) +
 #| warning: false
 #| error: false
 #| message: false
-ggplot(abu89, aes(x = time89)) +
+#| 
+ggplot(norlag, aes(x = hcPCS12)) +
   geom_density(linewidth = 1)+
   theme_minimal()+
-  facet_wrap(~klasse89, scales="free")
+  facet_wrap(~hc231, scales="free")
 
 ```
 
@@ -206,7 +217,7 @@ ggplot(abu89, aes(x = time89)) +
 #| error: false
 #| message: false
 #| 
-ggplot(abu89, aes(x = time89, group = female,  fill = factor(female))) +
+ggplot(norlag, aes(x = hcPCS12,  fill = iokjonn)) +
   geom_density(alpha = .3)+
   guides(fill=guide_legend(title="Kjønn"))+
   theme_minimal()
@@ -225,9 +236,10 @@ ggplot(abu89, aes(x = time89, group = female,  fill = factor(female))) +
 #| warning: false
 #| message: false
 #| error : false
-ggplot(abu89, aes(y = time89, group = klasse89)) +
+ggplot(norlag, aes(x = hcPCS12, group = hc231)) +
   geom_boxplot()+
-  theme_minimal()
+  theme_minimal()+
+  coord_flip()
 ```
 
 
@@ -240,8 +252,9 @@ ggplot(abu89, aes(y = time89, group = klasse89)) +
 #| warning: false
 #| message: false
 #| error : false
+glimpse(norlag)
 
-ggplot(abu89, aes(x = age, y = time89)) +
+ggplot(norlag, aes(x = ioalder, y = hcPCS12)) +
   geom_point(alpha=.3)+
   theme_minimal()
 ```
@@ -250,7 +263,7 @@ ggplot(abu89, aes(x = age, y = time89)) +
 #| warning: false
 #| message: false
 #| error : false
-ggplot(abu89, aes(x = age, y = time89)) +
+ggplot(norlag, aes(x = ioalder, y = hcPCS12)) +
   geom_jitter(alpha=.1, width = .3)+
   theme_minimal()
 ```
@@ -265,22 +278,11 @@ Ridgeplot er en annen måte å sammenligne en kontinuerlig fordeling betinget p�
 #| message: false
 #| error : false
 library(ggridges)
-ggplot( abu89,  aes(y = klasse89, x = time89)) +
+ggplot( filter(norlag, !is.na(iolandb)),  aes(y = iolandb, x = hcPCS12)) +
   geom_density_ridges() 
 ```
 
 
+## Andre greier 
 
-## Oppgaver
-
-Slå opp i boken [R for data science](https://r4ds.had.co.nz/data-visualisation.html) hvis du står fast eller ikke skjønner hva koden betyr. 
-
-::: {#exr-}
-Last ned datasettet abu89 fra angitt hjemmeside og les inn dataene til R som vist ovenfor. Lag den samme grafikken som vist her, gjør noen endringer på kodene for å endre utseendet på plottene. Det er et mål at du skal forstå hva hver enkelt kommando gjør. 
-:::
-
-
-::: {#exr-}
-Last inn datasettet NorLAG i R. Velg noen variable som du selv tenker kan være informative å se nærmere på. Bruk de samme teknikkene på disse variablene. 
-:::
 

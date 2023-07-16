@@ -40,6 +40,7 @@ book:
         - omkode_factor.qmd
   appendices:
    - import_metadata.qmd
+   - createDictionary.qmd
 
   
 format:

@@ -12,7 +12,7 @@ library(labelled)
 norlag <- read_stata("data/norlag_panel2022.dta")
 ```
 
-Hvis man jobber med større spørreskjemaundersøkelser kan det være svært mange variable i datasettet, kanskje hundrevis, og det er vanskelig å ha en oversikt over datasettet. NorLAG er et eksempel på et slikt datasett. Det vil normalt følge med et dokumentasjonsnotat eller -rapport med oversikt over alle variable. Ofte til det være mest hensiktsmessig å slå opp i denne, men vi kan også ha behov for å se nærmere på dataene i R. En første ting man bør sjekke er om dataene er lest inn riktig og at det rett og slett ser greit ut.
+Hvis man jobber med større spørreskjemaundersøkelser kan det være svært mange variable i datasettet, kanskje hundrevis, og det er vanskelig å ha en oversikt over datasettet. Bare det å finne riktig variabel kan være en utfordring. NorLAG er et eksempel på et slikt datasett. Det vil normalt følge med et dokumentasjonsnotat eller -rapport med oversikt over alle variable. Ofte til det være mest hensiktsmessig å slå opp i denne, men vi kan også ha behov for å se nærmere på dataene i R. En første ting man bør sjekke er om dataene er lest inn riktig og at det rett og slett ser greit ut.
 
 I det følgende er utgangspunktet at man har lest inn hele datasettet og lagret det i et objekt med navn *norlag*.
 
@@ -34,7 +34,7 @@ For å vite hvor mange rader og kolonner det er i datasettet kan man bruke funks
 dim(norlag)
 ```
 
-Her får vi vite at det er `dim(norlag)[1]` rader (dvs. observasjoner) og `dim(norlag)[2]` kollonner (dvs. variable). 
+Her får vi vite at det er `r dim(norlag)[1]` rader (dvs. observasjoner) og `r dim(norlag)[2]` kollonner (dvs. variable). 
 
 
 ### Bruke `View()`
@@ -47,12 +47,14 @@ View(norlag)
 
 Hvis variablene ser ut til å ha forventede variabelnavn og verdier, så er det antakeligvis ok.
 
-Et slikt datasett tar imidlertid stor plass og det er vanligvis mer hensiktsmessige måter å se på dataene på som også gir mer informasjon.
+Et slikt datasett tar imidlertid stor plass og det er vanligvis mer hensiktsmessige måter å se på dataene på som også gir mer informasjon. I R er det ikke meningen at du skal "sitte og se på dataene" på den måten mens man jobber. Men ta gjerne en titt for å få et bedre inntrykk av hvordan dataene ser ut. 
+
+Du kan lukke det vinduet med dataene uten at det har noe å si for dataene, som fremdeles er tilgjengelig i minnet på datamaskinen på samme måte som før. 
 
 
 ### Bruke `head()`
 
-Funksjonen `head()` skriver ut de første 6 observasjonenen til konsollen i Rstudio. Det gir et første inntrykk av datasettet med variabelnavn og de første verdiene uten å åpne hele datasettet. Hva som faktisk vises vil avhenge av hvor stor skjerm du har, men R vil bare vise de første variablene etter hva som er plass til på skjermen din. Med en liten skjerm kan dette da se omtrent slik ut: 
+Funksjonen `head()` skriver de første 6 observasjonenen til konsollen i Rstudio. Det gir et første inntrykk av datasettet med variabelnavn og de første verdiene uten å åpne hele datasettet. Hva som faktisk vises vil avhenge av hvor stor skjerm du har, men R vil bare vise de første variablene etter hva som er plass til på skjermen din. For datasett med mer enn noen få variable er ikke dette veldig nyttig, men noen ganger har man små datasett. Med en liten skjerm kan dette da se omtrent slik ut: 
 
 ```{r}
 #| eval: false
@@ -60,7 +62,6 @@ head(norlag)
 ```
 
 ![](images/head_skjermdump.png)
-
 
 Legg merke til at under hvert variabelnavn er det en indikasjon på hva slags variabeltype det er. For eksempel betyr `<dbl>` at det er en numerisk variabel mens `<dbl+lbl>` indikerer at variabelen inneholder *labels*. 
 
@@ -86,15 +87,15 @@ head(norlag[1:3, 40:44])
 ```
 
 
-Legg merke til at under hvert variabelnavn står det en liten tekst, f.eks. <dbl> eller \<S3: haven_labelled\>. Det kan også stå andre ting. dbl betyr at det er en kontinuerlig variabel, mens haven_labelled betyr at det er labler til alle eller noe verdier i variabelen.
+Legg merke til at under hvert variabelnavn står det en liten tekst, f.eks. <dbl> eller <S3: haven_labelled>. Det kan også stå andre ting. dbl betyr at det er en kontinuerlig variabel, mens haven_labelled betyr at det er labler til alle eller noe verdier i variabelen.
 
+Vi skal primært jobbe med data som ikke er "labelled", men du vil noen ganger komme borti dette, spesielt hvis du importerer data fra andre statistikksoftware. 
 
 ### Bruke 'glimpse()'
 
-I tidligere kurs skal dere ha lært å bruke funksjonen `glimpse()`, men også her blir det mest rotete fordi det er så mange variable.
+I tidligere kurs skal dere ha lært å bruke funksjonen `glimpse()`, men også her blir det mest rotete fordi det er så mange variable. Det tar rett og slett veldig stor plass på skjermen. 
 
-
-En  variant er å bruke `glimpse()` bare på et utvalg variable på tilsvarende måte. Her er et eksempel, men der vi ser på de 10 første variablene.
+En  variant er å bruke `glimpse()` bare på et utvalg variable på tilsvarende måte. Her er et eksempel, men der vi ser på de 20 første variablene ved bruk av klammeparentes tilsvarende som vist over.
 
 ```{r}
 #| message: false 
@@ -104,7 +105,6 @@ glimpse(norlag[, 1:20])
 ```
 
 I denne output'en er den første kollonnen altså variabelnavnene, deretter er det en kollonne som viser hva slags type variabel det er, og deretter de første observasjonene på hver variabel slik at man får et inntrykk av hvordan det ser ut. `glimpse()` gir altså omtrent samme informasjon som `head()`, men er nok mer hensiktsmessig hvis mange variable.
-
 
 
 ### Undersøke enkeltvariable med `codebook()` fra pakken {memisc}

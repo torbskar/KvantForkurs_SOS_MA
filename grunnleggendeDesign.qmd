@@ -69,3 +69,24 @@ Poenget er at tolkning av resultatene handler vel så mye om hvordan dataene har
 
 
 
+
+## Hva med sosiologisk teori? 
+Vi bruker kvantitative metoder til å beskrive statistiske sammenhenger. Men vi er jo ikke interessert i *variablene* som sådan. Poenget er å beskrive sosiale fenomener. Å si hva det betyr krever imidlertid en teoretisk tolkning. Å teste om et estimat er statistisk signifikant er ikke det samme som å teste en teori, selv om begge deler kan omtales med ordet "test".  
+
+* Gitt et fenomen (beskrevet med statistikk), hvordan kan vi forklare det? 
+* Hva skjer med fenomenet vi er interessert i hvis vi gjør en intervensjon? 
+* Gitt en teori, er observasjonsdata (dvs. statistikk) konsistent med teorien?
+* Gitt en teori, kan vi sjekke om observasjonsdata (dvs. statistikk) *ikke* er konsistent med teorien?
+
+Den første varianten handler om å først beskrive - gjerne eksplorerende - og så bruke teori til å forklare hvorfor det er slik. Det følger gjerne flere analyser som gjør beskrivelsen mer nyanserte og utforsker ulike muligheter.  
+
+Den andre varianten handler om å måle effekter, gjerne et naturlig eksperiment eller et felteksperiment. Hvis man ønsker å vite hva *effekten* av et tiltak er, så må man endre noe slik at man kan observere resultatet. Randomisering handler om å håndtere seleksjon. 
+
+Den tredje varianten er en konfirmerende strategi: En teori bør jo være konsistent med hvordan verden ser ut. Det er viktig å sjekke at dette er tilfellet. Hvis det er konsistent vet man jo det, men det er ikke en *test* av noe som helst fordi det kan jo være alternative teorier som forklarer minst like godt. 
+
+Den fjerde varianten krever at teorien gir en *empirisk forventning* - helst som er motstridende med en annen teori. Hvis det kan vises empiriske mønster som er inkonsistente med teori, så må teorien enten forkastes eller i det minste justeres. Hvor mye vil være helt avhengig av den teoretiske påstanden. 
+
+*Statistiske tester*, med p-verdier og konfidensintervaller, brukes til å skille mellom tilfeldig variasjon og systematisk variasjon på en tilsvarende måte for alle strategier. 
+
+
+

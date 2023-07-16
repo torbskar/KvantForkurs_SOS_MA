@@ -1,0 +1,230 @@
+# Lage dictionary-fil 
+
+Dokumentasjonen som følger med NorLAG og andre datasett fra Sikt er en html-fil (dvs. web-side) med en oversikt over alle variable og hvordan de er kodet. Dette er fint for manuelt oppslag, men er ikke ideelt til bruk for maskinell behandling. 
+
+Det vi ideelt skulle hatt er et samlet datasett der kodeskjemaet er knyttet til variabelnavnene. Dette kalles noen ganger en "dictionary" fil. All informasjonen vi trenger for å lage en slik ligger i html-filen man får sammen med datasettet fra Sikt, bare på en knotete form. Det skal vi fikse. 
+
+Nedenfor skal vi vise hvordan vi gjør følgende:
+
+* Leser inn en fullstendig html-fil, inkludert alle html-kodene
+* Identifiserer den delen av html-filen som inneholder kodeskjema og begrenser filen til disse
+* Plukker ut alle tabeller og gjør dem om til data.frame-struktur i R
+* Rensker opp i filen til å bare beholde de relevante radene
+
+Dette er egentlig en svært enkel introduksjon til webscraping for et spesfikt formål. Vi skal bruke pakken `rvest` som er laget nettopp for webscraping. 
+
+```{r}
+#| echo: false
+#| message: false
+Sys.setlocale(locale='no_NB.utf8')
+```
+
+```{r}
+#| message: false
+#| error: false
+library(rvest)       # scrape html-sider
+library(tidyverse)   # generell databehandling
+```
+
+
+## Lese inn html-dokumentasjonen
+Første sted er å lese inn html-filen. Funksjonen `read_html()` gjør dette. For å skjønne litt mer av hvordan dette ser ut kan du åpne den opprinnelige html-filen i ren tekst, f.eks. med bruk av Notepad. Det er dette som leses inn. Jeg legger det i et nytt objekt som jeg har kalt `cb` (forkortelse for codebook). 
+
+```{r}
+#| message: false
+#| error: false
+
+#library(XML)
+
+# read html file
+u <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/Kodebok.html"
+
+cb <- read_html(u)
+```
+For NorLAG er dokumentasjonsdokumentet inndelt i flere deler, og det er bare den siste delen som inneholder kodeskjemaene. Det er denne siste delen vi trenger, så første utfordring er å plukke ut denne delen. 
+
+En html-fil er strukturert innenfor "noder" som har en start og en slutt. Et avsnitt starter med en kode `<a>` og avsluttes med `</a>`. Tilsvarende koder finnes for tabeller og andre elementer. Disse delene har er oftest gitt et navn som man kan identififiseres og brukes til lage lenker til spesifikke deler av siden (jf. innholdsfortegnelsen). Vi bruker denne til å filtrere filen. 
+
+I akkurat denne filen trenger vi informasjonen som ligger etter overskriften "Variables Description". For å finne navnet på dette avsnittet kan man undersøke lenken i innholdsfortegnelsen der det fremkommer som `#variables`. Eller man kan åpne html-filen i et tekstdokument og søke opp tittelen, så finner man koden `name='variables` innenfor det avsnittet. 
+
+Vi bruker `html_nodes` til å trekke ut bare dette avsnittet som følger. 
+
+```{r}
+# Find the specific heading
+variables <- cb %>% 
+  html_nodes("a[name='variables']")
+```
+
+I denne dokumentasjonen er hver variabel lagret i en egen tabell. I html-kode angis begynnelsen av en tabell med `<table>` og denne brukes til å trekke ut bare tabellene. 
+
+```{r}
+tables <- variables %>% 
+    #html_node(xpath = "//a[@name='variables']") %>% 
+    html_nodes(xpath = "./following::table")
+
+```
+
+Så kan vi bruke funksjonen `html_table` til å trekke ut hver enkelt tabell i en struktur som er lettere å jobbe med, nemlig en "data.frame", altså en rektangulær struktur med rader og kolonner slik datasett vanligvis ser ut. Hver tabell blir et eget data.frame-objekt, og når man legger dette i et nytt objekt blir det av typen "list". En "list" er en samling objekter som har hver sin plass i det samme objektet. (Du kan tenke på det som en eske med flere mindre ekster oppi). Vi kommer tilbake til hvordan de slås sammen. 
+
+```{r}
+table_data <- html_table(tables)
+```
+
+
+
+### Legge det hele i en funksjon 
+
+
+```{r}
+# Check if the heading exists
+if (length(variables) > 0) {
+  # Find the tables after the heading
+  tables <- variables %>% 
+    html_node(xpath = "//a[@name='variables']") %>% 
+    html_nodes(xpath = "./following::table")
+  
+  # Extract the table data
+  table_data <- html_table(tables)
+  } else {
+  cat("The specified heading was not found.")
+}
+
+
+tbslist <- list()
+for(i in 1:length(table_data)){ 
+  if("X2" %in% names(table_data[[i]]) & 
+     "X3" %in% names(table_data[[i]]) & 
+     !("X4" %in% names(table_data[[i]])) ){
+    
+    tbslist[[i]] <- table_data[[i]] %>% 
+      mutate(col_nm = strsplit(as.character(.[1,1]), split = ":")[[1]][1],
+             spm = strsplit(as.character(.[1,1]), split = ":")[[1]][2]) %>% 
+      rename( value = X2, 
+              label = X3) %>%
+      filter( str_detect(X1, "Values and categories")) %>% 
+      filter( !is.na(value)) %>% 
+      select(-X1)
+  }
+  else{
+    if(i==1){
+      teller <- 0
+      }
+    teller <- teller + 1 
+  }
+  if(i == length(table_data)){
+    print(paste("Antall liste-elementer som ikke tas med: ", teller)) 
+  }
+}
+
+
+dat_dict <- bind_rows(tbslist) %>% 
+  select(col_nm, value, label, spm)
+
+saveRDS(dat_dict, "data/dat_dict.rds")
+
+# head(dat_dict)
+# 
+# filter(dat_dict, col_nm == "pr010")
+# 
+# dat_dict %>% 
+#   filter( str_sub(label,1,6) == "Filter") %>% 
+#   pull(label) %>% 
+#   unique()
+```
+
+
+# recoding function ####
+# source: https://tim-tiefenbach.de/post/2023-recode-columns/ 
+
+
+## Omkode alle variable i datasettet 
+Dette opplegget er basert 
+
+
+```{r}
+#| eval: false
+#| warning: false
+#| error: false
+library(tidyverse)
+library(haven)
+library(labelled)
+infilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/rOBH3y10/"
+
+faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
+lang <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
+
+norlag <- merge(faste, lang, by = "ref_nr") %>% 
+  filter(iodeltakelse == 1 |  
+           iodeltakelse == 2 & round %in% c(1, 3) | 
+           iodeltakelse == 3 & round %in% c(2, 3) |
+           iodeltakelse == 4 & round %in% c(1) |
+           iodeltakelse == 5 & round %in% c(1, 2) |
+           iodeltakelse == 6 & round %in% c(2)
+  ) %>% 
+  zap_labels() %>% 
+  zap_formats() %>% 
+  zap_label()
+
+# glimpse(norlag[,1:30])
+# 
+# head(norlag$pa320)
+``` 
+
+
+
+```{r}
+dat_dict_na <- dat_dict %>% 
+  filter(str_sub(tolower(label), 1, 7) == "filter:" | 
+           tolower(label) %in% c("vil ikke svare",
+                                 "deltok ikke i runden",
+                                  "mangler data")) 
+
+# recode numeriske som har user-NA
+recode_col_na <- function(x, dict) {
+  recode_vec <- dict %>%
+    filter(col_nm == cur_column()) %>%
+    mutate(value = as.numeric(value)) %>% 
+    pull(value)
+  replace(x, x %in% recode_vec, NA)
+}
+
+# recode alt annet
+recode_col <- function(x, dict) {
+  
+  recode_vec <- dict |>
+    filter(col_nm == cur_column()) |>
+    pull(label, name = value)
+  
+  dplyr::recode(x, !!! recode_vec)
+}
+
+```
+
+
+
+```{r}
+cols_vec_all <- unique(dat_dict$col_nm)
+
+vars <- unique(names(norlag))
+
+cols_vec <- cols_vec_all[cols_vec_all %in% vars]
+
+cols_vec_na <- cols_vec[(cols_vec %in% unique(dat_dict_na$col_nm))]
+
+
+dat <- norlag %>%  
+  mutate(across(all_of(cols_vec_na), 
+                \(x,dic) recode_col_na(x, .env$dat_dict_na))) #%>% 
+  mutate(across(all_of(cols_vec),
+                \(x, dic) recode_col(x, .env$dat_dict)))
+
+glimpse(dat[1:6,1:20])
+glimpse(norlag[1:6,1:20])
+
+#str(norlag$iolandb)
+#head(dat$iolandb)
+#dat_dict %>% filter(col_nm == "iolandb") %>% select(-col_nm)
+```
+
+
+
