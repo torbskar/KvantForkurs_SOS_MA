@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -259,16 +322,18 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#quick-and-dirty-oppsummeringer" id="toc-quick-and-dirty-oppsummeringer" class="nav-link active" data-scroll-target="#quick-and-dirty-oppsummeringer"><span class="toc-section-number">6.1</span>  Quick-and-dirty oppsummeringer</a>
   <ul class="collapse">
-  <li><a href="#enkeltvariable-med" id="toc-enkeltvariable-med" class="nav-link" data-scroll-target="#enkeltvariable-med"><span class="toc-section-number">6.1.1</span>  Enkeltvariable med $</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">6.1.2</span>  summary</a></li>
+  <li><a href="#enkeltfunksjoner" id="toc-enkeltfunksjoner" class="nav-link" data-scroll-target="#enkeltfunksjoner"><span class="toc-section-number">6.1.1</span>  Enkeltfunksjoner</a></li>
   </ul></li>
-  <li><a href="#manuelle-tabeller" id="toc-manuelle-tabeller" class="nav-link" data-scroll-target="#manuelle-tabeller"><span class="toc-section-number">6.2</span>  Manuelle tabeller</a>
+  <li><a href="#professjonelle-tabeller-med-gtsummary" id="toc-professjonelle-tabeller-med-gtsummary" class="nav-link" data-scroll-target="#professjonelle-tabeller-med-gtsummary"><span class="toc-section-number">6.2</span>  Professjonelle tabeller med gtsummary</a>
   <ul class="collapse">
-  <li><a href="#for-datasettet-totalt" id="toc-for-datasettet-totalt" class="nav-link" data-scroll-target="#for-datasettet-totalt"><span class="toc-section-number">6.2.1</span>  For datasettet totalt</a></li>
-  <li><a href="#grupperte-statistikker" id="toc-grupperte-statistikker" class="nav-link" data-scroll-target="#grupperte-statistikker"><span class="toc-section-number">6.2.2</span>  Grupperte statistikker</a></li>
+  <li><a href="#eksport-av-tabeller" id="toc-eksport-av-tabeller" class="nav-link" data-scroll-target="#eksport-av-tabeller"><span class="toc-section-number">6.2.1</span>  Eksport av tabeller</a></li>
   </ul></li>
-  <li><a href="#professjonelle-tabeller-med-gtsummary" id="toc-professjonelle-tabeller-med-gtsummary" class="nav-link" data-scroll-target="#professjonelle-tabeller-med-gtsummary"><span class="toc-section-number">6.3</span>  Professjonelle tabeller med gtsummary</a></li>
-  <li><a href="#noen-andre-muligheter" id="toc-noen-andre-muligheter" class="nav-link" data-scroll-target="#noen-andre-muligheter"><span class="toc-section-number">6.4</span>  Noen andre muligheter</a></li>
+  <li><a href="#manuelle-tabeller" id="toc-manuelle-tabeller" class="nav-link" data-scroll-target="#manuelle-tabeller"><span class="toc-section-number">6.3</span>  Manuelle tabeller</a>
+  <ul class="collapse">
+  <li><a href="#for-datasettet-totalt" id="toc-for-datasettet-totalt" class="nav-link" data-scroll-target="#for-datasettet-totalt"><span class="toc-section-number">6.3.1</span>  For datasettet totalt</a></li>
+  <li><a href="#grupperte-statistikker" id="toc-grupperte-statistikker" class="nav-link" data-scroll-target="#grupperte-statistikker"><span class="toc-section-number">6.3.2</span>  Grupperte statistikker</a></li>
+  </ul></li>
+  <li><a href="#oppgaver" id="toc-oppgaver" class="nav-link" data-scroll-target="#oppgaver"><span class="toc-section-number">6.4</span>  Oppgaver</a></li>
   </ul>
 </nav>
     </div>
@@ -292,30 +357,2348 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+<p>Det kan være ulike grunner til å lage deskriptiv statistikk, og hva du skal bruke tabellene til kan ha betydning for hvordan du lager dem. Noen ganger skal du bare sjekke noen tall, og da er det ingen grunn til å bruke tid på å gjøre tabellen spesiell pen. Andre ganger skal tabellen publiseres i en rapport, på en nettside eller i en vitenskapelig artikkel - eller mest aktuelt på kort sikt: i en masteroppgave. Da må tabellene se ordentlige ut. Nedenfor skal vi se på begge mulighetene.</p>
 <section id="quick-and-dirty-oppsummeringer" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="quick-and-dirty-oppsummeringer"><span class="header-section-number">6.1</span> Quick-and-dirty oppsummeringer</h2>
-<section id="enkeltvariable-med" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="enkeltvariable-med"><span class="header-section-number">6.1.1</span> Enkeltvariable med $</h3>
+<p>Først og fremst har vi funksjonen <code>summary()</code>. Når denne brukes på et objekt vil hva slags output du får avhenge av objekttypen. Derfor vil <code>summary()</code> gi forskjellig output om det er en vektor, et datasett eller et regresjonsobjekt etc. Vi avgrenser oss til datasett her.</p>
+<p>Her er output for hele datasettet.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(abu89)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     io_nr          time89             ed             age       
+ Min.   :   3   Min.   : 25.00   Min.   : 0.00   Min.   :16.00  
+ 1st Qu.:1542   1st Qu.: 71.00   1st Qu.: 1.00   1st Qu.:30.00  
+ Median :3093   Median : 83.33   Median : 3.00   Median :39.00  
+ Mean   :3105   Mean   : 90.15   Mean   : 2.69   Mean   :39.65  
+ 3rd Qu.:4644   3rd Qu.:102.56   3rd Qu.: 3.00   3rd Qu.:48.00  
+ Max.   :6258   Max.   :343.75   Max.   :11.00   Max.   :74.00  
+                NA's   :368                                     
+     female                           klasse89    promot          fexp       
+ Min.   :0.0000   I Øvre serviceklasse    : 328   NEI:2568   Min.   :0.0000  
+ 1st Qu.:0.0000   II Nedre serviceklasse  :1181   JA :1559   1st Qu.:0.2000  
+ Median :0.0000   III Rutinefunksjonærer  :1248              Median :0.7000  
+ Mean   :0.4686   V-VI Faglærte arbeidere : 648              Mean   :0.9451  
+ 3rd Qu.:1.0000   VIIa Ufaglærte arbeidere: 637              3rd Qu.:1.4000  
+ Max.   :1.0000   NA's                    :  85              Max.   :4.9000  
+                                                                             
+    private    
+ Public :1602  
+ Private:2525  
+               
+               
+               
+               
+               </code></pre>
+</div>
+</div>
+<p>Merk at <code>summary()</code> rapporterer forskjellig basert på om variabelen er kontinuerlig eller kategorisk. For kontinuerlige variable gis min/max, kvartiler, median og gjennomsnitt. For kategoriske variable gis det antall i hver kategori. Hvis det er manglende verdier på en variabel står det oppført nederst som antall <code>NA's</code>.</p>
+<p>Merk her at variabelen female er definert som kontinuerlig selv om det bare er to verdier. Det ville være mer hensiktsmessig å gjøre om denne variabelen til kategorisk.</p>
+<p>Man kan også bruke <code>summary()</code> på enkeltvariable med bruk av <code>$</code> som følger:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(abu89<span class="sc">$</span>time89)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  25.00   71.00   83.33   90.15  102.56  343.75     368 </code></pre>
+</div>
+</div>
+<p>Da får man altså bare tallene for den variabelen man har angitt etter dollartegnet.</p>
+<section id="enkeltfunksjoner" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="enkeltfunksjoner"><span class="header-section-number">6.1.1</span> Enkeltfunksjoner</h3>
+<p>Man kan hente ut hvert av disse tallene spesifikt fremfor å bruke <code>summary()</code>. Det er egne funksjoner for dette, og de kan også brukes når man gjør databearbeiding for litt andre formål. Vi ser her på de viktigste.</p>
+<p>Hva om man vil ha en kvartil som ikke er oppgitt i forvalget? Da kan man bruke funksjonen <code>quantile()</code>. Argumentene i denne funksjonen er hvilken variabel og hvilket prosentil. Som vi ovenfor inneholder time89 noen NA. Vi må i tillegg bestemme hva vi ønsker å gjøre med NA i beregningen, og vi vil her se bort fra disse ved å angi <code>na.rm = TRUE</code>. Ellers får man feilmelding.</p>
+<p>Her er eksempel med første kvartil som skal gi samme svar som ovenfor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(abu89<span class="sc">$</span>time89, .<span class="dv">25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>25% 
+ 71 </code></pre>
+</div>
+</div>
+<p>Her er en variant der man ber om 95-prosentilen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(abu89<span class="sc">$</span>time89, .<span class="dv">95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     95% 
+148.0362 </code></pre>
+</div>
+</div>
+<p>Man kan også be om flere prosentiler. Da listes disse opp innenfor en <code>c()</code> som følger. Her gis prosentilene for 5, 10, 90 og 95 prosent.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(abu89<span class="sc">$</span>time89, <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">10</span>, .<span class="dv">90</span>, .<span class="dv">95</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       5%       10%       90%       95% 
+ 54.91651  61.00000 127.77778 148.03618 </code></pre>
+</div>
+</div>
+<p>Gjennomsnittet av en variabel gis ved funksjonen <code>mean()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(abu89<span class="sc">$</span>time89, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 90.14948</code></pre>
+</div>
+</div>
+<p>Standardavviket gis ved <code>sd()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(abu89<span class="sc">$</span>time89, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30.31473</code></pre>
+</div>
+</div>
+<p>Medianen kan angis med <code>quantile()</code>, men enklere med <code>median()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(abu89<span class="sc">$</span>time89, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 83.33333</code></pre>
+</div>
+</div>
+<p>Vi trenger også ofte antall. <code>nrow()</code> gir antall rader, dvs. antall observasjoner i datasettet</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(abu89)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4127</code></pre>
+</div>
+</div>
+<p>Tilsvarende gir <code>ncol()</code> antall kolonner, mens <code>dim()</code> gir begge deler:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(abu89)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(abu89)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4127    9</code></pre>
+</div>
+</div>
 </section>
-<section id="summary" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">6.1.2</span> summary</h3>
+</section>
+<section id="professjonelle-tabeller-med-gtsummary" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="professjonelle-tabeller-med-gtsummary"><span class="header-section-number">6.2</span> Professjonelle tabeller med gtsummary</h2>
+<p>For å lage ordentlig professjonelle tabeller kreves det mer. For det første skal de se ordentlige ut, men de skal også kunne eksporteres til andre formater på en hensiktsmessig måte.</p>
+<p>I R finnes det en hel rekke slike funksjoner. Her har vi vektlagt pakken <code>gtsummary</code> fordi den gir gode tabeller fra helt enkle til ganske avanserte relativt lett. Det er også mange muligheter for å justere tabellene slik du vil. Dessuten kan resultatene eksporteres lett til de fleste aktuelle formater (Word, html, pdf, Excel, latex).</p>
+<p>Avanserte brukere vil muligens se begrensningene i denne pakken og foretrekke noe annet. De fleste vil kunne lage det aller meste med denne pakken.</p>
+<p>Vi starter med en enkel oversiktstabell med alle variablene i datasettet. Men vi fjerner løpenummeret for person, nemlig variabelen <em>io_nr</em> fordi den ikke inneholder noe analyserbar informasjon.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>io_nr) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="tbtymiwutc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tbtymiwutc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tbtymiwutc thead, #tbtymiwutc tbody, #tbtymiwutc tfoot, #tbtymiwutc tr, #tbtymiwutc td, #tbtymiwutc th {
+  border-style: none;
+}
+
+#tbtymiwutc p {
+  margin: 0;
+  padding: 0;
+}
+
+#tbtymiwutc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tbtymiwutc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tbtymiwutc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tbtymiwutc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tbtymiwutc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tbtymiwutc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tbtymiwutc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tbtymiwutc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tbtymiwutc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tbtymiwutc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tbtymiwutc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tbtymiwutc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tbtymiwutc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tbtymiwutc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tbtymiwutc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tbtymiwutc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tbtymiwutc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tbtymiwutc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tbtymiwutc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tbtymiwutc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tbtymiwutc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tbtymiwutc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tbtymiwutc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tbtymiwutc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tbtymiwutc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tbtymiwutc .gt_left {
+  text-align: left;
+}
+
+#tbtymiwutc .gt_center {
+  text-align: center;
+}
+
+#tbtymiwutc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tbtymiwutc .gt_font_normal {
+  font-weight: normal;
+}
+
+#tbtymiwutc .gt_font_bold {
+  font-weight: bold;
+}
+
+#tbtymiwutc .gt_font_italic {
+  font-style: italic;
+}
+
+#tbtymiwutc .gt_super {
+  font-size: 65%;
+}
+
+#tbtymiwutc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tbtymiwutc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tbtymiwutc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tbtymiwutc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tbtymiwutc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tbtymiwutc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tbtymiwutc .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N = 4,127</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>N = 4,127</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Gjennomsnittlig timelønn 1989</td>
+<td headers="stat_0" class="gt_row gt_center">83 (71, 103)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td headers="stat_0" class="gt_row gt_center">368</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">År utdanning</td>
+<td headers="stat_0" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;0</td>
+<td headers="stat_0" class="gt_row gt_center">839 (20%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;1</td>
+<td headers="stat_0" class="gt_row gt_center">1,156 (28%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;3</td>
+<td headers="stat_0" class="gt_row gt_center">1,121 (27%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;5</td>
+<td headers="stat_0" class="gt_row gt_center">483 (12%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;7</td>
+<td headers="stat_0" class="gt_row gt_center">308 (7.5%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;9</td>
+<td headers="stat_0" class="gt_row gt_center">205 (5.0%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;11</td>
+<td headers="stat_0" class="gt_row gt_center">15 (0.4%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Alder</td>
+<td headers="stat_0" class="gt_row gt_center">39 (30, 48)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Respondentens kjønn</td>
+<td headers="stat_0" class="gt_row gt_center">1,934 (47%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Goldthorpe klasse 1989</td>
+<td headers="stat_0" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;I Øvre serviceklasse</td>
+<td headers="stat_0" class="gt_row gt_center">328 (8.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;II Nedre serviceklasse</td>
+<td headers="stat_0" class="gt_row gt_center">1,181 (29%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;III Rutinefunksjonærer</td>
+<td headers="stat_0" class="gt_row gt_center">1,248 (31%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;V-VI Faglærte arbeidere</td>
+<td headers="stat_0" class="gt_row gt_center">648 (16%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;VIIa Ufaglærte arbeidere</td>
+<td headers="stat_0" class="gt_row gt_center">637 (16%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td headers="stat_0" class="gt_row gt_center">85</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Noen gang forfremmet</td>
+<td headers="stat_0" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NEI</td>
+<td headers="stat_0" class="gt_row gt_center">2,568 (62%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;JA</td>
+<td headers="stat_0" class="gt_row gt_center">1,559 (38%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Bedriftserfaring</td>
+<td headers="stat_0" class="gt_row gt_center">0.70 (0.20, 1.40)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Privat sektor</td>
+<td headers="stat_0" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Public</td>
+<td headers="stat_0" class="gt_row gt_center">1,602 (39%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Private</td>
+<td headers="stat_0" class="gt_row gt_center">2,525 (61%)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="2"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Median (IQR); n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Legg merke til at <code>tbl_summary</code> gjør en del ting automatisk. Først og fremst er bruker den <em>variabel label</em> og <em>factor levels</em> i sidespalten. Ofte vil ikke variable ha slike labler, og da vil det vises variabelnavnene. Variabelen <em>kjønn</em> har ikke angitt factor levels, og variabelen har bare verdiene 0 og 1, og da rapporteres kun den ene kategorien (dvs. verdien 1). Vi kan legge til annen tekst hvis vi ønsker.</p>
+<p>Dernest er det en forhåndsinnstilling som angir at det for kontinuerlige variable skal rapporteres median og interquartile range (IQR), dvs. nedre og øvre kvartil i parentes. Det gir en god beskrivelse av variablene, men vi skal endre dette nedenfor. For kategoriske variable rapporteres det antall observasjoner og andelen i prosent i parentes.</p>
+<p>Men merk at for antall år utdanning og kjønn, så er det rapportert som kategoriske variable selv om variabeltypen er kontinuerlig. <code>tbl_summary</code> gjør dette fordi det er relativt få kategorier slik at median og IQR ikke er så interessant uansett.</p>
+<p>La oss først endre slik at det rapporteres gjennomsnitt og standardavvik i stedet. Det er mer vanlig å gjøre selv om det ikke er noen regel for dette. Funksjonen <code>theme_gtsummary_mean_sd()</code> endrer standardvalget for <code>tbl_summary</code> i <em>alle etterfølgende tabeller</em>. Dermed slipper du endre neste gang. Flere themes finner du på <a href="https://www.danieldsjoberg.com/gtsummary/articles/themes.html">pakkens hjemmeside</a>. For å gå tilbake til opprinnelig theme brukes funksjonen <code>reset_gtsummary_theme()</code>.</p>
+<p>Vi kan endre andre ting ved tabellen med noen enkle grep. Alle variable kan endre navn i forspalten med å legge til argumentet <code>label =</code>. Nedenfor er to variable endret for å vise hvordan man endrer flere variable. Når det er flere variable må de spesifiseres innenfor argumentet <code>list()</code> som nedenfor. Her endrer vi også label for variabelen female og klasse89.</p>
+<p>Noen ganger kan man også ønske å endre hvordan en variabel presenteres. Et vanlig behov er å presisere hvilken type en variabel er. I dette tilfellet er utdanning antall år etter obligatorisk skolenivå, så det er egentlig en kontinuerlig variabel selv om antall verdier er få. Vi kan velge å presisere at denne er av typen <em>continuous</em>. Nedenfor presiserer vi også at female er kategorisk, <em>dichotomous</em>, selv om denne ble presentert riktig uansett. Vi bruker argumentet <code>type =</code> og flere variable må oppgis innenfor <code>list()</code>.</p>
+<p>En siste ting vi kan endre er å ikke rapportere NA. Det er ikke oppgitt timelønn for alle, så antall NA er rapportert for seg. Det kan være fint, men kan også hende vi ikke ønsker det. Nedenfor er det derfor også lagt til <code>missing = "no"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_gtsummary_mean_sd</span>()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>io_nr) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">label =</span> <span class="fu">list</span>(female <span class="sc">~</span> <span class="st">"Kjønn"</span>, <span class="at">klasse89 =</span> <span class="st">"Klasse"</span>), </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">type =</span> <span class="fu">list</span>(ed <span class="sc">~</span> <span class="st">"continuous"</span>, female <span class="sc">~</span> <span class="st">"dichotomous"</span>), </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">missing =</span> <span class="st">"no"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="xedxwrxutp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xedxwrxutp table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xedxwrxutp thead, #xedxwrxutp tbody, #xedxwrxutp tfoot, #xedxwrxutp tr, #xedxwrxutp td, #xedxwrxutp th {
+  border-style: none;
+}
+
+#xedxwrxutp p {
+  margin: 0;
+  padding: 0;
+}
+
+#xedxwrxutp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xedxwrxutp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xedxwrxutp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xedxwrxutp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xedxwrxutp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xedxwrxutp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xedxwrxutp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xedxwrxutp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xedxwrxutp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xedxwrxutp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xedxwrxutp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xedxwrxutp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xedxwrxutp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xedxwrxutp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xedxwrxutp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xedxwrxutp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xedxwrxutp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xedxwrxutp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xedxwrxutp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xedxwrxutp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xedxwrxutp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xedxwrxutp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xedxwrxutp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xedxwrxutp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xedxwrxutp .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xedxwrxutp .gt_left {
+  text-align: left;
+}
+
+#xedxwrxutp .gt_center {
+  text-align: center;
+}
+
+#xedxwrxutp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xedxwrxutp .gt_font_normal {
+  font-weight: normal;
+}
+
+#xedxwrxutp .gt_font_bold {
+  font-weight: bold;
+}
+
+#xedxwrxutp .gt_font_italic {
+  font-style: italic;
+}
+
+#xedxwrxutp .gt_super {
+  font-size: 65%;
+}
+
+#xedxwrxutp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xedxwrxutp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xedxwrxutp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xedxwrxutp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xedxwrxutp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xedxwrxutp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xedxwrxutp .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N = 4,127</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>N = 4,127</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Gjennomsnittlig timelønn 1989</td>
+<td headers="stat_0" class="gt_row gt_center">90 (30)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">År utdanning</td>
+<td headers="stat_0" class="gt_row gt_center">2.69 (2.56)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Alder</td>
+<td headers="stat_0" class="gt_row gt_center">40 (12)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Kjønn</td>
+<td headers="stat_0" class="gt_row gt_center">1,934 (47%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Klasse</td>
+<td headers="stat_0" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;I Øvre serviceklasse</td>
+<td headers="stat_0" class="gt_row gt_center">328 (8.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;II Nedre serviceklasse</td>
+<td headers="stat_0" class="gt_row gt_center">1,181 (29%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;III Rutinefunksjonærer</td>
+<td headers="stat_0" class="gt_row gt_center">1,248 (31%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;V-VI Faglærte arbeidere</td>
+<td headers="stat_0" class="gt_row gt_center">648 (16%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;VIIa Ufaglærte arbeidere</td>
+<td headers="stat_0" class="gt_row gt_center">637 (16%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Noen gang forfremmet</td>
+<td headers="stat_0" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NEI</td>
+<td headers="stat_0" class="gt_row gt_center">2,568 (62%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;JA</td>
+<td headers="stat_0" class="gt_row gt_center">1,559 (38%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Bedriftserfaring</td>
+<td headers="stat_0" class="gt_row gt_center">0.95 (0.91)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Privat sektor</td>
+<td headers="stat_0" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Public</td>
+<td headers="stat_0" class="gt_row gt_center">1,602 (39%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Private</td>
+<td headers="stat_0" class="gt_row gt_center">2,525 (61%)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="2"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Mean (SD); n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Ofte vil vi ha en tabell som ikke bare viser univariat fordeling, men bi-variate, altså fordelt på to eller flere grupper. Det er f.eks. ganske vanlig å vise tabeller fordelt på kjønn. Det kan vi også gjøre her ved å legge til argumentet <code>by = female</code>. Nedenfor er det også forenklet argumentene for <code>label =</code> og <code>type =</code>. I slike tilfeller vil vi ofte ha totalen i tillegg til per gruppe, og det gjør vi ved å legge til funksjonen <code>add_overall()</code>.</p>
+<p>For de kontinuerlige variablene får vi ikke antallet som inngår i beregningene. Vi vil gjerne vise antall ikke-missing verdier - særlig fordi vi tok vekk NA som egen rad ovenfor. Dette gjør vi ved å legge til funksjonen <code>add_n()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>io_nr) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">ifelse</span>(female <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Menn"</span>, <span class="st">"Kvinner"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tbl_summary</span>(<span class="at">by =</span> female, </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">list</span>(<span class="at">klasse89 =</span> <span class="st">"Klasse"</span>), </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">type =</span> <span class="fu">list</span>(ed <span class="sc">~</span> <span class="st">"continuous"</span>), </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">missing =</span> <span class="st">"no"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_n</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="jmkltoczni" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jmkltoczni table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jmkltoczni thead, #jmkltoczni tbody, #jmkltoczni tfoot, #jmkltoczni tr, #jmkltoczni td, #jmkltoczni th {
+  border-style: none;
+}
+
+#jmkltoczni p {
+  margin: 0;
+  padding: 0;
+}
+
+#jmkltoczni .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jmkltoczni .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jmkltoczni .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jmkltoczni .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jmkltoczni .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jmkltoczni .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jmkltoczni .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jmkltoczni .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jmkltoczni .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jmkltoczni .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jmkltoczni .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jmkltoczni .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jmkltoczni .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jmkltoczni .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jmkltoczni .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jmkltoczni .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jmkltoczni .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jmkltoczni .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jmkltoczni .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jmkltoczni .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jmkltoczni .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jmkltoczni .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jmkltoczni .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jmkltoczni .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jmkltoczni .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jmkltoczni .gt_left {
+  text-align: left;
+}
+
+#jmkltoczni .gt_center {
+  text-align: center;
+}
+
+#jmkltoczni .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jmkltoczni .gt_font_normal {
+  font-weight: normal;
+}
+
+#jmkltoczni .gt_font_bold {
+  font-weight: bold;
+}
+
+#jmkltoczni .gt_font_italic {
+  font-style: italic;
+}
+
+#jmkltoczni .gt_super {
+  font-size: 65%;
+}
+
+#jmkltoczni .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jmkltoczni .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jmkltoczni .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jmkltoczni .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jmkltoczni .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jmkltoczni .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jmkltoczni .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N</strong>"><strong>N</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Overall</strong>, N = 4,127<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Overall</strong>, N = 4,127<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Kvinner</strong>, N = 1,934<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Kvinner</strong>, N = 1,934<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Menn</strong>, N = 2,193<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Menn</strong>, N = 2,193<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Gjennomsnittlig timelønn 1989</td>
+<td headers="n" class="gt_row gt_center">3,759</td>
+<td headers="stat_0" class="gt_row gt_center">90 (30)</td>
+<td headers="stat_1" class="gt_row gt_center">79 (24)</td>
+<td headers="stat_2" class="gt_row gt_center">100 (32)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">År utdanning</td>
+<td headers="n" class="gt_row gt_center">4,127</td>
+<td headers="stat_0" class="gt_row gt_center">2.69 (2.56)</td>
+<td headers="stat_1" class="gt_row gt_center">2.38 (2.40)</td>
+<td headers="stat_2" class="gt_row gt_center">2.96 (2.66)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Alder</td>
+<td headers="n" class="gt_row gt_center">4,127</td>
+<td headers="stat_0" class="gt_row gt_center">40 (12)</td>
+<td headers="stat_1" class="gt_row gt_center">40 (13)</td>
+<td headers="stat_2" class="gt_row gt_center">40 (12)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Klasse</td>
+<td headers="n" class="gt_row gt_center">4,042</td>
+<td headers="stat_0" class="gt_row gt_center"></td>
+<td headers="stat_1" class="gt_row gt_center"></td>
+<td headers="stat_2" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;I Øvre serviceklasse</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">328 (8.1%)</td>
+<td headers="stat_1" class="gt_row gt_center">74 (3.9%)</td>
+<td headers="stat_2" class="gt_row gt_center">254 (12%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;II Nedre serviceklasse</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">1,181 (29%)</td>
+<td headers="stat_1" class="gt_row gt_center">555 (29%)</td>
+<td headers="stat_2" class="gt_row gt_center">626 (29%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;III Rutinefunksjonærer</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">1,248 (31%)</td>
+<td headers="stat_1" class="gt_row gt_center">986 (52%)</td>
+<td headers="stat_2" class="gt_row gt_center">262 (12%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;V-VI Faglærte arbeidere</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">648 (16%)</td>
+<td headers="stat_1" class="gt_row gt_center">46 (2.4%)</td>
+<td headers="stat_2" class="gt_row gt_center">602 (28%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;VIIa Ufaglærte arbeidere</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">637 (16%)</td>
+<td headers="stat_1" class="gt_row gt_center">244 (13%)</td>
+<td headers="stat_2" class="gt_row gt_center">393 (18%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Noen gang forfremmet</td>
+<td headers="n" class="gt_row gt_center">4,127</td>
+<td headers="stat_0" class="gt_row gt_center"></td>
+<td headers="stat_1" class="gt_row gt_center"></td>
+<td headers="stat_2" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NEI</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">2,568 (62%)</td>
+<td headers="stat_1" class="gt_row gt_center">1,308 (68%)</td>
+<td headers="stat_2" class="gt_row gt_center">1,260 (57%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;JA</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">1,559 (38%)</td>
+<td headers="stat_1" class="gt_row gt_center">626 (32%)</td>
+<td headers="stat_2" class="gt_row gt_center">933 (43%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Bedriftserfaring</td>
+<td headers="n" class="gt_row gt_center">4,127</td>
+<td headers="stat_0" class="gt_row gt_center">0.95 (0.91)</td>
+<td headers="stat_1" class="gt_row gt_center">0.83 (0.81)</td>
+<td headers="stat_2" class="gt_row gt_center">1.05 (0.97)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Privat sektor</td>
+<td headers="n" class="gt_row gt_center">4,127</td>
+<td headers="stat_0" class="gt_row gt_center"></td>
+<td headers="stat_1" class="gt_row gt_center"></td>
+<td headers="stat_2" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Public</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">1,602 (39%)</td>
+<td headers="stat_1" class="gt_row gt_center">1,016 (53%)</td>
+<td headers="stat_2" class="gt_row gt_center">586 (27%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Private</td>
+<td headers="n" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center">2,525 (61%)</td>
+<td headers="stat_1" class="gt_row gt_center">918 (47%)</td>
+<td headers="stat_2" class="gt_row gt_center">1,607 (73%)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="5"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Mean (SD); n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Men vi kan lage mer kompliserte tabeller også. La oss si at vi ønsker å lage den samme tabellen som over, men fordelt på to grupper. Det kan være relevant å sammenligne offentlig og privat sektor. En mulighet er å lage en ny grupperingsvariabel ved å slå sammen kjønn og sektor slik at vi får fire kategorier. Men vi får et bedre resultat ved å lage en stratifisert tabell med funksjonen <code>tbl_strata()</code>. Det er litt kryptisk syntaks, men det viktige er å angi hvilken variabel det skal stratifiseres etter med argumentet <code>strata =</code> etterfulgt av <code>.tbl_fun = ~ .x %&gt;%</code>, så kommer <code>tble_summary</code> etter dette. Her er det også lagt til en ekstra header med antall observasjoner.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>io_nr) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">ifelse</span>(female <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Menn"</span>, <span class="st">"Kvinner"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_strata</span>(<span class="at">strata =</span> private, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">.tbl_fun =</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>               <span class="sc">~</span> .x <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tbl_summary</span>(<span class="at">by =</span> female, </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="fu">list</span>(<span class="at">klasse89 =</span> <span class="st">"Klasse"</span>), </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">type =</span> <span class="fu">list</span>(ed <span class="sc">~</span> <span class="st">"continuous"</span>), </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">missing =</span> <span class="st">"no"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>               <span class="fu">add_n</span>(),</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.header =</span> <span class="st">"**{strata}**, N = {n}"</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="bkmquvjswn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bkmquvjswn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bkmquvjswn thead, #bkmquvjswn tbody, #bkmquvjswn tfoot, #bkmquvjswn tr, #bkmquvjswn td, #bkmquvjswn th {
+  border-style: none;
+}
+
+#bkmquvjswn p {
+  margin: 0;
+  padding: 0;
+}
+
+#bkmquvjswn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bkmquvjswn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bkmquvjswn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bkmquvjswn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bkmquvjswn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bkmquvjswn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bkmquvjswn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bkmquvjswn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bkmquvjswn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bkmquvjswn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bkmquvjswn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bkmquvjswn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bkmquvjswn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bkmquvjswn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bkmquvjswn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmquvjswn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bkmquvjswn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bkmquvjswn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bkmquvjswn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmquvjswn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bkmquvjswn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmquvjswn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bkmquvjswn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmquvjswn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bkmquvjswn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmquvjswn .gt_left {
+  text-align: left;
+}
+
+#bkmquvjswn .gt_center {
+  text-align: center;
+}
+
+#bkmquvjswn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bkmquvjswn .gt_font_normal {
+  font-weight: normal;
+}
+
+#bkmquvjswn .gt_font_bold {
+  font-weight: bold;
+}
+
+#bkmquvjswn .gt_font_italic {
+  font-style: italic;
+}
+
+#bkmquvjswn .gt_super {
+  font-size: 65%;
+}
+
+#bkmquvjswn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bkmquvjswn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bkmquvjswn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bkmquvjswn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bkmquvjswn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bkmquvjswn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bkmquvjswn .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="<strong>Public</strong>, N = 1602">
+        <span class="gt_column_spanner"><strong>Public</strong>, N = 1602</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="<strong>Private</strong>, N = 2525">
+        <span class="gt_column_spanner"><strong>Private</strong>, N = 2525</span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N</strong>"><strong>N</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Kvinner</strong>, N = 1,016<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Kvinner</strong>, N = 1,016<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Menn</strong>, N = 586<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Menn</strong>, N = 586<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N</strong>"><strong>N</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Kvinner</strong>, N = 918<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Kvinner</strong>, N = 918<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Menn</strong>, N = 1,607<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Menn</strong>, N = 1,607<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Gjennomsnittlig timelønn 1989</td>
+<td headers="n_1" class="gt_row gt_center">1,403</td>
+<td headers="stat_1_1" class="gt_row gt_center">82 (23)</td>
+<td headers="stat_2_1" class="gt_row gt_center">100 (28)</td>
+<td headers="n_2" class="gt_row gt_center">2,356</td>
+<td headers="stat_1_2" class="gt_row gt_center">76 (24)</td>
+<td headers="stat_2_2" class="gt_row gt_center">100 (33)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">År utdanning</td>
+<td headers="n_1" class="gt_row gt_center">1,602</td>
+<td headers="stat_1_1" class="gt_row gt_center">2.88 (2.67)</td>
+<td headers="stat_2_1" class="gt_row gt_center">4.22 (3.12)</td>
+<td headers="n_2" class="gt_row gt_center">2,525</td>
+<td headers="stat_1_2" class="gt_row gt_center">1.82 (1.92)</td>
+<td headers="stat_2_2" class="gt_row gt_center">2.50 (2.31)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Alder</td>
+<td headers="n_1" class="gt_row gt_center">1,602</td>
+<td headers="stat_1_1" class="gt_row gt_center">42 (12)</td>
+<td headers="stat_2_1" class="gt_row gt_center">43 (11)</td>
+<td headers="n_2" class="gt_row gt_center">2,525</td>
+<td headers="stat_1_2" class="gt_row gt_center">37 (13)</td>
+<td headers="stat_2_2" class="gt_row gt_center">39 (12)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Klasse</td>
+<td headers="n_1" class="gt_row gt_center">1,592</td>
+<td headers="stat_1_1" class="gt_row gt_center"></td>
+<td headers="stat_2_1" class="gt_row gt_center"></td>
+<td headers="n_2" class="gt_row gt_center">2,450</td>
+<td headers="stat_1_2" class="gt_row gt_center"></td>
+<td headers="stat_2_2" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;I Øvre serviceklasse</td>
+<td headers="n_1" class="gt_row gt_center"></td>
+<td headers="stat_1_1" class="gt_row gt_center">55 (5.4%)</td>
+<td headers="stat_2_1" class="gt_row gt_center">150 (26%)</td>
+<td headers="n_2" class="gt_row gt_center"></td>
+<td headers="stat_1_2" class="gt_row gt_center">19 (2.1%)</td>
+<td headers="stat_2_2" class="gt_row gt_center">104 (6.7%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;II Nedre serviceklasse</td>
+<td headers="n_1" class="gt_row gt_center"></td>
+<td headers="stat_1_1" class="gt_row gt_center">340 (34%)</td>
+<td headers="stat_2_1" class="gt_row gt_center">196 (34%)</td>
+<td headers="n_2" class="gt_row gt_center"></td>
+<td headers="stat_1_2" class="gt_row gt_center">215 (24%)</td>
+<td headers="stat_2_2" class="gt_row gt_center">430 (28%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;III Rutinefunksjonærer</td>
+<td headers="n_1" class="gt_row gt_center"></td>
+<td headers="stat_1_1" class="gt_row gt_center">507 (50%)</td>
+<td headers="stat_2_1" class="gt_row gt_center">64 (11%)</td>
+<td headers="n_2" class="gt_row gt_center"></td>
+<td headers="stat_1_2" class="gt_row gt_center">479 (54%)</td>
+<td headers="stat_2_2" class="gt_row gt_center">198 (13%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;V-VI Faglærte arbeidere</td>
+<td headers="n_1" class="gt_row gt_center"></td>
+<td headers="stat_1_1" class="gt_row gt_center">5 (0.5%)</td>
+<td headers="stat_2_1" class="gt_row gt_center">114 (20%)</td>
+<td headers="n_2" class="gt_row gt_center"></td>
+<td headers="stat_1_2" class="gt_row gt_center">41 (4.6%)</td>
+<td headers="stat_2_2" class="gt_row gt_center">488 (31%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;VIIa Ufaglærte arbeidere</td>
+<td headers="n_1" class="gt_row gt_center"></td>
+<td headers="stat_1_1" class="gt_row gt_center">104 (10%)</td>
+<td headers="stat_2_1" class="gt_row gt_center">57 (9.8%)</td>
+<td headers="n_2" class="gt_row gt_center"></td>
+<td headers="stat_1_2" class="gt_row gt_center">140 (16%)</td>
+<td headers="stat_2_2" class="gt_row gt_center">336 (22%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Noen gang forfremmet</td>
+<td headers="n_1" class="gt_row gt_center">1,602</td>
+<td headers="stat_1_1" class="gt_row gt_center"></td>
+<td headers="stat_2_1" class="gt_row gt_center"></td>
+<td headers="n_2" class="gt_row gt_center">2,525</td>
+<td headers="stat_1_2" class="gt_row gt_center"></td>
+<td headers="stat_2_2" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NEI</td>
+<td headers="n_1" class="gt_row gt_center"></td>
+<td headers="stat_1_1" class="gt_row gt_center">696 (69%)</td>
+<td headers="stat_2_1" class="gt_row gt_center">318 (54%)</td>
+<td headers="n_2" class="gt_row gt_center"></td>
+<td headers="stat_1_2" class="gt_row gt_center">612 (67%)</td>
+<td headers="stat_2_2" class="gt_row gt_center">942 (59%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;JA</td>
+<td headers="n_1" class="gt_row gt_center"></td>
+<td headers="stat_1_1" class="gt_row gt_center">320 (31%)</td>
+<td headers="stat_2_1" class="gt_row gt_center">268 (46%)</td>
+<td headers="n_2" class="gt_row gt_center"></td>
+<td headers="stat_1_2" class="gt_row gt_center">306 (33%)</td>
+<td headers="stat_2_2" class="gt_row gt_center">665 (41%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Bedriftserfaring</td>
+<td headers="n_1" class="gt_row gt_center">1,602</td>
+<td headers="stat_1_1" class="gt_row gt_center">0.93 (0.85)</td>
+<td headers="stat_2_1" class="gt_row gt_center">1.15 (0.94)</td>
+<td headers="n_2" class="gt_row gt_center">2,525</td>
+<td headers="stat_1_2" class="gt_row gt_center">0.72 (0.74)</td>
+<td headers="stat_2_2" class="gt_row gt_center">1.01 (0.98)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="7"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Mean (SD); n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Det går også an å lage langt mer avanserte tabeller enn dette, og alle deler kan modifiseres. Men vi går ikke inn på dette her. Ved behov finner du instruksjoner på <a href="https://www.danieldsjoberg.com/gtsummary/index.html">pakkens hjemmeside</a>.</p>
+<section id="eksport-av-tabeller" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="eksport-av-tabeller"><span class="header-section-number">6.2.1</span> Eksport av tabeller</h3>
+<p>Du skal aldri bruke “klipp og lim” for å få en tabell over i et tekstbehandlingsprogram. Trikset er å konvertere tabellen til gt-format som har en eksportfunksjon til MS Word.</p>
+<p>Først lagres tabellen i et eget objekt.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fintabell <span class="ot">&lt;-</span> abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>io_nr) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">ifelse</span>(female <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Menn"</span>, <span class="st">"Kvinner"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_strata</span>(<span class="at">strata =</span> private, </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">.tbl_fun =</span> </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>               <span class="sc">~</span> .x <span class="sc">%&gt;%</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tbl_summary</span>(<span class="at">by =</span> female, </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="fu">list</span>(<span class="at">klasse89 =</span> <span class="st">"Klasse"</span>), </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">type =</span> <span class="fu">list</span>(ed <span class="sc">~</span> <span class="st">"continuous"</span>), </span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">missing =</span> <span class="st">"no"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>               <span class="fu">add_n</span>(),</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.header =</span> <span class="st">"**{strata}**, N = {n}"</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Så kan tabellen eksporteres til Word, og evt. redigeres videre der hvis det trengs. På dette nivået kan det være mer tidsbesparende å gjøre siste justeringer i Word fremfor å lære alle triks for å lage tabellen fiks ferdig i R. (Skal du lage mange tabeller kan det likevel lønne seg å gjøre mest mulig i R).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fintabell <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gtsave</span>(<span class="at">filename =</span> <span class="st">"output/fintabell.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Merk at eksport til docx-formatet krever at du har en relativt ny installasjon av pakkene {gt} og {gtsummary}. Filhalen “.docx” innebærer at filen lagres i dette formatet. Tilsvarende kan du lagre i .html, .pdf, .rtf, .png, .tex eller .ltex bare ved å endre filhalen.</p>
+<p>En tilsvarende variant som noen av dere har lært på sosgeo1120 er å bruke <code>as_flextable</code> og en tilsvarende eksportfunksjon. Det er selvsagt også helt ok. En tidligere versjon av {gt} kunne som sagt ikke eksportere til Word, så da var {flextable} beste løsning. Men pakken {flextable} har vist seg å være litt trøblete å installere på noen pc’er, så da er det bedre å bruke {gt}.</p>
 </section>
 </section>
-<section id="manuelle-tabeller" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="manuelle-tabeller"><span class="header-section-number">6.2</span> Manuelle tabeller</h2>
+<section id="manuelle-tabeller" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="manuelle-tabeller"><span class="header-section-number">6.3</span> Manuelle tabeller</h2>
 <p>Noen ganger trenger man å lage ganske spesifikke ting.</p>
-<section id="for-datasettet-totalt" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="for-datasettet-totalt"><span class="header-section-number">6.2.1</span> For datasettet totalt</h3>
+<section id="for-datasettet-totalt" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="for-datasettet-totalt"><span class="header-section-number">6.3.1</span> For datasettet totalt</h3>
 </section>
-<section id="grupperte-statistikker" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="grupperte-statistikker"><span class="header-section-number">6.2.2</span> Grupperte statistikker</h3>
+<section id="grupperte-statistikker" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="grupperte-statistikker"><span class="header-section-number">6.3.2</span> Grupperte statistikker</h3>
 </section>
 </section>
-<section id="professjonelle-tabeller-med-gtsummary" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="professjonelle-tabeller-med-gtsummary"><span class="header-section-number">6.3</span> Professjonelle tabeller med gtsummary</h2>
-</section>
-<section id="noen-andre-muligheter" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="noen-andre-muligheter"><span class="header-section-number">6.4</span> Noen andre muligheter</h2>
+<section id="oppgaver" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="oppgaver"><span class="header-section-number">6.4</span> Oppgaver</h2>
+<p>Slå opp i boken <a href="https://r4ds.had.co.nz/data-visualisation.html">R for data science</a> hvis du står fast eller ikke skjønner hva koden betyr.</p>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.1 </strong></span>Bruk datasettet abu89 og lag de samme tabellene som vist her, gjør noen endringer på kodene for å endre utseendet på tabellene. Det er et mål at du skal forstå hva hver enkelt kommando gjør.</p>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.2 </strong></span>Last inn datasettet NorLAG i R. Velg noen variable som du selv tenker kan være informative å se nærmere på. Bruk de samme teknikkene på disse variablene.</p>
+</div>
 
 
 </section>

@@ -364,7 +364,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(norlag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+<pre><code>[1] "data.frame"</code></pre>
 </div>
 </div>
 <p>I dette tilfellet får vi tre beskjeder. Det er en kombinert objekttype av <em>tibble</em> og <em>data.frame</em>. Mens <em>data.frame</em> er standard datasett tilsvarende som et regneark, så er <em>tibble</em> en utvidelse med noen ekstra funksjoner som er nyttige for avanserte brukere, men er å regne som en utvidelse av <em>data.frame</em>. For vårt formål vil det i praksis være det samme. Et datasett som leses inn i R bør altså være av typen tbl eller data.frame. Data kan også ha andre typer strukturer og da vil <code>class()</code> rapportere noe annet.</p>
@@ -373,10 +373,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(norlag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 33084   434</code></pre>
+<pre><code>[1] 20892  2605</code></pre>
 </div>
 </div>
-<p>Her får vi vite at det er 33084 rader (dvs. observasjoner) og 434 kollonner (dvs. variable).</p>
+<p>Her får vi vite at det er 20892 rader (dvs. observasjoner) og 2605 kollonner (dvs. variable).</p>
 <section id="bruke-view" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="bruke-view"><span class="header-section-number">4.1.1</span> Bruke <code>View()</code></h3>
 <p>Særlig når man er uvant med å jobbe i R vil man kunne ha behov for å <em>se på dataene</em> slik man er vant til fra regneark eller software som SPSS eller Stata. En mulighet er å bruke funksjonen <code>View()</code> så vil hele datafilen åpnes i eget vindu. Dette er kun egnet for å se på dataene og du kan lukke vinduet uten at det påvirker dataene. Dataene ligger fremdeles i det samme objektet på samme måte som før.</p>
@@ -403,28 +403,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(norlag[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  ref_nr round iointervjumnd                 iointervjuyr ioalder               
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl+lbl&gt;                     &lt;dbl+lbl&gt;    &lt;dbl+lbl&gt;             
-1      5     1      5                          2002           68                
-2      5     2     11                          2007           72                
-3      5     3 999999 [Deltok ikke i runden] 999999       999999 [Deltok ikke i…
-4     10     1      5                          2002           44                
-5     10     2      5                          2007           49                
-6     10     3      5                          2017           59                </code></pre>
+<pre><code>  ref_nr         iodeltakelse iododaar iofodselsaar iokjonn
+1      5     Deltatt T1 og T2     &lt;NA&gt;         1934    Mann
+2      5     Deltatt T1 og T2     &lt;NA&gt;         1934    Mann
+3     10 Deltatt T1, T2 og T3     &lt;NA&gt;         1957  Kvinne
+4     10 Deltatt T1, T2 og T3     &lt;NA&gt;         1957  Kvinne
+5     10 Deltatt T1, T2 og T3     &lt;NA&gt;         1957  Kvinne
+6     12     Deltatt T1 og T3     &lt;NA&gt;         1955  Kvinne</code></pre>
 </div>
 </div>
 <p>Vi kan altså også angi både rader og kollonner på denne måten. Her er eksempel som viser første 3 rader og variabelnummer 40 til 44.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(norlag[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">40</span><span class="sc">:</span><span class="dv">44</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 5
-  alder_eldste_barnebarn alder_yngste_barnebarn alder_barnebarn sosken_i_live
-                   &lt;dbl&gt;                  &lt;dbl&gt;           &lt;dbl&gt;         &lt;dbl&gt;
-1                     NA                     NA              NA             2
-2                     21                      7              NA             2
-3                     NA                     NA              NA             0
-# ℹ 1 more variable: household_rel_p2 &lt;dbl+lbl&gt;</code></pre>
+<pre><code>  hc201 hc202 hc203 hc204 hc205
+1   176    85    Ja   Nei    Ja
+2   176    95    Ja   Nei    Ja
+3   168    64    Ja   Nei    Ja</code></pre>
 </div>
 </div>
 <p>Legg merke til at under hvert variabelnavn står det en liten tekst, f.eks. <dbl> eller &lt;S3: haven_labelled&gt;. Det kan også stå andre ting. dbl betyr at det er en kontinuerlig variabel, mens haven_labelled betyr at det er labler til alle eller noe verdier i variabelen.</dbl></p>
@@ -437,28 +432,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(norlag[, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 33,084
+<pre><code>Rows: 20,892
 Columns: 20
-$ ref_nr          &lt;dbl&gt; 5, 5, 5, 10, 10, 10, 12, 12, 12, 15, 15, 15, 18, 18, 1…
-$ round           &lt;dbl&gt; 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, …
-$ iointervjumnd   &lt;dbl+lbl&gt;      5,     11, 999999,      5,      5,      5,   …
-$ iointervjuyr    &lt;dbl+lbl&gt;   2002,   2007, 999999,   2002,   2007,   2017,   …
-$ ioalder         &lt;dbl+lbl&gt;     68,     72, 999999,     44,     49,     59,   …
-$ iolandb         &lt;dbl+lbl&gt;      1,      1,      1,      1,      1,      1,   …
-$ iolandb3        &lt;dbl+lbl&gt;     NA,     NA, 999999,      1,      1,      1,   …
-$ iosvar          &lt;dbl+lbl&gt;      1,      1, 999999,      1,      1,      1,   …
-$ iofodselsyr     &lt;dbl&gt; 1934, 1934, 1934, 1957, 1957, 1957, 1955, 1955, 1955, …
-$ iokjonn         &lt;dbl+lbl&gt; 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1,…
-$ iopafyll        &lt;dbl+lbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0,…
-$ iodeltagelse    &lt;dbl+lbl&gt; 5, 5, 5, 1, 1, 1, 2, 2, 2, 5, 5, 5, 3, 3, 3, 4, 4,…
-$ ionorlag1kohort &lt;dbl+lbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,…
-$ iododyr         &lt;dbl+lbl&gt; 9996, 9996, 9996, 9996, 9996, 9996, 9996, 9996, 99…
-$ ssIO_sivil      &lt;dbl+lbl&gt;  2,  2, NA,  4,  4,  4,  2, NA,  2,  4,  4, NA, NA…
-$ hh001c          &lt;dbl+lbl&gt;      1,      1, 999999,      1,      1,      1,   …
-$ hh002           &lt;dbl&gt; 2, 2, 999999, 3, 2, 2, 2, 999999, 2, 1, 1, 999999, 999…
-$ pa001c          &lt;dbl+lbl&gt;      1,      1, 999999,      0,      1,      1,   …
-$ pa002c          &lt;dbl+lbl&gt;     NA,      1, 999999,     NA,      2,      2,   …
-$ pa003           &lt;dbl+lbl&gt;     60,     66, 999999,    996,     57,     67,   …</code></pre>
+$ ref_nr          &lt;dbl&gt; 5, 5, 10, 10, 10, 12, 12, 15, 15, 18, 18, 22, 23, 23, …
+$ iodeltakelse    &lt;fct&gt; "Deltatt T1 og T2", "Deltatt T1 og T2", "Deltatt T1, T…
+$ iododaar        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 2006, NA, …
+$ iofodselsaar    &lt;dbl&gt; 1934, 1934, 1957, 1957, 1957, 1955, 1955, 1944, 1944, …
+$ iokjonn         &lt;fct&gt; Mann, Mann, Kvinne, Kvinne, Kvinne, Kvinne, Kvinne, Kv…
+$ ionorlag1kohort &lt;fct&gt; Del av NorLAG1 kohort, Del av NorLAG1 kohort, Del av N…
+$ iopafyll        &lt;fct&gt; Ingen påfyll, Ingen påfyll, Ingen påfyll, Ingen påfyll…
+$ iovektnorlag2   &lt;fct&gt; 143, 143, 51, 51, 51, NA, NA, 195, 195, 215, 215, NA, …
+$ iovektnorlag3   &lt;fct&gt; NA, NA, 73, 73, 73, 135, 135, NA, NA, 227, 227, NA, 39…
+$ pr002c          &lt;fct&gt; 1905, 1905, 1933, 1933, 1933, 1918, 1918, 1918, 1918, …
+$ pr003c          &lt;fct&gt; 1991, 1991, NA, NA, NA, 2004, 2004, 1989, 1989, NA, NA…
+$ pr005c          &lt;fct&gt; 1905, 1905, 1933, 1933, 1933, 1915, 1915, 1909, 1909, …
+$ pr006c          &lt;fct&gt; 1996, 1996, NA, NA, NA, 1996, 1996, 1975, 1975, 1976, …
+$ pr007c          &lt;fct&gt; Grunnskole, Grunnskole, Videregående, Videregående, Vi…
+$ pr011c          &lt;fct&gt; Videregående, Videregående, Grunnskole, Grunnskole, Gr…
+$ round           &lt;dbl&gt; 1, 2, 3, 2, 1, 3, 1, 1, 2, 3, 2, 1, 3, 1, 1, 3, 2, 1, …
+$ ioalder         &lt;fct&gt; 68, 72, 59, 49, 44, 61, 47, 58, 63, 67, 57, 63, 69, 55…
+$ iointervjumnd   &lt;fct&gt; 5, 11, 5, 5, 5, 8, 5, 8, 3, 3, 5, 8, 5, 8, 2, 5, 9, 4,…
+$ iointervjuaar   &lt;fct&gt; 2002, 2007, 2017, 2007, 2002, 2017, 2002, 2002, 2007, …
+$ iolandb         &lt;fct&gt; NA, Norskfødt, NA, Norskfødt, NA, NA, NA, NA, Norskfød…</code></pre>
 </div>
 </div>
 <p>I denne output’en er den første kollonnen altså variabelnavnene, deretter er det en kollonne som viser hva slags type variabel det er, og deretter de første observasjonene på hver variabel slik at man får et inntrykk av hvordan det ser ut. <code>glimpse()</code> gir altså omtrent samme informasjon som <code>head()</code>, men er nok mer hensiktsmessig hvis mange variable.</p>
@@ -478,13 +473,13 @@ $ pa003           &lt;dbl+lbl&gt;     60,     66, 999999,    996,     57,     67
 
 --------------------------------------------------------------------------------
 
-   Storage mode: double
-   Measurement: undefined
+   Storage mode: integer
+   Factor with 2 levels
 
-   Values and labels       N Percent
-                                    
-   1 'Mann'            16197    49.0
-   2 'Kvinne'          16887    51.0</code></pre>
+   Levels and labels     N Valid
+                                
+   1 'Mann'          10244  49.0
+   2 'Kvinne'        10648  51.0</code></pre>
 </div>
 </div>
 <p>Poenget her er altså bare å få en penere output og litt deskriptiv statistikk samtidig.</p>
@@ -496,9 +491,9 @@ $ pa003           &lt;dbl+lbl&gt;     60,     66, 999999,    996,     57,     67
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(norlag, <span class="st">"iokjonn"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> pos variable label     col_type values    
- 10  iokjonn  IOs kjønn dbl+lbl  [1] Mann  
-                                 [2] Kvinne</code></pre>
+<pre><code> pos variable label     col_type values
+ 5   iokjonn  IOs kjønn fct      Mann  
+                                 Kvinne</code></pre>
 </div>
 </div>
 <p>I output fremgår det at dette er den 10’ende variabelen, inneholder informasjonen “IOs kjønn”, er av typen numerisk med tilhørende labler, og verdiene er 1 = Mann og 2 = Kvinne.</p>
@@ -513,30 +508,20 @@ $ pa003           &lt;dbl+lbl&gt;     60,     66, 999999,    996,     57,     67
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">val_labels</span>(norlag<span class="sc">$</span>iokjonn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Mann Kvinne 
-     1      2 </code></pre>
+<pre><code>NULL</code></pre>
 </div>
 </div>
 <p>Alle datasett skal komme med en dokumentasjon som sier hva hver variabel inneholder og hvilke verdier som finnes i hver variable, og hva de betyr. Dette leveres gjerne som en separat fil, ganske ofte i pdf eller html format. NSD/Sikt leverer dokumentasjonen for Norlag i html-format. (Ideelt burde det vært i et enkelt maskinlesbart format egnet til å bruke til omkoding og labler for de som ønsker det, men de har valgt en annen løsning).</p>
 <p>Du kan søke i dokumentasjonen på samme måte som i andre filer, men det kan være litt knotete. Et godt alternativ er å søke direkte i datasettet. Funksjonen <code>look_for()</code> søker både i variabelnavn, verdier og labler. Her er et eksempel for hvordan finne variabler som inneholder ordet “yrkesinntekt”. Du kan også søke på kortere eller lengre tekststrenger. (Søker du f.eks. bare på “innt” eller “yrke” så får du opp langt flere variable, så du må kanskje prøve deg litt frem).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">look_for</span>(norlag, <span class="st">"Yrkesinntekt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> pos variable       label                   col_type values                 
- 353 inwyrkinnt     Yrkesinntekter NorLAG ~ dbl+lbl  [-5000] Value &lt;0 &gt;-5000
-                                                     [5000] Value &gt;0 &lt;5000  
-                                                     [999999999] Mangler da~
- 371 inpartwyrkinnt Partner: yrkesinntekte~ dbl+lbl  [99999996] Filter: IO ~
-                                                     [99999999] Mangler data
-                                                     [999999999] Deltok ikk~</code></pre>
-</div>
 </div>
 <p>Det er to variable som inneholder teksten “yrkesinntekt”. Den første variabelen har posisjon 353 i datasettet og har variabelnavnet inwyrkinnt. Den andre variabelen har posisjon 371 og har navnet inpartwyrkinnt. Vi fokuserer på den første.</p>
 <p>Merk at når labelen avsluttes med ~ (uttales “tilde”) indikerer det at teksten er avkortet i outputvinduet. Du får opp hele teksten ved å bruke <code>val_label()</code> slik:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var_label</span>(norlag<span class="sc">$</span>inwyrkinnt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var_label</span>(norlag<span class="sc">$</span>inwyrkinnt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Yrkesinntekter NorLAG longitudinell"</code></pre>
+<pre><code>NULL</code></pre>
 </div>
 </div>
 
