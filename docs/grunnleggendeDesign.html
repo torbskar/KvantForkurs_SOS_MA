@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forkurs for kvantitativ metode - 9&nbsp; Design og tolkning</title>
+<title>Forkurs for kvantitativ metode - 10&nbsp; Design og tolkning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./statistiskTolkning.html" rel="next">
-<link href="./linearRegresjon.html" rel="prev">
+<link href="./linearRegresjon_kat.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Design og tolkning</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Design og tolkning</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -172,6 +172,11 @@ ul.task-list li input[type="checkbox"] {
   <a href="./linearRegresjon.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regresjon: Sammenheng mellom variable</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./linearRegresjon_kat.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lineær regresjon med kategoriske variable</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -184,12 +189,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./grunnleggendeDesign.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Design og tolkning</span></a>
+  <a href="./grunnleggendeDesign.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Design og tolkning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./statistiskTolkning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistisk tolkning</span></a>
+  <a href="./statistiskTolkning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Statistisk tolkning</span></a>
   </div>
 </li>
       </ul>
@@ -204,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./praktiskStatistikk.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Statistikk i praksis</span></a>
+  <a href="./praktiskStatistikk.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Statistikk i praksis</span></a>
   </div>
 </li>
       </ul>
@@ -219,12 +224,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Datahåndtering med <em>Tidyverse</em></span></a>
+  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datahåndtering med <em>Tidyverse</em></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./omkode_factor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Omkoding av variable</span></a>
+  <a href="./omkode_factor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Omkoding av variable</span></a>
   </div>
 </li>
       </ul>
@@ -258,15 +263,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#tre-nivåer-av-regresjonanalyse" id="toc-tre-nivåer-av-regresjonanalyse" class="nav-link active" data-scroll-target="#tre-nivåer-av-regresjonanalyse"><span class="toc-section-number">9.1</span>  Tre nivåer av regresjonanalyse</a>
+  <li><a href="#tre-nivåer-av-regresjonanalyse" id="toc-tre-nivåer-av-regresjonanalyse" class="nav-link active" data-scroll-target="#tre-nivåer-av-regresjonanalyse"><span class="toc-section-number">10.1</span>  Tre nivåer av regresjonanalyse</a>
   <ul class="collapse">
-  <li><a href="#nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" id="toc-nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="nav-link" data-scroll-target="#nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="toc-section-number">9.1.1</span>  Nivå I: Ikke tilfeldig utvalg fra en veldefinert populasjon</a></li>
-  <li><a href="#nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" id="toc-nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="nav-link" data-scroll-target="#nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="toc-section-number">9.1.2</span>  Nivå II: Tilfeldig utvalg fra en veldefinert populasjon</a></li>
-  <li><a href="#nivå-iii-estimering-av-kausale-effekter" id="toc-nivå-iii-estimering-av-kausale-effekter" class="nav-link" data-scroll-target="#nivå-iii-estimering-av-kausale-effekter"><span class="toc-section-number">9.1.3</span>  Nivå III: Estimering av kausale effekter</a></li>
-  <li><a href="#mot-et-nivå-iv" id="toc-mot-et-nivå-iv" class="nav-link" data-scroll-target="#mot-et-nivå-iv"><span class="toc-section-number">9.1.4</span>  Mot et nivå IV?</a></li>
+  <li><a href="#nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" id="toc-nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="nav-link" data-scroll-target="#nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="toc-section-number">10.1.1</span>  Nivå I: Ikke tilfeldig utvalg fra en veldefinert populasjon</a></li>
+  <li><a href="#nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" id="toc-nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="nav-link" data-scroll-target="#nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="toc-section-number">10.1.2</span>  Nivå II: Tilfeldig utvalg fra en veldefinert populasjon</a></li>
+  <li><a href="#nivå-iii-estimering-av-kausale-effekter" id="toc-nivå-iii-estimering-av-kausale-effekter" class="nav-link" data-scroll-target="#nivå-iii-estimering-av-kausale-effekter"><span class="toc-section-number">10.1.3</span>  Nivå III: Estimering av kausale effekter</a></li>
+  <li><a href="#mot-et-nivå-iv" id="toc-mot-et-nivå-iv" class="nav-link" data-scroll-target="#mot-et-nivå-iv"><span class="toc-section-number">10.1.4</span>  Mot et nivå IV?</a></li>
   </ul></li>
-  <li><a href="#hva-er-poenget-her-egentlig" id="toc-hva-er-poenget-her-egentlig" class="nav-link" data-scroll-target="#hva-er-poenget-her-egentlig"><span class="toc-section-number">9.2</span>  Hva er poenget her, egentlig?</a></li>
-  <li><a href="#hva-med-sosiologisk-teori" id="toc-hva-med-sosiologisk-teori" class="nav-link" data-scroll-target="#hva-med-sosiologisk-teori"><span class="toc-section-number">9.3</span>  Hva med sosiologisk teori?</a></li>
+  <li><a href="#hva-er-poenget-her-egentlig" id="toc-hva-er-poenget-her-egentlig" class="nav-link" data-scroll-target="#hva-er-poenget-her-egentlig"><span class="toc-section-number">10.2</span>  Hva er poenget her, egentlig?</a></li>
+  <li><a href="#hva-med-sosiologisk-teori" id="toc-hva-med-sosiologisk-teori" class="nav-link" data-scroll-target="#hva-med-sosiologisk-teori"><span class="toc-section-number">10.3</span>  Hva med sosiologisk teori?</a></li>
   </ul>
 </nav>
     </div>
@@ -275,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Design og tolkning</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Design og tolkning</span></h1>
 </div>
 
 
@@ -290,11 +295,11 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="tre-nivåer-av-regresjonanalyse" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="tre-nivåer-av-regresjonanalyse"><span class="header-section-number">9.1</span> Tre nivåer av regresjonanalyse</h2>
+<section id="tre-nivåer-av-regresjonanalyse" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="tre-nivåer-av-regresjonanalyse"><span class="header-section-number">10.1</span> Tre nivåer av regresjonanalyse</h2>
 <p>Richard Berk beskriver i sin lærebok tre nivåer av regresjonsanalyse basert på hvordan dataene ble til. Dette er et godt utgangspunkt som burde klargjøre betydelig, i hvert fall som et først skritt.</p>
-<section id="nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" class="anchored" data-anchor-id="nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="header-section-number">9.1.1</span> Nivå I: Ikke tilfeldig utvalg fra en veldefinert populasjon</h3>
+<section id="nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="nivå-i-ikke-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="header-section-number">10.1.1</span> Nivå I: Ikke tilfeldig utvalg fra en veldefinert populasjon</h3>
 <p>Grunnlaget for statistisk tolkning (sannsynligheter, p-verdier og sånn) er at dataene er en tilfeldig realisering av en underliggende sann verdi. Typisk betyr dette bare at man har trukket et tilfeldig utvalg fra en populasjon. Da vil man få et godt mål på f.eks. gjennomsnittsverdi i populasjonen, men på grunn av tilfeldighet vil det være en feilmargin på denne målingen.</p>
 <p>Det avgjørende er altså at det finnes en veldefinert populasjon som det kan generaliseres til. Grunnen til å bruke begrepet <em>veldefinert</em> er at det må være rimelig spesifisert.</p>
 <p>Hvis dataene <em>ikke</em> er fra en veldefinert populasjon kalles dette noen ganger for <em>convenience sample</em>. Altså, at man gjorde et uttrekk av beleilighetsgrunner, men uten at det var en veldefinert populasjon.</p>
@@ -302,18 +307,18 @@ ul.task-list li input[type="checkbox"] {
 <p>Det kan være veldig nyttig å analysere slike data, og det kan bringe innsikt og kunnskaper. Men med slike data gir det ikke mye mening å regne på statistisk usikkerhet. Hvis man ikke skal si noe utover de dataene man har (ikke generalisere), så er det heller ikke denne typen usikkerhet i målingene.</p>
 <p>Slike ikke-tilfeldige utvalg kan betraktes nærmest som case-studier. En dataanalyse vil gi oss kunnskaper om de erfaringene som gjøre akkurat der. Størrelsen på datasettet kan gi oss mer pålitelig informasjon om dette caset, men hjelper ikke for å generalisere utover caset.</p>
 </section>
-<section id="nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="level3" data-number="9.1.2">
-<h3 data-number="9.1.2" class="anchored" data-anchor-id="nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="header-section-number">9.1.2</span> Nivå II: Tilfeldig utvalg fra en veldefinert populasjon</h3>
+<section id="nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="nivå-ii-tilfeldig-utvalg-fra-en-veldefinert-populasjon"><span class="header-section-number">10.1.2</span> Nivå II: Tilfeldig utvalg fra en veldefinert populasjon</h3>
 <p>Tilfeldig utvalg er akkurat det det høres ut som, og er den foretrukne metoden for alle surveyundersøkelser. Teorien bak er at utvalget vil gjenspeile populasjonen, og avvik fra “de sanne verdiene” skyldes tilfeldigheter. Disse tilfeldighetene er grunnlaget for statistisk tolkning ved at vi kan si noe om <em>samplingfordelingen</em> (se annet kapittel) og dermed har grunnlag for å regne på standardfeil og p-verdier osv. Med andre ord: generalisering til populasjonen.</p>
 <p>Så er det viktig å påpeke at forutsetningen her er at det må være et utvalg fra en <em>veldefinert</em> populasjon. Hvis vi ikke vet hvem resultatene generaliserer til, så blir det jo tullete, og vi er egentlig på nivå 1.</p>
 </section>
-<section id="nivå-iii-estimering-av-kausale-effekter" class="level3" data-number="9.1.3">
-<h3 data-number="9.1.3" class="anchored" data-anchor-id="nivå-iii-estimering-av-kausale-effekter"><span class="header-section-number">9.1.3</span> Nivå III: Estimering av kausale effekter</h3>
+<section id="nivå-iii-estimering-av-kausale-effekter" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="nivå-iii-estimering-av-kausale-effekter"><span class="header-section-number">10.1.3</span> Nivå III: Estimering av kausale effekter</h3>
 <p>Fra et teknisk perspektiv er det ingenting som skiller studier av eksperimenter fra observasjonsstudier. De samme regresjonsmodellene kan estimeres og de samme utregningene av usikkerhet. Hva som bestemmer tolknigen (og hvorvidt modellspesifikasjonen er rimelig etc) avhenger av forskningsdesignet. Kort sagt kreves det et eksperiment. Hvis man har en <em>treatment</em>-gruppe og en kontrollgruppe, så vil <span class="math inline">\(\beta\)</span> beskrive forskjellen mellom disse gruppene som i andre typer data. Det som gir <span class="math inline">\(\beta\)</span> en <em>kausal</em> tolkning er om dataene tilfredsstiller kravene til et eksperiment.</p>
 <p>Vi kan også regne inn kvasi-eksperimentelle studier eller naturlige eksperimenter her. Enten er disse studiene gode nok til å kvalifisere til å tolke som kausaleffekter - eller så er de det ikke, men da hører de hjemme på nivå II.</p>
 </section>
-<section id="mot-et-nivå-iv" class="level3" data-number="9.1.4">
-<h3 data-number="9.1.4" class="anchored" data-anchor-id="mot-et-nivå-iv"><span class="header-section-number">9.1.4</span> Mot et nivå IV?</h3>
+<section id="mot-et-nivå-iv" class="level3" data-number="10.1.4">
+<h3 data-number="10.1.4" class="anchored" data-anchor-id="mot-et-nivå-iv"><span class="header-section-number">10.1.4</span> Mot et nivå IV?</h3>
 <p>I Berk sin fremstilling av de tre nivåene får man en følelse av at den vitenskapelige verdien øker ved hvert nivå. Mange vil da også mene akkurat det. Men logisk sett er det litt mer tvetydig enn som så.</p>
 <p>Vi har snakket om to dimensjoner: kausalitet (ja/nei) og generalisering (ja/nei). Dette gir fire logisk mulige kombinasjoner.</p>
 <style type="text/css">
@@ -327,7 +332,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 <div id="tbl-" class="anchored">
 <table class="table">
-<caption>Table&nbsp;9.1: Nivåer av regresjonsanalyse og hvor vanlige de er</caption>
+<caption>Table&nbsp;10.1: Nivåer av regresjonsanalyse og hvor vanlige de er</caption>
 <colgroup>
 <col style="width: 25%">
 <col style="width: 38%">
@@ -359,12 +364,12 @@ ul.task-list li input[type="checkbox"] {
 <p>Eksperimenter omtales noen ganger - og i noen fagmiljøer - som <em>gullstandarden</em>. Men altså: ethvert eksperiment kan ikke være en gullstandard, ikke engang når formålet er å estimere kausaleffekter. Nivå IV er i så fall det vi ser etter, da nivå III har begrenset gyldighet. I tilsvarende ånd omtaler Berk eksperimenter som <em>bronsestandarden</em>, med den begrunnelse at det i praksis ikke er noe på palleplassene sølv og gull.</p>
 </section>
 </section>
-<section id="hva-er-poenget-her-egentlig" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="hva-er-poenget-her-egentlig"><span class="header-section-number">9.2</span> Hva er poenget her, egentlig?</h2>
+<section id="hva-er-poenget-her-egentlig" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="hva-er-poenget-her-egentlig"><span class="header-section-number">10.2</span> Hva er poenget her, egentlig?</h2>
 <p>Poenget er at tolkning av resultatene handler vel så mye om hvordan dataene har <em>blitt til</em> som hvordan de er <em>analysert</em>. Hvis du har data på nivå I, så finnes det ingen statistiske krumspring du kan gjøre som løfter det til et annet nivå. Det samme gjelder nivå II og nivå III. Du kan fremdeles gjøre svært så nyttige og informative analyser på det nivået du har data på. De statistiske analyseteknikkene er det ellers ikke så stor forskjell på.</p>
 </section>
-<section id="hva-med-sosiologisk-teori" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="hva-med-sosiologisk-teori"><span class="header-section-number">9.3</span> Hva med sosiologisk teori?</h2>
+<section id="hva-med-sosiologisk-teori" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="hva-med-sosiologisk-teori"><span class="header-section-number">10.3</span> Hva med sosiologisk teori?</h2>
 <p>Vi bruker kvantitative metoder til å beskrive statistiske sammenhenger. Men vi er jo ikke interessert i <em>variablene</em> som sådan. Poenget er å beskrive sosiale fenomener. Å si hva det betyr krever imidlertid en teoretisk tolkning. Å teste om et estimat er statistisk signifikant er ikke det samme som å teste en teori, selv om begge deler kan omtales med ordet “test”.</p>
 <ul>
 <li>Gitt et fenomen (beskrevet med statistikk), hvordan kan vi forklare det?</li>
@@ -517,13 +522,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./linearRegresjon.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regresjon: Sammenheng mellom variable</span></span>
+      <a href="./linearRegresjon_kat.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lineær regresjon med kategoriske variable</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./statistiskTolkning.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistisk tolkning</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Statistisk tolkning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

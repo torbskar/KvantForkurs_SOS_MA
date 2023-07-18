@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forkurs for kvantitativ metode - Appendix B — Lage dictionary-fil</title>
+<title>Forkurs for kvantitativ metode - 9&nbsp; Lineær regresjon med kategoriske variable</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./import_metadata.html" rel="prev">
+<link href="./grunnleggendeDesign.html" rel="next">
+<link href="./linearRegresjon.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -123,6 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -142,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Appendix B — Lage dictionary-fil</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lineær regresjon med kategoriske variable</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -235,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linearRegresjon_kat.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lineær regresjon med kategoriske variable</span></a>
+  <a href="./linearRegresjon_kat.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lineær regresjon med kategoriske variable</span></a>
   </div>
 </li>
       </ul>
@@ -310,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./createDictionary.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></a>
+  <a href="./createDictionary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></a>
   </div>
 </li>
       </ul>
@@ -324,10 +326,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lese-inn-html-dokumentasjonen" id="toc-lese-inn-html-dokumentasjonen" class="nav-link active" data-scroll-target="#lese-inn-html-dokumentasjonen"><span class="toc-section-number">B.1</span>  Lese inn html-dokumentasjonen</a>
-  <ul class="collapse">
-  <li><a href="#legge-det-hele-i-en-funksjon" id="toc-legge-det-hele-i-en-funksjon" class="nav-link" data-scroll-target="#legge-det-hele-i-en-funksjon"><span class="toc-section-number">B.1.1</span>  Legge det hele i en funksjon</a></li>
-  </ul></li>
+  <li><a href="#dummy-variable" id="toc-dummy-variable" class="nav-link active" data-scroll-target="#dummy-variable"><span class="toc-section-number">9.1</span>  Dummy-variable</a></li>
+  <li><a href="#linjeær-sannsynlighetsmodell" id="toc-linjeær-sannsynlighetsmodell" class="nav-link" data-scroll-target="#linjeær-sannsynlighetsmodell"><span class="toc-section-number">9.2</span>  Linjeær sannsynlighetsmodell</a></li>
   </ul>
 </nav>
     </div>
@@ -336,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Appendix B — Lage dictionary-fil</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lineær regresjon med kategoriske variable</span></h1>
 </div>
 
 
@@ -351,109 +351,142 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Dokumentasjonen som følger med NorLAG og andre datasett fra Sikt er en html-fil (dvs. web-side) med en oversikt over alle variable og hvordan de er kodet. Dette er fint for manuelt oppslag, men er ikke ideelt til bruk for maskinell behandling.</p>
-<p>Det vi ideelt skulle hatt er et samlet datasett der kodeskjemaet er knyttet til variabelnavnene. Dette kalles noen ganger en “dictionary” fil. All informasjonen vi trenger for å lage en slik ligger i html-filen man får sammen med datasettet fra Sikt, bare på en knotete form. Det skal vi fikse.</p>
-<p>Nedenfor skal vi vise hvordan vi gjør følgende:</p>
-<ul>
-<li>Leser inn en fullstendig html-fil, inkludert alle html-kodene</li>
-<li>Identifiserer den delen av html-filen som inneholder kodeskjema og begrenser filen til disse</li>
-<li>Plukker ut alle tabeller og gjør dem om til data.frame-struktur i R</li>
-<li>Rensker opp i filen til å bare beholde de relevante radene</li>
-</ul>
-<p>Dette er egentlig en svært enkel introduksjon til webscraping for et spesfikt formål. Vi skal bruke pakken <code>rvest</code> som er laget nettopp for webscraping.</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "LC_COLLATE=no_NB.utf8;LC_CTYPE=no_NB.utf8;LC_MONETARY=no_NB.utf8;LC_NUMERIC=C;LC_TIME=no_NB.utf8"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)       <span class="co"># scrape html-sider</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># generell databehandling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="lese-inn-html-dokumentasjonen" class="level2" data-number="B.1">
-<h2 data-number="B.1" class="anchored" data-anchor-id="lese-inn-html-dokumentasjonen"><span class="header-section-number">B.1</span> Lese inn html-dokumentasjonen</h2>
-<p>Første sted er å lese inn html-filen. Funksjonen <code>read_html()</code> gjør dette. For å skjønne litt mer av hvordan dette ser ut kan du åpne den opprinnelige html-filen i ren tekst, f.eks. med bruk av Notepad. Det er dette som leses inn. Jeg legger det i et nytt objekt som jeg har kalt <code>cb</code> (forkortelse for codebook).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(XML)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read html file</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="st">"C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/Kodebok.html"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>cb <span class="ot">&lt;-</span> <span class="fu">read_html</span>(u)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>For NorLAG er dokumentasjonsdokumentet inndelt i flere deler, og det er bare den siste delen som inneholder kodeskjemaene. Det er denne siste delen vi trenger, så første utfordring er å plukke ut denne delen.</p>
-<p>En html-fil er strukturert innenfor “noder” som har en start og en slutt. Et avsnitt starter med en kode <code>&lt;a&gt;</code> og avsluttes med <code>&lt;/a&gt;</code>. Tilsvarende koder finnes for tabeller og andre elementer. Disse delene har er oftest gitt et navn som man kan identififiseres og brukes til lage lenker til spesifikke deler av siden (jf. innholdsfortegnelsen). Vi bruker denne til å filtrere filen.</p>
-<p>I akkurat denne filen trenger vi informasjonen som ligger etter overskriften “Variables Description”. For å finne navnet på dette avsnittet kan man undersøke lenken i innholdsfortegnelsen der det fremkommer som <code>#variables</code>. Eller man kan åpne html-filen i et tekstdokument og søke opp tittelen, så finner man koden <code>name='variables</code> innenfor det avsnittet.</p>
-<p>Vi bruker <code>html_nodes</code> til å trekke ut bare dette avsnittet som følger.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the specific heading</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> cb <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"a[name='variables']"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>I denne dokumentasjonen er hver variabel lagret i en egen tabell. I html-kode angis begynnelsen av en tabell med <code>&lt;table&gt;</code> og denne brukes til å trekke ut bare tabellene.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tables <span class="ot">&lt;-</span> variables <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">#html_node(xpath = "//a[@name='variables']") %&gt;% </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">"./following::table"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Så kan vi bruke funksjonen <code>html_table</code> til å trekke ut hver enkelt tabell i en struktur som er lettere å jobbe med, nemlig en “data.frame”, altså en rektangulær struktur med rader og kolonner slik datasett vanligvis ser ut. Hver tabell blir et eget data.frame-objekt, og når man legger dette i et nytt objekt blir det av typen “list”. En “list” er en samling objekter som har hver sin plass i det samme objektet. (Du kan tenke på det som en eske med flere mindre ekster oppi). Vi kommer tilbake til hvordan de slås sammen.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> <span class="fu">html_table</span>(tables)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="legge-det-hele-i-en-funksjon" class="level3" data-number="B.1.1">
-<h3 data-number="B.1.1" class="anchored" data-anchor-id="legge-det-hele-i-en-funksjon"><span class="header-section-number">B.1.1</span> Legge det hele i en funksjon</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the heading exists</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(variables) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Find the tables after the heading</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  tables <span class="ot">&lt;-</span> variables <span class="sc">%&gt;%</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_node</span>(<span class="at">xpath =</span> <span class="st">"//a[@name='variables']"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="at">xpath =</span> <span class="st">"./following::table"</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the table data</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  table_data <span class="ot">&lt;-</span> <span class="fu">html_table</span>(tables)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"The specified heading was not found."</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>tbslist <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(table_data)){ </span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="st">"X2"</span> <span class="sc">%in%</span> <span class="fu">names</span>(table_data[[i]]) <span class="sc">&amp;</span> </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>     <span class="st">"X3"</span> <span class="sc">%in%</span> <span class="fu">names</span>(table_data[[i]]) <span class="sc">&amp;</span> </span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>     <span class="sc">!</span>(<span class="st">"X4"</span> <span class="sc">%in%</span> <span class="fu">names</span>(table_data[[i]])) ){</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    tbslist[[i]] <span class="ot">&lt;-</span> table_data[[i]] <span class="sc">%&gt;%</span> </span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">col_nm =</span> <span class="fu">strsplit</span>(<span class="fu">as.character</span>(.[<span class="dv">1</span>,<span class="dv">1</span>]), <span class="at">split =</span> <span class="st">":"</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>],</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">spm =</span> <span class="fu">strsplit</span>(<span class="fu">as.character</span>(.[<span class="dv">1</span>,<span class="dv">1</span>]), <span class="at">split =</span> <span class="st">":"</span>)[[<span class="dv">1</span>]][<span class="dv">2</span>]) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rename</span>( <span class="at">value =</span> X2, </span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> X3) <span class="sc">%&gt;%</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>( <span class="fu">str_detect</span>(X1, <span class="st">"Values and categories"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>( <span class="sc">!</span><span class="fu">is.na</span>(value)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">-</span>X1)</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>{</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(i<span class="sc">==</span><span class="dv">1</span>){</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>      teller <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    teller <span class="ot">&lt;-</span> teller <span class="sc">+</span> <span class="dv">1</span> </span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="fu">length</span>(table_data)){</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Antall variable som ikke har omkodinger: "</span>, teller)) </span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Antall variable som ikke har omkodinger:  1"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dat_dict <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(tbslist) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(col_nm, value, label, spm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 
 </div>
-
-
+<p>I samfunnsvitenskapen har vi ganske ofte kategoriske variable både som forklaringsvariable og utfallsvariable, eller en kombinasjon. I en regresjon vil vi behandle kategoriske variable dem som om de er tall på kontinuerlig akse, men der det typisk bare finnes to verdier: 0 og 1. Dette kalles en dummyvariabel eller en indikatorvariabel.</p>
+<p>Når man bruker kategoriske variable i en lineær regresjon er det derfor ikke egentlig noe nytt. Det som står i boken om kontinuerlige variable gjelder også for kategoriske variable (i hvert fall for alle praktiske formål som dekkes for dette kurset). Dette dokumentet forklarer først hva en dummy-variabel er for noe, hvordan det brukes som forklaringsvariable og til sist hvordan det brukes som utfallsvariabel.</p>
+<section id="dummy-variable" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="dummy-variable"><span class="header-section-number">9.1</span> Dummy-variable</h2>
+<p>Hvis det er to verdier vil vi typisk gi den ene kategorien verdien 0 og den andre kategorien 1. Dette kalles en «dummy variabel» eller en «indikator variabel». For eksempel vil et datasett ofte ha en variabel for kjønn med verdiene «Mann» og «Kvinne». Da kan vi la mann få verdien 0 og kvinne verdien 1. Ofte vil man da gi variabelen et navn som indikerer hvilken verdi som er 1. Så i dette eksempelet er det hensiktsmessig å gi den nye variabelen navnet «Kvinne». I dette eksempelet vil man også kunne si at variabelen er en «dummy for kvinne» (altså: den kategorien som får verdien 1).</p>
+<p>Det spiller ingen rolle hvilken kategori som får verdien 0 og 1. I dette eksempelet kunne man like gjerne gjort det motsatt, og latt det være en «dummy for mann». Da ville det være naturlig å kalle variabelen «mann» i stedet for «kvinne». Som vi skal se nedenfor vil det bare påvirke fortegnet når vi bruker variabelen i en regresjonsanalyse.</p>
+<p>I datasettet abu89 er variabelen “female” en slik variabel som har verdiene 0 eller 1, og der 0 betyr “mann” og 1 betyr “kvinne”.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Kjønn</th>
+<th>Female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mann</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Kvinne</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Kvinne</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Mann</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Kvinne</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Kvinne</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Kvinne</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Mann</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Noen ganger har vi forklaringsvariable med flere enn to kategorier. Det kan vi løse på en tilsvarende måte ved å lage flere dummy-variable. Et eksempel kan være sosial klasse. I datasettet abu89 er det fem kategorier.</p>
+<p>En dummy-variabel har bare to kategorier: 0 og 1, men vi kan lage flere dummy-variable. Vi kan lager en ny variabel «klasse II» som har verdien 1 hvis personen tilhører denne klassen og 0 ellers. Altså en dummy. Så kan vi lage en ny variabel «Klasse III» som har verdien 1 hvis personen tilhører denne klassen og 0 ellers. Slik kan man lage en dummy-variabel for hver av kategoriene. Da har vi altså flere dummy-variable som til sammen fanger opp informasjonen i den opprinnelige variabelen.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Utdanning</th>
+<th>Klasse II</th>
+<th>Klasse III</th>
+<th>Klasse V-VI</th>
+<th>Klasse VII</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Klasse I</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Klasse II</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Klasse III</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Klasse V-VI</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Klasse VII</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Merk at her er det ingen dummy for “Klasse I”. Denne gruppen brukes som referansekategori slik at estimatene for <em>de andre</em> dummyene blir tolkbare som forskjellen til denne referansekategorien. Mer om det siden, men man kan velge å bruke en annen referansekategori hvis man vil.</p>
+<p>La oss først se på et plot. Her er det brukt en jitter-plot. Den røde linjen viser endring i gjennomsnitt mellom de kategoriene. En regresjonsanalyse vil gi slike estimater på differanser, men det er enklest hvis alle endringene er i forhold til samme referansekategori.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lmest <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> klasse89, <span class="at">data =</span> abu89)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>abu89x <span class="ot">&lt;-</span> abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(klasse89), <span class="sc">!</span><span class="fu">is.na</span>(time89)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">smooth =</span> <span class="fu">predict</span>(lmest, <span class="at">newdata =</span> .)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(klasse89) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gr_snitt =</span> <span class="fu">mean</span>(time89))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( abu89x, <span class="fu">aes</span>(<span class="at">x =</span>klasse89, <span class="at">y =</span> time89))<span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">width =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>gr_snitt), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_hline(yintercept = mean(abu89x$time89, na.rm = TRUE))+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(klasse89), <span class="at">y =</span> smooth), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="linearRegresjon_kat_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Den generelle regresjonsligningen skrives som y=a+bx, der <span class="math inline">\(x\)</span> er forklaringsvariabelen. Regresjonskoeffisienten, <span class="math inline">\(b\)</span>, tolkes som hvor forskjellen i gjennomsnittet på utfallsvariabelen, <span class="math inline">\(y\)</span>, mellom de som er en enhets forskjell på <span class="math inline">\(x\)</span>-variabelen.</p>
 </section>
+<section id="linjeær-sannsynlighetsmodell" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="linjeær-sannsynlighetsmodell"><span class="header-section-number">9.2</span> Linjeær sannsynlighetsmodell</h2>
+<p>I samfunnsvitenskapen er utfallsvariabelen ganske ofte kategorisk. I en regresjon vil vi behandle kategoriske variable dem som om de er tall på kontinuerlig akse, også der det typisk bare finnes to verdier: 0 og 1. Dette kalles en dummyvariabel eller en indikatorvariabel.</p>
+<p>Når man bruker kategoriske variable i en lineær regresjon er det derfor ikke egentlig noe nytt. Det som står i boken om kontinuerlige variable gjelder også for kategoriske variable (i hvert fall for alle praktiske formål som dekkes for dette kurset).</p>
+<p>Dummy-variable Hvis det er to verdier vil vi typisk gi den ene kategorien verdien 0 og den andre kategorien 1. Dette kalles en «dummy variabel» eller en «indikator variabel». For eksempel vil et datasett ofte ha en variabel for kjønn med verdiene «Mann» og «Kvinne». Da kan vi la mann få verdien 0 og kvinne verdien 1. Ofte vil man da gi variabelen et navn som indikerer hvilken verdi som er 1. Så i dette eksempelet er det hensiktsmessig å gi den nye variabelen navnet «Kvinne». I dette eksempelet vil man også kunne si at variabelen er en «dummy for kvinne» (altså: den kategorien som får verdien 1). Det spiller ingen rolle hvilken kategori som får verdien 0 og 1. I dette eksempelet kunne man like gjerne gjort det motsatt, og latt det være en «dummy for mann». Da ville det være naturlig å kalle variabelen «mann» i stedet for «kvinne». Som vi skal se nedenfor vil det bare påvirke fortegnet når vi bruker variabelen i en regresjonsanalyse.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -592,11 +625,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./import_metadata.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></span>
+      <a href="./linearRegresjon.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regresjon: Sammenheng mellom variable</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./grunnleggendeDesign.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Design og tolkning</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

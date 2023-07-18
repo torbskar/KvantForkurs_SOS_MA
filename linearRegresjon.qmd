@@ -1,51 +1,142 @@
-# Regresjon: Sammenheng mellom variable 
+# Regresjon: Sammenheng mellom variable
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+library(tidyverse)
+library(gtsummary)
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| error: false
+#| message: false
+library(haven)
+abu89 <- read_stata("data/abu89.dta") %>% 
+  mutate(across(where(is.labelled), ~as_factor(.)),
+         across(where(is.factor), ~fct_drop(.)))
 
 
+```
 
-## Scatterplot 
+Vi skal her se på helt grunnleggende lineær regresjon med en og to forklaringsvariable.
+
+## Scatterplot
+
+Bivariat regresjon beskriver sammenhengen mellom to variable. En naturlig start er å se på et scatterplot. Her er en figur som viser hvordan timelønn varierer med alder. I det nedenforstående er det brukt jitter og gjennomsiktig farge for å håndtere overplotting.
+
+I tillegg er det tegnet inn en linje som illustrerer *trenden i gjennomsnittlig lønn* med alder. Denne linjen skrår svakt oppover, som altså betyr at gjennomsnittlig lønn øker noe med alder. Vi ser med det blotte øyet at en rett linje ikke beskriver denne sammenhengen perfekt. Først og fremst er det en stor variasjon rundt denne linjen, så det er mye annet som påvirker lønna enn alder. Det er også verd å legge merke til at i de yngste aldersgruppene er lønna en god del lavere - og kanskje litt lavere i eldste aldersgrupper også. Så en rett linje er kanskje ikke optimalt i utgangspunktet. Fordelen med en rett linje er at vi kan si noe slikt som at "gjennosmsnittslønna øker med x antall kroner for hvert år eldre man blir". Hvis linja er kurvlineær blir det litt mer komplisert. Så et første poeng er at en slik linje er en *forenkling*, og det er en tilsiktet forenkling.
+
+```{r}
+#| message: false
+#| warning: false
+#| error: false
+
+ggplot(abu89, aes(x =age, y = time89))+
+  geom_jitter(alpha = .2)+
+  geom_smooth(method = "lm", se = FALSE)
+
+```
+
+Det er en viss tendens til at lønnen øker med alder, men det er ikke helt lett å si hvor mye. Poenget med lineær regresjon er å beskrive en gjennomsnittlig trend.
+
+```{r}
+#| message: false
+#| warning: false
+#| error: false
+
+ggplot(abu89, aes(x =age, y = time89))+
+  geom_jitter(alpha = .2)+
+  geom_smooth(method = "lm", se = FALSE)
+
+```
+
+Denne trendlinja er hva vi vanligvis kaller regresjonslinje.
+
+## Regresjonslinja
+
+Regresjonslinja kan beskrives med et *stigningstall*, som sier hvor bratt linjen er. Substansielt sett betyr det hvor mye utfallsvariabelen (y-aksen) endres med økning i forklaringsvariabelen (x-aksen). I tillegg trenger vi også vite hvor høyt/lavt linjen ligger. [^linearregresjon-1]. Til det bruker vi startpunktet for linjen, der hvor $x$ har verdien 0. Dette må regnes ut, og det er akkurat dette estimering av lineær regresjon gir oss.
+
+[^linearregresjon-1]: Du kan jo tenke deg flere parallelle linjer i plottet ovenfor med samme stigningstall
+
+Utregningen av regresjonslinja går vi ikke inn på her, men intuitivt sett ønsker vi jo *den beste linja* og ikke en hvilken som helst omtrentlig linje. Datapunktene (de svarte punktene i grafen) er spredt rundt linja, og avstanden mellom linje og punkt kalles *residualer*. Summen av disse residualene er grunnlaget for mål på hvor godt regresjonslinja beskriver de faktiske dataene. Den beste linja er definert som den som minimerer residualene. Det er dette som kalles "minste kvadraters metode".
+
+I R estimeres regresjonsmodeller med funksjonen `lm`. Første argument er en formel på formen `utfallsvariabel ~ forklaringsvariabel`. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med `data =`. [^linearregresjon-2].
+
+[^linearregresjon-2]: Grunnen til det siste er at R kan ha flere datasett oppe samtidig, så R vet ikke nødvendigvis hvilket datasett du tenker på
+
+Legg alltid resultatene i et eget objekt med et navnt som er rimelig enkelt å forstå hva er. I følgende kode legges resultatet i en nytt objekt `lm_est1`. Deretter bruker kan man hente ut de delene av resultatet vi er interessert i. I aller første omgang er bare interessert i regresjonslinjas konstantledd (startpunktet) og stigningstall. Disse kaller vi vanligvis *regresjonskoeffisienter*. Det kan vi få ut ved å bruke funksjonen `coef`.
+
+```{r}
+#| message: false
+#| warning: false
+library(equatiomatic)
+
+lm_est1 <- lm(time89 ~ age, data = abu89)
+summary(lm_est1)
+coef(lm_est1)
+```
 
 
+Regresjonslingningen kan skrives på formel der $\alpha$ er konstantleddet og $\beta$ er stigningstallet slik: 
 
-## Regresjonslinja 
+```{r}
+extract_eq(lm_est1, use_coefs = FALSE)
+```
 
+Når vi setter inn de estimerte koeffisientene inn i ligningen får vi følgende: 
+```{r}
+extract_eq(lm_est1, use_coefs = TRUE)
+```
 
+Tolkningen her er at gjennomsnittlig forskjell i timelønn mellom grupper der aldersforskjellen er ett år er 0.48 kroner i favør av den eldre gruppen.[^linearregresjon-3] Merk enheten her: stigningstallet tolkes på den skalaen utfallsvariabelen er på, i dette tilfellet kroner. Det er også uttrykt endring ved at forklaringsvariabelen endres med nøyaktig 1. 
 
-## Flere variable 
-
-
-
-## Eksport av resultater til fil 
-Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på "klipp og lim" eller skjermbilde etc er uaktuelt og unngå det for nærmest enhver pris.^[Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.] Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for dere, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt.
-
-Her presenteres noen pakker som eksporterer til de viktigste formatene som er: 
-
-* MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.  
-* rtf - rikt tekstformat. Er et enklere format som fungerer på tvers av de fleste programmer. Kan brukes i Word også. 
-* html - for websider
-* latex - for mer tekniske dokumenter, særlig hvis du har mye formler og stæsj
-* Markdown - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater^[F.eks. dette dokumentet er skrevet i Quarto] Det som fungerer med Markdown fungerer også med Quarto for samme formål. 
+[^linearregresjon-3]: Noen ganger sier man at gjennomsnittslønna øker med 0.48 kroner for hvert år eldre man blir. Men det er ikke helt riktig, for dataene beskriver jo ikke individuell endringer over tid! Men hvis du synes det er lettere å tenke på det på den måten er det ok - men prøv å husk at det også er litt feil.
 
 
+Vi sier gjerne at regresjonslinjen er *estimert*, og det innebærer at det er usikkerhet i estimatene. Vi kommer tilbake til dette, men en vanligere output fra regresjonsmodeller er å bruker `summary` som følger: 
 
+```{r}
+summary(lm_est1)
+```
+
+Da får vi også mye informasjon knyttet til usikkerheten på estimatene, primært standardfeil, *p*-verdier og konfidensintervaller. Du finner koeffisientene under kolonnen "Estimate". 
+
+
+## Flere variable
+
+## Eksport av resultater til fil
+
+Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på "klipp og lim" eller skjermbilde etc er uaktuelt og unngå det for nærmest enhver pris.[^linearregresjon-4] Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for dere, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt.
+
+[^linearregresjon-4]: Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.
+
+Her presenteres noen pakker som eksporterer til de viktigste formatene som er:
+
+-   MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.\
+-   rtf - rikt tekstformat. Er et enklere format som fungerer på tvers av de fleste programmer. Kan brukes i Word også.
+-   html - for websider
+-   latex - for mer tekniske dokumenter, særlig hvis du har mye formler og stæsj
+-   Markdown - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater[^linearregresjon-5] Det som fungerer med Markdown fungerer også med Quarto for samme formål.
+
+[^linearregresjon-5]: F.eks. dette dokumentet er skrevet i Quarto
 
 ### Alt 1: Bruke `modelsummary()`
-Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown 
 
-Fordel: Kan lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket `gt`
-Ulempe: 
+Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown
+
+Fordel: Kan lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket `gt` Ulempe:
 
 ### Alt 2: Bruke `stargazer()`
-Eksporterer til bl.a. følgende formater: rtf, html, latex, markdown 
 
-Fordel: Er en stand-alone pakke men gir enkelt veldig fine tabeller som antakeligvis er det du trenger
-Ulempe: Eksport til Word er ikke den beste, men god nok. 
+Eksporterer til bl.a. følgende formater: rtf, html, latex, markdown
 
+Fordel: Er en stand-alone pakke men gir enkelt veldig fine tabeller som antakeligvis er det du trenger Ulempe: Eksport til Word er ikke den beste, men god nok.
 
 ### Alt 3: Bruke `gtsummary()`
-Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown 
 
-Fordel: Kan lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket `gt`. Bruker samme rammeverk som for deskriptive tabeller med `tbl_summary`. 
-Ulempe: Litt mer mikk-makk enn `modelsummary` og `stargazer` 
+Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown
 
-
-
+Fordel: Kan lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket `gt`. Bruker samme rammeverk som for deskriptive tabeller med `tbl_summary`. Ulempe: Litt mer mikk-makk enn `modelsummary` og `stargazer`

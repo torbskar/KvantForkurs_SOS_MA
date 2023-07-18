@@ -27,6 +27,7 @@ book:
       chapters: 
         - kontrollerefor.qmd
         - linearRegresjon.qmd
+        - linearRegresjon_kat.qmd
     - part: "Del 4: statistisk tolkning"
       chapters: 
         - grunnleggendeDesign.qmd
