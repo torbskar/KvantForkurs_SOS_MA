@@ -79,61 +79,223 @@ summary(lm_est1)
 coef(lm_est1)
 ```
 
-
-Regresjonslingningen kan skrives på formel der $\alpha$ er konstantleddet og $\beta$ er stigningstallet slik: 
+Regresjonslingningen kan skrives på formel der $\alpha$ er konstantleddet og $\beta$ er stigningstallet slik:
 
 ```{r}
 extract_eq(lm_est1, use_coefs = FALSE)
 ```
 
-Når vi setter inn de estimerte koeffisientene inn i ligningen får vi følgende: 
+Når vi setter inn de estimerte koeffisientene inn i ligningen får vi følgende:
+
 ```{r}
 extract_eq(lm_est1, use_coefs = TRUE)
 ```
 
-Tolkningen her er at gjennomsnittlig forskjell i timelønn mellom grupper der aldersforskjellen er ett år er 0.48 kroner i favør av den eldre gruppen.[^linearregresjon-3] Merk enheten her: stigningstallet tolkes på den skalaen utfallsvariabelen er på, i dette tilfellet kroner. Det er også uttrykt endring ved at forklaringsvariabelen endres med nøyaktig 1. 
+Tolkningen her er at gjennomsnittlig forskjell i timelønn mellom grupper der aldersforskjellen er ett år er 0.48 kroner i favør av den eldre gruppen.[^linearregresjon-3] Merk enheten her: stigningstallet tolkes på den skalaen utfallsvariabelen er på, i dette tilfellet kroner. Det er også uttrykt endring ved at forklaringsvariabelen endres med nøyaktig 1.
 
 [^linearregresjon-3]: Noen ganger sier man at gjennomsnittslønna øker med 0.48 kroner for hvert år eldre man blir. Men det er ikke helt riktig, for dataene beskriver jo ikke individuell endringer over tid! Men hvis du synes det er lettere å tenke på det på den måten er det ok - men prøv å husk at det også er litt feil.
 
-
-Vi sier gjerne at regresjonslinjen er *estimert*, og det innebærer at det er usikkerhet i estimatene. Vi kommer tilbake til dette, men en vanligere output fra regresjonsmodeller er å bruker `summary` som følger: 
+Vi sier gjerne at regresjonslinjen er *estimert*, og det innebærer at det er usikkerhet i estimatene. Vi kommer tilbake til dette, men en vanligere output fra regresjonsmodeller er å bruker `summary` som følger:
 
 ```{r}
 summary(lm_est1)
 ```
 
-Da får vi også mye informasjon knyttet til usikkerheten på estimatene, primært standardfeil, *p*-verdier og konfidensintervaller. Du finner koeffisientene under kolonnen "Estimate". 
-
-
 ## Flere variable
 
-## Eksport av resultater til fil
+Det er ikke så ofte vi bruker regresjon med bare en forklaringsvariabel, såklat "enkel lineær regresjon".[^linearregresjon-4] Langt mer vanlig er å bruke flere variable samtidig i det vi kaller "multippel regresjon".[^linearregresjon-5] I multippel regresjon kan man altså beskrive mer kompliserte mønstre i dataene.
 
-Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på "klipp og lim" eller skjermbilde etc er uaktuelt og unngå det for nærmest enhver pris.[^linearregresjon-4] Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for dere, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt.
+[^linearregresjon-4]: Det er selvsagt ingenting *enkelt* med slike modeller utover at det finnes mer kompliserte varianter.
 
-[^linearregresjon-4]: Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.
+[^linearregresjon-5]: Noen kaller dette også for *multivariat* regresjon, men det er tvetydig da det også kan bety modeller med flere utfallsvariable, som er noe ganske annet.
+
+Vi fortsetter med eksempelet om lønn og alder, men utvider med en dimensjon til, nemlig kjønn. La oss først se på kjønnsforskjellene i gjennomsnittlig timelønn.
+
+```{r}
+abu89 <- abu89 %>%
+  mutate(sex = factor(ifelse(female == 1, "Female", "Male"), levels = c("Male", "Female"))) %>% 
+  filter(!is.na(time89))
+
+abu89 %>% 
+  select(sex, time89) %>% 
+  tbl_summary(by = sex) 
+```
+
+Vi ser altså at menn hadde i gjennomsnitt høyere timelønn enn kvinner, nærmere bestemt 21 kroner mer. Dette kan vi også undersøke med lineær regresjon som følger:
+
+```{r}
+lm_est2 <- lm(time89 ~ sex , data = abu89)
+
+coef(lm_est2)
+```
+
+Det er altså slik at koeffisienten, $\beta$, gir den samme differansen som en enkel sammenligning av to gjennomsnitt.
+
+Vi har allerede sett på alder og lønn, så vi kan utvide dette til å inkludere kjønn samtidig i et scatterplot.
+
+Grafisk er det da greit å bruke farger og slik vise for menn og kvinner for seg. I `ggplot` spesifiseres da `group = sex` og at fargene skal settes etter sammen grupperingen `col = sex` slik:
+
+```{r}
+ggplot(abu89, aes(x = age, y = time89, group = sex, col = sex)) +
+  geom_jitter(alpha = .4)
+
+```
+
+```{r}
+lm_est3 <- lm(time89 ~ sex + age, data = abu89)
+
+summary(lm_est3)
+```
+
+## Pene tabeller og eksport til fil
+
+Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på "klipp og lim" eller skjermbilde etc er uaktuelt og må unngås for nærmest enhver pris.[^linearregresjon-6] Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for dere, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt.
+
+[^linearregresjon-6]: Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.
 
 Her presenteres noen pakker som eksporterer til de viktigste formatene som er:
 
--   MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.\
+-   MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.
 -   rtf - rikt tekstformat. Er et enklere format som fungerer på tvers av de fleste programmer. Kan brukes i Word også.
 -   html - for websider
 -   latex - for mer tekniske dokumenter, særlig hvis du har mye formler og stæsj
--   Markdown - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater[^linearregresjon-5] Det som fungerer med Markdown fungerer også med Quarto for samme formål.
+-   Markdown/Quarto - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater[^linearregresjon-7] Det som fungerer med Markdown fungerer også med Quarto for samme formål.
 
-[^linearregresjon-5]: F.eks. dette dokumentet er skrevet i Quarto
+[^linearregresjon-7]: F.eks. dette dokumentet er skrevet i Quarto
+
 
 ### Alt 1: Bruke `modelsummary()`
 
 Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown
 
-Fordel: Kan lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket `gt` Ulempe:
+Fordel: Gir pene og oversiktlige tabeller med enkel kode, og relativt enkelt å  modifisere videre. Eksporterer direkte til alle viktigste formater. 
+Kan også lett integreres med andre eksterne verktøy, først og fremst "grammar of tables" i pakket {gt} 
+Ulempe: 
 
-### Alt 2: Bruke `stargazer()`
+
+Her er kode for en enkel tabell med to regresjonsmodeller som vist ovenfor. Merk at objektene med regresjonsresultatene må legges inni funksjonen `list()`. 
+```{r}
+library(modelsummary)
+modelsummary(list(lm_est2, lm_est3))
+
+```
+
+Denne tabellen inneholder mer enn du er interessert i. Nedre del av tabellen inneholder "goodness of fit" statistikker, altså mål på hvordan modellen passer til dataene. Det finnes mange slike, men ingen grunn til å gå seg vill i disse her. De kan fjernes med argumentet `gof_omit = ` og så angis statistikkene med de navnene du ser i tabellen. Det skrives på en spesiell måte: som en tekststreng angitt med anførselstegn rundt, og `|` mellom hver. I koden nedenfor beholdes kun antall observasjoner, $r^2$ og $F$.^[Øvrige statistikker har selvsagt sitt bruksområde. De nevnte holder for de fleste formål.] 
+
+Vi gjør et par andre justeringer samtidig for å demonstrere noe funksjonalitet. I stedet for å oppgi estimatet og standardfeil på forskjellig linje kan vi spesifisere å ha det på samme linje med argumentet `estimate = `. Merk at den statistikken du vil rapportere settes i parentes {...} og mellomrom og parentes er ellers som det står. Man har også andre valg, derav det vanligste i bruk er å angi *p*-verdier eller *stjerner* for å vise disse på en forenklet måte. Det angis ved `{p.value}` eller `{stars}` på tilsvarende måte.  
+
+I stedet for standardfeil på egen linje er det her angitt konfidensintervall på neste linje. For konfidensintervall vil det som forvalg være 95%, men vi kan angi f.eks. 99% konfidensintervall i stedet ved `conf_level = `. 
+Hvis man ikke vil ha noe på neste linje kan man angi `statistic = NULL` i stedet. Man kan også velge å sette inn `p.value` eller `stars` på denne linjen.
+
+Merk at utfallsvariabelen i modellene er timelønn i kroner. I forrige tabell ble estimatene gitt med tre desimaler. Det er i overkant mange desimaler. En desimal er mer passende og nedenfor endres dette med `fmt = `. 
+
+```{r}
+modelsummary(list(lm_est2, lm_est3), 
+             fmt = 1,
+             estimate = "{estimate} ({std.error})",
+             statistic = 'conf.int', 
+             conf_level = .99, 
+             gof_omit = 'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE')
+
+```
+
+
+To siste ting å ta med her er å endre navn på variablene til noe mer presentabelt og eksportere til Word. Med argumentet `coef_rename = ` angis variabelen slik den ser ut i output og spesifiserer hva du vil skal stå. Koden nedenfor viser eksempel. 
+
+For å eksportere til Word settes `output = ` med filbane og filnavn, og der filhalen *.docx* angir Word format. Du kan eksportere til annet format ved å angi annen filhale f.eks. .rtf eller .html. 
+
+```{r}
+#|echo: false
+modelsummary(list(lm_est2, lm_est3), 
+             fmt = 1,
+             estimate = "{estimate} ({std.error})",
+             statistic = 'conf.int', 
+             conf_level = .99, 
+             gof_omit = 'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE', 
+             coef_rename = c("sexFemale" = "Kvinne", 
+                                   "age" = "Alder", 
+                                  "(Intercept)" = "Konstant")) 
+```
+
+
+```{r}
+#| eval: false
+
+modelsummary(list(lm_est2, lm_est3), 
+             fmt = 1,
+             estimate = "{estimate} ({std.error})",
+             statistic = 'conf.int', 
+             conf_level = .99, 
+             gof_omit = 'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE', 
+             coef_rename = c("sexFemale" = "Kvinne", 
+                                   "age" = "Alder", 
+                                  "(Intercept)" = "Konstant"), 
+             output = "output/reg_table.docx")
+
+```
+
+Merk at Word vil vise tabellen med de fonter etc som er forvalgt for Word. Dette kan du endre i Word etterpå. Det er en rekke funksjoner i Word for å formattere tabeller som du kan bruke. 
+
+Pakken {modelsummary} har også en rekke andre funksjoner for å redigere tabeller som du kan utforske ved behov. For avanserte brukere kan man også gjøre om tabellen til et gt-objekt og redigere videre med pakken {gt} eller tilsvarende med pakken {flextable}. Det er altså tilnærmet uendelige muligheter for avanserte tabeller. Dette går imidlertid langt utenfor hva de fleste av dere vil trenge. {modelsummary} har [egen hjemmeside](https://vincentarelbundock.github.io/modelsummary/index.html) med mer detaljer og instruksjoner.
+
+
+
+### Alt 2: Bruke {stargazer}
+Mange R-brukere foretrekker pakken {stargazer}. Dette er en noe eldre funksjon og er derfor godt etablert. 
 
 Eksporterer til bl.a. følgende formater: rtf, html, latex, markdown
 
 Fordel: Er en stand-alone pakke men gir enkelt veldig fine tabeller som antakeligvis er det du trenger Ulempe: Eksport til Word er ikke den beste, men god nok.
+
+Stargazer lager tabeller i kun tre formater: latex, html, og ren tekst. Vi velger derfor `type = "text"` for at det skal se ok ut her. 
+
+```{r}
+#| warning: false
+#| message: false
+library(stargazer)
+stargazer(lm_est2, lm_est3, type = "text")
+```
+
+Vi kan modifisere tabellen tilsvarende som vi gjorde med {modelsummary}. Forklaringer av de enkelte argumenter finnes i [manualen for stargazer](https://cran.r-project.org/web/packages/stargazer/stargazer.pdf). 
+
+`covariate.labels = ` Angir teksten for variabelnavn. Merk at det oppgis i den *rekkefølgen* det skal stå, så være veldig nøye hvis du har mange variable! 
+`report = ` angir hva som skal inngå i tabellen, der hver bokstav viser til spesifikke deler: v = variabelnavn, c = koeffisient/estimat, s = standardfeil. 
+`single.row = ` setter statistikkene på samme linje fremfor under hverandre.
+`keep.stat = ` angir hvilke "model fit statistics" som skal rapporteres. Hvis du skriver "all" her får du en lang remse tilsvarende vi fikk med {modelsummary}. 
+`digits = ` angir antall desimaler 
+```{r}
+#| warning: false
+#| message: false
+stargazer(lm_est2, lm_est3, 
+          type = "text", 
+          covariate.labels = c("Kvinne", "Alder", "Konstant"),
+          report = "vcs",
+          single.row = TRUE, 
+          keep.stat = c("n","rsq", "f"),
+          digits = 1)
+```
+
+For å eksportere til Word kan man bruke rikt tekstformat (.rtf) eller html. rtf-formatet er som navnet tilsier ren tekst og selv om det ser greit ut, så er videre redigering i et tekstbehandlingsprogram krøkete. (Prøv og se selv). Bruk heller html fordi da beholdes tabell-strukturen. Du kan åpne html-tabeller fra Word og redigere videre der ved behov. 
+
+
+```{r}
+#| eval: false
+#| warning: false
+#| message: false
+stargazer(lm_est2, lm_est3, 
+          type = "text",
+          covariate.labels = c("Kvinne", "Alder", "Konstant"),
+          report = "vcs",
+          single.row = TRUE, 
+          keep.stat = c("n","rsq", "f"),
+          digits = 1, 
+          out = "output/reg_starg.html")
+```
+
+
+Mer detaljer finner du i [{stargazer} sin vignette](https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf).
+
+
 
 ### Alt 3: Bruke `gtsummary()`
 

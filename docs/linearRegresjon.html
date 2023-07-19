@@ -124,6 +124,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -329,10 +332,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#scatterplot" id="toc-scatterplot" class="nav-link active" data-scroll-target="#scatterplot"><span class="toc-section-number">8.1</span>  Scatterplot</a></li>
   <li><a href="#regresjonslinja" id="toc-regresjonslinja" class="nav-link" data-scroll-target="#regresjonslinja"><span class="toc-section-number">8.2</span>  Regresjonslinja</a></li>
   <li><a href="#flere-variable" id="toc-flere-variable" class="nav-link" data-scroll-target="#flere-variable"><span class="toc-section-number">8.3</span>  Flere variable</a></li>
-  <li><a href="#eksport-av-resultater-til-fil" id="toc-eksport-av-resultater-til-fil" class="nav-link" data-scroll-target="#eksport-av-resultater-til-fil"><span class="toc-section-number">8.4</span>  Eksport av resultater til fil</a>
+  <li><a href="#pene-tabeller-og-eksport-til-fil" id="toc-pene-tabeller-og-eksport-til-fil" class="nav-link" data-scroll-target="#pene-tabeller-og-eksport-til-fil"><span class="toc-section-number">8.4</span>  Pene tabeller og eksport til fil</a>
   <ul class="collapse">
   <li><a href="#alt-1-bruke-modelsummary" id="toc-alt-1-bruke-modelsummary" class="nav-link" data-scroll-target="#alt-1-bruke-modelsummary"><span class="toc-section-number">8.4.1</span>  Alt 1: Bruke <code>modelsummary()</code></a></li>
-  <li><a href="#alt-2-bruke-stargazer" id="toc-alt-2-bruke-stargazer" class="nav-link" data-scroll-target="#alt-2-bruke-stargazer"><span class="toc-section-number">8.4.2</span>  Alt 2: Bruke <code>stargazer()</code></a></li>
+  <li><a href="#alt-2-bruke-stargazer" id="toc-alt-2-bruke-stargazer" class="nav-link" data-scroll-target="#alt-2-bruke-stargazer"><span class="toc-section-number">8.4.2</span>  Alt 2: Bruke {stargazer}</a></li>
   <li><a href="#alt-3-bruke-gtsummary" id="toc-alt-3-bruke-gtsummary" class="nav-link" data-scroll-target="#alt-3-bruke-gtsummary"><span class="toc-section-number">8.4.3</span>  Alt 3: Bruke <code>gtsummary()</code></a></li>
   </ul></li>
   </ul>
@@ -471,32 +474,875 @@ Multiple R-squared:  0.0387,    Adjusted R-squared:  0.03844
 F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Da får vi også mye informasjon knyttet til usikkerheten på estimatene, primært standardfeil, <em>p</em>-verdier og konfidensintervaller. Du finner koeffisientene under kolonnen “Estimate”.</p>
 </section>
 <section id="flere-variable" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="flere-variable"><span class="header-section-number">8.3</span> Flere variable</h2>
+<p>Det er ikke så ofte vi bruker regresjon med bare en forklaringsvariabel, såklat “enkel lineær regresjon”.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Langt mer vanlig er å bruke flere variable samtidig i det vi kaller “multippel regresjon”.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> I multippel regresjon kan man altså beskrive mer kompliserte mønstre i dataene.</p>
+<p>Vi fortsetter med eksempelet om lønn og alder, men utvider med en dimensjon til, nemlig kjønn. La oss først se på kjønnsforskjellene i gjennomsnittlig timelønn.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>abu89 <span class="ot">&lt;-</span> abu89 <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(female <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(time89))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, time89) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="cmznezxfoe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cmznezxfoe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cmznezxfoe thead, #cmznezxfoe tbody, #cmznezxfoe tfoot, #cmznezxfoe tr, #cmznezxfoe td, #cmznezxfoe th {
+  border-style: none;
+}
+
+#cmznezxfoe p {
+  margin: 0;
+  padding: 0;
+}
+
+#cmznezxfoe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cmznezxfoe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cmznezxfoe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cmznezxfoe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cmznezxfoe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cmznezxfoe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cmznezxfoe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cmznezxfoe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cmznezxfoe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cmznezxfoe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cmznezxfoe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cmznezxfoe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cmznezxfoe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cmznezxfoe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cmznezxfoe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cmznezxfoe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cmznezxfoe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cmznezxfoe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cmznezxfoe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cmznezxfoe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cmznezxfoe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cmznezxfoe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cmznezxfoe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cmznezxfoe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cmznezxfoe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cmznezxfoe .gt_left {
+  text-align: left;
+}
+
+#cmznezxfoe .gt_center {
+  text-align: center;
+}
+
+#cmznezxfoe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cmznezxfoe .gt_font_normal {
+  font-weight: normal;
+}
+
+#cmznezxfoe .gt_font_bold {
+  font-weight: bold;
+}
+
+#cmznezxfoe .gt_font_italic {
+  font-style: italic;
+}
+
+#cmznezxfoe .gt_super {
+  font-size: 65%;
+}
+
+#cmznezxfoe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cmznezxfoe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cmznezxfoe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cmznezxfoe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cmznezxfoe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cmznezxfoe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cmznezxfoe .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Male</strong>, N = 2,003<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Male</strong>, N = 2,003<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>Female</strong>, N = 1,756<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>Female</strong>, N = 1,756<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Gjennomsnittlig timelønn 1989</td>
+<td headers="stat_1" class="gt_row gt_center">94 (79, 115)</td>
+<td headers="stat_2" class="gt_row gt_center">75 (66, 88)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="3"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Median (IQR)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Vi ser altså at menn hadde i gjennomsnitt høyere timelønn enn kvinner, nærmere bestemt 21 kroner mer. Dette kan vi også undersøke med lineær regresjon som følger:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lm_est2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> sex , <span class="at">data =</span> abu89)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)   sexFemale 
+   99.84382   -20.75229 </code></pre>
+</div>
+</div>
+<p>Det er altså slik at koeffisienten, <span class="math inline">\(\beta\)</span>, gir den samme differansen som en enkel sammenligning av to gjennomsnitt.</p>
+<p>Vi har allerede sett på alder og lønn, så vi kan utvide dette til å inkludere kjønn samtidig i et scatterplot.</p>
+<p>Grafisk er det da greit å bruke farger og slik vise for menn og kvinner for seg. I <code>ggplot</code> spesifiseres da <code>group = sex</code> og at fargene skal settes etter sammen grupperingen <code>col = sex</code> slik:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abu89, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> time89, <span class="at">group =</span> sex, <span class="at">col =</span> sex)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="linearRegresjon_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lm_est3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> sex <span class="sc">+</span> age, <span class="at">data =</span> abu89)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_est3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = time89 ~ sex + age, data = abu89)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-72.37 -17.12  -4.90  10.99 247.94 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  81.10147    1.58497   51.17   &lt;2e-16 ***
+sexFemale   -20.62511    0.91186  -22.62   &lt;2e-16 ***
+age           0.47380    0.03684   12.86   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 27.89 on 3756 degrees of freedom
+Multiple R-squared:  0.1539,    Adjusted R-squared:  0.1535 
+F-statistic: 341.7 on 2 and 3756 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
 </section>
-<section id="eksport-av-resultater-til-fil" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="eksport-av-resultater-til-fil"><span class="header-section-number">8.4</span> Eksport av resultater til fil</h2>
-<p>Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på “klipp og lim” eller skjermbilde etc er uaktuelt og unngå det for nærmest enhver pris.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for dere, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt.</p>
+<section id="pene-tabeller-og-eksport-til-fil" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="pene-tabeller-og-eksport-til-fil"><span class="header-section-number">8.4</span> Pene tabeller og eksport til fil</h2>
+<p>Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på “klipp og lim” eller skjermbilde etc er uaktuelt og må unngås for nærmest enhver pris.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for dere, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt.</p>
 <p>Her presenteres noen pakker som eksporterer til de viktigste formatene som er:</p>
 <ul>
-<li>MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.<br>
-</li>
+<li>MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.</li>
 <li>rtf - rikt tekstformat. Er et enklere format som fungerer på tvers av de fleste programmer. Kan brukes i Word også.</li>
 <li>html - for websider</li>
 <li>latex - for mer tekniske dokumenter, særlig hvis du har mye formler og stæsj</li>
-<li>Markdown - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Det som fungerer med Markdown fungerer også med Quarto for samme formål.</li>
+<li>Markdown/Quarto - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> Det som fungerer med Markdown fungerer også med Quarto for samme formål.</li>
 </ul>
 <section id="alt-1-bruke-modelsummary" class="level3" data-number="8.4.1">
 <h3 data-number="8.4.1" class="anchored" data-anchor-id="alt-1-bruke-modelsummary"><span class="header-section-number">8.4.1</span> Alt 1: Bruke <code>modelsummary()</code></h3>
 <p>Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown</p>
-<p>Fordel: Kan lett integreres med andre funksjoner, først og fremst “grammar of tables” i pakket <code>gt</code> Ulempe:</p>
+<p>Fordel: Gir pene og oversiktlige tabeller med enkel kode, og relativt enkelt å modifisere videre. Eksporterer direkte til alle viktigste formater. Kan også lett integreres med andre eksterne verktøy, først og fremst “grammar of tables” i pakket {gt} Ulempe:</p>
+<p>Her er kode for en enkel tabell med to regresjonsmodeller som vist ovenfor. Merk at objektene med regresjonsresultatene må legges inni funksjonen <code>list()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> &nbsp;(1) </th>
+   <th style="text-align:center;"> &nbsp;&nbsp;(2) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:center;"> 99.844 </td>
+   <td style="text-align:center;"> 81.101 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.637) </td>
+   <td style="text-align:center;"> (1.585) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> sexFemale </td>
+   <td style="text-align:center;"> -20.752 </td>
+   <td style="text-align:center;"> -20.625 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.932) </td>
+   <td style="text-align:center;"> (0.912) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> age </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 0.474 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.037) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 3759 </td>
+   <td style="text-align:center;"> 3759 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 </td>
+   <td style="text-align:center;"> 0.117 </td>
+   <td style="text-align:center;"> 0.154 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 Adj. </td>
+   <td style="text-align:center;"> 0.116 </td>
+   <td style="text-align:center;"> 0.153 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 35854.9 </td>
+   <td style="text-align:center;"> 35694.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIC </td>
+   <td style="text-align:center;"> 35873.6 </td>
+   <td style="text-align:center;"> 35719.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -17924.434 </td>
+   <td style="text-align:center;"> -17843.437 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> F </td>
+   <td style="text-align:center;"> 496.278 </td>
+   <td style="text-align:center;"> 341.699 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> RMSE </td>
+   <td style="text-align:center;"> 28.49 </td>
+   <td style="text-align:center;"> 27.88 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>Denne tabellen inneholder mer enn du er interessert i. Nedre del av tabellen inneholder “goodness of fit” statistikker, altså mål på hvordan modellen passer til dataene. Det finnes mange slike, men ingen grunn til å gå seg vill i disse her. De kan fjernes med argumentet <code>gof_omit =</code> og så angis statistikkene med de navnene du ser i tabellen. Det skrives på en spesiell måte: som en tekststreng angitt med anførselstegn rundt, og <code>|</code> mellom hver. I koden nedenfor beholdes kun antall observasjoner, <span class="math inline">\(r^2\)</span> og <span class="math inline">\(F\)</span>.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>Vi gjør et par andre justeringer samtidig for å demonstrere noe funksjonalitet. I stedet for å oppgi estimatet og standardfeil på forskjellig linje kan vi spesifisere å ha det på samme linje med argumentet <code>estimate =</code>. Merk at den statistikken du vil rapportere settes i parentes {…} og mellomrom og parentes er ellers som det står. Man har også andre valg, derav det vanligste i bruk er å angi <em>p</em>-verdier eller <em>stjerner</em> for å vise disse på en forenklet måte. Det angis ved <code>{p.value}</code> eller <code>{stars}</code> på tilsvarende måte.</p>
+<p>I stedet for standardfeil på egen linje er det her angitt konfidensintervall på neste linje. For konfidensintervall vil det som forvalg være 95%, men vi kan angi f.eks. 99% konfidensintervall i stedet ved <code>conf_level =</code>. Hvis man ikke vil ha noe på neste linje kan man angi <code>statistic = NULL</code> i stedet. Man kan også velge å sette inn <code>p.value</code> eller <code>stars</code> på denne linjen.</p>
+<p>Merk at utfallsvariabelen i modellene er timelønn i kroner. I forrige tabell ble estimatene gitt med tre desimaler. Det er i overkant mange desimaler. En desimal er mer passende og nedenfor endres dette med <code>fmt =</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> &nbsp;(1) </th>
+   <th style="text-align:center;"> &nbsp;&nbsp;(2) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:center;"> 99.8 (0.6) </td>
+   <td style="text-align:center;"> 81.1 (1.6) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> [98.2, 101.5] </td>
+   <td style="text-align:center;"> [77.0, 85.2] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> sexFemale </td>
+   <td style="text-align:center;"> -20.8 (0.9) </td>
+   <td style="text-align:center;"> -20.6 (0.9) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> [-23.2, -18.4] </td>
+   <td style="text-align:center;"> [-23.0, -18.3] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> age </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 0.5 (0.0) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> [0.4, 0.6] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 3759 </td>
+   <td style="text-align:center;"> 3759 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 </td>
+   <td style="text-align:center;"> 0.117 </td>
+   <td style="text-align:center;"> 0.154 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> F </td>
+   <td style="text-align:center;"> 496.278 </td>
+   <td style="text-align:center;"> 341.699 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>To siste ting å ta med her er å endre navn på variablene til noe mer presentabelt og eksportere til Word. Med argumentet <code>coef_rename =</code> angis variabelen slik den ser ut i output og spesifiserer hva du vil skal stå. Koden nedenfor viser eksempel.</p>
+<p>For å eksportere til Word settes <code>output =</code> med filbane og filnavn, og der filhalen <em>.docx</em> angir Word format. Du kan eksportere til annet format ved å angi annen filhale f.eks. .rtf eller .html.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|echo: false</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>, </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"sexFemale"</span> <span class="ot">=</span> <span class="st">"Kvinne"</span>, </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"age"</span> <span class="ot">=</span> <span class="st">"Alder"</span>, </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"Konstant"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> &nbsp;(1) </th>
+   <th style="text-align:center;"> &nbsp;&nbsp;(2) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Konstant </td>
+   <td style="text-align:center;"> 99.8 (0.6) </td>
+   <td style="text-align:center;"> 81.1 (1.6) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> [98.2, 101.5] </td>
+   <td style="text-align:center;"> [77.0, 85.2] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Kvinne </td>
+   <td style="text-align:center;"> -20.8 (0.9) </td>
+   <td style="text-align:center;"> -20.6 (0.9) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> [-23.2, -18.4] </td>
+   <td style="text-align:center;"> [-23.0, -18.3] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Alder </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 0.5 (0.0) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> [0.4, 0.6] </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 3759 </td>
+   <td style="text-align:center;"> 3759 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 </td>
+   <td style="text-align:center;"> 0.117 </td>
+   <td style="text-align:center;"> 0.154 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> F </td>
+   <td style="text-align:center;"> 496.278 </td>
+   <td style="text-align:center;"> 341.699 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>, </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"sexFemale"</span> <span class="ot">=</span> <span class="st">"Kvinne"</span>, </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"age"</span> <span class="ot">=</span> <span class="st">"Alder"</span>, </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"Konstant"</span>), </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">output =</span> <span class="st">"output/reg_table.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Merk at Word vil vise tabellen med de fonter etc som er forvalgt for Word. Dette kan du endre i Word etterpå. Det er en rekke funksjoner i Word for å formattere tabeller som du kan bruke.</p>
+<p>Pakken {modelsummary} har også en rekke andre funksjoner for å redigere tabeller som du kan utforske ved behov. For avanserte brukere kan man også gjøre om tabellen til et gt-objekt og redigere videre med pakken {gt} eller tilsvarende med pakken {flextable}. Det er altså tilnærmet uendelige muligheter for avanserte tabeller. Dette går imidlertid langt utenfor hva de fleste av dere vil trenge. {modelsummary} har <a href="https://vincentarelbundock.github.io/modelsummary/index.html">egen hjemmeside</a> med mer detaljer og instruksjoner.</p>
 </section>
 <section id="alt-2-bruke-stargazer" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="alt-2-bruke-stargazer"><span class="header-section-number">8.4.2</span> Alt 2: Bruke <code>stargazer()</code></h3>
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="alt-2-bruke-stargazer"><span class="header-section-number">8.4.2</span> Alt 2: Bruke {stargazer}</h3>
+<p>Mange R-brukere foretrekker pakken {stargazer}. Dette er en noe eldre funksjon og er derfor godt etablert.</p>
 <p>Eksporterer til bl.a. følgende formater: rtf, html, latex, markdown</p>
 <p>Fordel: Er en stand-alone pakke men gir enkelt veldig fine tabeller som antakeligvis er det du trenger Ulempe: Eksport til Word er ikke den beste, men god nok.</p>
+<p>Stargazer lager tabeller i kun tre formater: latex, html, og ren tekst. Vi velger derfor <code>type = "text"</code> for at det skal se ok ut her.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=======================================================================
+                                    Dependent variable:                
+                    ---------------------------------------------------
+                                          time89                       
+                               (1)                       (2)           
+-----------------------------------------------------------------------
+sexFemale                  -20.752***                -20.625***        
+                             (0.932)                   (0.912)         
+                                                                       
+age                                                   0.474***         
+                                                       (0.037)         
+                                                                       
+Constant                    99.844***                 81.101***        
+                             (0.637)                   (1.585)         
+                                                                       
+-----------------------------------------------------------------------
+Observations                  3,759                     3,759          
+R2                            0.117                     0.154          
+Adjusted R2                   0.116                     0.153          
+Residual Std. Error    28.495 (df = 3757)        27.891 (df = 3756)    
+F Statistic         496.278*** (df = 1; 3757) 341.699*** (df = 2; 3756)
+=======================================================================
+Note:                                       *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+<p>Vi kan modifisere tabellen tilsvarende som vi gjorde med {modelsummary}. Forklaringer av de enkelte argumenter finnes i <a href="https://cran.r-project.org/web/packages/stargazer/stargazer.pdf">manualen for stargazer</a>.</p>
+<p><code>covariate.labels =</code> Angir teksten for variabelnavn. Merk at det oppgis i den <em>rekkefølgen</em> det skal stå, så være veldig nøye hvis du har mange variable! <code>report =</code> angir hva som skal inngå i tabellen, der hver bokstav viser til spesifikke deler: v = variabelnavn, c = koeffisient/estimat, s = standardfeil. <code>single.row =</code> setter statistikkene på samme linje fremfor under hverandre. <code>keep.stat =</code> angir hvilke “model fit statistics” som skal rapporteres. Hvis du skriver “all” her får du en lang remse tilsvarende vi fikk med {modelsummary}. <code>digits =</code> angir antall desimaler</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>, </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"f"</span>),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+============================================================
+                           Dependent variable:              
+             -----------------------------------------------
+                                 time89                     
+                       (1)                     (2)          
+------------------------------------------------------------
+Kvinne             -20.8 (0.9)             -20.6 (0.9)      
+Alder                                      0.5 (0.04)       
+Konstant           99.8 (0.6)              81.1 (1.6)       
+------------------------------------------------------------
+Observations          3,759                   3,759         
+R2                     0.1                     0.2          
+F Statistic  496.3*** (df = 1; 3757) 341.7*** (df = 2; 3756)
+============================================================
+Note:                            *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+<p>For å eksportere til Word kan man bruke rikt tekstformat (.rtf) eller html. rtf-formatet er som navnet tilsier ren tekst og selv om det ser greit ut, så er videre redigering i et tekstbehandlingsprogram krøkete. (Prøv og se selv). Bruk heller html fordi da beholdes tabell-strukturen. Du kan åpne html-tabeller fra Word og redigere videre der ved behov.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"f"</span>),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">out =</span> <span class="st">"output/reg_starg.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Mer detaljer finner du i <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">{stargazer} sin vignette</a>.</p>
 </section>
 <section id="alt-3-bruke-gtsummary" class="level3" data-number="8.4.3">
 <h3 data-number="8.4.3" class="anchored" data-anchor-id="alt-3-bruke-gtsummary"><span class="header-section-number">8.4.3</span> Alt 3: Bruke <code>gtsummary()</code></h3>
@@ -512,8 +1358,11 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li id="fn1"><p>Du kan jo tenke deg flere parallelle linjer i plottet ovenfor med samme stigningstall<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Grunnen til det siste er at R kan ha flere datasett oppe samtidig, så R vet ikke nødvendigvis hvilket datasett du tenker på<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Noen ganger sier man at gjennomsnittslønna øker med 0.48 kroner for hvert år eldre man blir. Men det er ikke helt riktig, for dataene beskriver jo ikke individuell endringer over tid! Men hvis du synes det er lettere å tenke på det på den måten er det ok - men prøv å husk at det også er litt feil.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>F.eks. dette dokumentet er skrevet i Quarto<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Det er selvsagt ingenting <em>enkelt</em> med slike modeller utover at det finnes mer kompliserte varianter.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Noen kaller dette også for <em>multivariat</em> regresjon, men det er tvetydig da det også kan bety modeller med flere utfallsvariable, som er noe ganske annet.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>F.eks. dette dokumentet er skrevet i Quarto<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Øvrige statistikker har selvsagt sitt bruksområde. De nevnte holder for de fleste formål.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
