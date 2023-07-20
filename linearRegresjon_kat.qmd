@@ -1,4 +1,4 @@
-# Lineær regresjon med kategoriske variable
+# Lineær sannsynlighetsmodell
 
 ```{r}
 #| warning: false
@@ -23,77 +23,33 @@ abu89 <- read_stata("data/abu89.dta") %>%
 
 I samfunnsvitenskapen har vi ganske ofte kategoriske variable både som forklaringsvariable og utfallsvariable, eller en kombinasjon. I en regresjon vil vi behandle kategoriske variable dem som om de er tall på kontinuerlig akse, men der det typisk bare finnes to verdier: 0 og 1. Dette kalles en dummyvariabel eller en indikatorvariabel.
 
-Når man bruker kategoriske variable i en lineær regresjon er det derfor ikke egentlig noe nytt. Det som står i boken om kontinuerlige variable gjelder også for kategoriske variable (i hvert fall for alle praktiske formål som dekkes for dette kurset). Dette dokumentet forklarer først hva en dummy-variabel er for noe, hvordan det brukes som forklaringsvariable og til sist hvordan det brukes som utfallsvariabel.
-
-## Dummy-variable
-
-Hvis det er to verdier vil vi typisk gi den ene kategorien verdien 0 og den andre kategorien 1. Dette kalles en «dummy variabel» eller en «indikator variabel». For eksempel vil et datasett ofte ha en variabel for kjønn med verdiene «Mann» og «Kvinne». Da kan vi la mann få verdien 0 og kvinne verdien 1. Ofte vil man da gi variabelen et navn som indikerer hvilken verdi som er 1. Så i dette eksempelet er det hensiktsmessig å gi den nye variabelen navnet «Kvinne». I dette eksempelet vil man også kunne si at variabelen er en «dummy for kvinne» (altså: den kategorien som får verdien 1).
-
-Det spiller ingen rolle hvilken kategori som får verdien 0 og 1. I dette eksempelet kunne man like gjerne gjort det motsatt, og latt det være en «dummy for mann». Da ville det være naturlig å kalle variabelen «mann» i stedet for «kvinne». Som vi skal se nedenfor vil det bare påvirke fortegnet når vi bruker variabelen i en regresjonsanalyse.
-
-I datasettet abu89 er variabelen "female" en slik variabel som har verdiene 0 eller 1, og der 0 betyr "mann" og 1 betyr "kvinne".
-
-| Kjønn  | Female |
-|--------|--------|
-| Mann   | 0      |
-| Kvinne | 1      |
-| Kvinne | 1      |
-| Mann   | 0      |
-| Kvinne | 1      |
-| Kvinne | 1      |
-| Kvinne | 1      |
-| Mann   | 0      |
-
-Noen ganger har vi forklaringsvariable med flere enn to kategorier. Det kan vi løse på en tilsvarende måte ved å lage flere dummy-variable. Et eksempel kan være sosial klasse. I datasettet abu89 er det fem kategorier. 
-
-En dummy-variabel har bare to kategorier: 0 og 1, men vi kan lage flere dummy-variable. Vi kan lager en ny variabel «klasse II» som har verdien 1 hvis personen tilhører denne klassen og 0 ellers. Altså en dummy. Så kan vi lage en ny variabel «Klasse III» som har verdien 1 hvis personen tilhører denne klassen og 0 ellers. Slik kan man lage en dummy-variabel for hver av kategoriene. Da har vi altså flere dummy-variable som til sammen fanger opp informasjonen i den opprinnelige variabelen.
-
-| Utdanning   | Klasse II | Klasse III | Klasse V-VI | Klasse VII |
-|-------------|-----------|------------|-------------|------------|
-| Klasse I    | 0         | 0          | 0           | 0          |
-| Klasse II   | 1         | 0          | 0           | 0          |
-| Klasse III  | 0         | 1          | 0           | 0          |
-| Klasse V-VI | 0         | 0          | 1           | 0          |
-| Klasse VII  | 0         | 0          | 0           | 1          |
-
-Merk at her er det ingen dummy for "Klasse I". Denne gruppen brukes som referansekategori slik at estimatene for *de andre* dummyene blir tolkbare som forskjellen til denne referansekategorien. Mer om det siden, men man kan velge å bruke en annen referansekategori hvis man vil.  
+Når man bruker kategoriske variable i en lineær regresjon er det derfor ikke egentlig noe nytt. Det som står i læreboken om kontinuerlige variable gjelder også for kategoriske variable (i hvert fall for alle praktiske formål som dekkes for dette kurset). 
 
 
-La oss først se på et plot. Her er det brukt en jitter-plot. Den røde linjen viser endring i gjennomsnitt mellom de kategoriene. En regresjonsanalyse vil gi slike estimater på differanser, men det er enklest hvis alle endringene er i forhold til samme referansekategori. 
-
-```{r}
-
-lmest <- lm(time89 ~ klasse89, data = abu89)
-
-abu89x <- abu89 %>% 
-  filter(!is.na(klasse89), !is.na(time89)) %>% 
-  mutate(smooth = predict(lmest, newdata = .)) %>% 
-  group_by(klasse89) %>% 
-  mutate(gr_snitt = mean(time89))
-
-
-ggplot( abu89x, aes(x =klasse89, y = time89))+
-  geom_jitter(alpha = .3, width = .2)+
-  geom_point(aes(y=gr_snitt), col = "red", size = 3)+
-  #geom_hline(yintercept = mean(abu89x$time89, na.rm = TRUE))+
-  geom_line(aes(x = as.numeric(klasse89), y = smooth), col = "red", linewidth = 1) 
-
-```
-
-
-
-
-Den generelle regresjonsligningen skrives som y=a+bx, der $x$ er forklaringsvariabelen. Regresjonskoeffisienten, $b$, tolkes som hvor forskjellen i gjennomsnittet på utfallsvariabelen, $y$, mellom de som er en enhets forskjell på $x$-variabelen. 
-
-
-
-## Linjeær sannsynlighetsmodell
+## Dummy som utfallsvariabel 
 
 I samfunnsvitenskapen er utfallsvariabelen ganske ofte kategorisk. I en regresjon vil vi behandle kategoriske variable dem som om de er tall på kontinuerlig akse, også der det typisk bare finnes to verdier: 0 og 1. Dette kalles en dummyvariabel eller en indikatorvariabel.
 
 Når man bruker kategoriske variable i en lineær regresjon er det derfor ikke egentlig noe nytt. Det som står i boken om kontinuerlige variable gjelder også for kategoriske variable (i hvert fall for alle praktiske formål som dekkes for dette kurset).
 
-Dummy-variable Hvis det er to verdier vil vi typisk gi den ene kategorien verdien 0 og den andre kategorien 1. Dette kalles en «dummy variabel» eller en «indikator variabel». For eksempel vil et datasett ofte ha en variabel for kjønn med verdiene «Mann» og «Kvinne». Da kan vi la mann få verdien 0 og kvinne verdien 1. Ofte vil man da gi variabelen et navn som indikerer hvilken verdi som er 1. Så i dette eksempelet er det hensiktsmessig å gi den nye variabelen navnet «Kvinne». I dette eksempelet vil man også kunne si at variabelen er en «dummy for kvinne» (altså: den kategorien som får verdien 1). Det spiller ingen rolle hvilken kategori som får verdien 0 og 1. I dette eksempelet kunne man like gjerne gjort det motsatt, og latt det være en «dummy for mann». Da ville det være naturlig å kalle variabelen «mann» i stedet for «kvinne». Som vi skal se nedenfor vil det bare påvirke fortegnet når vi bruker variabelen i en regresjonsanalyse.
+Husk at tolkningen av regresjonskoeffisienten, $b$, tolkes på den skalaen $y$-variabelen er på. Altså: hvis utfallsvariabelen er i kroner, så er tolkningen av $b$ i måleenheten kroner. Hvis y-variabelen er i antall timer, så er tolkningen av $b$ i antall timer, osv. Husk også at vi estimerer endring i gjennomsnitt. 
 
+Når utfallsvariabelen er en dummy, så har den verdiene 0 eller 1. Da er gjennomsnittet det samme som en andel. For eksempel: hvis utfallet er om man er i jobb eller ikke, og koder å være i jobb som 1 og 0 ellers. Hvis man har 5 personer, derav 3 er i jobb får man så: $\bar{y} = \frac{(0+0+1+1+1)} {5} = \frac{3}{5}=0.6$ som er det samme som 60%. 
+
+
+I regresjon med slike variable er dermed utfallet en andel og dette kalles derfor ofte en «lineær sannsynlighetsmodell». Men det er egentlig en helt vanlig regresjonsmodell. Vi tolker fremdeles på den skalaen y-variabelen er på, som altså er en andel. (Vi skal forresten senere omtale andeler som estimater på sannsynligheter). En økning i $x$-variabelen tilsvarer altså en endring, b, i andelen med den egenskapen som er kodet 1 på $y$-variabelen. 
+
+
+La oss si at vi er interessert i å beskrive kjønnsforskjell i hvorvidt menn og kvinner jobber i privat vs offentlig sektor. Variabelen "private" er en factor-variabel der første kategori er "public", som da blir referansekategorien. R regner da privat sektor som 1 mens offentlig sektor er 0. Koeffisientene vil da uttrykke forskjell i sannsynlighet for å være i privat sektor.
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+lm(private ~ female + ed + age, data = abu89)
+```
+
+Vi ser her at sannsynligheten for at kvinner jobber i privat sektor er 0.28 lavere enn for menn, dvs. 28 prosentpoeng lavere. Dette er da kontrollert for utdanning og alder, slik at vi kan se bort fra at utdanningsnivå og forskjell i aldersfordeling i dataene kan være grunnen til forskjellene. 
 
 

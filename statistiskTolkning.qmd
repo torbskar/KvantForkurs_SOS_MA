@@ -18,10 +18,27 @@ Hvis du synes at denne forklaringen ikke hjalp, så er det med god grunn. Det er
 
 
 ### Samplingfordeling og sentralgrenseteoremet 
+
+
 #### Samplingfordeling
 
 
+
+
 #### Sentralgrenseteoremet 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

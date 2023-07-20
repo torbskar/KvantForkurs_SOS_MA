@@ -70,8 +70,9 @@ I R estimeres regresjonsmodeller med funksjonen `lm`. Første argument er en for
 Legg alltid resultatene i et eget objekt med et navnt som er rimelig enkelt å forstå hva er. I følgende kode legges resultatet i en nytt objekt `lm_est1`. Deretter bruker kan man hente ut de delene av resultatet vi er interessert i. I aller første omgang er bare interessert i regresjonslinjas konstantledd (startpunktet) og stigningstall. Disse kaller vi vanligvis *regresjonskoeffisienter*. Det kan vi få ut ved å bruke funksjonen `coef`.
 
 ```{r}
-#| message: false
 #| warning: false
+#| error: false
+#| message: false
 library(equatiomatic)
 
 lm_est1 <- lm(time89 ~ age, data = abu89)
@@ -82,6 +83,9 @@ coef(lm_est1)
 Regresjonslingningen kan skrives på formel der $\alpha$ er konstantleddet og $\beta$ er stigningstallet slik:
 
 ```{r}
+#| warning: false
+#| error: false
+#| message: false
 extract_eq(lm_est1, use_coefs = FALSE)
 ```
 
@@ -98,11 +102,142 @@ Tolkningen her er at gjennomsnittlig forskjell i timelønn mellom grupper der al
 Vi sier gjerne at regresjonslinjen er *estimert*, og det innebærer at det er usikkerhet i estimatene. Vi kommer tilbake til dette, men en vanligere output fra regresjonsmodeller er å bruker `summary` som følger:
 
 ```{r}
+#| warning: false
+#| error: false
+#| message: false
 summary(lm_est1)
 ```
 
-## Flere variable
+## Dummy-variable 
+Hvis en forklaringsvariabel har kun to verdier vil vi typisk gi den ene kategorien verdien 0 og den andre kategorien 1. Dette kalles en «dummy variabel» eller en «indikator variabel». For eksempel vil et datasett ofte ha en variabel for kjønn med verdiene «Mann» og «Kvinne». Da kan vi la mann få verdien 0 og kvinne verdien 1. Ofte vil man da gi variabelen et navn som indikerer hvilken verdi som er 1. Så i dette eksempelet er det hensiktsmessig å gi den nye variabelen navnet «Kvinne». I dette eksempelet vil man også kunne si at variabelen er en «dummy for kvinne» (altså: den kategorien som får verdien 1).
 
+Det spiller ingen rolle hvilken kategori som får verdien 0 og 1. I dette eksempelet kunne man like gjerne gjort det motsatt, og latt det være en «dummy for mann». Da ville det være naturlig å kalle variabelen «mann» i stedet for «kvinne». Som vi skal se nedenfor vil det bare påvirke fortegnet når vi bruker variabelen i en regresjonsanalyse.
+
+I datasettet abu89 er variabelen "female" en slik variabel som har verdiene 0 eller 1, og der 0 betyr "mann" og 1 betyr "kvinne".
+
+| Kjønn  | Female |
+|--------|--------|
+| Mann   | 0      |
+| Kvinne | 1      |
+| Kvinne | 1      |
+| Mann   | 0      |
+| Kvinne | 1      |
+| Kvinne | 1      |
+| Kvinne | 1      |
+| Mann   | 0      |
+
+
+I R vil vi ofte ha slike variable som factor-variable. Da er variabelen definert som kategorisk og selv om det er tekst-verdier i variabelen, så vil R automatisk behandle den som om verdiene var 0 og 1 i estimeringen av regresjonsmodellen. 
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+theme_gtsummary_mean_sd()
+abu89 %>% 
+  select(female, time89) %>% 
+  tbl_summary(by = female) 
+```
+
+Vi ser altså at menn hadde i gjennomsnitt høyere timelønn enn kvinner, nærmere bestemt 21 kroner mer. Dette kan vi også undersøke med lineær regresjon som følger:
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+lm_est_i <- lm(time89 ~ female , data = abu89)
+
+coef(lm_est_i)
+```
+Regresjonskoeffisenten for variabelen female uttrykker nettopp differansen mellom menn og kvinner, som er 21 kroner. Husk at $\beta$ er hvor mye $y$-variabelen endres når man sammenligner $x$-variabelen med akkurat 1 enhets forskjell. Her er mann 0 og kvinner 1, så da er dette faktisk 1 enhets forskjell. Altså: når $x$ går fra 0 til 1, så reduseres $y$ med 21. Derfor negativt fortegn.  
+
+I R vil vi ofte gjøre om kategoriske variable til såkalte factor-variable. En factor-variabel vil håndtere kategoriske variable som tekst, men med en underliggende numerisk verdi. Da kan man bruke factor-variable i alle standard analysemetoder. I regresjon vil R automatisk bruke den første kategorien som referansekategori. 
+
+Vi kan gjøre den samme analysen med kjønn som en factor variabel og få de samme resultatene som ovenefor. 
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+abu89 <- abu89 %>%
+  mutate(sex = factor(ifelse(female == 1, "Female", "Male"), levels = c("Male", "Female"))) %>% 
+  filter(!is.na(time89))
+
+lm_est2 <- lm(time89 ~ female , data = abu89)
+
+coef(lm_est2)
+
+```
+
+### Dummy-variable med mer enn en kategori
+Noen ganger har vi forklaringsvariable med flere enn to kategorier. Det kan vi løse på en tilsvarende måte ved å lage flere dummy-variable. Et eksempel kan være sosial klasse. I datasettet abu89 er det fem kategorier. 
+
+En dummy-variabel har bare to kategorier: 0 og 1, men vi kan lage flere dummy-variable. Vi kan lager en ny variabel «klasse II» som har verdien 1 hvis personen tilhører denne klassen og 0 ellers. Altså en dummy. Så kan vi lage en ny variabel «Klasse III» som har verdien 1 hvis personen tilhører denne klassen og 0 ellers. Slik kan man lage en dummy-variabel for hver av kategoriene. Da har vi altså flere dummy-variable som til sammen fanger opp informasjonen i den opprinnelige variabelen.
+
+| Utdanning   | Klasse II | Klasse III | Klasse V-VI | Klasse VII |
+|-------------|-----------|------------|-------------|------------|
+| Klasse I    | 0         | 0          | 0           | 0          |
+| Klasse II   | 1         | 0          | 0           | 0          |
+| Klasse III  | 0         | 1          | 0           | 0          |
+| Klasse V-VI | 0         | 0          | 1           | 0          |
+| Klasse VII  | 0         | 0          | 0           | 1          |
+
+Merk at her er det ingen dummy for "Klasse I". Denne gruppen brukes som referansekategori slik at estimatene for *de andre* dummyene blir tolkbare som forskjellen til denne referansekategorien. Mer om det siden, men man kan velge å bruke en annen referansekategori hvis man vil.  
+
+
+La oss først se på et plot. Her er det brukt en jitter-plot. Den røde linjen viser endring i gjennomsnitt mellom de kategoriene. En regresjonsanalyse vil gi slike estimater på differanser, men det er enklest hvis alle endringene er i forhold til samme referansekategori. 
+
+```{r}
+#| echo: false
+#| warning: false
+#| error: false
+#| message: false
+lmest <- lm(time89 ~ klasse89, data = abu89)
+
+abu89x <- abu89 %>% 
+  filter(!is.na(klasse89), !is.na(time89)) %>% 
+  mutate(smooth = predict(lmest, newdata = .)) %>% 
+  group_by(klasse89) %>% 
+  mutate(gr_snitt = mean(time89))
+```
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+ggplot( abu89x, aes(x =klasse89, y = time89))+
+  geom_jitter(alpha = .3, width = .2)+
+  geom_point(aes(y=gr_snitt), col = "red", size = 3)+
+  #geom_hline(yintercept = mean(abu89x$time89, na.rm = TRUE))+
+  geom_line(aes(x = as.numeric(klasse89), y = smooth), col = "red", linewidth = 1) 
+
+```
+
+
+
+Den generelle regresjonsligningen skrives som $y=a+bx$, der $x$ er forklaringsvariabelen. Regresjonskoeffisienten, $b$, tolkes som hvor forskjellen i gjennomsnittet på utfallsvariabelen, $y$, mellom de som er en enhets forskjell på $x$-variabelen. 
+
+
+
+```{r}
+#| warning: false
+#| error: false
+#| message: false
+lm(time89 ~ klasse89, data = abu89) %>% 
+  summary()
+
+```
+
+Hvert estimat for kategori for klasse sammenlignes med *den første kategorien* (altså den som mangler): klasse I. Det betyr at klasse VII (ufaglærte arbeidere) har en timelønn på 37 kroner mindre enn klasse I (øvre serviceklasse). Mens klasse II (nedre serviceklasse) tjener 14 kroner mindre enn klasse I.  
+
+Forskjellen mellom andre grupper er således differansen mellom disse estimatene. Altså: klasse VII tjener mindre enn klasse V-VI: $36.9 - 29.7 = 7.2$ kroner. Se på plottet over, så ser du at disse tallene ser riktige ut. 
+
+
+
+## Flere variable
 Det er ikke så ofte vi bruker regresjon med bare en forklaringsvariabel, såklat "enkel lineær regresjon".[^linearregresjon-4] Langt mer vanlig er å bruke flere variable samtidig i det vi kaller "multippel regresjon".[^linearregresjon-5] I multippel regresjon kan man altså beskrive mer kompliserte mønstre i dataene.
 
 [^linearregresjon-4]: Det er selvsagt ingenting *enkelt* med slike modeller utover at det finnes mer kompliserte varianter.
@@ -131,6 +266,9 @@ coef(lm_est2)
 
 Det er altså slik at koeffisienten, $\beta$, gir den samme differansen som en enkel sammenligning av to gjennomsnitt.
 
+
+
+
 Vi har allerede sett på alder og lønn, så vi kan utvide dette til å inkludere kjønn samtidig i et scatterplot.
 
 Grafisk er det da greit å bruke farger og slik vise for menn og kvinner for seg. I `ggplot` spesifiseres da `group = sex` og at fargene skal settes etter sammen grupperingen `col = sex` slik:
@@ -148,12 +286,13 @@ summary(lm_est3)
 ```
 
 ## Pene tabeller og eksport til fil
+Slik resultatene ser ut med bruk av `summary` er forsåvidt fint, og du får den informasjonen du trenger. Men det er ikke særlig presentabelt som ferdig produkt i en analyse. Du trenger typisk to ting: 1) Samle flere regresjonsmodeller i samme tabell, og 2) gjøre tabellene penere og lettere å lese, og 3) eksportere til det tekstbehandlingsprogrammet du bruker, typisk Microsoft Word. 
 
-Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på "klipp og lim" eller skjermbilde etc er uaktuelt og må unngås for nærmest enhver pris.[^linearregresjon-6] Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for dere, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt.
+R har en hel rekke funksjoner for dette. Det spiller ingen rolle hvilke funksjoner du bruker da det er noe smak og behag her, så det viktigste er at det fungerer rimelig greit for deg. Nedenfor presenteres tre pakker for dette formålet. Velg én av dem. Alle disse funksjonene håndterer svært mange typer modeller, gir gode muligheter for å ferdigstille tabellene fullstendig før eksport, og eksporterer til de formatene som er mest aktuelle. De har også mer avansert funksjonalitet som f.eks. å rapportere robuste standardfeil (av forskjellig type) i stedet for vanlige standardfeil (dette er pensum på SOS4020).
+
+Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på "klipp og lim" eller skjermbilde etc er uaktuelt og må unngås for nærmest enhver pris.[^linearregresjon-6] Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for de fleste, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt. De viktigste formatene som er:
 
 [^linearregresjon-6]: Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.
-
-Her presenteres noen pakker som eksporterer til de viktigste formatene som er:
 
 -   MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.
 -   rtf - rikt tekstformat. Er et enklere format som fungerer på tvers av de fleste programmer. Kan brukes i Word også.
@@ -271,7 +410,7 @@ stargazer(lm_est2, lm_est3,
           covariate.labels = c("Kvinne", "Alder", "Konstant"),
           report = "vcs",
           single.row = TRUE, 
-          keep.stat = c("n","rsq", "f"),
+          keep.stat = c("n","rsq", "ser"),
           digits = 1)
 ```
 
@@ -287,7 +426,7 @@ stargazer(lm_est2, lm_est3,
           covariate.labels = c("Kvinne", "Alder", "Konstant"),
           report = "vcs",
           single.row = TRUE, 
-          keep.stat = c("n","rsq", "f"),
+          keep.stat = c("n","rsq", "ser"),
           digits = 1, 
           out = "output/reg_starg.html")
 ```
@@ -297,8 +436,44 @@ Mer detaljer finner du i [{stargazer} sin vignette](https://cran.r-project.org/w
 
 
 
-### Alt 3: Bruke `gtsummary()`
+### Alt 3: Bruke {gtsummary}
+Vi har tidligere brukt {gtsummary} for å lage deskriptive tabeller, som er det pakken er best til. Men den kan også lage gode regresjonstabeller. Det er imidlertid en stor ulempe for nybegynnere i R: det er ganske krøkete å sette sammen flere regresjonsmodeller i en samlet tabell. Derfor er rådet å *ikke bruke* denne pakken med mindre du har veldig lyst til å prøve. 
 
-Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown
+Fordel med å bruke denne pakken er at man slipper å lære enda en ny pakke og slik sett ha ett sett med konsistent syntaks. En mulighet er selvsagt å ikke lage tabellene så ferdig i R, men eksportere til Word og redigere ferdig der mer manuelt. 
 
-Fordel: Kan lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket `gt`. Bruker samme rammeverk som for deskriptive tabeller med `tbl_summary`. Ulempe: Litt mer mikk-makk enn `modelsummary` og `stargazer`
+{gtsummary} kan eksportere til følgende formater: Word, rtf, html, latex og markdown. Resultatene kan også lett integreres med andre funksjoner, først og fremst "grammar of tables" i pakket {gt} og {flextable} - altså for mer avanserte ting som vi ikke dekker her.
+
+Prinsippet er å lage hver tabell for seg og så slå dem sammen med `tbl_merge` etterpå. Det innebærer en del mer kode, rett og slett. I utgangspunktet virker det ganske greit, men det er alltid en del småting som krever litt mer. 
+
+Følgende kode lager først en ryddig tabell for hver regresionsmodell og så kobler sammen disse to tabellene. 
+
+```{r}
+lm_tab1 <- tbl_regression(lm_est2, intercept = T, 
+                          estimate_fun = function(x) style_number(x, digits = 1),
+                          show_single_row = "sex",
+                          label = list(sex ~ "Kvinne")) %>% 
+    add_glance_table(include = c(nobs, r.squared, sigma))
+                     
+lm_tab2 <- tbl_regression(lm_est3, intercept = T,
+                          estimate_fun = function(x) style_number(x, digits = 1), 
+                          show_single_row = "sex",
+                          label = list(age ~ "Alder", sex ~ "Kvinne")) %>% 
+    add_glance_table(include = c(nobs, r.squared, sigma)
+  )
+
+
+tbl_merge(tbls = list(lm_tab1, lm_tab2)) %>% 
+  modify_table_body(
+    ~.x %>% 
+      dplyr::arrange(
+        row_type == "glance_statistic", # sort glance table to bottom
+        var_label                       # sort by the variable label (a hidden column) 
+      )
+  )
+
+
+
+```
+
+
+

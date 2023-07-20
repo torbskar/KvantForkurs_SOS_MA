@@ -25,7 +25,7 @@ book:
         - deskriptive_tabeller.qmd
     - part: "Del 3: Flere variable på en gang"
       chapters: 
-        - kontrollerefor.qmd
+        #- kontrollerefor.qmd
         - linearRegresjon.qmd
         - linearRegresjon_kat.qmd
     - part: "Del 4: statistisk tolkning"
