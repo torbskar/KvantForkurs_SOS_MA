@@ -413,21 +413,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>De grunnleggende funksjonene vi bruker kan ordnes sekvensielt og bindes sammen med en “pipe”. Norsk oversettelse vil være “rørlegging”. Dette er litt rart og uvant, men i første omgang kan du se for deg at det er en flyt av data fra venstre side mot høyre side. Du kan altså gjøre noe med data og “deretter gjøre” noe mer med de dataene du har endret. Vi kommer tilbake til dette nedenfor.</p>
 <p>Vi skal bruke et bittelite datasett for å demonstrere. Det er seks observasjoner og to variable. Observasjonene tilhører gruppe a, b, eller c, og variabelen “varA” har en tallverdi. Dataene ser ut som følger:</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.1     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.1     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
+
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dinedata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dinedata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  gruppe varA
 1      a    3
@@ -443,7 +432,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For å endre variable brukes funksjonen <code>mutate</code>, som har to argumenter: hvilket datasett som skal endres på, og spesifikasjon av gitte variable.</p>
 <p>Syntaksen er slik at man <em>starter</em> med å angi objektnavnet med dataene, men her skal det <em>ikke</em> skrives <code>data =</code> av grunner vi kommer tilbake til straks. Deretter skriver man navnet på ny variabel “erlik” utregning av ny verdi. I det følgende lages en ny variabel “varB” som er <em>2 ganger varA</em>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(dinedata, <span class="at">varB =</span> <span class="dv">2</span><span class="sc">*</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(dinedata, <span class="at">varB =</span> <span class="dv">2</span><span class="sc">*</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  gruppe varA varB
 1      a    3    6
@@ -457,7 +446,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Man kan også overskrive en eksisterende variabel på samme måte.</p>
 <p>Vi kan også velge bort variable med <code>select</code>. Merk at det som ble gjort med <code>mutate</code> ovenfor ikke er lagt i et nytt objekt, så det er bare printet til konsollen. Objektet “dinedata” er altså <em>ikke</em> endret. I følgende kode bruker vi <code>select</code> til velge å bare beholde “varA”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(dinedata, varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(dinedata, varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  varA
 1    3
@@ -470,7 +459,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Vi kan slette variable ved å sette minustegn foran variabelnavnet som følger:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(dinedata, <span class="sc">-</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(dinedata, <span class="sc">-</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  gruppe
 1      a
@@ -486,9 +475,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 data-number="3.5.1.2" class="anchored" data-anchor-id="pipe-med-magrittr"><span class="header-section-number">3.5.1.2</span> Pipe %&gt;% med {magrittr}</h4>
 <p>Vi bruker en “pipe” for å få lettere lesbare koder og slippe å lage mange nye objekter hele tiden. Vi kan binde sammen flere verb i en arbeidsflyt der man kun angir objektnavnet én gang.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">varB =</span> <span class="dv">2</span><span class="sc">*</span>varA) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">varB =</span> <span class="dv">2</span><span class="sc">*</span>varA) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  gruppe varB
 1      a    6
@@ -507,9 +496,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Hvis vi vil legge resultatet i et nytt objekt for å bruke det videre (og det vil vi nesten alltid!) så spesifiseres det med å sette <code>nyttobjekt &lt;-</code> helt først som følger:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dinedata2 <span class="ot">&lt;-</span> dinedata <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">varB =</span> <span class="dv">2</span><span class="sc">*</span>varA) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dinedata2 <span class="ot">&lt;-</span> dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">varB =</span> <span class="dv">2</span><span class="sc">*</span>varA) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="logiske-operatorer" class="level4" data-number="3.5.1.3">
@@ -552,8 +541,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>For å kode om kategoriske variable trenger vi disse. La oss bruke <code>mutate</code> til å gruppere sammen gruppene “a” og “b” ved å gjøre om alle “a” til “b”. Da bruker vi funksjonen <code>ifelse</code> som har syntaksen: <code>ifelse(krav, verdi hvis TRUE, verdi hvis FALSE)</code>. Altså: først kravet, og alle observasjoner som fyller dette kravet får en verdi, mens alle andre får en annen verdi. Her er en kode som sjekker hvem som er i gruppe “a”, og gjør alle disse om til “b”, og resten beholder verdiene fra variabelen “gruppe”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gruppe2 =</span> <span class="fu">ifelse</span>(gruppe <span class="sc">==</span> <span class="st">"a"</span>, <span class="st">"b"</span>, gruppe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gruppe2 =</span> <span class="fu">ifelse</span>(gruppe <span class="sc">==</span> <span class="st">"a"</span>, <span class="st">"b"</span>, gruppe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  gruppe varA gruppe2
 1      a    3       b
@@ -566,8 +555,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Logiske krav kan også kombineres med <code>&amp;</code> og <code>|</code> og også med parenteser for mer kompliserte krav. Her er et eksempel som omkoder basert på verdier på to variable for å lage en tredje variabel:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gruppe2 =</span> <span class="fu">ifelse</span>(gruppe <span class="sc">==</span> <span class="st">"a"</span> <span class="sc">&amp;</span> varA <span class="sc">&lt;</span> <span class="dv">5</span>, <span class="st">"a5"</span>, <span class="st">"andre"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gruppe2 =</span> <span class="fu">ifelse</span>(gruppe <span class="sc">==</span> <span class="st">"a"</span> <span class="sc">&amp;</span> varA <span class="sc">&lt;</span> <span class="dv">5</span>, <span class="st">"a5"</span>, <span class="st">"andre"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  gruppe varA gruppe2
 1      a    3      a5
@@ -583,8 +572,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 data-number="3.5.1.4" class="anchored" data-anchor-id="flere-verb"><span class="header-section-number">3.5.1.4</span> Flere verb</h4>
 <p>Logiske operatorer brukes også til å filtrere dataene, altså å beholde eller slette rader som oppfyller visse krav. Her er en kode som beholder alle observasjoner om <em>ikke</em> tilhører gruppe “a”:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gruppe <span class="sc">!=</span> <span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gruppe <span class="sc">!=</span> <span class="st">"a"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  gruppe varA
 1      b    5
@@ -593,42 +582,120 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 4      c    7</code></pre>
 </div>
 </div>
-<p><code>summarise</code> aggregerer</p>
+<p><code>summarise</code> aggregerer resultater i et datasett. Man må da manuelt oppgi hvordan man ønsker summere opp med funksjoner som <code>n()</code>, <code>sum()</code> osv. Her er et eksempel som summerer opp med antall observasjoner, og for en variabel regner ut totalsummen for hele datasettet, gjennomsnittet og standardavviket.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">totalt =</span> <span class="fu">sum</span>(varA), <span class="at">standardavvik =</span> <span class="fu">sd</span>(varA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">antall =</span> <span class="fu">n</span>(), <span class="at">totalt =</span> <span class="fu">sum</span>(varA), <span class="at">gjennomsnitt =</span> <span class="fu">mean</span>(varA), <span class="at">standardavvik =</span> <span class="fu">sd</span>(varA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  totalt standardavvik
-1     24      1.788854</code></pre>
+<pre><code>  antall totalt gjennomsnitt standardavvik
+1      6     24            4      1.788854</code></pre>
 </div>
 </div>
-<p><code>group_by</code> grupperer data slik at hvis vi kan gå grupperte verdier med <code>mutate</code> og <code>summarise</code>.</p>
+<p>Du synes kanskje det virker litt tungvint å lage oppsummeringer på denne måten? Det burde da finnes en egen funksjon som bare spytter ut en standard oppsummering uten å skrive så mye kode! Det gjør det selvsagt, så dette kommer vi tilbake til i <em>del 2</em> for deskriptive teknikker.</p>
+<p>Man kan også lage oppsummeringer for ulike grupper i datasettet. Funksjonen <code>group_by</code> grupperer dataene slik at når man bruker <code>summarise</code> etterpå, så blir resultatene per gruppe. Her er samme oppsummering som ovenfor, men gruppert:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gruppe) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">totalt =</span> <span class="fu">sum</span>(varA), <span class="at">standardavvik =</span> <span class="fu">sd</span>(varA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gruppe) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">antall =</span> <span class="fu">n</span>(), <span class="at">totalt =</span> <span class="fu">sum</span>(varA), <span class="at">gjennomsnitt =</span> <span class="fu">mean</span>(varA), <span class="at">standardavvik =</span> <span class="fu">sd</span>(varA)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-  gruppe totalt standardavvik
-  &lt;chr&gt;   &lt;dbl&gt;         &lt;dbl&gt;
-1 a           7         0.707
-2 b           7         2.12 
-3 c          10         2.83 </code></pre>
+<pre><code># A tibble: 3 × 5
+  gruppe antall totalt gjennomsnitt standardavvik
+  &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+1 a           2      7          3.5         0.707
+2 b           2      7          3.5         2.12 
+3 c           2     10          5           2.83 </code></pre>
 </div>
 </div>
+<p>Merk at når et datasett først er gruppert, så vil alle utregninger fortsette å være gruppert helt til du legger til <code>... %&gt;% ungroup()</code>.</p>
+<p>Merk at <code>summarise</code> gjør at man bare får ut de aggregerte tallene. Noen ganger trenger man å inkludere en aggregert sum i de opprinnelige dataene. Et eksempel er hvis man vil regne ut for hver observasjon om den er over eller under gjennomsnittet i gruppen (eller totalt). Det følgende eksempelet lager nye variable med antall i gruppen og gjennomsnittet, regner avvik fra gjennomsnittet for hver observasjon og så “dummy” for om observasjonen er over gjennomsnittet eller ikke.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gruppe) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">antall =</span> <span class="fu">n</span>(), <span class="at">gjennomsnitt =</span> <span class="fu">mean</span>(varA), </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">avvik =</span> varA <span class="sc">-</span> gjennomsnitt, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">over_snittet =</span> <span class="fu">ifelse</span>(avvik <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+# Groups:   gruppe [3]
+  gruppe  varA antall gjennomsnitt avvik over_snittet
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;
+1 a          3      2          3.5  -0.5            0
+2 b          5      2          3.5   1.5            1
+3 b          2      2          3.5  -1.5            0
+4 a          4      2          3.5   0.5            1
+5 c          3      2          5    -2              0
+6 c          7      2          5     2              1</code></pre>
+</div>
+</div>
+<p>Resultatene kommer ut i samme rekkefølge som de var fra før selv om dataene er gruppert. Noen ganger trenger vi også å sortere dataene med funksjonen <code>arrange</code>. Akkurat her kan sortering være greit bare for å få et ryddigere output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gruppe) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">antall =</span> <span class="fu">n</span>(), <span class="at">gjennomsnitt =</span> <span class="fu">mean</span>(varA), </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">avvik =</span> varA <span class="sc">-</span> gjennomsnitt, </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">over_snittet =</span> <span class="fu">ifelse</span>(avvik <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(gruppe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+# Groups:   gruppe [3]
+  gruppe  varA antall gjennomsnitt avvik over_snittet
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;
+1 a          3      2          3.5  -0.5            0
+2 a          4      2          3.5   0.5            1
+3 b          5      2          3.5   1.5            1
+4 b          2      2          3.5  -1.5            0
+5 c          3      2          5    -2              0
+6 c          7      2          5     2              1</code></pre>
+</div>
+</div>
+<p>Ovenfor ser du eksempler på at flere funksjoner settes sammen med “pipe”, %&gt;%. Man kan sette sammen så mange slike man vil, men det er en fordel å ikke ha så mange at man mister oversikten: da bør du heller dele opp og lage noen nye objekter som mellomtrinn. Merk at i en slik rekke av funksjoner så utføres operasjonene i <em>rekkefølge</em>. Hvis du f.eks. lager en ny variabel kan du bruke den til å filtere <em>etterpå</em>, men ikke <em>før</em> du har laget den.</p>
+<p>Her er et eksempel der vi ønsker å få ut den observasjonen i hver gruppe som har høyeste positive avvik fra gjennomsnittet. Da sorteres det først på både gruppe og avvik, men merk at for avviket vil vi ha det sortert fra høyeste verdi til laveste verdi som angis med <code>desc(avvik)</code>. (Funksjonen <code>desc</code> er forkortelse for “descending”, altså synkende). Deretter filtreres det ved å plukke ut den første observasjonen i hver gruppe, og til dette brukes en funksjon som nummererer radene i hver gruppe <code>row_number()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gruppe) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">antall =</span> <span class="fu">n</span>(), <span class="at">gjennomsnitt =</span> <span class="fu">mean</span>(varA), </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">avvik =</span> varA <span class="sc">-</span> gjennomsnitt) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(gruppe, <span class="fu">desc</span>(avvik)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+# Groups:   gruppe [3]
+  gruppe  varA antall gjennomsnitt avvik
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;int&gt;        &lt;dbl&gt; &lt;dbl&gt;
+1 a          4      2          3.5   0.5
+2 b          5      2          3.5   1.5
+3 c          7      2          5     2  </code></pre>
+</div>
+</div>
+<p>Det er mulig det ovenstående ikke fremstår veldig nyttig. Men poenget er å introdusere noe grunnleggende om hvordan R og <em>tidyverse</em> fungerer. Det gjør det lettere å forstå det etterfølgende kapitlene - som er konkret nyttige.</p>
 </section>
 </section>
 <section id="grafikk-ggplot2" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="grafikk-ggplot2"><span class="header-section-number">3.5.2</span> Grafikk: {ggplot2}</h3>
+<p>“Base R” har en del innebygde funksjoner for å lage grafikk som vi <em>ikke</em> dekker her. Grunnen til dette er at vi vektlegger funksjonen fra tidyverse <code>ggplot</code>. Det er noen viktige grunner til dette:</p>
+<ol type="1">
+<li><code>ggplot</code> fungerer det sømløst med arbeidsflyten vi har vist over</li>
+<li><code>ggplot</code> er en fullstendig <em>gramatikk</em> for all slags grafiske fremstillinger av data. Vi ser på det grunnleggende her, men dette kan også brukes til å lage 3D-fremstillinger, kart og animasjoner og mye mer.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li><code>ggplot</code> gir ikke bare funksjonelle plot, men også i professjonelt publiserbar kvalitet. Selv hvis forlag har sære krav til fonter, fargebruk, dimensjoner og formater, så kan det fikses i <code>ggplot</code>. Dessuten blir det pent.</li>
+</ol>
+<p>Første kapittel om deskriptiv statistikk handler om grafikk og vi går inn i detaljene der etterhvert som det trengs der.</p>
+<p>Et viktig moment i <code>ggplot</code> er at det er <em>lagdelt</em> og hvert lag skilles med <code>+</code> på en måte som ligner på “pipe”. Man kan så legge på flere lag oppgå det første laget. En vanlig feilmelding i starten er at man bruker <code>%&gt;%</code> når det skulle vært <code>+</code>.</p>
 </section>
 <section id="import-av-data-haven" class="level3" data-number="3.5.3">
 <h3 data-number="3.5.3" class="anchored" data-anchor-id="import-av-data-haven"><span class="header-section-number">3.5.3</span> Import av data: {haven}</h3>
+<p>R kan importere det aller meste av dataformater, men spesielt for samfunnsvitenskapen er noen formater som primært er brukt i samfunnsvitenskap. Det gjelder Stata, SPSS og SAS. Pakken {haven} er en del av tidyverse og tar seg av dette. Dette er forklart nærmere i kapittelet om import av data.</p>
 </section>
 <section id="andre-funksjoner" class="level3" data-number="3.5.4">
 <h3 data-number="3.5.4" class="anchored" data-anchor-id="andre-funksjoner"><span class="header-section-number">3.5.4</span> Andre funksjoner</h3>
 
 
 </section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Dette er i kontrast til annen statistikksoftware som i større grad er basert på enkeltfunksjoner for mer avgrensede typer grafikk.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

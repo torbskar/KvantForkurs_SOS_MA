@@ -79,6 +79,8 @@ Vi skal bruke et bittelite datasett for å demonstrere. Det er seks observasjone
 
 ```{r}
 #| echo: false
+#| message: false
+#| warning: false
 library(tidyverse)
 dinedata <- data.frame(gruppe = c("a", "b", "b", "a", "c", "c"), 
                        varA = c(3, 5, 2, 4, 3, 7))
@@ -174,6 +176,9 @@ dinedata %>%
 Logiske operatorer brukes også til å filtrere dataene, altså å beholde eller slette rader som oppfyller visse krav. Her er en kode som beholder alle observasjoner om *ikke* tilhører gruppe "a": 
 
 ```{r}
+#| message: false
+#| warning: false
+#| error: false
 dinedata %>% 
   filter(gruppe != "a")
 
@@ -181,25 +186,92 @@ dinedata %>%
 
 
 
-`summarise` aggregerer
+`summarise` aggregerer resultater i et datasett. Man må da manuelt oppgi hvordan man ønsker summere opp med funksjoner som `n()`, `sum()` osv. Her er et eksempel som summerer opp med antall observasjoner, og for en variabel regner ut totalsummen for hele datasettet, gjennomsnittet og standardavviket. 
 
 ```{r}
+#| message: false
+#| warning: false
+#| error: false
 dinedata %>% 
-  summarise(totalt = sum(varA), standardavvik = sd(varA))
+  summarise(antall = n(), totalt = sum(varA), gjennomsnitt = mean(varA), standardavvik = sd(varA))
 
 ```
 
-`group_by` grupperer data slik at hvis vi kan gå grupperte verdier med `mutate` og `summarise`.
+Du synes kanskje det virker litt tungvint å lage oppsummeringer på denne måten? Det burde da finnes en egen funksjon som bare spytter ut en standard oppsummering uten å skrive så mye kode! Det gjør det selvsagt, så dette kommer vi tilbake til i *del 2* for deskriptive teknikker. 
+
+Man kan også lage oppsummeringer for ulike grupper i datasettet. Funksjonen `group_by` grupperer dataene slik at når man bruker `summarise` etterpå, så blir resultatene per gruppe. Her er samme oppsummering som ovenfor, men gruppert:
 
 ```{r}
 dinedata %>% 
   group_by(gruppe) %>% 
-  summarise(totalt = sum(varA), standardavvik = sd(varA))
+  summarise(antall = n(), totalt = sum(varA), gjennomsnitt = mean(varA), standardavvik = sd(varA)) 
 
 ```
 
+Merk at når et datasett først er gruppert, så vil alle utregninger fortsette å være gruppert helt til du legger til `... %>% ungroup()`. 
+
+Merk at `summarise` gjør at man bare får ut de aggregerte tallene. Noen ganger trenger man å inkludere en aggregert sum i de opprinnelige dataene. Et eksempel er hvis man vil regne ut for hver observasjon om den er over eller under gjennomsnittet i gruppen (eller totalt). Det følgende eksempelet lager nye variable med antall i gruppen og gjennomsnittet, regner avvik fra gjennomsnittet for hver observasjon og så "dummy" for om observasjonen er over gjennomsnittet eller ikke. 
+
+```{r}
+dinedata %>% 
+  group_by(gruppe) %>% 
+  mutate(antall = n(), gjennomsnitt = mean(varA), 
+         avvik = varA - gjennomsnitt, 
+         over_snittet = ifelse(avvik > 0, 1, 0)) 
+
+```
+
+Resultatene kommer ut i samme rekkefølge som de var fra før selv om dataene er gruppert. Noen ganger trenger vi også å sortere dataene med funksjonen `arrange`. Akkurat her kan sortering være greit bare for å få et ryddigere output. 
+
+```{r}
+dinedata %>% 
+  group_by(gruppe) %>% 
+  mutate(antall = n(), gjennomsnitt = mean(varA), 
+         avvik = varA - gjennomsnitt, 
+         over_snittet = ifelse(avvik > 0, 1, 0)) %>% 
+  arrange(gruppe)
+
+```
+
+Ovenfor ser du eksempler på at flere funksjoner settes sammen med "pipe", %>%. Man kan sette sammen så mange slike man vil, men det er en fordel å ikke ha så mange at man mister oversikten: da bør du heller dele opp og lage noen nye objekter som mellomtrinn. Merk at i en slik rekke av funksjoner så utføres operasjonene i *rekkefølge*. Hvis du f.eks. lager en ny variabel kan du bruke den til å filtere *etterpå*, men ikke *før* du har laget den. 
+
+Her er et eksempel der vi ønsker å få ut den observasjonen i hver gruppe som har høyeste positive avvik fra gjennomsnittet. Da sorteres det først på både gruppe og avvik, men merk at for avviket vil vi ha det sortert fra høyeste verdi til laveste verdi som angis med `desc(avvik)`. (Funksjonen `desc` er forkortelse for "descending", altså synkende). Deretter filtreres det ved å plukke ut den første observasjonen i hver gruppe, og til dette brukes en funksjon som nummererer radene i hver gruppe `row_number()`.  
+
+```{r}
+dinedata %>% 
+  group_by(gruppe) %>% 
+  mutate(antall = n(), gjennomsnitt = mean(varA), 
+         avvik = varA - gjennomsnitt) %>% 
+  arrange(gruppe, desc(avvik)) %>% 
+  filter(row_number() == 1)
+
+```
+
+
+Det er mulig det ovenstående ikke fremstår veldig nyttig. Men poenget er å introdusere noe grunnleggende om hvordan R og *tidyverse* fungerer. Det gjør det lettere å forstå det etterfølgende kapitlene - som er konkret nyttige.   
+
 ### Grafikk: {ggplot2}
 
+"Base R" har en del innebygde funksjoner for å lage grafikk som vi *ikke* dekker her. Grunnen til dette er at vi vektlegger funksjonen fra tidyverse `ggplot`. Det er noen viktige grunner til dette: 
+
+1) `ggplot` fungerer det sømløst med arbeidsflyten vi har vist over 
+1) `ggplot` er en fullstendig *gramatikk* for all slags grafiske fremstillinger av data. Vi ser på det grunnleggende her, men dette kan også brukes til å lage 3D-fremstillinger, kart og animasjoner og mye mer.^[Dette er i kontrast til annen statistikksoftware som i større grad er basert på enkeltfunksjoner for mer avgrensede typer grafikk.] 
+1) `ggplot` gir ikke bare funksjonelle plot, men også i professjonelt publiserbar kvalitet. Selv hvis forlag har sære krav til fonter, fargebruk, dimensjoner og formater, så kan det fikses i `ggplot`. Dessuten blir det pent.
+
+Første kapittel om deskriptiv statistikk handler om grafikk og vi går inn i detaljene der etterhvert som det trengs der. 
+
+Et viktig moment i `ggplot` er at det er *lagdelt* og hvert lag skilles med `+` på en måte som ligner på "pipe". Man kan så legge på flere lag oppgå det første laget. En vanlig feilmelding i starten er at man bruker `%>%` når det skulle vært `+`. 
+
+
+
 ### Import av data: {haven}
+R kan importere det aller meste av dataformater, men spesielt for samfunnsvitenskapen er noen formater som primært er brukt i samfunnsvitenskap. Det gjelder Stata, SPSS og SAS. Pakken {haven} er en del av tidyverse og tar seg av dette. Dette er forklart nærmere i kapittelet om import av data. 
+
+
 
 ### Andre funksjoner
+
+
+
+
+
