@@ -269,9 +269,114 @@ R kan importere det aller meste av dataformater, men spesielt for samfunnsvitens
 
 
 
-### Andre funksjoner
+## Andre nyttige ting
+
+### Hjelpfiler / dokumentasjon
+Dokumentasjonen i R er ofte ganske vanskelig å lese når man ikke er så god (ennå) i å bruke R. Det tar rett og slett litt tid å bli vant til hvordan ting fungerer. Hjelpfilene er skrevet slik at de er lette å finne frem i for erfarne brukere, men du er kanskje ikke der riktig ennå? Her gis en liten introduksjon for å hjelpe deg til å komme igang. Men ellers vil det meste du trenger å kunne forklares fortløpende etterhvert som funksjonene introduseres. Så foreløpig er rådet å ikke stresse med å finne ut av dette ennå. Men det er greit å vite at de finnes!  
+
+Alle R-pakker kommer med egne dokumentasjonsfiler, og det er en slik fil til hver funksjon. Denne åpnes med kommandoen `?` foran navnet på funksjonen. For å se nærmere på funksjonen for å lese inn csv-filer, `read.csv` blir det altså `?read.csv`. Hjelpfilen åpens i en egen fane i Rstudio.  
+
+Noen ganger er det flere funksjoner som er varianter av hverandre som står i samme dokumentasjon. F.eks. vil dokumentasjonen for `read.csv` også inneholde `read.table`, `read.delim` og et par andre. De har samme argumenter og struktur, og altså samme dokumentasjon. 
+
+Hjelpfiler har en fast struktur. Under overskriften **Usage** står koden med angitte forvalg for funksjonen(e). Hvis man ikke angir annet, så er det disse argumentene som brukes. Det gjør at man ofte ikke behøver å spesifisere så mye kode hver gang. Hvis man ønsker å gjøre noe *annet* må man imidlertid angi de relevante argumentene. 
+
+Under overskriften **Arguments** vil det stå spesifisert hva hvert argument gjør, og ofte angitt hvilke verdier som er gyldige å angi. 
+
+Under overskriften **Details** vil det gjerne være noe nærmere forklart, gjøre oppmerksom på spesielle utfordringer etc. 
+
+Under overskriften **Value** kan det stå noe mer om hva som kommer *ut* av funksjonen. Dette kan være hva slags objekt det blir eller andre ting. 
+
+Under overskriften **See Also** vil det være referanser til andre funksjoner som er relevante, enten alternativer eller tilleggsfunksjoner etc.  
+
+Overskriften **Examples** er gjerne den mest nyttige. Det er rett og slett noen korte kodesnutter som illustrerer bruken. 
+
+
+#### Vignetter
+Alle R-pakker publiseres på en server, CRAN, og hver pakke har sin egen side. Du kan gå inn på denne direkte. [Her er lenken til tidyverse på CRAN](https://cran.r-project.org/web/packages/tidyverse/index.html). Under overskriften **Dokumentation** vil det være en lenke til en referansemanual, som er den samme som når du bruker `?` i R, men her får du alt tilhørende pakken i en samlet pdf-fil. 
+
+For mange pakker vil deg også være lenker til "Vignettes". Disse er gjerne mer utførlige tekster som forklarer pakkens struktur og viser bruk. Disse er gjerne de mest nyttige for vanlige brukere. Noen ganger er det egne nettsider for disse pakkene og vignettene. Det er lenket til flere slike i det etterfølgende. 
+
+
+### Bruke pakker uten å laste dem
+Det hender at man trenger å bruke en funksjon fra en spesifikk pakke én gang og derfor ikke har behov for å laste pakken. Som nevnt ovenfor hender det at funksjoner har samme navn i ulike pakker slik at det finnes en konflikt der R kan komme til å bruke en annen funksjon enn du hadde tenkt. Det burde ikke være et problem i noe av det som dekkes i dette heftet, men kan være greit å vite likevel. 
+
+En funksjon fra en spesifikk pakke kan angis med `pakkenavn::funksjon()`. Her er et eksempel der man eksplisitt angir å bruke funksjonen `summarise` fra pakken {dplyr}. 
+
+```{r}
+dplyr::summarise(dinedata, antall = n(), snitt = mean(varA))
+
+
+```
+
+
+### Addins 
+Rstudio er det mulig å installere såkalte "addins". Dette gir ikke økt funksjonalitet til R, men til Rstudio. Noen av disse hjelper deg med å skrive kode med bruk av menyer. Dette kan være nyttig for å finne ut av problemer og vanskelig syntaks - men er ikke noe du skal bruke på daglig basis. Det er *hjelp* til å finne ut av ting, så bruk det til å lære!  
+
+Addins installeres på samme måte som R-pakker med `install.packages`, men du trenger ikke laste det med `library` for å brukes. I stedet er funksjonene tilgjengelig i Rstudio-menyen "Addins". Det er mulig du må søke opp f
+
+Det er veldig viktig at du bruker slike addins på en måte som gjør at du *lærer deg R* på ordentlig. Du kan ikke belage deg på å bruke addins i det lange løp. De som nevnes nedenfor genererer kode for deg og du bør så lime den koden inn i scriptet ditt! 
+
+#### Styler - skriv pent 
+I R spiller det ingen rolle *hvordan* du skriver kode: linjeskift, innrykk og mellomrom etter parentes osv gir det samme resultatet. (Komma og parenteser er derimot viktig!). Men det er ikke likegyldig for lesbarheten. {styler} kan brukes til å bedre lesbarheten av egen kode. Denne addin'en er laget av de samme som lager tidyverse, og er derfor utmerket verktøy for å skrive bedre kode. "Bedre" er da her i betydningen ryddig og ordentlig, noe som gjør den lettere å lese, de-bugge og at andre forstår koden din. 
+
+Du kan se nærmere på [vignetten til Styler](https://www.tidyverse.org/blog/2017/12/styler-1.0.0/) 
+
+
+#### Esquisse - grafikk 
+Esquisse kan brukes til å lage grafikk med "drag-and-drop". Noen synes det er lettere i begynnelsen. Men det viktigste med å bruke slike verktøy er at du etterpå kan vise koden slik den lages med `ggplot`.  
+
+Du kan se nærmere på [vignetten til Esquisse](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html). 
+
+#### Questionr - omkode factor
+Å omkode factor-variable kan være litt styr. Det er en egen addin for dette formålet. 
+
+OBS! Questionr generer kode i base-R. Det er altså *ikke* helt den samme dialekten som ellers er dekket her. Men det er likheter, så det kan være til hjelp likevel. 
+
+Du kan se nærmere på [vignetten til questionr](https://cran.r-project.org/web/packages/questionr/vignettes/recoding_addins.html). 
 
 
 
+### Få hjelp av chatGPT 
+Det er mye snakk om kunstig intelligens for tiden, og AI er overalt. En av de tingene som AI-verktøy som chatGPT faktisk er god på er å skrive kode i mange språk, deriblant R. Det er imidlertid ingenting ved chatGPT som gjør at du ikke trenger å kunne skrive kode selv.^[Nei, heller ikke med *code interpreter*.] Du må nemlig vite om løsningen gjør det du faktisk ønsker. 
+
+Effektiv bruk av chatGPT innebærer at du kan formulere promptet godt. For å få til det bør du derfor vite hva du driver med. Du trenger også kunnskap og erfaring for å se om kodeforslaget ser rimelig ut, og vurdere om løsningen bruker riktige pakker. Det er ofte lurt å spesifisere at du vil ha en løsning med tidyverse eller andre spesifikke pakker. Oppfølgingsspørsmål kan også være nødvendig. 
+
+Du må *aldri* bruk kode fra chatGPT (eller andre verktøy) uten at du forstår hva koden faktisk gjør. Det kan innebære at du må teste koden på dine data grundig. Det krever også ferdigheter. Du må rett og slett ha et godt grunnlag for å forstå koden. I mellomtiden kan du godt bruke chatGPT til å *lære deg* R. 
+
+Hvis du skal bruke chatGPT så bør du starte med å bruke det til å forstå instruksjoner du har problemer med. Prøv ut med følgende prompt: 
+
+```{r}
+#| eval: false
+#| warning: false
+#| error: false
+
+Kan du forklare følgende kode? 
+  dinedata %>% 
+  group_by(gruppe) %>% 
+  mutate(antall = n(), gjennomsnitt = mean(varA), 
+         avvik = varA - gjennomsnitt) %>% 
+  arrange(gruppe, desc(avvik)) %>% 
+  filter(row_number() == 1)
+
+```
+
+
+Du kan også bruke chatGPT til å finne feil i koden du ikke klarer å finne ut av selv. Du kan legge til en "kontekst" og be chatGPT om å finne feilen som gjør at du ikke får det resultatet du forventer. Prøv ut med følgende prompt: 
+
+```{r}
+#| eval: false
+#| warning: false
+#| error: false
+Jeg ønsker å få aggregerte statistikker for et datasett, men det blir ikke riktig. Kan du finne feilen i følgende kode? 
+  dinedata %>% 
+  group_by(gruppe) %>% 
+  mutate(antall = n(), gjennomsnitt = mean(varA), 
+         avvik = varA - gjennomsnitt) %>% 
+  arrange(gruppe, desc(avvik)) %>% 
+  filter(row_number() == 1)
+
+```
+
+Merk at chatGPT da vil foreslå en løsning. Denne er ikke nødvendigvis riktig! Da jeg testet på ovenstående ga chatGPT råd om å bruke funksjonen `reframe` i stedet. Det er ikke riktig, selv om det også er mulig. Funksjonen `summarise` ville være en bedre løsning. 
 
 

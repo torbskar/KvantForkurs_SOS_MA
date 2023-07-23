@@ -4,7 +4,9 @@ Dette materialet er beregnet på et forkurs for masterstudenter i sosiologi ved 
 
 Det anbefales å repetere materiale fra kurs i kvantitative metoder på bachelornivå. Forkurset er en oppfrisker av det aller viktigste materialet fra [SOSGEO1120](https://www.uio.no/studier/emner/sv/iss/SOSGEO1120/).
 
-De som lært annen statistikksoftware enn R på bachelornivå vil ha særlig nytte av dette kurset. I tillegg til programmeringsspråket skal du lære å lage en hensiktsmessig mappestruktur og lese inn datasett i R. 
+De som lært annen statistikksoftware enn R på bachelornivå vil ha særlig nytte av dette kurset. Har man tatt bachelorgrad annet sted enn ved UiO kan man ha lært å bruke Stata, SPSS eller noe slikt. Da trenger du en introduksjon til R, men hva vi skal gjøre vil være tilsvarende. 
+
+En av de store forskjellene fra SPSS og Stata er at R **ikke** er menybasert. Du kan altså ikke gjøre analyser med "pek-og-klikk"! Det bør du jo egentlig uansett ikke gjøre i andre software heller - så forhåpenligvis har du lært å skrive kode fra før. R er altså et programmeringsspråk, og det er viktig å lære å skrive kode. I tillegg til programmeringsspråket skal du lære å lage en hensiktsmessig mappestruktur og lese inn datasett i R. 
 
 Datasettet som skal brukes i SOS4020 er tilgangsbegrenset så det er litt formaliteter som må på plass først. Det skal vi gå på plass her slik at dere har lovlig tilgang til dataene. Men gjennomgangen og eksempler i det følgende vil basere seg på det samme datasett som brukes gjennomgående i SOSGEO1120. Til hvert kapittel er det oppgaver. Først og fremst skal dere kunne gjøre de samme operasjonene på egen datamaskin. Dernest skal dere bruke NorLAG til å gjøre noe mer selvstendige analyser med de samme teknikkene. 
 

@@ -334,7 +334,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#datahåndtering-dplyr" id="toc-datahåndtering-dplyr" class="nav-link" data-scroll-target="#datahåndtering-dplyr"><span class="toc-section-number">3.5.1</span>  Datahåndtering: {dplyr}</a></li>
   <li><a href="#grafikk-ggplot2" id="toc-grafikk-ggplot2" class="nav-link" data-scroll-target="#grafikk-ggplot2"><span class="toc-section-number">3.5.2</span>  Grafikk: {ggplot2}</a></li>
   <li><a href="#import-av-data-haven" id="toc-import-av-data-haven" class="nav-link" data-scroll-target="#import-av-data-haven"><span class="toc-section-number">3.5.3</span>  Import av data: {haven}</a></li>
-  <li><a href="#andre-funksjoner" id="toc-andre-funksjoner" class="nav-link" data-scroll-target="#andre-funksjoner"><span class="toc-section-number">3.5.4</span>  Andre funksjoner</a></li>
+  </ul></li>
+  <li><a href="#andre-nyttige-ting" id="toc-andre-nyttige-ting" class="nav-link" data-scroll-target="#andre-nyttige-ting"><span class="toc-section-number">3.6</span>  Andre nyttige ting</a>
+  <ul class="collapse">
+  <li><a href="#hjelpfiler-dokumentasjon" id="toc-hjelpfiler-dokumentasjon" class="nav-link" data-scroll-target="#hjelpfiler-dokumentasjon"><span class="toc-section-number">3.6.1</span>  Hjelpfiler / dokumentasjon</a></li>
+  <li><a href="#bruke-pakker-uten-å-laste-dem" id="toc-bruke-pakker-uten-å-laste-dem" class="nav-link" data-scroll-target="#bruke-pakker-uten-å-laste-dem"><span class="toc-section-number">3.6.2</span>  Bruke pakker uten å laste dem</a></li>
+  <li><a href="#addins" id="toc-addins" class="nav-link" data-scroll-target="#addins"><span class="toc-section-number">3.6.3</span>  Addins</a></li>
+  <li><a href="#få-hjelp-av-chatgpt" id="toc-få-hjelp-av-chatgpt" class="nav-link" data-scroll-target="#få-hjelp-av-chatgpt"><span class="toc-section-number">3.6.4</span>  Få hjelp av chatGPT</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -685,8 +691,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="3.5.3" class="anchored" data-anchor-id="import-av-data-haven"><span class="header-section-number">3.5.3</span> Import av data: {haven}</h3>
 <p>R kan importere det aller meste av dataformater, men spesielt for samfunnsvitenskapen er noen formater som primært er brukt i samfunnsvitenskap. Det gjelder Stata, SPSS og SAS. Pakken {haven} er en del av tidyverse og tar seg av dette. Dette er forklart nærmere i kapittelet om import av data.</p>
 </section>
-<section id="andre-funksjoner" class="level3" data-number="3.5.4">
-<h3 data-number="3.5.4" class="anchored" data-anchor-id="andre-funksjoner"><span class="header-section-number">3.5.4</span> Andre funksjoner</h3>
+</section>
+<section id="andre-nyttige-ting" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="andre-nyttige-ting"><span class="header-section-number">3.6</span> Andre nyttige ting</h2>
+<section id="hjelpfiler-dokumentasjon" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="hjelpfiler-dokumentasjon"><span class="header-section-number">3.6.1</span> Hjelpfiler / dokumentasjon</h3>
+<p>Dokumentasjonen i R er ofte ganske vanskelig å lese når man ikke er så god (ennå) i å bruke R. Det tar rett og slett litt tid å bli vant til hvordan ting fungerer. Hjelpfilene er skrevet slik at de er lette å finne frem i for erfarne brukere, men du er kanskje ikke der riktig ennå? Her gis en liten introduksjon for å hjelpe deg til å komme igang. Men ellers vil det meste du trenger å kunne forklares fortløpende etterhvert som funksjonene introduseres. Så foreløpig er rådet å ikke stresse med å finne ut av dette ennå. Men det er greit å vite at de finnes!</p>
+<p>Alle R-pakker kommer med egne dokumentasjonsfiler, og det er en slik fil til hver funksjon. Denne åpnes med kommandoen <code>?</code> foran navnet på funksjonen. For å se nærmere på funksjonen for å lese inn csv-filer, <code>read.csv</code> blir det altså <code>?read.csv</code>. Hjelpfilen åpens i en egen fane i Rstudio.</p>
+<p>Noen ganger er det flere funksjoner som er varianter av hverandre som står i samme dokumentasjon. F.eks. vil dokumentasjonen for <code>read.csv</code> også inneholde <code>read.table</code>, <code>read.delim</code> og et par andre. De har samme argumenter og struktur, og altså samme dokumentasjon.</p>
+<p>Hjelpfiler har en fast struktur. Under overskriften <strong>Usage</strong> står koden med angitte forvalg for funksjonen(e). Hvis man ikke angir annet, så er det disse argumentene som brukes. Det gjør at man ofte ikke behøver å spesifisere så mye kode hver gang. Hvis man ønsker å gjøre noe <em>annet</em> må man imidlertid angi de relevante argumentene.</p>
+<p>Under overskriften <strong>Arguments</strong> vil det stå spesifisert hva hvert argument gjør, og ofte angitt hvilke verdier som er gyldige å angi.</p>
+<p>Under overskriften <strong>Details</strong> vil det gjerne være noe nærmere forklart, gjøre oppmerksom på spesielle utfordringer etc.</p>
+<p>Under overskriften <strong>Value</strong> kan det stå noe mer om hva som kommer <em>ut</em> av funksjonen. Dette kan være hva slags objekt det blir eller andre ting.</p>
+<p>Under overskriften <strong>See Also</strong> vil det være referanser til andre funksjoner som er relevante, enten alternativer eller tilleggsfunksjoner etc.</p>
+<p>Overskriften <strong>Examples</strong> er gjerne den mest nyttige. Det er rett og slett noen korte kodesnutter som illustrerer bruken.</p>
+<section id="vignetter" class="level4" data-number="3.6.1.1">
+<h4 data-number="3.6.1.1" class="anchored" data-anchor-id="vignetter"><span class="header-section-number">3.6.1.1</span> Vignetter</h4>
+<p>Alle R-pakker publiseres på en server, CRAN, og hver pakke har sin egen side. Du kan gå inn på denne direkte. <a href="https://cran.r-project.org/web/packages/tidyverse/index.html">Her er lenken til tidyverse på CRAN</a>. Under overskriften <strong>Dokumentation</strong> vil det være en lenke til en referansemanual, som er den samme som når du bruker <code>?</code> i R, men her får du alt tilhørende pakken i en samlet pdf-fil.</p>
+<p>For mange pakker vil deg også være lenker til “Vignettes”. Disse er gjerne mer utførlige tekster som forklarer pakkens struktur og viser bruk. Disse er gjerne de mest nyttige for vanlige brukere. Noen ganger er det egne nettsider for disse pakkene og vignettene. Det er lenket til flere slike i det etterfølgende.</p>
+</section>
+</section>
+<section id="bruke-pakker-uten-å-laste-dem" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="bruke-pakker-uten-å-laste-dem"><span class="header-section-number">3.6.2</span> Bruke pakker uten å laste dem</h3>
+<p>Det hender at man trenger å bruke en funksjon fra en spesifikk pakke én gang og derfor ikke har behov for å laste pakken. Som nevnt ovenfor hender det at funksjoner har samme navn i ulike pakker slik at det finnes en konflikt der R kan komme til å bruke en annen funksjon enn du hadde tenkt. Det burde ikke være et problem i noe av det som dekkes i dette heftet, men kan være greit å vite likevel.</p>
+<p>En funksjon fra en spesifikk pakke kan angis med <code>pakkenavn::funksjon()</code>. Her er et eksempel der man eksplisitt angir å bruke funksjonen <code>summarise</code> fra pakken {dplyr}.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">summarise</span>(dinedata, <span class="at">antall =</span> <span class="fu">n</span>(), <span class="at">snitt =</span> <span class="fu">mean</span>(varA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  antall snitt
+1      6     4</code></pre>
+</div>
+</div>
+</section>
+<section id="addins" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="addins"><span class="header-section-number">3.6.3</span> Addins</h3>
+<p>Rstudio er det mulig å installere såkalte “addins”. Dette gir ikke økt funksjonalitet til R, men til Rstudio. Noen av disse hjelper deg med å skrive kode med bruk av menyer. Dette kan være nyttig for å finne ut av problemer og vanskelig syntaks - men er ikke noe du skal bruke på daglig basis. Det er <em>hjelp</em> til å finne ut av ting, så bruk det til å lære!</p>
+<p>Addins installeres på samme måte som R-pakker med <code>install.packages</code>, men du trenger ikke laste det med <code>library</code> for å brukes. I stedet er funksjonene tilgjengelig i Rstudio-menyen “Addins”. Det er mulig du må søke opp f</p>
+<p>Det er veldig viktig at du bruker slike addins på en måte som gjør at du <em>lærer deg R</em> på ordentlig. Du kan ikke belage deg på å bruke addins i det lange løp. De som nevnes nedenfor genererer kode for deg og du bør så lime den koden inn i scriptet ditt!</p>
+<section id="styler---skriv-pent" class="level4" data-number="3.6.3.1">
+<h4 data-number="3.6.3.1" class="anchored" data-anchor-id="styler---skriv-pent"><span class="header-section-number">3.6.3.1</span> Styler - skriv pent</h4>
+<p>I R spiller det ingen rolle <em>hvordan</em> du skriver kode: linjeskift, innrykk og mellomrom etter parentes osv gir det samme resultatet. (Komma og parenteser er derimot viktig!). Men det er ikke likegyldig for lesbarheten. {styler} kan brukes til å bedre lesbarheten av egen kode. Denne addin’en er laget av de samme som lager tidyverse, og er derfor utmerket verktøy for å skrive bedre kode. “Bedre” er da her i betydningen ryddig og ordentlig, noe som gjør den lettere å lese, de-bugge og at andre forstår koden din.</p>
+<p>Du kan se nærmere på <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">vignetten til Styler</a></p>
+</section>
+<section id="esquisse---grafikk" class="level4" data-number="3.6.3.2">
+<h4 data-number="3.6.3.2" class="anchored" data-anchor-id="esquisse---grafikk"><span class="header-section-number">3.6.3.2</span> Esquisse - grafikk</h4>
+<p>Esquisse kan brukes til å lage grafikk med “drag-and-drop”. Noen synes det er lettere i begynnelsen. Men det viktigste med å bruke slike verktøy er at du etterpå kan vise koden slik den lages med <code>ggplot</code>.</p>
+<p>Du kan se nærmere på <a href="https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html">vignetten til Esquisse</a>.</p>
+</section>
+<section id="questionr---omkode-factor" class="level4" data-number="3.6.3.3">
+<h4 data-number="3.6.3.3" class="anchored" data-anchor-id="questionr---omkode-factor"><span class="header-section-number">3.6.3.3</span> Questionr - omkode factor</h4>
+<p>Å omkode factor-variable kan være litt styr. Det er en egen addin for dette formålet.</p>
+<p>OBS! Questionr generer kode i base-R. Det er altså <em>ikke</em> helt den samme dialekten som ellers er dekket her. Men det er likheter, så det kan være til hjelp likevel.</p>
+<p>Du kan se nærmere på <a href="https://cran.r-project.org/web/packages/questionr/vignettes/recoding_addins.html">vignetten til questionr</a>.</p>
+</section>
+</section>
+<section id="få-hjelp-av-chatgpt" class="level3" data-number="3.6.4">
+<h3 data-number="3.6.4" class="anchored" data-anchor-id="få-hjelp-av-chatgpt"><span class="header-section-number">3.6.4</span> Få hjelp av chatGPT</h3>
+<p>Det er mye snakk om kunstig intelligens for tiden, og AI er overalt. En av de tingene som AI-verktøy som chatGPT faktisk er god på er å skrive kode i mange språk, deriblant R. Det er imidlertid ingenting ved chatGPT som gjør at du ikke trenger å kunne skrive kode selv.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Du må nemlig vite om løsningen gjør det du faktisk ønsker.</p>
+<p>Effektiv bruk av chatGPT innebærer at du kan formulere promptet godt. For å få til det bør du derfor vite hva du driver med. Du trenger også kunnskap og erfaring for å se om kodeforslaget ser rimelig ut, og vurdere om løsningen bruker riktige pakker. Det er ofte lurt å spesifisere at du vil ha en løsning med tidyverse eller andre spesifikke pakker. Oppfølgingsspørsmål kan også være nødvendig.</p>
+<p>Du må <em>aldri</em> bruk kode fra chatGPT (eller andre verktøy) uten at du forstår hva koden faktisk gjør. Det kan innebære at du må teste koden på dine data grundig. Det krever også ferdigheter. Du må rett og slett ha et godt grunnlag for å forstå koden. I mellomtiden kan du godt bruke chatGPT til å <em>lære deg</em> R.</p>
+<p>Hvis du skal bruke chatGPT så bør du starte med å bruke det til å forstå instruksjoner du har problemer med. Prøv ut med følgende prompt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Kan du forklare følgende kode? </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gruppe) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">antall =</span> <span class="fu">n</span>(), <span class="at">gjennomsnitt =</span> <span class="fu">mean</span>(varA), </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">avvik =</span> varA <span class="sc">-</span> gjennomsnitt) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(gruppe, <span class="fu">desc</span>(avvik)) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Du kan også bruke chatGPT til å finne feil i koden du ikke klarer å finne ut av selv. Du kan legge til en “kontekst” og be chatGPT om å finne feilen som gjør at du ikke får det resultatet du forventer. Prøv ut med følgende prompt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Jeg ønsker å få aggregerte statistikker <span class="cf">for</span> et datasett, men det blir ikke riktig. Kan du finne feilen i følgende kode? </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  dinedata <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gruppe) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">antall =</span> <span class="fu">n</span>(), <span class="at">gjennomsnitt =</span> <span class="fu">mean</span>(varA), </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">avvik =</span> varA <span class="sc">-</span> gjennomsnitt) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(gruppe, <span class="fu">desc</span>(avvik)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Merk at chatGPT da vil foreslå en løsning. Denne er ikke nødvendigvis riktig! Da jeg testet på ovenstående ga chatGPT råd om å bruke funksjonen <code>reframe</code> i stedet. Det er ikke riktig, selv om det også er mulig. Funksjonen <code>summarise</code> ville være en bedre løsning.</p>
 
 
 </section>
@@ -695,6 +779,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr>
 <ol>
 <li id="fn1"><p>Dette er i kontrast til annen statistikksoftware som i større grad er basert på enkeltfunksjoner for mer avgrensede typer grafikk.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Nei, heller ikke med <em>code interpreter</em>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
