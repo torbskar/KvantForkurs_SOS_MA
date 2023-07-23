@@ -1,0 +1,205 @@
+# En veldig kjapp intro til R
+
+Før vi setter igang trengs det en kort introduksjon til noe grunnleggende om hvordan R fungerer. Så lærer man mer underveis, og et senere kapittel går grundigere inn i omkoding av variable.
+
+## Objektorientert
+
+I de innledende kapitlene ble det vist hvordan man leser inn data i R og dataene ble lagt i et "objekt". R er bygd opp rundt å bruke slike objekter i den forstand at alt man jobber med (typisk: datasett) ligger i objekter.
+
+Du kan tenke på objekter som en boks som det står et navn på. Ofte er det bare et datasett oppi boksen, men det kan også være flere ting. Det finnes derfor *flere typer objekter*. Vi skal primært jobbe med datasett, og slike objekter er av typen "data.frame". De kan også være av typen "tibble", men det er for alle praktiske formål på dette nivået akkurat det samme som "data.frame". Men objekter kan også inneholde resultater fra analyser, som f.eks. grafikk, tabeller eller regresjonsresultater. Man kan også legge enkelttall, vektorer og tekststrenger i objekter.
+
+Noen ganger vil et objekt inneholde flere forskjellige ting. Et eksempel er resultat fra regresjonsmodeller som både vil inneholde koeffisienter, standardfeil, residualer, en del statistikker, men også selve datasettet. Men for å se på output er det funksjoner som trekker ut akkurat det vi trenger, så du trenger sjelden forholde deg til hvordan et slikt objekt er bygd opp. Men du kan tenke på det som en velorganisert boks med masse mindre rom oppi.
+
+Men poenget er: Alt du jobber med i R er objekter. Alle objekter har et navn som du velger selv. Du kan legge hva som helst i et objekt. Du kan ikke ha to objekter med samme navn, og hvis du lager et objekt med et navn som eksisterer fra før overskriver du det gamle objektet.
+
+## Funksjoner
+
+Alt man gjør i R gjøres med "funksjoner", og man bruker funksjonene på objekter eller deler av objekter. Funksjonenen har et navn og etterfulgt av en parentes slik som f.eks. `dinfunksjon(...)`. Funksjonen starter og slutter med en parentes. Du kan tenke på funksjoner som en liten maskin der du putter noe inn, og så kommer noe annet ut. Det du putter inn skal står inni parentes. Det som kommer ut kan du enten legge i et eget objekt eller la det skrives til output-vinduet.
+
+Det du legger inn i funksjonen - altså inni parentesn - kalles "argumenter". Hvert argument har et navn og du skal normalt oppgi i hvert fall hvilket datasett funksjonen skal brukes på. Argumentet for data er nettopp `data =` og så oppgis navnet på det objektet dataene ligger i. En god del slike argumenter har navn som er standardisert på tvers av funksjoner, og `data =` er et eksempel på dette.
+
+I tillegg kan det være en rekke andre argumenter som vi kommer tilbake til i de ulike funksjonene vi bruker. Et poeng er viktig å presisere: argumentene har også en forventet *rekkefølge*. Man kan også oppgi argumentene uten å angi navnet hvis de kommer i riktig rekkefølge. For eksempel vil en funksjon for regresjon ha den forventede rekkefølgen: 1) Spesifisering av utfallsvariabel og forklaringsvariable på en form som heter "formula", deretter og 2) Angitt objektnavnet til dataene. Så kan det være andre argumenter i tillegg. Man kan godt oppgi argumentene i annen rekkefølge, men da er man nødt til å bruke argumentnavnet slik at R forstår hva som er hva.
+
+## R-pakker
+
+Når man installerer R har man svært mye funksjonalitet tilgjengelig uten videre. Dette kalles "base R", altså basic installasjon og funksjonalitet. Men R er i praksis basert på å bruke såkalte "pakker". Dette er funksjoner som utvider R sin funksjonalitet. Så mens "base R" tilbyr infrastrukturen, så er de ulike pakkene laget for spesifikke oppgaver.
+
+R-pakker er et helt økosystem av funksjonalitet som dekker det aller meste du kan finne på å gjøre, fra bittesmå oppgaver, til avansert statistikk og maskinlæring, til hele systemer for dataanalyse. Det finnes mange hundre R-pakker tilgjengelig, og disse ligger på en server som heter CRAN. Hvis du vil se på hva som finnes kan du se på [oversikten over tilgjengelige pakker](https://cran.r-project.org/web/packages/available_packages_by_name.html). For nye brukere av R vil dette fremstå som ganske kaotisk. Det finnes også oversikter der viktigste pakker innenfor ulike typer analyse er gruppert slik at man lettere skal kunne finne frem. Dette kalles [Task Views](https://cran.r-project.org/index.html). Men du trenger ikke forholde deg til slike oversikter på en god stund ennå. Du får beskjed om hvilke pakker du trenger fortløpende, og det er et begrenset antall.
+
+For å installere en pakke må du vite hva pakken heter og datamaskinen din må være koblet til internett. Funksjonen `install.packages`:
+
+```{r}
+#| eval: false
+install.packages("pakkenavn")
+```
+
+Det hender at man får en feilmelding når man prøver installere en pakke. Det er noen veldig vanlige grunner til feilmeldinger som skal være rimelig enkle å finne ut av selv:
+
+1)  Du har stavet navnet på pakken feil. Passe på særlig små og store bokstaver.
+2)  Pakken krever at du har noen andre pakker installert fra før. I så fall vil disse pakkenes navn står i feilmeldingen. Installer disse på samme måte først og prøv igjen.
+3)  Noen andre pakker trengs å oppdateres for at den nye pakken skal virke. Oppdater alle pakker og prøv på nytt.
+4)  Din R installasjon må oppdateres. Hvis det er lenge siden du installerte R, så installer på nytt og prøv igjen. Da må alle andre pakker også installeres på nytt.
+
+Når du installerer pakker får du noen ganger spørsmål om du vil installere "from source". Som hovedregel kan du velge nei. "From source" betyr at det finnes en ny versjon som ikke er ferdig kvalitetssjekket på CRAN, men som er tilgjengelig. Du trenger neppe det aller, aller siste av funksjonalitet, så "nei" holder.
+
+Når en pakke er installert på datamaskinen din er disse funksjonalitetene tilgjengelig i R, men ikke helt automatisk. Pakkene ligger i en egen mappe i filstrukturen på datamaskinen og R vet selvsagt hvor dette er. For at pakkene skal være tilgjengelig for deg må du fortelle R at du skal bruke en slik pakke. Vi sier at vi "laster en pakke" (engelsk: "load") og da er disse funksjonene tilgjengelig for deg i hele R-sesjonen. Hvis du restarter R, så må du laste pakkene på nytt før du kan fortsette der du slapp.
+
+Du laster en pakke med funksjonen `library`.
+
+```{r}
+#| eval: false
+library(pakkenavn)
+```
+
+Hvis en kode ikke fungerer og du får feilmelding kan dette være grunnen: du har glemt å laste pakken eller pakken er ikke installert på maskinen din.
+
+En annen grunn til at koden ikke fungerer kan være at det er "konflikt" mellom pakker du har lastet. Hvis du bare laster alle pakker du vet du bruker (og noen ekstra som noen på internett har foreslått), så kan det hende at disse pakkene skaper trøbbel for hverandre. Det er typisk at noen funksjoner har samme navn i ulike pakker, og R bruker da en annen funksjon enn du tror. Så da er rådet: ikke last masse pakker du ikke vet hva er. I det etterfølgende introduseres ulike pakker fortløpende og du får da vite hva de brukes til. Utvalget av pakker er dessuten slik at det ikke skal være noen slike konflikter. De pakkene vi skal bruke jobber veldig fint sammen. (Se avsnitt nedenfor om dialekter).
+
+Men det er altså et poeng at du må vite hva slags funksjonalitet de ulike pakkene har, og hvilke du faktisk trenger.
+
+## R-dialekter
+
+De funksjonene som følger med grunnleggende installasjon av R kalles altså "base R" eller bare "base". Dette er grunnstrukturen for programmeringsspråket. Man kan gjøre svært mye analyser med bare bruk av base R, og en god del lærebøker i statistikk og dataanalyse er lagt opp til hovedsakelig bruk av *base*.
+
+Noen R-pakker inneholder ikke bare enkeltfunksjoner, men nesten et helt programmeringsspråk i seg selv. Noen slike pakker er egentlig en hel samling av veldig mange andre pakker som er integrert i hverandre og fungerer sømløst sammen. Det er lurt å holde seg innenfor samme "dialekt" da man ellers kan bli veldig forvirret. I det følgende skal vi holde oss til dialekten "Tidyverse", som er en dominerende variant i R.
+
+Merk at det finnes altså flere dialekter som er spesialiserte for spesifikke formål. Et eksempel er {data.table} som er lynrask for store datasett, {caret} som gir et rammeverk for maskinlæring, og {lattice} som er et eget grafikk-system. Det finnes enda flere. Dette gjør at det kan være vanskelig å søke på nettet etter løsninger fordi du kan få svar (som funker!) i en annen dialekt enn den du kan.
+
+## Tidyverse
+
+Når man laster pakken {tidyverse} laster man egentlig flere pakker som også kan lastes individuelt. Merk at "tidy" betyr jo "ryddig" og hensikten her er et språk som er så ryddig og logisk som mulig. Dette innebærer også at det er innarbeidet en del prinsipper for datastruktur og datahåndtering som hovedarkitekten bak har [redegjort for i en egen artikkel](https://www.jstatsoft.org/article/view/v059i10). Full oversikt over pakkene som inngår i [Tidyverse finner du på deres hjemmeside](https://www.tidyverse.org/). Men du trenger ikke sette deg inn i alt det for å bruke softwaren.
+
+### Datahåndtering: {dplyr}
+
+Grunnleggende datahåndtering inkluderer først og fremst å *endre variable* ved omkoding, utregninger eller transformasjoner. Pakken {dplyr} inneholder de nødvendige verktøy for dette.
+
+De grunnleggende funksjonene vi bruker kan ordnes sekvensielt og bindes sammen med en "pipe". Norsk oversettelse vil være "rørlegging". Dette er litt rart og uvant, men i første omgang kan du se for deg at det er en flyt av data fra venstre side mot høyre side. Du kan altså gjøre noe med data og "deretter gjøre" noe mer med de dataene du har endret. Vi kommer tilbake til dette nedenfor.
+
+Vi skal bruke et bittelite datasett for å demonstrere. Det er seks observasjoner og to variable. Observasjonene tilhører gruppe a, b, eller c, og variabelen "varA" har en tallverdi. Dataene ser ut som følger:
+
+```{r}
+#| echo: false
+library(tidyverse)
+dinedata <- data.frame(gruppe = c("a", "b", "b", "a", "c", "c"), 
+                       varA = c(3, 5, 2, 4, 3, 7))
+```
+
+```{r}
+dinedata
+```
+
+#### Grunnleggende verb
+
+For å endre variable brukes funksjonen `mutate`, som har to argumenter: hvilket datasett som skal endres på, og spesifikasjon av gitte variable.
+
+Syntaksen er slik at man *starter* med å angi objektnavnet med dataene, men her skal det *ikke* skrives `data =` av grunner vi kommer tilbake til straks. Deretter skriver man navnet på ny variabel "erlik" utregning av ny verdi. I det følgende lages en ny variabel "varB" som er *2 ganger varA*:
+
+```{r}
+mutate(dinedata, varB = 2*varA)
+```
+
+Man kan også overskrive en eksisterende variabel på samme måte.
+
+Vi kan også velge bort variable med `select`. Merk at det som ble gjort med `mutate` ovenfor ikke er lagt i et nytt objekt, så det er bare printet til konsollen. Objektet "dinedata" er altså *ikke* endret. I følgende kode bruker vi `select` til velge å bare beholde "varA".
+
+```{r}
+select(dinedata, varA)
+```
+
+Vi kan slette variable ved å sette minustegn foran variabelnavnet som følger:
+
+```{r}
+select(dinedata, -varA)
+```
+
+#### Pipe %\>% med {magrittr}
+
+Vi bruker en "pipe" for å få lettere lesbare koder og slippe å lage mange nye objekter hele tiden. Vi kan binde sammen flere verb i en arbeidsflyt der man kun angir objektnavnet én gang.
+
+```{r}
+dinedata %>% 
+  mutate(varB = 2*varA) %>% 
+  select(-varA)
+```
+
+Operatoren `%>%` betyr "gjør deretter". Kode ovenfor kan dermed skrives i klartekst som følger:
+
+1)  start med datasettet *dinedata* og "gjør deretter:"
+2)  lag en ny variabel med navn *varB* som er 2 ganger verdien av variabelen varA, og "gjør deretter:
+3)  slett variabel varA
+
+Hvis vi vil legge resultatet i et nytt objekt for å bruke det videre (og det vil vi nesten alltid!) så spesifiseres det med å sette `nyttobjekt <-` helt først som følger:
+
+```{r}
+dinedata2 <- dinedata %>% 
+  mutate(varB = 2*varA) %>% 
+  select(-varA)
+```
+
+#### Logiske operatorer
+
+I mange sammenhenger setter man *hvis*-krav. F.eks. at man skal gi en ny variabel en verdi *hvis* en annen variabel har en bestemt verdig - og en annen verdi hvis ikke. Det kan også gjelde kombinasjoner av variable og verdier. Slike krav er da enten `TRUE` eller `FALSE`.
+
+Her er grunnleggende logiske operatorer.
+
+| Uttrykk                        | Kode            |
+|--------------------------------|-----------------|
+| er lik                         | `==`            |
+| er ikke lik                    | `!=`            |
+| og                             | `&`             |
+| eller                          | `|`             |
+| større/mindre enn              | `>` eller `<`   |
+| større/mindre enn eller er lik | `<=` eller `>=` |
+
+For å kode om kategoriske variable trenger vi disse. La oss bruke `mutate` til å gruppere sammen gruppene "a" og "b" ved å gjøre om alle "a" til "b". Da bruker vi funksjonen `ifelse` som har syntaksen: `ifelse(krav, verdi hvis TRUE, verdi hvis FALSE)`. Altså: først kravet, og alle observasjoner som fyller dette kravet får en verdi, mens alle andre får en annen verdi. Her er en kode som sjekker hvem som er i gruppe "a", og gjør alle disse om til "b", og resten beholder verdiene fra variabelen "gruppe".
+
+```{r}
+dinedata %>% 
+  mutate(gruppe2 = ifelse(gruppe == "a", "b", gruppe))
+
+```
+
+Logiske krav kan også kombineres med `&` og `|` og også med parenteser for mer kompliserte krav.  Her er et eksempel som omkoder basert på verdier på to variable for å lage en tredje variabel: 
+
+```{r}
+dinedata %>% 
+  mutate(gruppe2 = ifelse(gruppe == "a" & varA < 5, "a5", "andre"))
+
+```
+
+
+
+#### Flere verb
+
+Logiske operatorer brukes også til å filtrere dataene, altså å beholde eller slette rader som oppfyller visse krav. Her er en kode som beholder alle observasjoner om *ikke* tilhører gruppe "a": 
+
+```{r}
+dinedata %>% 
+  filter(gruppe != "a")
+
+```
+
+
+
+`summarise` aggregerer
+
+```{r}
+dinedata %>% 
+  summarise(totalt = sum(varA), standardavvik = sd(varA))
+
+```
+
+`group_by` grupperer data slik at hvis vi kan gå grupperte verdier med `mutate` og `summarise`.
+
+```{r}
+dinedata %>% 
+  group_by(gruppe) %>% 
+  summarise(totalt = sum(varA), standardavvik = sd(varA))
+
+```
+
+### Grafikk: {ggplot2}
+
+### Import av data: {haven}
+
+### Andre funksjoner

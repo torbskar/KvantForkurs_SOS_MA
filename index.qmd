@@ -6,7 +6,7 @@ Det anbefales å repetere materiale fra kurs i kvantitative metoder på bachelor
 
 De som lært annen statistikksoftware enn R på bachelornivå vil ha særlig nytte av dette kurset. I tillegg til programmeringsspråket skal du lære å lage en hensiktsmessig mappestruktur og lese inn datasett i R. 
 
-Vi skal jobbe med datasettet som skal brukes i SOS4020. Dette datasettet er tilgangsbegrenset så det er litt formaliteter som må på plass først. 
+Datasettet som skal brukes i SOS4020 er tilgangsbegrenset så det er litt formaliteter som må på plass først. Det skal vi gå på plass her slik at dere har lovlig tilgang til dataene. Men gjennomgangen og eksempler i det følgende vil basere seg på det samme datasett som brukes gjennomgående i SOSGEO1120. Til hvert kapittel er det oppgaver. Først og fremst skal dere kunne gjøre de samme operasjonene på egen datamaskin. Dernest skal dere bruke NorLAG til å gjøre noe mer selvstendige analyser med de samme teknikkene. 
 
 Læringsmålene for forkurset er som følger:
 
