@@ -3,11 +3,48 @@
 ```{r }
 #| warning: false
 #| message: false
+#| error: false
 library(haven)       # Importere data fra SAS, SPSS og Stata
 library(tidyverse)   # Pakker for generell datahåndtering og grafikk
 library(labelled)    # Håndtering av variable med labler, importert fra annen software
 library(forcats)     # Lettere omkoding av faktorvariable
 library(gtsummary)
+
+Sys.setlocale(locale='no_NB.utf8')  # Hvis æøå ikke vises riktig kan du endre "locale" til norsk utf8 encoding med denne koden. 
+
+```
+
+
+I denne delen skal vi bruke et uttrekk NorLAG som ikke er ryddet skikkelig i forkant. Kategoriske variable er riktignok gjort om til factor-variable, men det er beholdt ulike typer missing-verdier som vi ellers ville luket bort. 
+
+```{r}
+#| warning: false
+#| echo: false
+#| error: false
+#| message: false
+
+
+infilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/rOBH3y10/"
+utfilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/"
+
+# data
+faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
+lang <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
+
+norlag_ex <- merge(faste, lang, by = "ref_nr") %>% 
+  filter(iodeltakelse == 1 |  
+           iodeltakelse == 2 & round %in% c(1, 3) | 
+           iodeltakelse == 3 & round %in% c(2, 3) |
+           iodeltakelse == 4 & round %in% c(1) |
+           iodeltakelse == 5 & round %in% c(1, 2) |
+           iodeltakelse == 6 & round %in% c(2)
+  ) %>% 
+  select(iokjonn, wr117zz) %>% 
+  mutate(wr117zz = as_factor(wr117zz), 
+         iokjonn = as_factor(iokjonn)) %>% 
+  labelled::unlabelled()
+
+glimpse(norlag_ex)
 
 ```
 
@@ -39,6 +76,9 @@ Hvis variabelen er ordnet f.eks. på en skala fra 1 til 5 eller annen naturlig r
 
 ### Få oversikt over factor-levels med `levels()`
 
+```{r}
+levels(norlag_ex$wr117zz)
+```
 
 
 ### Enkel omkoding med `fct_recode()` og `fct_collapse()` 
@@ -58,31 +98,16 @@ Du kan lære mer om effektiv håndtering av kategoriske variable med [forcats-pa
 
 
 ## Factorvariable med skikkelig lang tekst
-```{r}
-#| message: false 
-#| warning: false
-norlag <- read_stata("data/norlag_panel2022.dta") %>% 
-    mutate(across( where(is.labelled) ,  ~replace(., 
-                                        . %in% c(997, 998, 999, 99999, 999999), 
-                                        NA))) %>%
-  # For hele datasettet fjernes ikke-brukte labler 
-  drop_unused_value_labels() %>% 
-  # Så gjør alle variable om til mer ordinære R-format. Dvs. gjøre labler om til factor
-  unlabelled()
+Når man omkoder en variabel må man skrive hele tekstverdien man ønsker endre, og det må være *nøyaktig* likt stavet. Særlig i survey-data vil disse tekststrengene kunne være lange og det gir jo større muligheter for å skrive feil og du kan få andre resultater enn forventet. Det kan også være vanskelig å finne feilen i lange tekststrenger! Så det er altså noe hærk. Kan man gjøre dette på en lurere måte? Minst mulig tårer? Ja, selvsagt. 
 
-```
-
-
-Noen ganger har man et datasett som allerede er omgjort med factor-variable. Eller du har en eller annen grunn til å ikke gå tilbake til et tidligere steg for å omkode. Men du har factor-levels med skikkelig lang tekst kan det være noe drit å kode om. Kan man gjøre dette på en lurere måte? Minst mulig tårer? Ja, selvsagt. 
-
-I NorLAG er variabelen wr117zz svar på et spørsmål om "Mulighet for å redusert arbeidstid (deltid)". Når denne variabelen er gjort om til factor kan man se hvilke verdier variabelen har med bruke av funksjonen *levels()* slik: 
+Vi jobber normalt med factorvariable for kategoriske variable. I NorLAG er variabelen wr117zz svar på et spørsmål om "Mulighet for å redusert arbeidstid (deltid)". Når denne variabelen er gjort om til factor kan man se hvilke verdier variabelen har med bruke av funksjonen *levels()* slik: 
 
 ```{r}
 #| message: false 
 #| warning: false
-levels(norlag$wr117zz)
+levels(norlag_ex$wr117zz)
 
-table(norlag$wr117zz)
+table(norlag_ex$wr117zz)
 
 ``` 
 
@@ -93,42 +118,49 @@ La oss si at vi vil kode om slik at vi får en variabel som bare er om vedkommen
 ```{r}
 #| message: false 
 #| warning: false
-norlag_omkodet <- norlag %>%
+
+norlag_omkodet <- norlag_ex %>%
   mutate(redarbtid = replace(wr117zz, wr117zz == "filter: jobber deltid", "Ja"), 
-         redarbtid = replace(redarbtid, redarbtid == "filter: selvstendig næringsdrivende (NorLAG3 inkl frilanser/annet)", NA), 
-         redarbtid = replace(redarbtid, redarbtid == "filter: ikke i arbeid", NA), 
+         redarbtid = replace(redarbtid, redarbtid == "filter: selvstendig næringsdrivende (NorLAG3 inkl frilanser/annet)", NA),
+         redarbtid = replace(redarbtid, redarbtid == "filter: ikke i arbeid", NA),
          redarbtid = replace(redarbtid, redarbtid == "vil ikke svare", NA),
          redarbtid = replace(redarbtid, redarbtid == "vet ikke", NA),
          redarbtid = replace(redarbtid, redarbtid == "mangler data", NA),
          redarbtid = replace(redarbtid, redarbtid == "Deltok ikke i runden", NA)) %>% 
   droplevels()
 
+norlag_omkodet %>% 
+  select(redarbtid) %>% 
+  gtsummary::tbl_summary()
+
+
+
 ```
 
-Dette funker, men blir ganske mye tekst å skrive, og da kan man også lett gjøre skrivefeil. Husk at faktornivåene må angis helt nøyaktig slik de er skrevet! 
-Merk at den siste funksjone, *droplevels()*, bare fjerner faktor-levels som ikke er i bruk. 
+Dette funker, men blir ganske mye tekst å skrive, og da kan man altså lett skrive feil. Husk at faktornivåene må angis helt nøyaktig slik de er skrevet! 
+Merk at den siste funksjone, `droplevels`, bare fjerner faktor-levels som ikke er i bruk. 
 
-I output for faktor-levels angir klammeparentesen gir rekkefølgen på disse verdiene. Vi kan bruke denne informasjonen direkte i omkodingen for å unngå å skrive så veldig mye. Når man bruker levels() får man en liten vektor med verdier, og disse kan man altså henvise til med rekkefølgen. Her er et eksempel for bare å bytte ut de som jobber deltid til "Ja": 
+I output for faktor-levels angir klammeparentesen gir rekkefølgen på disse verdiene. Vi kan bruke denne informasjonen direkte i omkodingen for å unngå å skrive så veldig mye. Når man bruker `levels()` får man en vektor med verdier, og disse kan man altså henvise til med rekkefølgen. Her er et eksempel for bare å bytte ut de som jobber deltid til "Ja": 
 
 
 ```{r}
 #| message: false 
 #| warning: false
-norlag_omkodet <- norlag %>%
+norlag_omkodet <- norlag_ex %>%
   mutate(redarbtid = replace(wr117zz, wr117zz == levels(wr117zz)[3], "Ja")) %>% 
   droplevels()
 
 
 ```
 
-Trikset her er altså å bruke `levels()` og vise til hvilket nummer i rekkefølgen. Da unngår vi også faren for skrivefeil.  
+Trikset her er altså å bruke `levels` og vise til hvilket nummer i rekkefølgen. Da unngår vi også faren for skrivefeil. 
 
-Vi vil også kode om alle de andre verdiene, nummer 4-9 til NA. Det kan vi gjøre på samme måte, men vi behøver ikke skrive en ny linje for hver verdi. Den logiske operatoren == kan man bruke når man skal sjekke om to verdier er like. Hvis vi skal se om en verdi er lik en av flere mulige kan vi bruke %in% og så en liste med verdier. levels() gir en liste med verdier, så da kan vi angi den direkte og alle verdiene 4 til 9 ved å skrive 4:9. Samlet blir det da slik: 
+Vi vil også kode om alle de andre verdiene, nummer 4-9 til NA. Det kan vi gjøre på samme måte, men vi behøver ikke skrive en ny linje for hver verdi. Den logiske operatoren `==` kan man bruke når man skal sjekke om to verdier er like. Hvis vi skal se om en verdi er lik en av flere mulige kan vi bruke `%in%` og så en liste med verdier. `levels` gir en liste med verdier, så da kan vi angi den direkte og alle verdiene 4 til 9 ved å skrive `4:9`. Samlet blir det da slik: 
 
 ```{r}
 #| message: false 
 #| warning: false
-norlag_omkodet <- norlag %>%
+norlag_omkodet <- norlag_ex %>%
   mutate(redarbtid = replace(wr117zz, wr117zz == levels(wr117zz)[3], "Ja"), 
          redarbtid = replace(redarbtid, redarbtid %in% levels(wr117zz)[4:9], NA)) %>% 
   droplevels()
@@ -145,6 +177,7 @@ memisc::codebook(norlag_omkodet$redarbtid)
 For disse eksemplene skal vi bruke et litt annet datasett, nemlig et lite uttrekk fra European Social Survey. Her er det 3 variable: yrkeskode, kjønn og politisk interesse. 
 
 ```{r}
+
 polit <- read.csv2("data/politics.csv", colClasses = "character")
 
 glimpse(polit)
@@ -188,20 +221,19 @@ polit %>%
 
 
 ### Bruke kataloger for kodeverk 
-Sometimes, such long list of unique codes have a standard grouping that are not hierarchical. One such example is the **ordc class schema** as developed by the [HISTCLASS-project homepage](https://www.sv.uio.no/iss/english/research/projects/histclass/). This is a coding schema for isco-codes to classes, and a catalogue is available from the homepage. As there are about 800 unique values and they are stored in Excel-format with corresponding grouping for each code. The first lines in Excel-file looks lik this:  
+Noen ganger har slike lange lister med unike koder en standard gruppering som ikke er hierarkisk, eller man ønsker å lage en annen type gruppering av andre grunner. Et slikt eksempel er gruppering av yrker etter klasseskjemaer, slik som f.eks. **ORDC class schema** utviklet av [HISTCLASS-prosjektet](https://www.sv.uio.no/iss/english/research/projects/histclass/). Dette er et kodeskjemae for isco-koder til klasser og en katalog er tilgjengelig fra prosjektets hjemmeside. Det er omtrent 800 unike verdier og de er lagret i et Excel-format med gruppering for hver kode. De første linjene i arket ser ut som følgende:  
 
 ![](images/isco_excel.png) 
 
-This file can be read into R using `read_excel()`, where the first line is typically read as variable names. But the first lines are not to be used, and neither are several columns. 
+Dette Excel-arket er også lagt til rette for omkoding med bruk av Stata, men du kan se bort fra de siste kolonnene. 
 
-To read it into R, we need to skip the lines not needed and change the variable names. In this example, we only need the isco-kodes and the ordc_yrk codes. Variable names should not include spaces, so we include an argument for ensuring universal valid variable names. That substitutes white space with punctuation. 
-We also specify `col_types = "text"` to avoid the values being interpreted as numeric. 
+Filen kan leses inn med `read_excel()`, der første linje typisk leses inn som variabelnavn. Men i dette tilfellet skal ikke de første linjene brukes og flere kolonner skal heller ikke brukes. Derfor ber vi R droppe de første linjenene, endrer variabelnavn og beholder kun isco-kodene og tilhørende ORDC-grupperingen. Variabelnavn bør ikke inkludere mellomrom, så vi legger til et argument som endrer til gyldige variabelnavn ved å bytte ut mellomrom med punktum. Vi også spesifiserer `col_types = "text"` for å unngå at tallverdier tolkes som numeriske verdier. 
 
 ```{r}
 #| echo: TRUE
 #| warning: FALSE
-
-isco <- readxl::read_excel(path = "data/3_codes_isco88_ordc.xlsx", skip = 4, .name_repair = "universal", col_types = "text") %>% 
+list.files("data/")
+isco <- readxl::read_excel(path = "data/CODES_isco88_ordc.xlsx", skip = 4, .name_repair = "universal", col_types = "text") %>% 
   select(2,9) 
 head(isco)
 ```
@@ -230,6 +262,50 @@ polit2 %>%
 
 ```
 
+
+
+### Noen ganger finnes det en pakke
+Siden R støtter pakker laget av brukere rundt omkring i verden, så er det alltids en sjanse for at noen har laget noe lurt som fikser akkurat ditt problem. Du kan altså ha flaks. 
+
+Når det gjelder omkoding av ISCO-koder til klasseskjemaer, så har noen faktisk gjort dette. Pakken {DIGCLASS} koder om til flere forskjellige klasseskjemaer ganske greit. Se gjerne nærmere på [vignetten til pakken](https://digclass.pages.code.europa.eu/digclass/index.html).
+
+Denne pakken finnes imidlertid ikke på CRAN i skrivende stund. Derimot finnes den tilgjengelig på nettet. Følgende kode installerer pakken. Hvis du får feilmelding om at du trenger {devtools}, så installer denne pakken først på vanlig måte. 
+
+```{r}
+#| eval: FALSE
+devtools::install_git("https://code.europa.eu/digclass/digclass.git")
+
+```
+
+
+Denne pakken inneholder også funksjonen for å rydde opp i isco-kodene. Det er noen vanlige problemer som omkodes enkelt med `repair_isco`. I følgende kode sjekkes isco-kodene *før* funksjonen `isco88_to_ordc` brukes til selve omkodingen. Den har en versjon som gir tallkode og en som gir tekstverdier, som er kjekt, så da kjøres begge to. 
+
+Denne funksjonen spytter også ut mange beskjeder i output som vi strengt tatt ikke trenger. Den melder fra om alle verdier som ikke inngår i klasseskjemaet og som derfor settes til NA. Det er fint, men tar i dette tilfellet ganske mye plass. Vet å bruke funksjonen `suppressMessages({...})` og parenteser rundt hele koden slipper vi dette. Normalt skal du ikke bruke denne funksjonen da du vanligvis vil ha slike beskjeder. Her tar det bare litt mye plass. 
+
+```{r}
+library(DIGCLASS)
+
+suppressMessages({
+polit3 <- polit %>% 
+  mutate(isco08 = repair_isco(.$isco08), 
+         orcd = isco88_to_ordc(isco08, label = FALSE), 
+         orcd_lab = isco88_to_ordc(isco08, label = TRUE))
+})
+
+head(polit3)
+
+```
+
+Da kan vi lage tabellen omigjen bare for å sjekke at vi får samme svar. 
+
+```{r}
+
+polit3 %>% 
+  select(orcd, gndr) %>% 
+  tbl_summary(by = gndr)
+
+```
+```
 
 
 

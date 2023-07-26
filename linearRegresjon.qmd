@@ -57,13 +57,13 @@ Denne trendlinja er hva vi vanligvis kaller regresjonslinje.
 
 ## Regresjonslinja
 
-Regresjonslinja kan beskrives med et *stigningstall*, som sier hvor bratt linjen er. Substansielt sett betyr det hvor mye utfallsvariabelen (y-aksen) endres med økning i forklaringsvariabelen (x-aksen). I tillegg trenger vi også vite hvor høyt/lavt linjen ligger. [^linearregresjon-1]. Til det bruker vi startpunktet for linjen, der hvor $x$ har verdien 0. Dette må regnes ut, og det er akkurat dette estimering av lineær regresjon gir oss.
+Regresjonslinja kan beskrives med et *stigningstall*, som sier hvor bratt linjen er. Substansielt sett betyr det hvor mye utfallsvariabelen (y-aksen) endres med økning i forklaringsvariabelen (x-aksen). I tillegg trenger vi også vite hvor høyt/lavt linjen ligger.[^linearregresjon-1] Til det bruker vi startpunktet for linjen, der hvor $x$ har verdien 0. Dette må regnes ut, og det er akkurat dette estimering av lineær regresjon gir oss.
 
 [^linearregresjon-1]: Du kan jo tenke deg flere parallelle linjer i plottet ovenfor med samme stigningstall
 
 Utregningen av regresjonslinja går vi ikke inn på her, men intuitivt sett ønsker vi jo *den beste linja* og ikke en hvilken som helst omtrentlig linje. Datapunktene (de svarte punktene i grafen) er spredt rundt linja, og avstanden mellom linje og punkt kalles *residualer*. Summen av disse residualene er grunnlaget for mål på hvor godt regresjonslinja beskriver de faktiske dataene. Den beste linja er definert som den som minimerer residualene. Det er dette som kalles "minste kvadraters metode".
 
-I R estimeres regresjonsmodeller med funksjonen `lm`. Første argument er en formel på formen `utfallsvariabel ~ forklaringsvariabel`. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med `data =`. [^linearregresjon-2].
+I R estimeres regresjonsmodeller med funksjonen `lm`. Første argument er en formel på formen `utfallsvariabel ~ forklaringsvariabel`. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med `data = `.[^linearregresjon-2]
 
 [^linearregresjon-2]: Grunnen til det siste er at R kan ha flere datasett oppe samtidig, så R vet ikke nødvendigvis hvilket datasett du tenker på
 
@@ -288,7 +288,7 @@ summary(lm_est3)
 ## Pene tabeller og eksport til fil
 Slik resultatene ser ut med bruk av `summary` er forsåvidt fint, og du får den informasjonen du trenger. Men det er ikke særlig presentabelt som ferdig produkt i en analyse. Du trenger typisk to ting: 1) Samle flere regresjonsmodeller i samme tabell, og 2) gjøre tabellene penere og lettere å lese, og 3) eksportere til det tekstbehandlingsprogrammet du bruker, typisk Microsoft Word. 
 
-R har en hel rekke funksjoner for dette. Det spiller ingen rolle hvilke funksjoner du bruker da det er noe smak og behag her, så det viktigste er at det fungerer rimelig greit for deg. Nedenfor presenteres tre pakker for dette formålet. Velg én av dem. Alle disse funksjonene håndterer svært mange typer modeller, gir gode muligheter for å ferdigstille tabellene fullstendig før eksport, og eksporterer til de formatene som er mest aktuelle. De har også mer avansert funksjonalitet som f.eks. å rapportere robuste standardfeil (av forskjellig type) i stedet for vanlige standardfeil (dette er pensum på SOS4020).
+R har en hel rekke funksjoner for dette. Det spiller egentlig ingen rolle hvilke funksjoner du bruker da det er noe smak og behag her, så det viktigste er at det fungerer rimelig greit for deg. Nedenfor presenteres tre pakker for dette formålet. Velg én av dem. Hvis du ikke har egne preferanser, så velg det første alternativet: {modelsummary}. Alle disse funksjonene håndterer svært mange typer modeller, gir gode muligheter for å ferdigstille tabellene fullstendig før eksport, og eksporterer til de formatene som er mest aktuelle. De har også mer avansert funksjonalitet som f.eks. å rapportere robuste standardfeil (av forskjellig type) i stedet for vanlige standardfeil (dette er pensum på SOS4020).
 
 Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på "klipp og lim" eller skjermbilde etc er uaktuelt og må unngås for nærmest enhver pris.[^linearregresjon-6] Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for de fleste, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt. De viktigste formatene som er:
 
@@ -344,7 +344,7 @@ To siste ting å ta med her er å endre navn på variablene til noe mer presenta
 For å eksportere til Word settes `output = ` med filbane og filnavn, og der filhalen *.docx* angir Word format. Du kan eksportere til annet format ved å angi annen filhale f.eks. .rtf eller .html. 
 
 ```{r}
-#|echo: false
+#| echo: false
 modelsummary(list(lm_est2, lm_est3), 
              fmt = 1,
              estimate = "{estimate} ({std.error})",

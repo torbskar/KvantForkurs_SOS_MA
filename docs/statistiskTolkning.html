@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -266,7 +329,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#tilfeldigheter-og-systematikk" id="toc-tilfeldigheter-og-systematikk" class="nav-link active" data-scroll-target="#tilfeldigheter-og-systematikk"><span class="toc-section-number">11.1</span>  Tilfeldigheter og systematikk</a>
   <ul class="collapse">
   <li><a href="#samplingfordeling-og-sentralgrenseteoremet" id="toc-samplingfordeling-og-sentralgrenseteoremet" class="nav-link" data-scroll-target="#samplingfordeling-og-sentralgrenseteoremet"><span class="toc-section-number">11.1.1</span>  Samplingfordeling og sentralgrenseteoremet</a></li>
-  <li><a href="#standardfeil" id="toc-standardfeil" class="nav-link" data-scroll-target="#standardfeil"><span class="toc-section-number">11.1.2</span>  Standard<em>feil</em></a></li>
+  <li><a href="#standardfeil-og-feilmargin" id="toc-standardfeil-og-feilmargin" class="nav-link" data-scroll-target="#standardfeil-og-feilmargin"><span class="toc-section-number">11.1.2</span>  Standard<em>feil</em> og feilmargin</a></li>
   <li><a href="#er-man-95-sikker" id="toc-er-man-95-sikker" class="nav-link" data-scroll-target="#er-man-95-sikker"><span class="toc-section-number">11.1.3</span>  Er man “95% sikker”?</a></li>
   </ul></li>
   <li><a href="#konfidensintervaller" id="toc-konfidensintervaller" class="nav-link" data-scroll-target="#konfidensintervaller"><span class="toc-section-number">11.2</span>  Konfidensintervaller</a></li>
@@ -314,16 +377,33 @@ ul.task-list li input[type="checkbox"] {
 <p>Hvis du synes at denne forklaringen ikke hjalp, så er det med god grunn. Det er nemlig vanskelig å forstå. Det har en begrunnelse i sannsynlighetsteori som vi ikke skal gå veldig i dypbden på her. Men du trenger å forstå hva <em>samplingfordeling</em> er, og så gir <em>sentralgrenseteoremet</em> det vi trenger for å regne ut slike ting som p-verdier og konfidensintervall.</p>
 <section id="samplingfordeling-og-sentralgrenseteoremet" class="level3" data-number="11.1.1">
 <h3 data-number="11.1.1" class="anchored" data-anchor-id="samplingfordeling-og-sentralgrenseteoremet"><span class="header-section-number">11.1.1</span> Samplingfordeling og sentralgrenseteoremet</h3>
+<p>Se for deg følgende: du skal gjennomføre en undersøkelse blant dine medstudenter om hvor mange timer de bruker på studier hver uke. Du trekker et tilfeldig utvalg på 20 personer og noterer svarene. Med disse tallene kan du så regne ut hvor mange timer de bruker i gjennomsnitt. Dette vil være din beste gjetning på hvor mange timer dine medstudenter faktisk bruker på studiene. Det verd å merke seg at det <em>finnes et sannt gjennomsnitt</em> i populasjonen. Din utregning vil være et <em>estimat</em> på denne sanne verdien.</p>
+<p>Men hva hvis en annen student gjorde samme undersøkelse og trakk et utvalg på 20 personer helt uavhengig av ditt utvalg<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>? Tror du at dere ville kommet frem til akkurat samme gjennomsnitt? Neppe. Det vil sannsynligvis være en viss forskjell, men kanskje ikke stor.</p>
+<p>I prinsippet er det nesten uendelig mange måter å gjøre den samme undersøkelsen på så lenge det er tilfeldig trukket deltakere. Alle disse <em>mulige</em> utvalgene vil kunnne gi et litt forskjellig resultat, men den fundamentale årsaken til forskjellene vil skyldes <em>tilfeldigheter</em>. Det utvalget med tilhørende utregning <em>du</em> gjorde gir bare ett av mange <em>mulige</em> resultater. Du kunne fått et annet resultat av helt tilfeldige grunner!</p>
+<p>Poenget er at estimater har en usikkerhet i seg ved at det kunne vært annerledes. Gitt populasjonen og den sanne verdien er det et sett mulige resultater. Vi vet jo ikke hvordan verdiene fordeler seg i populasjonen - det er jo derfor man gjør en undersøkelse: for å finne det ut.</p>
 <section id="samplingfordeling" class="level4" data-number="11.1.1.1">
 <h4 data-number="11.1.1.1" class="anchored" data-anchor-id="samplingfordeling"><span class="header-section-number">11.1.1.1</span> Samplingfordeling</h4>
+<p>Vi har vært inne på at resultatene fra en undersøkelse til en viss grad er <em>tilfeldige</em>. Det betyr selvsagt ikke at resultatene kunne være hva som helst. Derimot betyr det at man kan bruke sannsynlighetsregning til å si noe om <em>hvor usikker</em> man er. Da må vi vite noe om sannsynligheten for å få ulike resultater. Siden vi strengt tatt ikke vet fordelingen i populasjonen innebærer dette en god del abstraksjon og teoretiske forutsetninger.</p>
 </section>
 <section id="sentralgrenseteoremet" class="level4" data-number="11.1.1.2">
 <h4 data-number="11.1.1.2" class="anchored" data-anchor-id="sentralgrenseteoremet"><span class="header-section-number">11.1.1.2</span> Sentralgrenseteoremet</h4>
+<p>Sentralgrenseteoremet sier at samplingfordelingen for et gjennomsnitt alltid vil være normalfordelt, uansett hvilken fordeling dataene har i utgangspunktet. Dermed kan vi bruke normalfordelingen til å beregne sannsynligheter for gitte utfall.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(animation)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ani.options(interval = 0.1, nmax = 150)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># op = par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># clt.ani(type = "s")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tilfeldigheter" class="level4" data-number="11.1.1.3">
+<h4 data-number="11.1.1.3" class="anchored" data-anchor-id="tilfeldigheter"><span class="header-section-number">11.1.1.3</span> Tilfeldigheter</h4>
+<p>Merk deg at alt det ovenstående er betinget på et tilfeldig utvalg. Vi kan bruke sannsynlighetsregning på denne måten for å håndtere tilfeldige feil i målingen. Hvis utvalget ikke er tilnærmet tilfeldig trukket, så bryter dette sammen. Da er det skjevhet i estimatene, ofte omtalt som <em>bias</em> eller <em>forventningsskjevhet</em>, som gjør at</p>
 </section>
 </section>
-<section id="standardfeil" class="level3" data-number="11.1.2">
-<h3 data-number="11.1.2" class="anchored" data-anchor-id="standardfeil"><span class="header-section-number">11.1.2</span> Standard<em>feil</em></h3>
+<section id="standardfeil-og-feilmargin" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="standardfeil-og-feilmargin"><span class="header-section-number">11.1.2</span> Standard<em>feil</em> og feilmargin</h3>
 <p>Standard<em>feilen</em> uttrykker usikkerheten ved <em>estimatet</em>. La oss si at du ønsker å si noe om gjennomsnittet i <em>populasjonen</em>, men har bare data om et tilfeldig <em>utvalg</em> fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et <em>estimat</em>. Standardfeilen til estimatet er et mål på usikkerheten ved målemetoden. Usikker målemetode gjør at feilen kan være større.</p>
+<p>Til ethvert estimat er knyttet en feilmargin som uttrykkes ved <span class="math inline">\(z \times se\)</span>, der <span class="math inline">\(se\)</span> er forkortelse for standardfeil (engelsk: “standard error”). <span class="math inline">\(z\)</span> er et tall som er knyttet til grad av usikkerhet ved feilmarginen.</p>
 </section>
 <section id="er-man-95-sikker" class="level3" data-number="11.1.3">
 <h3 data-number="11.1.3" class="anchored" data-anchor-id="er-man-95-sikker"><span class="header-section-number">11.1.3</span> Er man “95% sikker”?</h3>
@@ -362,6 +442,12 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Altså: noen kunne tilfeldigvis deltatt i begge undersøkelsene.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

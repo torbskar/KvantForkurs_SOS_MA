@@ -398,9 +398,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="regresjonslinja" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="regresjonslinja"><span class="header-section-number">8.2</span> Regresjonslinja</h2>
-<p>Regresjonslinja kan beskrives med et <em>stigningstall</em>, som sier hvor bratt linjen er. Substansielt sett betyr det hvor mye utfallsvariabelen (y-aksen) endres med økning i forklaringsvariabelen (x-aksen). I tillegg trenger vi også vite hvor høyt/lavt linjen ligger. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Til det bruker vi startpunktet for linjen, der hvor <span class="math inline">\(x\)</span> har verdien 0. Dette må regnes ut, og det er akkurat dette estimering av lineær regresjon gir oss.</p>
+<p>Regresjonslinja kan beskrives med et <em>stigningstall</em>, som sier hvor bratt linjen er. Substansielt sett betyr det hvor mye utfallsvariabelen (y-aksen) endres med økning i forklaringsvariabelen (x-aksen). I tillegg trenger vi også vite hvor høyt/lavt linjen ligger.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Til det bruker vi startpunktet for linjen, der hvor <span class="math inline">\(x\)</span> har verdien 0. Dette må regnes ut, og det er akkurat dette estimering av lineær regresjon gir oss.</p>
 <p>Utregningen av regresjonslinja går vi ikke inn på her, men intuitivt sett ønsker vi jo <em>den beste linja</em> og ikke en hvilken som helst omtrentlig linje. Datapunktene (de svarte punktene i grafen) er spredt rundt linja, og avstanden mellom linje og punkt kalles <em>residualer</em>. Summen av disse residualene er grunnlaget for mål på hvor godt regresjonslinja beskriver de faktiske dataene. Den beste linja er definert som den som minimerer residualene. Det er dette som kalles “minste kvadraters metode”.</p>
-<p>I R estimeres regresjonsmodeller med funksjonen <code>lm</code>. Første argument er en formel på formen <code>utfallsvariabel ~ forklaringsvariabel</code>. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med <code>data =</code>. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>I R estimeres regresjonsmodeller med funksjonen <code>lm</code>. Første argument er en formel på formen <code>utfallsvariabel ~ forklaringsvariabel</code>. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med <code>data =</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>Legg alltid resultatene i et eget objekt med et navnt som er rimelig enkelt å forstå hva er. I følgende kode legges resultatet i en nytt objekt <code>lm_est1</code>. Deretter bruker kan man hente ut de delene av resultatet vi er interessert i. I aller første omgang er bare interessert i regresjonslinjas konstantledd (startpunktet) og stigningstall. Disse kaller vi vanligvis <em>regresjonskoeffisienter</em>. Det kan vi få ut ved å bruke funksjonen <code>coef</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(equatiomatic)</span>
@@ -534,23 +534,23 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> female) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="lspsospddp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lspsospddp table {
+<div id="ywhuzwykvt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ywhuzwykvt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lspsospddp thead, #lspsospddp tbody, #lspsospddp tfoot, #lspsospddp tr, #lspsospddp td, #lspsospddp th {
+#ywhuzwykvt thead, #ywhuzwykvt tbody, #ywhuzwykvt tfoot, #ywhuzwykvt tr, #ywhuzwykvt td, #ywhuzwykvt th {
   border-style: none;
 }
 
-#lspsospddp p {
+#ywhuzwykvt p {
   margin: 0;
   padding: 0;
 }
 
-#lspsospddp .gt_table {
+#ywhuzwykvt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -576,12 +576,12 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#lspsospddp .gt_caption {
+#ywhuzwykvt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lspsospddp .gt_title {
+#ywhuzwykvt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -593,7 +593,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#lspsospddp .gt_subtitle {
+#ywhuzwykvt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -605,7 +605,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#lspsospddp .gt_heading {
+#ywhuzwykvt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -617,13 +617,13 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lspsospddp .gt_bottom_border {
+#ywhuzwykvt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lspsospddp .gt_col_headings {
+#ywhuzwykvt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -638,7 +638,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lspsospddp .gt_col_heading {
+#ywhuzwykvt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -658,7 +658,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#lspsospddp .gt_column_spanner_outer {
+#ywhuzwykvt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -670,15 +670,15 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#lspsospddp .gt_column_spanner_outer:first-child {
+#ywhuzwykvt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lspsospddp .gt_column_spanner_outer:last-child {
+#ywhuzwykvt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lspsospddp .gt_column_spanner {
+#ywhuzwykvt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -690,11 +690,11 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#lspsospddp .gt_spanner_row {
+#ywhuzwykvt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lspsospddp .gt_group_heading {
+#ywhuzwykvt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -720,7 +720,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#lspsospddp .gt_empty_group_heading {
+#ywhuzwykvt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -735,15 +735,15 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#lspsospddp .gt_from_md > :first-child {
+#ywhuzwykvt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lspsospddp .gt_from_md > :last-child {
+#ywhuzwykvt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lspsospddp .gt_row {
+#ywhuzwykvt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -762,7 +762,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#lspsospddp .gt_stub {
+#ywhuzwykvt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -775,7 +775,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lspsospddp .gt_stub_row_group {
+#ywhuzwykvt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -789,15 +789,15 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#lspsospddp .gt_row_group_first td {
+#ywhuzwykvt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lspsospddp .gt_row_group_first th {
+#ywhuzwykvt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lspsospddp .gt_summary_row {
+#ywhuzwykvt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -807,16 +807,16 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lspsospddp .gt_first_summary_row {
+#ywhuzwykvt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lspsospddp .gt_first_summary_row.thick {
+#ywhuzwykvt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lspsospddp .gt_last_summary_row {
+#ywhuzwykvt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -826,7 +826,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lspsospddp .gt_grand_summary_row {
+#ywhuzwykvt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -836,7 +836,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lspsospddp .gt_first_grand_summary_row {
+#ywhuzwykvt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -846,7 +846,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#lspsospddp .gt_last_grand_summary_row_top {
+#ywhuzwykvt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -856,11 +856,11 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lspsospddp .gt_striped {
+#ywhuzwykvt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lspsospddp .gt_table_body {
+#ywhuzwykvt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -869,7 +869,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lspsospddp .gt_footnotes {
+#ywhuzwykvt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -883,7 +883,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lspsospddp .gt_footnote {
+#ywhuzwykvt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -892,7 +892,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lspsospddp .gt_sourcenotes {
+#ywhuzwykvt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -906,7 +906,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lspsospddp .gt_sourcenote {
+#ywhuzwykvt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -914,63 +914,63 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lspsospddp .gt_left {
+#ywhuzwykvt .gt_left {
   text-align: left;
 }
 
-#lspsospddp .gt_center {
+#ywhuzwykvt .gt_center {
   text-align: center;
 }
 
-#lspsospddp .gt_right {
+#ywhuzwykvt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lspsospddp .gt_font_normal {
+#ywhuzwykvt .gt_font_normal {
   font-weight: normal;
 }
 
-#lspsospddp .gt_font_bold {
+#ywhuzwykvt .gt_font_bold {
   font-weight: bold;
 }
 
-#lspsospddp .gt_font_italic {
+#ywhuzwykvt .gt_font_italic {
   font-style: italic;
 }
 
-#lspsospddp .gt_super {
+#ywhuzwykvt .gt_super {
   font-size: 65%;
 }
 
-#lspsospddp .gt_footnote_marks {
+#ywhuzwykvt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lspsospddp .gt_asterisk {
+#ywhuzwykvt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lspsospddp .gt_indent_1 {
+#ywhuzwykvt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lspsospddp .gt_indent_2 {
+#ywhuzwykvt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lspsospddp .gt_indent_3 {
+#ywhuzwykvt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lspsospddp .gt_indent_4 {
+#ywhuzwykvt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lspsospddp .gt_indent_5 {
+#ywhuzwykvt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1141,23 +1141,23 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="bwndzldxas" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bwndzldxas table {
+<div id="mnmoduvjxy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mnmoduvjxy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bwndzldxas thead, #bwndzldxas tbody, #bwndzldxas tfoot, #bwndzldxas tr, #bwndzldxas td, #bwndzldxas th {
+#mnmoduvjxy thead, #mnmoduvjxy tbody, #mnmoduvjxy tfoot, #mnmoduvjxy tr, #mnmoduvjxy td, #mnmoduvjxy th {
   border-style: none;
 }
 
-#bwndzldxas p {
+#mnmoduvjxy p {
   margin: 0;
   padding: 0;
 }
 
-#bwndzldxas .gt_table {
+#mnmoduvjxy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1183,12 +1183,12 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_caption {
+#mnmoduvjxy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bwndzldxas .gt_title {
+#mnmoduvjxy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1200,7 +1200,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#bwndzldxas .gt_subtitle {
+#mnmoduvjxy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1212,7 +1212,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#bwndzldxas .gt_heading {
+#mnmoduvjxy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1224,13 +1224,13 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_bottom_border {
+#mnmoduvjxy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_col_headings {
+#mnmoduvjxy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1245,7 +1245,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_col_heading {
+#mnmoduvjxy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1265,7 +1265,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#bwndzldxas .gt_column_spanner_outer {
+#mnmoduvjxy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1277,15 +1277,15 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#bwndzldxas .gt_column_spanner_outer:first-child {
+#mnmoduvjxy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bwndzldxas .gt_column_spanner_outer:last-child {
+#mnmoduvjxy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bwndzldxas .gt_column_spanner {
+#mnmoduvjxy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1297,11 +1297,11 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#bwndzldxas .gt_spanner_row {
+#mnmoduvjxy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bwndzldxas .gt_group_heading {
+#mnmoduvjxy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1327,7 +1327,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#bwndzldxas .gt_empty_group_heading {
+#mnmoduvjxy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1342,15 +1342,15 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#bwndzldxas .gt_from_md > :first-child {
+#mnmoduvjxy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bwndzldxas .gt_from_md > :last-child {
+#mnmoduvjxy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bwndzldxas .gt_row {
+#mnmoduvjxy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1369,7 +1369,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#bwndzldxas .gt_stub {
+#mnmoduvjxy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1382,7 +1382,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#bwndzldxas .gt_stub_row_group {
+#mnmoduvjxy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1396,15 +1396,15 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#bwndzldxas .gt_row_group_first td {
+#mnmoduvjxy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bwndzldxas .gt_row_group_first th {
+#mnmoduvjxy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bwndzldxas .gt_summary_row {
+#mnmoduvjxy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1414,16 +1414,16 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#bwndzldxas .gt_first_summary_row {
+#mnmoduvjxy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_first_summary_row.thick {
+#mnmoduvjxy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bwndzldxas .gt_last_summary_row {
+#mnmoduvjxy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1433,7 +1433,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_grand_summary_row {
+#mnmoduvjxy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1443,7 +1443,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#bwndzldxas .gt_first_grand_summary_row {
+#mnmoduvjxy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1453,7 +1453,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_last_grand_summary_row_top {
+#mnmoduvjxy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1463,11 +1463,11 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_striped {
+#mnmoduvjxy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bwndzldxas .gt_table_body {
+#mnmoduvjxy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1476,7 +1476,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_footnotes {
+#mnmoduvjxy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1490,7 +1490,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_footnote {
+#mnmoduvjxy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1499,7 +1499,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#bwndzldxas .gt_sourcenotes {
+#mnmoduvjxy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1513,7 +1513,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#bwndzldxas .gt_sourcenote {
+#mnmoduvjxy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1521,63 +1521,63 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#bwndzldxas .gt_left {
+#mnmoduvjxy .gt_left {
   text-align: left;
 }
 
-#bwndzldxas .gt_center {
+#mnmoduvjxy .gt_center {
   text-align: center;
 }
 
-#bwndzldxas .gt_right {
+#mnmoduvjxy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bwndzldxas .gt_font_normal {
+#mnmoduvjxy .gt_font_normal {
   font-weight: normal;
 }
 
-#bwndzldxas .gt_font_bold {
+#mnmoduvjxy .gt_font_bold {
   font-weight: bold;
 }
 
-#bwndzldxas .gt_font_italic {
+#mnmoduvjxy .gt_font_italic {
   font-style: italic;
 }
 
-#bwndzldxas .gt_super {
+#mnmoduvjxy .gt_super {
   font-size: 65%;
 }
 
-#bwndzldxas .gt_footnote_marks {
+#mnmoduvjxy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bwndzldxas .gt_asterisk {
+#mnmoduvjxy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bwndzldxas .gt_indent_1 {
+#mnmoduvjxy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bwndzldxas .gt_indent_2 {
+#mnmoduvjxy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bwndzldxas .gt_indent_3 {
+#mnmoduvjxy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bwndzldxas .gt_indent_4 {
+#mnmoduvjxy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bwndzldxas .gt_indent_5 {
+#mnmoduvjxy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1655,7 +1655,7 @@ F-statistic: 341.7 on 2 and 3756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="pene-tabeller-og-eksport-til-fil" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="pene-tabeller-og-eksport-til-fil"><span class="header-section-number">8.5</span> Pene tabeller og eksport til fil</h2>
 <p>Slik resultatene ser ut med bruk av <code>summary</code> er forsåvidt fint, og du får den informasjonen du trenger. Men det er ikke særlig presentabelt som ferdig produkt i en analyse. Du trenger typisk to ting: 1) Samle flere regresjonsmodeller i samme tabell, og 2) gjøre tabellene penere og lettere å lese, og 3) eksportere til det tekstbehandlingsprogrammet du bruker, typisk Microsoft Word.</p>
-<p>R har en hel rekke funksjoner for dette. Det spiller ingen rolle hvilke funksjoner du bruker da det er noe smak og behag her, så det viktigste er at det fungerer rimelig greit for deg. Nedenfor presenteres tre pakker for dette formålet. Velg én av dem. Alle disse funksjonene håndterer svært mange typer modeller, gir gode muligheter for å ferdigstille tabellene fullstendig før eksport, og eksporterer til de formatene som er mest aktuelle. De har også mer avansert funksjonalitet som f.eks. å rapportere robuste standardfeil (av forskjellig type) i stedet for vanlige standardfeil (dette er pensum på SOS4020).</p>
+<p>R har en hel rekke funksjoner for dette. Det spiller egentlig ingen rolle hvilke funksjoner du bruker da det er noe smak og behag her, så det viktigste er at det fungerer rimelig greit for deg. Nedenfor presenteres tre pakker for dette formålet. Velg én av dem. Hvis du ikke har egne preferanser, så velg det første alternativet: {modelsummary}. Alle disse funksjonene håndterer svært mange typer modeller, gir gode muligheter for å ferdigstille tabellene fullstendig før eksport, og eksporterer til de formatene som er mest aktuelle. De har også mer avansert funksjonalitet som f.eks. å rapportere robuste standardfeil (av forskjellig type) i stedet for vanlige standardfeil (dette er pensum på SOS4020).</p>
 <p>Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på “klipp og lim” eller skjermbilde etc er uaktuelt og må unngås for nærmest enhver pris.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for de fleste, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt. De viktigste formatene som er:</p>
 <ul>
 <li>MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.</li>
@@ -1833,16 +1833,6 @@ F-statistic: 341.7 on 2 and 3756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>To siste ting å ta med her er å endre navn på variablene til noe mer presentabelt og eksportere til Word. Med argumentet <code>coef_rename =</code> angis variabelen slik den ser ut i output og spesifiserer hva du vil skal stå. Koden nedenfor viser eksempel.</p>
 <p>For å eksportere til Word settes <code>output =</code> med filbane og filnavn, og der filhalen <em>.docx</em> angir Word format. Du kan eksportere til annet format ved å angi annen filhale f.eks. .rtf eller .html.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|echo: false</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>, </span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"sexFemale"</span> <span class="ot">=</span> <span class="st">"Kvinne"</span>, </span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"age"</span> <span class="ot">=</span> <span class="st">"Alder"</span>, </span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"Konstant"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -1905,16 +1895,16 @@ F-statistic: 341.7 on 2 and 3756 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>, </span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"sexFemale"</span> <span class="ot">=</span> <span class="st">"Kvinne"</span>, </span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"age"</span> <span class="ot">=</span> <span class="st">"Alder"</span>, </span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"Konstant"</span>), </span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">output =</span> <span class="st">"output/reg_table.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>, </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"sexFemale"</span> <span class="ot">=</span> <span class="st">"Kvinne"</span>, </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"age"</span> <span class="ot">=</span> <span class="st">"Alder"</span>, </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"Konstant"</span>), </span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">output =</span> <span class="st">"output/reg_table.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Merk at Word vil vise tabellen med de fonter etc som er forvalgt for Word. Dette kan du endre i Word etterpå. Det er en rekke funksjoner i Word for å formattere tabeller som du kan bruke.</p>
 <p>Pakken {modelsummary} har også en rekke andre funksjoner for å redigere tabeller som du kan utforske ved behov. For avanserte brukere kan man også gjøre om tabellen til et gt-objekt og redigere videre med pakken {gt} eller tilsvarende med pakken {flextable}. Det er altså tilnærmet uendelige muligheter for avanserte tabeller. Dette går imidlertid langt utenfor hva de fleste av dere vil trenge. {modelsummary} har <a href="https://vincentarelbundock.github.io/modelsummary/index.html">egen hjemmeside</a> med mer detaljer og instruksjoner.</p>
@@ -1926,8 +1916,8 @@ F-statistic: 341.7 on 2 and 3756 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Fordel: Er en stand-alone pakke men gir enkelt veldig fine tabeller som antakeligvis er det du trenger Ulempe: Eksport til Word er ikke den beste, men god nok.</p>
 <p>Stargazer lager tabeller i kun tre formater: latex, html, og ren tekst. Vi velger derfor <code>type = "text"</code> for at det skal se ok ut her.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 =======================================================================
@@ -1958,13 +1948,13 @@ Note:                                       *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01
 <p>Vi kan modifisere tabellen tilsvarende som vi gjorde med {modelsummary}. Forklaringer av de enkelte argumenter finnes i <a href="https://cran.r-project.org/web/packages/stargazer/stargazer.pdf">manualen for stargazer</a>.</p>
 <p><code>covariate.labels =</code> Angir teksten for variabelnavn. Merk at det oppgis i den <em>rekkefølgen</em> det skal stå, så være veldig nøye hvis du har mange variable! <code>report =</code> angir hva som skal inngå i tabellen, der hver bokstav viser til spesifikke deler: v = variabelnavn, c = koeffisient/estimat, s = standardfeil. <code>single.row =</code> setter statistikkene på samme linje fremfor under hverandre. <code>keep.stat =</code> angir hvilke “model fit statistics” som skal rapporteres. Hvis du skriver “all” her får du en lang remse tilsvarende vi fikk med {modelsummary}. <code>digits =</code> angir antall desimaler</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>, </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"ser"</span>),</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>, </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"ser"</span>),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 =====================================================
@@ -1986,14 +1976,14 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 <p>For å eksportere til Word kan man bruke rikt tekstformat (.rtf) eller html. rtf-formatet er som navnet tilsier ren tekst og selv om det ser greit ut, så er videre redigering i et tekstbehandlingsprogram krøkete. (Prøv og se selv). Bruk heller html fordi da beholdes tabell-strukturen. Du kan åpne html-tabeller fra Word og redigere videre der ved behov.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"ser"</span>),</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>, </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">out =</span> <span class="st">"output/reg_starg.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"ser"</span>),</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">out =</span> <span class="st">"output/reg_starg.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Mer detaljer finner du i <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">{stargazer} sin vignette</a>.</p>
 </section>
@@ -2005,47 +1995,47 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <p>Prinsippet er å lage hver tabell for seg og så slå dem sammen med <code>tbl_merge</code> etterpå. Det innebærer en del mer kode, rett og slett. I utgangspunktet virker det ganske greit, men det er alltid en del småting som krever litt mer.</p>
 <p>Følgende kode lager først en ryddig tabell for hver regresionsmodell og så kobler sammen disse to tabellene.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>lm_tab1 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(lm_est2, <span class="at">intercept =</span> T, </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">estimate_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_number</span>(x, <span class="at">digits =</span> <span class="dv">1</span>),</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_single_row =</span> <span class="st">"sex"</span>,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label =</span> <span class="fu">list</span>(sex <span class="sc">~</span> <span class="st">"Kvinne"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_glance_table</span>(<span class="at">include =</span> <span class="fu">c</span>(nobs, r.squared, sigma))</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>                     </span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>lm_tab2 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(lm_est3, <span class="at">intercept =</span> T,</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">estimate_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_number</span>(x, <span class="at">digits =</span> <span class="dv">1</span>), </span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_single_row =</span> <span class="st">"sex"</span>,</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"Alder"</span>, sex <span class="sc">~</span> <span class="st">"Kvinne"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_glance_table</span>(<span class="at">include =</span> <span class="fu">c</span>(nobs, r.squared, sigma)</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_merge</span>(<span class="at">tbls =</span> <span class="fu">list</span>(lm_tab1, lm_tab2)) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_table_body</span>(</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>.x <span class="sc">%&gt;%</span> </span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">arrange</span>(</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>        row_type <span class="sc">==</span> <span class="st">"glance_statistic"</span>, <span class="co"># sort glance table to bottom</span></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>        var_label                       <span class="co"># sort by the variable label (a hidden column) </span></span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lm_tab1 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(lm_est2, <span class="at">intercept =</span> T, </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">estimate_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_number</span>(x, <span class="at">digits =</span> <span class="dv">1</span>),</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_single_row =</span> <span class="st">"sex"</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label =</span> <span class="fu">list</span>(sex <span class="sc">~</span> <span class="st">"Kvinne"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_glance_table</span>(<span class="at">include =</span> <span class="fu">c</span>(nobs, r.squared, sigma))</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                     </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>lm_tab2 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(lm_est3, <span class="at">intercept =</span> T,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">estimate_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_number</span>(x, <span class="at">digits =</span> <span class="dv">1</span>), </span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_single_row =</span> <span class="st">"sex"</span>,</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"Alder"</span>, sex <span class="sc">~</span> <span class="st">"Kvinne"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_glance_table</span>(<span class="at">include =</span> <span class="fu">c</span>(nobs, r.squared, sigma)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_merge</span>(<span class="at">tbls =</span> <span class="fu">list</span>(lm_tab1, lm_tab2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_table_body</span>(</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>.x <span class="sc">%&gt;%</span> </span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">arrange</span>(</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        row_type <span class="sc">==</span> <span class="st">"glance_statistic"</span>, <span class="co"># sort glance table to bottom</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        var_label                       <span class="co"># sort by the variable label (a hidden column) </span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="ncubotmbag" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ncubotmbag table {
+<div id="jmszvrbdpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jmszvrbdpd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ncubotmbag thead, #ncubotmbag tbody, #ncubotmbag tfoot, #ncubotmbag tr, #ncubotmbag td, #ncubotmbag th {
+#jmszvrbdpd thead, #jmszvrbdpd tbody, #jmszvrbdpd tfoot, #jmszvrbdpd tr, #jmszvrbdpd td, #jmszvrbdpd th {
   border-style: none;
 }
 
-#ncubotmbag p {
+#jmszvrbdpd p {
   margin: 0;
   padding: 0;
 }
 
-#ncubotmbag .gt_table {
+#jmszvrbdpd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2071,12 +2061,12 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_caption {
+#jmszvrbdpd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ncubotmbag .gt_title {
+#jmszvrbdpd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2088,7 +2078,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-bottom-width: 0;
 }
 
-#ncubotmbag .gt_subtitle {
+#jmszvrbdpd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2100,7 +2090,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-top-width: 0;
 }
 
-#ncubotmbag .gt_heading {
+#jmszvrbdpd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2112,13 +2102,13 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_bottom_border {
+#jmszvrbdpd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_col_headings {
+#jmszvrbdpd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2133,7 +2123,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_col_heading {
+#jmszvrbdpd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2153,7 +2143,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   overflow-x: hidden;
 }
 
-#ncubotmbag .gt_column_spanner_outer {
+#jmszvrbdpd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2165,15 +2155,15 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 4px;
 }
 
-#ncubotmbag .gt_column_spanner_outer:first-child {
+#jmszvrbdpd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ncubotmbag .gt_column_spanner_outer:last-child {
+#jmszvrbdpd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ncubotmbag .gt_column_spanner {
+#jmszvrbdpd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2185,11 +2175,11 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   width: 100%;
 }
 
-#ncubotmbag .gt_spanner_row {
+#jmszvrbdpd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ncubotmbag .gt_group_heading {
+#jmszvrbdpd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2215,7 +2205,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   text-align: left;
 }
 
-#ncubotmbag .gt_empty_group_heading {
+#jmszvrbdpd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2230,15 +2220,15 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   vertical-align: middle;
 }
 
-#ncubotmbag .gt_from_md > :first-child {
+#jmszvrbdpd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ncubotmbag .gt_from_md > :last-child {
+#jmszvrbdpd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ncubotmbag .gt_row {
+#jmszvrbdpd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2257,7 +2247,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   overflow-x: hidden;
 }
 
-#ncubotmbag .gt_stub {
+#jmszvrbdpd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2270,7 +2260,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#ncubotmbag .gt_stub_row_group {
+#jmszvrbdpd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2284,15 +2274,15 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   vertical-align: top;
 }
 
-#ncubotmbag .gt_row_group_first td {
+#jmszvrbdpd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ncubotmbag .gt_row_group_first th {
+#jmszvrbdpd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ncubotmbag .gt_summary_row {
+#jmszvrbdpd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2302,16 +2292,16 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#ncubotmbag .gt_first_summary_row {
+#jmszvrbdpd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_first_summary_row.thick {
+#jmszvrbdpd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ncubotmbag .gt_last_summary_row {
+#jmszvrbdpd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2321,7 +2311,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_grand_summary_row {
+#jmszvrbdpd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2331,7 +2321,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#ncubotmbag .gt_first_grand_summary_row {
+#jmszvrbdpd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2341,7 +2331,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_last_grand_summary_row_top {
+#jmszvrbdpd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2351,11 +2341,11 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_striped {
+#jmszvrbdpd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ncubotmbag .gt_table_body {
+#jmszvrbdpd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2364,7 +2354,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_footnotes {
+#jmszvrbdpd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2378,7 +2368,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_footnote {
+#jmszvrbdpd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2387,7 +2377,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#ncubotmbag .gt_sourcenotes {
+#jmszvrbdpd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2401,7 +2391,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ncubotmbag .gt_sourcenote {
+#jmszvrbdpd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2409,63 +2399,63 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#ncubotmbag .gt_left {
+#jmszvrbdpd .gt_left {
   text-align: left;
 }
 
-#ncubotmbag .gt_center {
+#jmszvrbdpd .gt_center {
   text-align: center;
 }
 
-#ncubotmbag .gt_right {
+#jmszvrbdpd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ncubotmbag .gt_font_normal {
+#jmszvrbdpd .gt_font_normal {
   font-weight: normal;
 }
 
-#ncubotmbag .gt_font_bold {
+#jmszvrbdpd .gt_font_bold {
   font-weight: bold;
 }
 
-#ncubotmbag .gt_font_italic {
+#jmszvrbdpd .gt_font_italic {
   font-style: italic;
 }
 
-#ncubotmbag .gt_super {
+#jmszvrbdpd .gt_super {
   font-size: 65%;
 }
 
-#ncubotmbag .gt_footnote_marks {
+#jmszvrbdpd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ncubotmbag .gt_asterisk {
+#jmszvrbdpd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ncubotmbag .gt_indent_1 {
+#jmszvrbdpd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ncubotmbag .gt_indent_2 {
+#jmszvrbdpd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ncubotmbag .gt_indent_3 {
+#jmszvrbdpd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ncubotmbag .gt_indent_4 {
+#jmszvrbdpd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ncubotmbag .gt_indent_5 {
+#jmszvrbdpd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
