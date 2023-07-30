@@ -17,6 +17,7 @@ Dernest avhenger feilmarginen av utvalgsstørrelsen. Det er rett og slett slik a
 
 Til sist avhenger feilmarginen av en grense vi selv setter, som gjerne kalles *konfidensgrad*. Denne setter vi selv, men det er vanlig å sette denne til 95%. Det gjør at man noen ganger sier "95% sikker", hvilket er en nokså sleivete måte å si det på, men ikke helt galt under visse forutsetninger som vi kommer tilbake til. 
 
+## Estimater og feilmarginer
 
 ### Estimat 
 La oss si at du ønsker å si noe om gjennomsnittet i *populasjonen*, men har bare data om et tilfeldig *utvalg* fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et *estimat*.
@@ -35,6 +36,8 @@ Altså: det er aller mest sannsynlig å få et estimat som ligger nærme den san
 
 ```{r}
 #| echo: false
+#| warning: false
+#| message: false
 library(tidyverse)
 ggplot(NULL, aes(x=c(-3,3))) +
   geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-3, 3)) +
@@ -60,7 +63,7 @@ ggplot(NULL, aes(x=c(-3,3))) +
   theme_minimal()
 ```
 
-
+### Konfidensintervall
 Hvis man ønsker å være "95% sikker", så bruker man altså et 95% konfidensintervall. Det er ikke noe magisk ved akkurat 95% og er primært blitt en norm. Grunnen er bare at det skal være en ganske lav sannsynlighet for at estimatet skyldes tilfeldig variasjon. 
 
 Til ethvert estimat er knyttet en feilmargin som uttrykkes ved $z \times se$, der $se$ er forkortelse for standardfeil (engelsk: "standard error"). $z$ er et tall som er knyttet til grad av usikkerhet ved feilmarginen. En feilmargin basert på 95% konfidensgrad er dermed $1.96 \times se$. Hvis man så tar denne feilmarginen til hver side, så gir det samme som illustrert i figuren ovenfor. 
@@ -128,6 +131,7 @@ Verdien $t$ tilsvarer verdien $z$ som vi nevnte i forbindelse med konfidensinter
 
 Tolkningen av $t$-verdien brukes gjerne som en en beslutningsregel: Ja/Nei. Litt firkantet, med andre ord. Men $t$-verdien er også knyttet til normalfordelingen på samme måte som nevnt ovenfor i forbindelse med konfidensintervaller. Ethvert mulig resultat er knyttet til en viss sannsynlighet for at det skal skje ved en tilfeldighet. 
 
+
 #### P-verdi
 Tolkningen av p-verdien er i hvilken grad det er sannsynlig å få det observerte resultatet *ved en tilfeldighet* hvis NULL-hypotesen er riktig. Dette høres ganske pussig ut. Tanken er at man nesten alltid vil observere noe forskjell fra null, og det kan skje ved en tilfeldighet. Hvis null-hypotesen er riktig er det mindre sannsynlig at vi observerer en veldig stor forskjell. Men hvor stor forskjell er det, egentlig? Løsningen er å se avstanden fra null i lys av standardfeilen. Hvis man bruker en usikker målemetode, så er det mer sannsynlig å observere en stor forskjell ved tilfeldigheter enn om man bruker en veldig nøyaktig målemetode.
 
@@ -136,6 +140,12 @@ I praksis: Tenk at du observerer en stor forskjell mellom to grupper. Med "stor"
 Så er logikken videre at vi som hovedregel ikke tror på resultater som er usannsynlige. Så i stedet for å holde fast på nullhypotesen velger vi i stedet å tro på den alternative hypotesen.
 
 
+## Kan man velge fritt konfidensgrad? 
+Det er ingenting magisk med tallet 1.96 eller $p < 0.05$. Det er en konvensjon. Konfidensgrad er nemlig noe *du* velger. All tolkning av "statistisk signifikans" er basert på en gitt konfidensgrad. 
+
+Problemet oppstår hvis du først ser på resultatene og så velger en konfidensgrad som passer til det du har mest lyst til å konkludere med. Det er rett og slett juks. For at du skal velge en annen konfidensgrad må du si det høyt og tydelig *før* du gjennomfører undersøkelsen - og da må du faktisk etterleve det når resultatene foreligger. Du bør også kunne argumentere selvstendig for en annen konfidensgrad, altså før resultatene foreligger. Dette innebærer at det ikke er godt nok å si det høyt ut i luften der du sitter alene for deg selv. Det må *pre-registeres* på et offentlig sted, f.eks. [osf.io](osf.io) eller tilsvarende websider. 
+
+Dette er egentlig en mye større diskusjon, men verd å være obs på. Du *kan* velge konfidensgrad, men i så fall må du gjøre det på en ordenlig måte hvis du vil bli tatt seriøst av andre. Vi skal ikke drive med cherry-picking av resultater og konklusjoner! 
 
 
 ## Statistiske tester generelt
