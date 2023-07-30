@@ -255,8 +255,8 @@
     "objectID": "statistiskTolkning.html#statistiske-tester-generelt",
     "href": "statistiskTolkning.html#statistiske-tester-generelt",
     "title": "11  Statistisk tolkning",
-    "section": "11.4 Statistiske tester generelt",
-    "text": "11.4 Statistiske tester generelt\nDet finnes en hel haug av statistiske tester. Prinsippet er gjerne variasjoner av t-testen og har disse komponentene:\n\nen nullhypotese og et alternativ\nen statistikk, altså et måltall som er et avstandsmål mellom observert resultat og hva man forventer under nullhypotesen\nen statistisk modell for samplingfordelingen som sier noe om fordelingen av tilfeldige feil\nen uttalt beslutningsregel for konklusjonen. Et vanlig mål er at hvis p < 0.05, så forkastes nullhypotesen."
+    "section": "11.1 Statistiske tester generelt",
+    "text": "11.1 Statistiske tester generelt\nDet finnes en hel haug av statistiske tester. Prinsippet er gjerne variasjoner av t-testen og har disse komponentene:\n\nen nullhypotese og et alternativ\nen statistikk, altså et måltall som er et avstandsmål mellom observert resultat og hva man forventer under nullhypotesen\nen statistisk modell for samplingfordelingen som sier noe om fordelingen av tilfeldige feil\nen uttalt beslutningsregel for konklusjonen. Et vanlig mål er at hvis \\(p < 0.05\\), så forkastes nullhypotesen.\n\nDu har sikker lært om \\(\\chi^2\\) testen for krysstabeller. Den er forskjellig på mange måter fra \\(t\\)-testen, men logikken er tilsvarende: \\(\\chi^2\\) er et avstandsmål for hva vi forventer gitt hypotesen om ingen forskjell. Hvis resultatet fra dataanalysen er for langt unna dette, så beslutter vi å tro at forskjellen skyldes systematikk."
   },
   {
     "objectID": "tidyverse.html#lage-ny-variabel-mutate",

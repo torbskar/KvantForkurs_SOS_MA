@@ -1,80 +1,118 @@
 # Statistisk tolkning
 
-Det vi omtaler som *statistisk tolkning* eller *statistisk inferens* handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. Dette er relevant for analyser på nivå II og III (se forrige kapittel). På nivå II handler det om å *generalisere* til en veldefinert populasjon, mens det på nivå III handler om å skille ut den kausale effekten fra tilfeldig støy. Teknikkene er imidlertid de samme. I praksis handler dette om (på dette nivået) følgende:
+Det vi omtaler som *statistisk tolkning* eller *statistisk inferens* handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. Dette er relevant for analyser på nivå II og III (se forrige kapittel). På nivå II handler det om å *generalisere* til en veldefinert populasjon, mens det på nivå III handler om å si om en kausal effekten kan skilles fra tilfeldig støy. De statistiske teknikken er imidlertid de samme. I praksis handler dette om (på dette nivået) følgende:
 
-1)  standardfeil\
+1)  standardfeil
 2)  konfidensintervall
 3)  p-verdi
 
-Disse tre henger nøye sammen. Vi vil her bare se på det grunnleggende som baserer seg på *normalfordelingen* hvis vi har stort nok datamateriale. Disse kaller vi t-test fordi det egentlig er en *t-fordeling* som ligger under. Det finnes en hel rekke statistiske tester som er varianter av samme tankegang, men det som skiller seg fra dette er stort sette hvordan standardfeilen regnes ut og hvilken sannsynlighetsfordeling man tolker test-statistikken ut fra. For å lære mer om slik kan du slå opp i hvilken som helst grunding innføringsbok i statistikk og kvantitative metoder.
-
-## Tilfeldigheter og systematikk
-
-Standard*feilen* er ikke det samme som standard*avviket*, og det er viktig at du vet forskjellen på disse.
-
--   Standardavvik: beskriver variasjonen rundt gjennomsnittet i utvalget, altså i dataene du har. Det er litt omtrentlig sagt et mål på hvor langt fra gjennomsnittet datapunktene ligger.\
--   Standardfeilen: beskriver en *hypotetisk fordeling* av hvordan man kan regne med at mulige estimater kan være fordelt rundt den sanne verdien. Denne fordelingen kalles en samplingfordeling og krever litt mer forklaring - men standardfeilen er estimatet på standardavviket i samplingfordelingen.
-
-Hvis du synes at denne forklaringen ikke hjalp, så er det med god grunn. Det er nemlig vanskelig å forstå. Det har en begrunnelse i sannsynlighetsteori som vi ikke skal gå veldig i dypbden på her. Men du trenger å forstå hva *samplingfordeling* er, og så gir *sentralgrenseteoremet* det vi trenger for å regne ut slike ting som p-verdier og konfidensintervall.
-
-### Samplingfordeling og sentralgrenseteoremet
-
-Se for deg følgende: du skal gjennomføre en undersøkelse blant dine medstudenter om hvor mange timer de bruker på studier hver uke. Du trekker et tilfeldig utvalg på 20 personer og noterer svarene. Med disse tallene kan du så regne ut hvor mange timer de bruker i gjennomsnitt. Dette vil være din beste gjetning på hvor mange timer dine medstudenter faktisk bruker på studiene. Det verd å merke seg at det *finnes et sannt gjennomsnitt* i populasjonen. Din utregning vil være et *estimat* på denne sanne verdien.
-
-Men hva hvis en annen student gjorde samme undersøkelse og trakk et utvalg på 20 personer helt uavhengig av ditt utvalg[^statistisktolkning-1]? Tror du at dere ville kommet frem til akkurat samme gjennomsnitt? Neppe. Det vil sannsynligvis være en viss forskjell, men kanskje ikke stor.
-
-[^statistisktolkning-1]: Altså: noen kunne tilfeldigvis deltatt i begge undersøkelsene.
-
-I prinsippet er det nesten uendelig mange måter å gjøre den samme undersøkelsen på så lenge det er tilfeldig trukket deltakere. Alle disse *mulige* utvalgene vil kunnne gi et litt forskjellig resultat, men den fundamentale årsaken til forskjellene vil skyldes *tilfeldigheter*. Det utvalget med tilhørende utregning *du* gjorde gir bare ett av mange *mulige* resultater. Du kunne fått et annet resultat av helt tilfeldige grunner!
-
-Poenget er at estimater har en usikkerhet i seg ved at det kunne vært annerledes. Gitt populasjonen og den sanne verdien er det et sett mulige resultater. Vi vet jo ikke hvordan verdiene fordeler seg i populasjonen - det er jo derfor man gjør en undersøkelse: for å finne det ut.
-
-#### Samplingfordeling
-Vi har vært inne på at resultatene fra en undersøkelse til en viss grad er *tilfeldige*. Det betyr selvsagt ikke at resultatene kunne være hva som helst. Derimot betyr det at man kan bruke sannsynlighetsregning til å si noe om *hvor usikker* man er. Da må vi vite noe om sannsynligheten for å få ulike resultater. Siden vi strengt tatt ikke vet fordelingen i populasjonen innebærer dette en god del abstraksjon og teoretiske forutsetninger. 
+Disse tre henger nøye sammen og er forskjellige uttrykk for *feilmarginen* ved et estimat. Her skal vi ikke gjennomgå begrunnelsene og det teoretiske grunnlaget for hvordan dette fungerer, men hoppe rett til det praktiske. En skikkelig forklaring følger fra *sentralgrenseteoremet*^[Hvis detter ukjent stoff for det kan du se en  som er dekket i f.eks. Moore Notz og Fligner (2021) *The basic practice of statistics*, kapittel 15, etterfulgt av forlengelsen til konfidensintervall og statistiske tester i kapittel 16 og 17.].
 
 
+Litt enkelt kan vi si at det hvis man gjør en studie på en ordenlig måte, så er ganske sannsynlig at man får en estimat som er lik den sanne verdien. Men det er også ganske *lite sannsynlig* at man får et estimat som er *nøyaktig* lik den sanne verdien. Vi må regne med at estimatet avviker noe på grunn av *tilfeldigheter*! Det er veldig nyttig å vite noe om hvor mye feil man kan forvente å få av tilfeldige grunner. Altså: hva er feilmarginen til den metoden vi bruker til å estimere? 
+
+Denne feilmarginen avhenger først og fremst av hvordan undersøkelsen er gjennomført. Utvalgsprosedyren er det viktigste: tilfeldig trukket utvalg er det mest grunnleggende momentet. Hvis det er systematiske skjevheter i dataene, så vil estimatet bli systematisk skjevt på måter vi ikke så lett kan håndtere med statistiske teknikker. 
+
+Dernest avhenger feilmarginen av utvalgsstørrelsen. Det er rett og slett slik at større data gir sikrere estimatet. Hvis utvalget består av 10 personer, så vil estimatet være langt mer usikkert enn hvis det hadde bestått av 5000 personer. Selv om det finnes en statistisk forklaring på dette, så er det relativt intuitivt å forstå. I utregninger vil standardfeilen bli mindre hvis antall observasjoner er større. 
+
+Til sist avhenger feilmarginen av en grense vi selv setter, som gjerne kalles *konfidensgrad*. Denne setter vi selv, men det er vanlig å sette denne til 95%. Det gjør at man noen ganger sier "95% sikker", hvilket er en nokså sleivete måte å si det på, men ikke helt galt under visse forutsetninger som vi kommer tilbake til. 
 
 
-#### Sentralgrenseteoremet
-Sentralgrenseteoremet sier at samplingfordelingen for et gjennomsnitt alltid vil være normalfordelt, uansett hvilken fordeling dataene har i utgangspunktet. Dermed kan vi bruke normalfordelingen til å beregne sannsynligheter for gitte utfall. 
+### Estimat 
+La oss si at du ønsker å si noe om gjennomsnittet i *populasjonen*, men har bare data om et tilfeldig *utvalg* fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et *estimat*.
 
+### Standardfeil 
+Standardfeilen uttrykker usikkerheten ved *estimatet*. Standardfeilen til estimatet er et mål på usikkerheten ved målemetoden. Usikker målemetode gjør at feilen kan være større.
+
+Ordet standard*feil* er lett å blande sammen med standard*avvik*, så la oss ta det med det samme. Standardavviket beskriver variasjon i data, f.eks. hvis man vil beskrive hvordan personers inntekt varierer rundt gjennomsnittet. Standardavviket beskriver altå variasjon i *data*. 
+
+Standard*feilen* beskriver derimot ikke data, men sannsynlighetsfordelingen for hvordan vi forventer at **estimatet** vil kunne avvike fra den sanne verdien på grunn av tilfeldigheter. 
+
+Sentralgrenseteoremet sier at estimatet på et gjennomsnitt vil ha tilfeldige feil som er *normalfordelt*, og dermed kan vi bruke normalfordelingen til å si noe om usikkerheten ved estimatet. Dette er forsøkt illustrert nedenfor der x-aksen viser hvor mye estimatet kan avvike fra den sanne verdien, mens kurven viser hvor sannsynligsfordelingen til avviket. Den stiplede linjen viser den sanne verdien. Når x-aksen er avvik fra sanne verdien, så vil altså $x = 0$ bety null avvik fra sanne verdien: helt riktig estimat. 
+
+Altså: det er aller mest sannsynlig å få et estimat som ligger nærme den sanne verdien, men litt avvik (større eller lavere estimat) er nesten like sannsynlig. Jo lengre til hver av sidene man går (større feil), jo mindre sannsynlig er det å få et slikt estimat. 
 
 
 ```{r}
-# library(animation)
-# ani.options(interval = 0.1, nmax = 150)
-# op = par(mar = c(3, 3, 1, 0.5), mgp = c(1.5, 0.5, 0), tcl = -0.3)
-# clt.ani(type = "s")
+#| echo: false
+library(tidyverse)
+ggplot(NULL, aes(x=c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-3, 3)) +
+  geom_vline(xintercept = 0, linetype="dashed", alpha=.4)+
+  labs(x = "z (antall standardfeil)", y = "") +
+  scale_x_continuous(breaks = -3:3)+
+  scale_y_continuous(labels = NULL)+
+  theme_minimal()
+```
+
+Skalaen på x-aksen er $z$, som i denne sammenheng kan tolkes som antall standardfeil. Den følger en standard normalfordeling som har kjente og faste egenskaper. Vi vet f.eks. at andelen *nedenfor* -1.96 er 0.025, og det samme gjelder *ovenfor* 1.96. Dette er illustrert i figuren nedenfor. Det er altså 0.05 (dvs 5%) sannsynlighet for å få et estimat som ligger 1.96 standardfeil unna den sanne verdien. Motsatt er sannsynligheten for å få et estimatet innenfor intervallet mellom -1.96 og 1.96 tilsvarende 95%. Dette er grunnlaget for det vi kaller *konfidensintervall*.
+
+
+```{r}
+#| echo: false
+ggplot(NULL, aes(x=c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-3, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "red", xlim = c(1.96, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "red", xlim = c(-3, -1.96)) +
+  geom_vline(xintercept = 0, linetype="dashed", alpha=.4)+
+  labs(x = "z (antall standardfeil)", y = "") +
+  scale_x_continuous(breaks = -3:3)+
+  theme_minimal()
+```
+
+
+Hvis man ønsker å være "95% sikker", så bruker man altså et 95% konfidensintervall. Det er ikke noe magisk ved akkurat 95% og er primært blitt en norm. Grunnen er bare at det skal være en ganske lav sannsynlighet for at estimatet skyldes tilfeldig variasjon. 
+
+Til ethvert estimat er knyttet en feilmargin som uttrykkes ved $z \times se$, der $se$ er forkortelse for standardfeil (engelsk: "standard error"). $z$ er et tall som er knyttet til grad av usikkerhet ved feilmarginen. En feilmargin basert på 95% konfidensgrad er dermed $1.96 \times se$. Hvis man så tar denne feilmarginen til hver side, så gir det samme som illustrert i figuren ovenfor. 
+
+Et konfidensintervall er altså bare å ta hensyn til feilmarginen til hver side av estimatet. Når vi bruker dette i praksis baserer vi oss på denne normalfordelingen og trenger bare å få regnet ut standardfeilen i tillegg. 
+
+
+```{r}
+#| echo: false
+library(haven)
+abu89 <- read_stata("data/abu89.dta") %>% 
+   mutate(across(where(is.labelled), ~as_factor(.)),
+          across(where(is.factor), ~fct_drop(.)))
+m <- mean(abu89$time89, na.rm = TRUE) %>% round(2)
+se <- (sd(abu89$time89, na.rm = TRUE)/sqrt(nrow(abu89))) %>% round(2)
+m + 1.96*se
 
 ```
 
-#### Tilfeldigheter
+Hvis man f.eks. har estimert gjennomsnittlig timelønn til å være `r round(m, 1)` og standardfeilen er `r round(se, 1)`. Da blir 95% konfidensintervallet som følger: 
 
-Merk deg at alt det ovenstående er betinget på et tilfeldig utvalg. Vi kan bruke sannsynlighetsregning på denne måten for å håndtere tilfeldige feil i målingen. Hvis utvalget ikke er tilnærmet tilfeldig trukket, så bryter dette sammen. Da er det skjevhet i estimatene, ofte omtalt som *bias* eller *forventningsskjevhet*, som gjør at
-
-
-
-### Standard*feil* og feilmargin
-Standard*feilen* uttrykker usikkerheten ved *estimatet*. La oss si at du ønsker å si noe om gjennomsnittet i *populasjonen*, men har bare data om et tilfeldig *utvalg* fra denne populasjonen. Når du da regner ut gjennomsnittet i utvalget er det din beste gjetning på hva gjennomsnittet er i populasjonen. En slik gjetning kaller vi et *estimat*. Standardfeilen til estimatet er et mål på usikkerheten ved målemetoden. Usikker målemetode gjør at feilen kan være større.
-
-Til ethvert estimat er knyttet en feilmargin som uttrykkes ved $z \times se$, der $se$ er forkortelse for standardfeil (engelsk: "standard error"). $z$ er et tall som er knyttet til grad av usikkerhet ved feilmarginen.  
+$$ 90.1 \pm 1.96 \times 0.47 = [89.2, 91.1]$$
+Dette betyr at vi har brukt en målemetode som har en feilmargin som gjør at vi kan være 95% sikker på at den sanne verdien ligger innenfor dette intervallet. 
 
 
+#### Er man egentlig "95% sikker"?
+Det sies ofte at feilmarginen uttrykker hvor sikker man er. Det er jo ikke helt riktig - eller det er riktig under noen spesielle forutsetninger om hva man mener med "sikker". La oss derfor ta dette med en gang.
 
-### Er man "95% sikker"?
-Det sies ofte at feilmarginen uttrykker hvor sikker man er. Det er jo ikke helt riktig - eller det er riktig under noen spesielle forutsetninger om hva man mener med "sikker". La oss derfor ta dette med en gang og starter med konfidensintervallet.
-
-Et 95% konfidensintervall er vårt anslag på hvor god vår målemetode er. Vi har jo regnet ut f.eks. et gjennomsnitt og det er jo greit nok. Usikkerheten kommer fra utvalgsprosedyren og variasjonen i data.
+Et 95% konfidensintervall er vårt anslag på hvor god vår *målemetode* er. Vi har jo regnet ut f.eks. et gjennomsnitt og det er jo greit nok. Usikkerheten kommer fra utvalgsprosedyren og variasjonen i data.
 
 Vi vet ikke hvorvidt vårt estimat ligger nærme eller langt unna den sanne verdien. Det vi derimot vet noe om er påliteligheten i den metoden vi har brukt. Det viktigste her er altså tilfeldig utvalg, og hvis utvalget ikke er tilnærmet tilfeldig trukket, så bryter det hele sammen.
 
 Når man sier at konfidensintervallet uttrykker at man er "95% sikker" på at den sanne verdien ligger i det intervallet mener man da følgende: Man har brukt en *metode* (dvs utvalg og utregninger og det hele) som har en *feilmargin*. Denne feilmarginen er slik at hvis man gjorde estimeringen (altså nytt utvalg hver gang) på samme måte svært mange ganger (f.eks. uendelig mange ganger), så ville 95% av resultatene ligget innenfor et slikt intervall.
 
-## Konfidensintervaller
+Man gjør selvsagt ikke samme undersøkelse tusenvis av ganger, så dette er en hypotetisk tanke. Man man kan også tenke seg at mange ulike forskere gjør en tilsvarende studie og får litt forskjellige resultat. Disse resultatene vil (i teorien) fordele seg som en normalfordeling rundt den sanne verdien. Noen ganske få vil ligge langt unna sannheten. 
 
-## T-test og p-verdier
 
-T-testen er i prinsippet en sammenligning mellom estimatets størrelse og standardfeilen til estimatet.
+### T-testen
+Hvis man skal sammenligne to grupper, så vet vi i utgangspunktet at dataene fra et utvalg antakeligvis vil vise at de ikke er helt like på grunn av tilfeldig variasjon. Det kan altså være at gruppene er like i virkeligheten, bare at dataene våre tilfeldigvis ble litt forskjellige. Det må vi jo regne med, men det er begrenset hvor forskjellig vi kan forvente at gruppene er på grunn av rene tilfeldigheter. 
+
+Se igjen på figuren over av normalfordelingen i omtalen av konfidensintervall. Gitt at det ikke er noen sann forskjell mellom gruppene, så vil vi forvente at estimatet ligger *innenfor* en viss feilmargin. Det betyr at en observert forskjell i dataene som ligger *innenfor* denne feilmarginen vil være konsistent med at forskjellene bare skyldes tilfeldig variasjon. Motsatt: hvis estimatet ligger *utenfor* denne feilmarginen, ja da kan vi si at det ikke er konsistent med dette utgangspunktet om at forskjellene bare skyldes tilfeldig variasjon. 
+
+En av de meste brukte statistiske testene i praksis er "t-testen". Du kan tenke på det som en **beslutningsregel**: hva skal til for at du skal bestemme deg for å tro at forskjellen *ikke skyldes tilfeldigheter*? Standardfeil og feilmarginer er det samme som før, så du må bare bestemme deg for hvor stor feilmargin du er villig til å operere med. Hvis estimatet på en differanse er *større* enn feilmarginen, da forkastes hypotesen om at forskjeller skyles tilfeldigher. Altså: forskjellene i data må da skyldes noe mer systematisk. 
+
+Så i utgangspunktet så må du altså ta stilling til om du mener det er en forskjell - eller ikke. Du kan ikke konkludere med at det "kanskje er en forskjell", men må ta et valg. Derfor kaller vi gjerne dette for hypotesetesting i en litt snever forstand. Det er bare to mulige hypoteser: 
+
+$H_0$: Det er egentlig ingen forskjell mellom gruppene, og forskjell i *dataene* skyldes bare tilfeldig variasjon. (Nullhypotesen). 
+$H_A$: Det er faktisk en forskjell mellom gruppene, og forskjellen i *dataene* er for stor til av det er sannsynlig at det skyldes tilfeldig variasjon. (Alternativ hypotese). 
+
+
+#### Formler og slikt 
+T-testen i prinsippet en sammenligning mellom estimatets størrelse og standardfeilen til estimatet. Vi kan skrive det som følger: 
 
 $$
  \frac{\mu}{SE(\mu)} = t 
@@ -84,21 +122,31 @@ Eller sagt på en annen måte: $$
  \frac{estimat}{standardfeil} = t 
 $$
 
-Det betyr at $t$ uttrykker forholdstallet mellom estimatet og standardfeilen. Intuitivt kan man vel forstå at hvis usikkerheten bør være mindre enn estimatet. Men hvor mye mindre?
+Det betyr at $t$-verdien egentlig bare er forholdstallet mellom estimatet og standardfeilen. Intuitivt kan man vel forstå at hvis usikkerheten bør være mindre enn estimatet. Altså: hvis du har estimert en forskjell i timelønn mellom to grupper, og feilmarginen til dette estimatet er større enn forskjellen, ja, da er det vanskelig å lære noe særlig fra det estimatet. 
 
-Fra samplingfordelingen og sentralgrenesteoremet ved vi jo at $1.96 \times SE(\mu)$
+Verdien $t$ tilsvarer verdien $z$ som vi nevnte i forbindelse med konfidensintervall. Så hvis $t$ er større enn $z$, så ligger estimatet *utenfor* konfidensintervallet. 
 
+Tolkningen av $t$-verdien brukes gjerne som en en beslutningsregel: Ja/Nei. Litt firkantet, med andre ord. Men $t$-verdien er også knyttet til normalfordelingen på samme måte som nevnt ovenfor i forbindelse med konfidensintervaller. Ethvert mulig resultat er knyttet til en viss sannsynlighet for at det skal skje ved en tilfeldighet. 
+
+#### P-verdi
 Tolkningen av p-verdien er i hvilken grad det er sannsynlig å få det observerte resultatet *ved en tilfeldighet* hvis NULL-hypotesen er riktig. Dette høres ganske pussig ut. Tanken er at man nesten alltid vil observere noe forskjell fra null, og det kan skje ved en tilfeldighet. Hvis null-hypotesen er riktig er det mindre sannsynlig at vi observerer en veldig stor forskjell. Men hvor stor forskjell er det, egentlig? Løsningen er å se avstanden fra null i lys av standardfeilen. Hvis man bruker en usikker målemetode, så er det mer sannsynlig å observere en stor forskjell ved tilfeldigheter enn om man bruker en veldig nøyaktig målemetode.
 
 I praksis: Tenk at du observerer en stor forskjell mellom to grupper. Med "stor" mener vi f.eks. at forskjellen er over dobbelt så stor som standardfeilen. Da får vi en p-verdi som er $p < 0.05$. Da kan vi si at hvis nullhypotesen er sann, så er det lite sannsynlig at vi ville fått et slikt resultat på grunn av tilfeldigheter.\^(Hvis vi ønsker være pinlig korrekte kan vi også si noe slikt som at hvis man gjorde målingen tusenvis av ganger, så ville 5% av resultatene ligge så langt unna null (eller lengre).)
 
 Så er logikken videre at vi som hovedregel ikke tror på resultater som er usannsynlige. Så i stedet for å holde fast på nullhypotesen velger vi i stedet å tro på den alternative hypotesen.
 
+
+
+
 ## Statistiske tester generelt
 
-Det finnes en hel haug av statistiske tester. Prinsippet er gjerne variasjoner av t-testen og har disse komponentene:
+Det finnes en hel haug av statistiske tester. Prinsippet er gjerne variasjoner av *t*-testen og har disse komponentene:
 
 1.  en nullhypotese og et alternativ
 2.  en *statistikk*, altså et måltall som er et avstandsmål mellom observert resultat og hva man forventer under nullhypotesen
 3.  en statistisk modell for samplingfordelingen som sier noe om fordelingen av tilfeldige feil
-4.  en uttalt beslutningsregel for konklusjonen. Et vanlig mål er at hvis p \< 0.05, så forkastes nullhypotesen.
+4.  en uttalt beslutningsregel for konklusjonen. Et vanlig mål er at hvis $p < 0.05$, så forkastes nullhypotesen.
+
+Du har sikker lært om $\chi^2$ testen for krysstabeller. Den er forskjellig på mange måter fra $t$-testen, men logikken er tilsvarende: $\chi^2$ er et avstandsmål for hva vi forventer gitt hypotesen om ingen forskjell. Hvis resultatet fra dataanalysen er for langt unna dette, så beslutter vi å tro at forskjellen skyldes systematikk. 
+
+
