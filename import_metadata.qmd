@@ -29,9 +29,9 @@ For disse dataene vil det være ulike sett av missing-verdier for de ulike varia
 
 En første sted er å lese inn dokumentasjonsrapporten fra en html-fil slik den leveres fra Sikt og gjør det om til et håndterbart oppslags-datasett. Dette er beskrevet i eget appendix. Det følgende tar utgangspunkt i at en slik oppslagsfil finnes.
 
-Det er noen verdier som i dokumentasjonen er spesifisert som spesielle typer missing. Disse skal vi kode om til NA. Disse verdiene har labler som starter med "filter:" eller "vil ikke svare" etc. Disse danner basis for omkoding til NA. 
+Det er noen verdier som i dokumentasjonen er spesifisert som spesielle typer missing. Disse skal vi kode om til NA. Disse verdiene har labler som starter med "filter:" eller "vil ikke svare" etc. Disse danner basis for omkoding til `NA`. Dette er ikke en komplett liste over koder som innebærer at det egentlig mangler informasjon. (Dvs. fordi koden indikerer grunner til at det mangler informasjon). Etter denne oppryddingen kan det altså fremdeles hende at det dukker opp noe slikt, så vær påpasselig med å sjekke variabelens fordeling før du analyserer med regresjonsmodeller. 
 
-Funksjonen nedenfor skal brukes innenfor et steg der man går gjennom alle variablene en om gangen. For hver variabel slås det opp de aktuelle missing-verdiene som gjelder for denne og bruker `replace()` til å omkode til NA for disse verdiene. Når denne funksjonen kalles for hver variabel senere, så brukes det altså ulike definisjoner av missing-verdier for hver variabel.^(Basert på kode fra https://tim-tiefenbach.de/post/2023-recode-columns/ ) 
+Funksjonen nedenfor skal brukes innenfor et steg der man går gjennom alle variablene en om gangen. For hver variabel slås det opp de aktuelle missing-verdiene som gjelder for denne og bruker `replace` til å omkode til `NA` for disse verdiene. Når denne funksjonen kalles for hver variabel senere, så brukes det altså ulike definisjoner av missing-verdier for hver variabel.^(Basert på kode fra https://tim-tiefenbach.de/post/2023-recode-columns/ ) 
 
 ```{r}
 # leser inn kodeliste/dokumentasjon
@@ -39,10 +39,17 @@ dat_dict <- readRDS("data/dat_dict.rds")
 
 # velger kun missing-lablene
 dat_dict_na <- dat_dict %>% 
-  filter(str_sub(tolower(label), 1, 7) == "filter:" | 
+  filter(  str_sub(tolower(label), 1, 7) == "filter:" | 
+           str_sub(tolower(label), 1, 10) == "filterfeil" |
+           str_sub(tolower(label), 1, 12) == "ikke besvart" |
+           str_sub(tolower(label), 1, 9) %in% c("filter t2", "filter t1", "filter t3") |
            tolower(label) %in% c("vil ikke svare",
                                  "deltok ikke i runden",
-                                  "mangler data")) 
+                                 "mangler data", "manglende data", 
+                                 "mangler verdi", "ubesvart spørsmål", 
+                                 "ugyldig verdi", "oppgitt verdi ikke et årstall",
+                                 "filter -",
+                                 "ikke svart post/web skjema")) 
 
 # Funksjon for å recode som har gitte user-NA.
 # (Må brukes innenfor `across()` nedenfor)
@@ -80,10 +87,12 @@ library(labelled)
 
 # data
 faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
+
 lang <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
 
 
-norlag <- merge(faste, lang, by = "ref_nr") %>% 
+
+norlag_lbl <- merge(faste, lang, by = c("ref_nr"), all.y = TRUE) %>% 
   filter(iodeltakelse == 1 |  
            iodeltakelse == 2 & round %in% c(1, 3) | 
            iodeltakelse == 3 & round %in% c(2, 3) |
@@ -92,13 +101,15 @@ norlag <- merge(faste, lang, by = "ref_nr") %>%
            iodeltakelse == 6 & round %in% c(2)
   ) 
 
+
+
 # vektorer av variable som skal omkodes
 cols_vec_all <- unique(dat_dict$col_nm)
-vars <- unique(names(norlag))
+vars <- unique(names(norlag_lbl))
 cols_vec <- cols_vec_all[cols_vec_all %in% vars]
 cols_vec_na <- cols_vec[(cols_vec %in% unique(dat_dict_na$col_nm))]
 
-norlag <- norlag %>% 
+norlag <- norlag_lbl %>% 
   mutate(across(all_of(cols_vec_na), 
               \(x,dic) recode_col_na(x, .env$dat_dict_na))) %>% 
   mutate(across(where(is.labelled), ~as_factor(.))) %>% 
@@ -133,6 +144,9 @@ norlag <- norlag %>%
 ```{r}
 #| echo: false
 #| eval: false
+saveRDS(norlag_lbl, paste0(utfilbane, "norlag_labelled.rds"))
+saveRDS(norlag_lbl, "data/norlag_labelled.rds")
+
 saveRDS(norlag, paste0(utfilbane, "norlag.rds"))
 saveRDS(norlag, "data/norlag.rds")
 ```

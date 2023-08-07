@@ -127,8 +127,7 @@ dat_dict <- bind_rows(tbslist) %>%
 
 ```{r}
 #| eval: false
-#| echo: false
-#saveRDS(dat_dict, "data/dat_dict.rds")
+saveRDS(dat_dict, "data/dat_dict.rds")
 ```
 
 
