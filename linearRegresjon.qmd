@@ -63,20 +63,17 @@ Regresjonslinja kan beskrives med et *stigningstall*, som sier hvor bratt linjen
 
 Utregningen av regresjonslinja går vi ikke inn på her, men intuitivt sett ønsker vi jo *den beste linja* og ikke en hvilken som helst omtrentlig linje. Datapunktene (de svarte punktene i grafen) er spredt rundt linja, og avstanden mellom linje og punkt kalles *residualer*. Summen av disse residualene er grunnlaget for mål på hvor godt regresjonslinja beskriver de faktiske dataene. Den beste linja er definert som den som minimerer residualene. Det er dette som kalles "minste kvadraters metode".
 
-I R estimeres regresjonsmodeller med funksjonen `lm`. Første argument er en formel på formen `utfallsvariabel ~ forklaringsvariabel`. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med `data = `.[^linearregresjon-2]
+I R estimeres regresjonsmodeller med funksjonen `lm`. Første argument er en formel på formen `utfallsvariabel ~ forklaringsvariabel`. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med `data = ` .[^linearregresjon-2]
 
 [^linearregresjon-2]: Grunnen til det siste er at R kan ha flere datasett oppe samtidig, så R vet ikke nødvendigvis hvilket datasett du tenker på
 
-Legg alltid resultatene i et eget objekt med et navnt som er rimelig enkelt å forstå hva er. I følgende kode legges resultatet i en nytt objekt `lm_est1`. Deretter bruker kan man hente ut de delene av resultatet vi er interessert i. I aller første omgang er bare interessert i regresjonslinjas konstantledd (startpunktet) og stigningstall. Disse kaller vi vanligvis *regresjonskoeffisienter*. Det kan vi få ut ved å bruke funksjonen `coef`.
+Legg alltid resultatene i et eget objekt med et navnt som er rimelig enkelt å forstå hva er. I følgende kode legges resultatet i en nytt objekt `lm_est1`. Deretter bruker kan man hente ut de delene av resultatet vi er interessert i. I aller første omgang er bare interessert i regresjonslinjas konstantledd (startpunktet) og stigningstall. Disse kaller vi vanligvis *regresjonskoeffisienter*. Det kan vi få ut ved å bruke funksjonen `coef`. (Vi kommer tilbake til å se på de fulle resultatene senere, som vi oftest er interessert i).
 
 ```{r}
 #| warning: false
 #| error: false
 #| message: false
-library(equatiomatic)
-
 lm_est1 <- lm(time89 ~ age, data = abu89)
-summary(lm_est1)
 coef(lm_est1)
 ```
 
@@ -84,14 +81,20 @@ Regresjonslingningen kan skrives på formel der $\alpha$ er konstantleddet og $\
 
 ```{r}
 #| warning: false
+#| echo: false
 #| error: false
 #| message: false
+library(equatiomatic)
 extract_eq(lm_est1, use_coefs = FALSE)
 ```
 
 Når vi setter inn de estimerte koeffisientene inn i ligningen får vi følgende:
 
 ```{r}
+#| warning: false
+#| echo: false
+#| error: false
+#| message: false
 extract_eq(lm_est1, use_coefs = TRUE)
 ```
 
@@ -99,7 +102,7 @@ Tolkningen her er at gjennomsnittlig forskjell i timelønn mellom grupper der al
 
 [^linearregresjon-3]: Noen ganger sier man at gjennomsnittslønna øker med 0.48 kroner for hvert år eldre man blir. Men det er ikke helt riktig, for dataene beskriver jo ikke individuell endringer over tid! Men hvis du synes det er lettere å tenke på det på den måten er det ok - men prøv å husk at det også er litt feil.
 
-Vi sier gjerne at regresjonslinjen er *estimert*, og det innebærer at det er usikkerhet i estimatene. Vi kommer tilbake til dette, men en vanligere output fra regresjonsmodeller er å bruker `summary` som følger:
+Vi sier gjerne at regresjonslinjen er *estimert*, og det innebærer at det er usikkerhet i estimatene. Vi kommer tilbake til dette, men en vanligere output fra regresjonsmodeller er å bruke funksjonen `summary`. Da får man med mye mer detaljer og output vil se ut som følger:
 
 ```{r}
 #| warning: false
@@ -220,20 +223,23 @@ ggplot( abu89x, aes(x =klasse89, y = time89))+
 
 Den generelle regresjonsligningen skrives som $y=a+bx$, der $x$ er forklaringsvariabelen. Regresjonskoeffisienten, $b$, tolkes som hvor forskjellen i gjennomsnittet på utfallsvariabelen, $y$, mellom de som er en enhets forskjell på $x$-variabelen. 
 
-
+Så kan vi kjøre en regresjon og få ut regresjonskoeffisientene på samme måte som før. Akkurat her er `coef` lagt inn i en parentes for `data.frame`, men det er bare for at det skal bli en pen kolonne. Vi kommer altså tilbake til teknikker for penere output nedenfor. 
 
 ```{r}
 #| warning: false
 #| error: false
 #| message: false
-lm(time89 ~ klasse89, data = abu89) %>% 
-  summary()
+est2 <- lm(time89 ~ klasse89, data = abu89)  
+data.frame(coef(est2)) 
 
 ```
 
-Hvert estimat for kategori for klasse sammenlignes med *den første kategorien* (altså den som mangler): klasse I. Det betyr at klasse VII (ufaglærte arbeidere) har en timelønn på 37 kroner mindre enn klasse I (øvre serviceklasse). Mens klasse II (nedre serviceklasse) tjener 14 kroner mindre enn klasse I.  
+Hvert estimat for kategori for klasse sammenlignes med *den første kategorien* (altså den som mangler): klasse I. Det betyr at klasse VII (ufaglærte arbeidere) har en timelønn på `r round(coef(est2)[5],1)` kroner mindre enn klasse I (øvre serviceklasse). Mens klasse II (nedre serviceklasse) tjener `r round(coef(est2)[2],1)`  kroner mindre enn klasse I.  
 
 Forskjellen mellom andre grupper er således differansen mellom disse estimatene. Altså: klasse VII tjener mindre enn klasse V-VI: $36.9 - 29.7 = 7.2$ kroner. Se på plottet over, så ser du at disse tallene ser riktige ut. 
+
+
+
 
 
 
@@ -284,6 +290,72 @@ lm_est3 <- lm(time89 ~ sex + age, data = abu89)
 
 summary(lm_est3)
 ```
+
+
+
+## Prediksjon 
+Lineær regresjon kan også brukes til *prediksjon* selv om dette i liten grad er hva samfunnsvitere bruker regresjonsmodeller til. Vanligvis vil vi primært være interessert i å tolke regresjonskoeffisientene som sammenligninger mellom grupper. Man kan si at man da er opptatt av *forklaringsvariablene*. Når man predikerer er man derimot opptatt av *utfallsvariabelen*. Hvis man skulle være interessert i temaer som maskinlæring, vil dette være en god inngang til det.^[f.eks. Et introduksjonskurs i maskinlæring som [SOS2901](https://www.uio.no/studier/emner/sv/iss/SOS2901/index.html) starter gjerne med nettopp prediksjon med lineær regresjon.] 
+
+
+### Regne ut forventet verdi
+Merk at konstantleddet er tolkbart som forventet verdi på utfallsvariabelen når alle andre prediktorer er null. I eksempelet ovenfor med timelønn og klassetilhøringhet, er det altså ikke noen koeffisient for klasse I. Gjennomsnittlig timelønn i klasse I er når de andre dummyene er 0, altså `r round(coef(est2)[1],1)` kroner. Gjennomsnittlig timelønn for klasse II er tilsvarende `r round(coef(est2)[1],1)` + (`r round(coef(est2)[2],2)`) = `r round(coef(est2)[1],1) + round(coef(est2)[2],1)`.  
+
+Hvis du skulle gjette timelønna til en person uten å vite noe annet enn klasseposisjon ville det være fornuftig å gjette på gjennomsnittet for denne klassen. Så vi kan bruke regresjonsmodeller til å regne ut gjennomsnittslønn for gitte verdier av forklaringsvariable. I dette eksempelet er det kanskje litt i overkant komplisert da vi jo også bare kunne regnet ut gjennomsnittet per gruppe i en enkel tabell. Det ville faktisk gitt akkurat samme resultat. Det er mer nyttig med kontinuerlige variable og mer kompliserte modeller. 
+
+La oss se på regresjonsmodellen for hvordan timelønn varierer med alder i stedet. Alder er kontinuerlig, så det er få personer på hvert alderstrinn. 
+
+```{r}
+coef(lm_est1)
+```
+
+Gjennomsnittlig timelønn ved 30 år vil da være `r round(coef(lm_est1)[1], 1)` + 30 $\times$ `r round(coef(lm_est1)[2], 1)` = `r round(coef(lm_est1)[1], 1) + 30 * round(coef(lm_est1)[2], 1)` kroner. Ved 35 år blir det tilsvarende `r round(coef(lm_est1)[1], 1)` + 35 $\times$ `r round(coef(lm_est1)[2], 1)` = `r round(coef(lm_est1)[1], 1) + 35 * round(coef(lm_est1)[2], 1)` kroner. 
+
+Dette kan vi altså regne ut for hånd, men man kan også bruke en r-funksjon, nemlig `predict`. Denne funksjonen tar som argument et regresjonsobjekt og en data.frame (altså et datasett eller tilsvarende struktur) med samme variabelnavn som ble brukt i opprinnelig regresjonsmodell.^[Hvis man ikke spesifiserer data.frame brukes opprinnelige data og predikerer for hver person. Det kan man også gjøre for å f.eks. regne ut residualer, men vi gjør ikke det her nå.]
+
+### Predikere for kontinuerlig variabel
+Koden nedenfor lager først et datasett med én variabel: alder med noen verdier man er interessert i utregning for. Så bruker man `mutate` til å lage en kolonne til med predikerte verdier. 
+
+
+```{r}
+nyedata <- data.frame(age = c(17, 20, 30, 40, 50, 60))
+
+nyedata %>% 
+  mutate(pred = predict(lm_est1, newdata = nyedata))
+
+
+```
+
+
+### Predikere kategorisk variabel
+Tilsvarende kan vi predikere for kategoriske variable slik som ble benyttet i regresjonsmodellen for klasse. I det nye datasettet spesifiseres f.eks. alle nivåene av en factor-variabel med funksjonen `levels` og predikerer for disse. 
+
+
+```{r}
+nyedata <- data.frame(klasse89 = levels(abu89$klasse89))
+
+nyedata %>% 
+  mutate(pred = predict(est2, newdata = nyedata))
+```
+
+
+### Predikere for multippel regresjon
+Nytten av predict-funksjonen kommer mer til sin rett ved mer kompliserte modeller. Her er et eksempel med flere variable: 
+
+
+Så kan vi regne ut estimert gjennomsnittlig verdi for de ulike kombinasjonene av utvalgte verdier som følger: 
+```{r}
+nyedata <- expand.grid(age = 30:35, 
+                      sex = c("Female", "Male"))
+nyedata %>% 
+  mutate(pred = predict(lm_est3, newdata = nyedata))
+
+```
+
+
+Funksjonen `predict` fungerer på tilsvarende måte uansett hvor komplisert modellen måtte være. Men det kreves at det nye datasettet har samme variabelnavn og variabeltype som i opprinnelige data. 
+
+
+
 
 ## Pene tabeller og eksport til fil
 Slik resultatene ser ut med bruk av `summary` er forsåvidt fint, og du får den informasjonen du trenger. Men det er ikke særlig presentabelt som ferdig produkt i en analyse. Du trenger typisk to ting: 1) Samle flere regresjonsmodeller i samme tabell, og 2) gjøre tabellene penere og lettere å lese, og 3) eksportere til det tekstbehandlingsprogrammet du bruker, typisk Microsoft Word. 

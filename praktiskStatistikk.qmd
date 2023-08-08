@@ -1,5 +1,9 @@
 # Statistikk i praksis
 
+```{r}
+#| echo: false
+invisible(Sys.setlocale(locale='no_NB.utf8'))
+```
 
 
 ```{r}
@@ -17,7 +21,7 @@ library(gtsummary)
 #| warning: false
 #| error: false
 #| message: false
-Sys.setlocale(locale='no_NB.utf8')
+
 library(haven)
 abu89 <- read_stata("data/abu89.dta") %>% 
   mutate(across(where(is.labelled), ~as_factor(.)),

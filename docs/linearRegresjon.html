@@ -341,11 +341,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#dummy-variable-med-mer-enn-en-kategori" id="toc-dummy-variable-med-mer-enn-en-kategori" class="nav-link" data-scroll-target="#dummy-variable-med-mer-enn-en-kategori"><span class="toc-section-number">9.3.1</span>  Dummy-variable med mer enn en kategori</a></li>
   </ul></li>
   <li><a href="#flere-variable" id="toc-flere-variable" class="nav-link" data-scroll-target="#flere-variable"><span class="toc-section-number">9.4</span>  Flere variable</a></li>
-  <li><a href="#pene-tabeller-og-eksport-til-fil" id="toc-pene-tabeller-og-eksport-til-fil" class="nav-link" data-scroll-target="#pene-tabeller-og-eksport-til-fil"><span class="toc-section-number">9.5</span>  Pene tabeller og eksport til fil</a>
+  <li><a href="#prediksjon" id="toc-prediksjon" class="nav-link" data-scroll-target="#prediksjon"><span class="toc-section-number">9.5</span>  Prediksjon</a>
   <ul class="collapse">
-  <li><a href="#alt-1-bruke-modelsummary" id="toc-alt-1-bruke-modelsummary" class="nav-link" data-scroll-target="#alt-1-bruke-modelsummary"><span class="toc-section-number">9.5.1</span>  Alt 1: Bruke <code>modelsummary()</code></a></li>
-  <li><a href="#alt-2-bruke-stargazer" id="toc-alt-2-bruke-stargazer" class="nav-link" data-scroll-target="#alt-2-bruke-stargazer"><span class="toc-section-number">9.5.2</span>  Alt 2: Bruke {stargazer}</a></li>
-  <li><a href="#alt-3-bruke-gtsummary" id="toc-alt-3-bruke-gtsummary" class="nav-link" data-scroll-target="#alt-3-bruke-gtsummary"><span class="toc-section-number">9.5.3</span>  Alt 3: Bruke {gtsummary}</a></li>
+  <li><a href="#regne-ut-forventet-verdi" id="toc-regne-ut-forventet-verdi" class="nav-link" data-scroll-target="#regne-ut-forventet-verdi"><span class="toc-section-number">9.5.1</span>  Regne ut forventet verdi</a></li>
+  <li><a href="#predikere-for-kontinuerlig-variabel" id="toc-predikere-for-kontinuerlig-variabel" class="nav-link" data-scroll-target="#predikere-for-kontinuerlig-variabel"><span class="toc-section-number">9.5.2</span>  Predikere for kontinuerlig variabel</a></li>
+  <li><a href="#predikere-kategorisk-variabel" id="toc-predikere-kategorisk-variabel" class="nav-link" data-scroll-target="#predikere-kategorisk-variabel"><span class="toc-section-number">9.5.3</span>  Predikere kategorisk variabel</a></li>
+  <li><a href="#predikere-for-multippel-regresjon" id="toc-predikere-for-multippel-regresjon" class="nav-link" data-scroll-target="#predikere-for-multippel-regresjon"><span class="toc-section-number">9.5.4</span>  Predikere for multippel regresjon</a></li>
+  </ul></li>
+  <li><a href="#pene-tabeller-og-eksport-til-fil" id="toc-pene-tabeller-og-eksport-til-fil" class="nav-link" data-scroll-target="#pene-tabeller-og-eksport-til-fil"><span class="toc-section-number">9.6</span>  Pene tabeller og eksport til fil</a>
+  <ul class="collapse">
+  <li><a href="#alt-1-bruke-modelsummary" id="toc-alt-1-bruke-modelsummary" class="nav-link" data-scroll-target="#alt-1-bruke-modelsummary"><span class="toc-section-number">9.6.1</span>  Alt 1: Bruke <code>modelsummary()</code></a></li>
+  <li><a href="#alt-2-bruke-stargazer" id="toc-alt-2-bruke-stargazer" class="nav-link" data-scroll-target="#alt-2-bruke-stargazer"><span class="toc-section-number">9.6.2</span>  Alt 2: Bruke {stargazer}</a></li>
+  <li><a href="#alt-3-bruke-gtsummary" id="toc-alt-3-bruke-gtsummary" class="nav-link" data-scroll-target="#alt-3-bruke-gtsummary"><span class="toc-section-number">9.6.3</span>  Alt 3: Bruke {gtsummary}</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -405,35 +412,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="9.2" class="anchored" data-anchor-id="regresjonslinja"><span class="header-section-number">9.2</span> Regresjonslinja</h2>
 <p>Regresjonslinja kan beskrives med et <em>stigningstall</em>, som sier hvor bratt linjen er. Substansielt sett betyr det hvor mye utfallsvariabelen (y-aksen) endres med økning i forklaringsvariabelen (x-aksen). I tillegg trenger vi også vite hvor høyt/lavt linjen ligger.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Til det bruker vi startpunktet for linjen, der hvor <span class="math inline">\(x\)</span> har verdien 0. Dette må regnes ut, og det er akkurat dette estimering av lineær regresjon gir oss.</p>
 <p>Utregningen av regresjonslinja går vi ikke inn på her, men intuitivt sett ønsker vi jo <em>den beste linja</em> og ikke en hvilken som helst omtrentlig linje. Datapunktene (de svarte punktene i grafen) er spredt rundt linja, og avstanden mellom linje og punkt kalles <em>residualer</em>. Summen av disse residualene er grunnlaget for mål på hvor godt regresjonslinja beskriver de faktiske dataene. Den beste linja er definert som den som minimerer residualene. Det er dette som kalles “minste kvadraters metode”.</p>
-<p>I R estimeres regresjonsmodeller med funksjonen <code>lm</code>. Første argument er en formel på formen <code>utfallsvariabel ~ forklaringsvariabel</code>. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med <code>data =</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Legg alltid resultatene i et eget objekt med et navnt som er rimelig enkelt å forstå hva er. I følgende kode legges resultatet i en nytt objekt <code>lm_est1</code>. Deretter bruker kan man hente ut de delene av resultatet vi er interessert i. I aller første omgang er bare interessert i regresjonslinjas konstantledd (startpunktet) og stigningstall. Disse kaller vi vanligvis <em>regresjonskoeffisienter</em>. Det kan vi få ut ved å bruke funksjonen <code>coef</code>.</p>
+<p>I R estimeres regresjonsmodeller med funksjonen <code>lm</code>. Første argument er en formel på formen <code>utfallsvariabel ~ forklaringsvariabel</code>. Rekkefølgen variablene oppgis i er altså viktig. Dernest må det spesifiseres hvilket datasett som skal brukes med <code>data =</code> .<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Legg alltid resultatene i et eget objekt med et navnt som er rimelig enkelt å forstå hva er. I følgende kode legges resultatet i en nytt objekt <code>lm_est1</code>. Deretter bruker kan man hente ut de delene av resultatet vi er interessert i. I aller første omgang er bare interessert i regresjonslinjas konstantledd (startpunktet) og stigningstall. Disse kaller vi vanligvis <em>regresjonskoeffisienter</em>. Det kan vi få ut ved å bruke funksjonen <code>coef</code>. (Vi kommer tilbake til å se på de fulle resultatene senere, som vi oftest er interessert i).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(equatiomatic)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>lm_est1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> age, <span class="at">data =</span> abu89)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_est1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = time89 ~ age, data = abu89)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--69.287 -19.131  -6.304  12.864 255.258 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 71.11019    1.62232   43.83   &lt;2e-16 ***
-age          0.48284    0.03926   12.30   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 29.73 on 3757 degrees of freedom
-  (368 observations deleted due to missingness)
-Multiple R-squared:  0.0387,    Adjusted R-squared:  0.03844 
-F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lm_est1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> age, <span class="at">data =</span> abu89)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)         age 
  71.1101883   0.4828415 </code></pre>
@@ -441,7 +424,6 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Regresjonslingningen kan skrives på formel der <span class="math inline">\(\alpha\)</span> er konstantleddet og <span class="math inline">\(\beta\)</span> er stigningstallet slik:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extract_eq</span>(lm_est1, <span class="at">use_coefs =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><span class="math display">\[
 \operatorname{time89} = \alpha + \beta_{1}(\operatorname{age}) + \epsilon
@@ -450,7 +432,6 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Når vi setter inn de estimerte koeffisientene inn i ligningen får vi følgende:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extract_eq</span>(lm_est1, <span class="at">use_coefs =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><span class="math display">\[
 \operatorname{\widehat{time89}} = 71.11 + 0.48(\operatorname{age})
@@ -458,9 +439,9 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Tolkningen her er at gjennomsnittlig forskjell i timelønn mellom grupper der aldersforskjellen er ett år er 0.48 kroner i favør av den eldre gruppen.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Merk enheten her: stigningstallet tolkes på den skalaen utfallsvariabelen er på, i dette tilfellet kroner. Det er også uttrykt endring ved at forklaringsvariabelen endres med nøyaktig 1.</p>
-<p>Vi sier gjerne at regresjonslinjen er <em>estimert</em>, og det innebærer at det er usikkerhet i estimatene. Vi kommer tilbake til dette, men en vanligere output fra regresjonsmodeller er å bruker <code>summary</code> som følger:</p>
+<p>Vi sier gjerne at regresjonslinjen er <em>estimert</em>, og det innebærer at det er usikkerhet i estimatene. Vi kommer tilbake til dette, men en vanligere output fra regresjonsmodeller er å bruke funksjonen <code>summary</code>. Da får man med mye mer detaljer og output vil se ut som følger:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_est1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_est1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -533,29 +514,29 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 </table>
 <p>I R vil vi ofte ha slike variable som factor-variable. Da er variabelen definert som kategorisk og selv om det er tekst-verdier i variabelen, så vil R automatisk behandle den som om verdiene var 0 og 1 i estimeringen av regresjonsmodellen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_gtsummary_mean_sd</span>()</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(female, time89) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> female) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_gtsummary_mean_sd</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(female, time89) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> female) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="pjyuiixtqy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pjyuiixtqy table {
+<div id="hvgvtpvfsf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hvgvtpvfsf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pjyuiixtqy thead, #pjyuiixtqy tbody, #pjyuiixtqy tfoot, #pjyuiixtqy tr, #pjyuiixtqy td, #pjyuiixtqy th {
+#hvgvtpvfsf thead, #hvgvtpvfsf tbody, #hvgvtpvfsf tfoot, #hvgvtpvfsf tr, #hvgvtpvfsf td, #hvgvtpvfsf th {
   border-style: none;
 }
 
-#pjyuiixtqy p {
+#hvgvtpvfsf p {
   margin: 0;
   padding: 0;
 }
 
-#pjyuiixtqy .gt_table {
+#hvgvtpvfsf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -581,12 +562,12 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_caption {
+#hvgvtpvfsf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pjyuiixtqy .gt_title {
+#hvgvtpvfsf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -598,7 +579,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#pjyuiixtqy .gt_subtitle {
+#hvgvtpvfsf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -610,7 +591,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#pjyuiixtqy .gt_heading {
+#hvgvtpvfsf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -622,13 +603,13 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_bottom_border {
+#hvgvtpvfsf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_col_headings {
+#hvgvtpvfsf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -643,7 +624,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_col_heading {
+#hvgvtpvfsf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -663,7 +644,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#pjyuiixtqy .gt_column_spanner_outer {
+#hvgvtpvfsf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -675,15 +656,15 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#pjyuiixtqy .gt_column_spanner_outer:first-child {
+#hvgvtpvfsf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pjyuiixtqy .gt_column_spanner_outer:last-child {
+#hvgvtpvfsf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pjyuiixtqy .gt_column_spanner {
+#hvgvtpvfsf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -695,11 +676,11 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#pjyuiixtqy .gt_spanner_row {
+#hvgvtpvfsf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pjyuiixtqy .gt_group_heading {
+#hvgvtpvfsf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -725,7 +706,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#pjyuiixtqy .gt_empty_group_heading {
+#hvgvtpvfsf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -740,15 +721,15 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#pjyuiixtqy .gt_from_md > :first-child {
+#hvgvtpvfsf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pjyuiixtqy .gt_from_md > :last-child {
+#hvgvtpvfsf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pjyuiixtqy .gt_row {
+#hvgvtpvfsf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -767,7 +748,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#pjyuiixtqy .gt_stub {
+#hvgvtpvfsf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -780,7 +761,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pjyuiixtqy .gt_stub_row_group {
+#hvgvtpvfsf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -794,15 +775,15 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#pjyuiixtqy .gt_row_group_first td {
+#hvgvtpvfsf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pjyuiixtqy .gt_row_group_first th {
+#hvgvtpvfsf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pjyuiixtqy .gt_summary_row {
+#hvgvtpvfsf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -812,16 +793,16 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pjyuiixtqy .gt_first_summary_row {
+#hvgvtpvfsf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_first_summary_row.thick {
+#hvgvtpvfsf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pjyuiixtqy .gt_last_summary_row {
+#hvgvtpvfsf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -831,7 +812,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_grand_summary_row {
+#hvgvtpvfsf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -841,7 +822,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pjyuiixtqy .gt_first_grand_summary_row {
+#hvgvtpvfsf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -851,7 +832,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_last_grand_summary_row_top {
+#hvgvtpvfsf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -861,11 +842,11 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_striped {
+#hvgvtpvfsf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pjyuiixtqy .gt_table_body {
+#hvgvtpvfsf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -874,7 +855,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_footnotes {
+#hvgvtpvfsf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -888,7 +869,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_footnote {
+#hvgvtpvfsf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -897,7 +878,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pjyuiixtqy .gt_sourcenotes {
+#hvgvtpvfsf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -911,7 +892,7 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#pjyuiixtqy .gt_sourcenote {
+#hvgvtpvfsf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -919,63 +900,63 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pjyuiixtqy .gt_left {
+#hvgvtpvfsf .gt_left {
   text-align: left;
 }
 
-#pjyuiixtqy .gt_center {
+#hvgvtpvfsf .gt_center {
   text-align: center;
 }
 
-#pjyuiixtqy .gt_right {
+#hvgvtpvfsf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pjyuiixtqy .gt_font_normal {
+#hvgvtpvfsf .gt_font_normal {
   font-weight: normal;
 }
 
-#pjyuiixtqy .gt_font_bold {
+#hvgvtpvfsf .gt_font_bold {
   font-weight: bold;
 }
 
-#pjyuiixtqy .gt_font_italic {
+#hvgvtpvfsf .gt_font_italic {
   font-style: italic;
 }
 
-#pjyuiixtqy .gt_super {
+#hvgvtpvfsf .gt_super {
   font-size: 65%;
 }
 
-#pjyuiixtqy .gt_footnote_marks {
+#hvgvtpvfsf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pjyuiixtqy .gt_asterisk {
+#hvgvtpvfsf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pjyuiixtqy .gt_indent_1 {
+#hvgvtpvfsf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pjyuiixtqy .gt_indent_2 {
+#hvgvtpvfsf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pjyuiixtqy .gt_indent_3 {
+#hvgvtpvfsf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pjyuiixtqy .gt_indent_4 {
+#hvgvtpvfsf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pjyuiixtqy .gt_indent_5 {
+#hvgvtpvfsf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1008,9 +989,9 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Vi ser altså at menn hadde i gjennomsnitt høyere timelønn enn kvinner, nærmere bestemt 21 kroner mer. Dette kan vi også undersøke med lineær regresjon som følger:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lm_est_i <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> female , <span class="at">data =</span> abu89)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est_i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lm_est_i <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> female , <span class="at">data =</span> abu89)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est_i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)      female 
    99.84382   -20.75229 </code></pre>
@@ -1020,13 +1001,13 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>I R vil vi ofte gjøre om kategoriske variable til såkalte factor-variable. En factor-variabel vil håndtere kategoriske variable som tekst, men med en underliggende numerisk verdi. Da kan man bruke factor-variable i alle standard analysemetoder. I regresjon vil R automatisk bruke den første kategorien som referansekategori.</p>
 <p>Vi kan gjøre den samme analysen med kjønn som en factor variabel og få de samme resultatene som ovenefor.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>abu89 <span class="ot">&lt;-</span> abu89 <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(female <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(time89))</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>lm_est2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> female , <span class="at">data =</span> abu89)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>abu89 <span class="ot">&lt;-</span> abu89 <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(female <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(time89))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>lm_est2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> female , <span class="at">data =</span> abu89)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)      female 
    99.84382   -20.75229 </code></pre>
@@ -1090,45 +1071,30 @@ F-statistic: 151.2 on 1 and 3757 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( abu89x, <span class="fu">aes</span>(<span class="at">x =</span>klasse89, <span class="at">y =</span> time89))<span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">width =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>gr_snitt), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_hline(yintercept = mean(abu89x$time89, na.rm = TRUE))+</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(klasse89), <span class="at">y =</span> smooth), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( abu89x, <span class="fu">aes</span>(<span class="at">x =</span>klasse89, <span class="at">y =</span> time89))<span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">width =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>gr_snitt), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_hline(yintercept = mean(abu89x$time89, na.rm = TRUE))+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(klasse89), <span class="at">y =</span> smooth), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="linearRegresjon_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Den generelle regresjonsligningen skrives som <span class="math inline">\(y=a+bx\)</span>, der <span class="math inline">\(x\)</span> er forklaringsvariabelen. Regresjonskoeffisienten, <span class="math inline">\(b\)</span>, tolkes som hvor forskjellen i gjennomsnittet på utfallsvariabelen, <span class="math inline">\(y\)</span>, mellom de som er en enhets forskjell på <span class="math inline">\(x\)</span>-variabelen.</p>
+<p>Så kan vi kjøre en regresjon og få ut regresjonskoeffisientene på samme måte som før. Akkurat her er <code>coef</code> lagt inn i en parentes for <code>data.frame</code>, men det er bare for at det skal bli en pen kolonne. Vi kommer altså tilbake til teknikker for penere output nedenfor.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(time89 <span class="sc">~</span> klasse89, <span class="at">data =</span> abu89) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>est2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> klasse89, <span class="at">data =</span> abu89)  </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">coef</span>(est2)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = time89 ~ klasse89, data = abu89)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--78.908 -15.460  -4.601  10.026 225.351 
-
-Coefficients:
-                                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                       118.399      1.575  75.176  &lt; 2e-16 ***
-klasse89II Nedre serviceklasse    -14.491      1.782  -8.133 5.65e-16 ***
-klasse89III Rutinefunksjonærer    -42.898      1.765 -24.300  &lt; 2e-16 ***
-klasse89V-VI Faglærte arbeidere   -29.688      1.917 -15.489  &lt; 2e-16 ***
-klasse89VIIa Ufaglærte arbeidere  -36.952      1.921 -19.232  &lt; 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 26.91 on 3675 degrees of freedom
-  (79 observations deleted due to missingness)
-Multiple R-squared:  0.2133,    Adjusted R-squared:  0.2124 
-F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>                                 coef.est2.
+(Intercept)                       118.39851
+klasse89II Nedre serviceklasse    -14.49078
+klasse89III Rutinefunksjonærer    -42.89842
+klasse89V-VI Faglærte arbeidere   -29.68788
+klasse89VIIa Ufaglærte arbeidere  -36.95234</code></pre>
 </div>
 </div>
-<p>Hvert estimat for kategori for klasse sammenlignes med <em>den første kategorien</em> (altså den som mangler): klasse I. Det betyr at klasse VII (ufaglærte arbeidere) har en timelønn på 37 kroner mindre enn klasse I (øvre serviceklasse). Mens klasse II (nedre serviceklasse) tjener 14 kroner mindre enn klasse I.</p>
+<p>Hvert estimat for kategori for klasse sammenlignes med <em>den første kategorien</em> (altså den som mangler): klasse I. Det betyr at klasse VII (ufaglærte arbeidere) har en timelønn på -37 kroner mindre enn klasse I (øvre serviceklasse). Mens klasse II (nedre serviceklasse) tjener -14.5 kroner mindre enn klasse I.</p>
 <p>Forskjellen mellom andre grupper er således differansen mellom disse estimatene. Altså: klasse VII tjener mindre enn klasse V-VI: <span class="math inline">\(36.9 - 29.7 = 7.2\)</span> kroner. Se på plottet over, så ser du at disse tallene ser riktige ut.</p>
 </section>
 </section>
@@ -1137,32 +1103,32 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Det er ikke så ofte vi bruker regresjon med bare en forklaringsvariabel, såklat “enkel lineær regresjon”.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Langt mer vanlig er å bruke flere variable samtidig i det vi kaller “multippel regresjon”.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> I multippel regresjon kan man altså beskrive mer kompliserte mønstre i dataene.</p>
 <p>Vi fortsetter med eksempelet om lønn og alder, men utvider med en dimensjon til, nemlig kjønn. La oss først se på kjønnsforskjellene i gjennomsnittlig timelønn.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>abu89 <span class="ot">&lt;-</span> abu89 <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(female <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(time89))</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, time89) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>abu89 <span class="ot">&lt;-</span> abu89 <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(female <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(time89))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>abu89 <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, time89) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="ufiqjezazs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ufiqjezazs table {
+<div id="micxyigxxu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#micxyigxxu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ufiqjezazs thead, #ufiqjezazs tbody, #ufiqjezazs tfoot, #ufiqjezazs tr, #ufiqjezazs td, #ufiqjezazs th {
+#micxyigxxu thead, #micxyigxxu tbody, #micxyigxxu tfoot, #micxyigxxu tr, #micxyigxxu td, #micxyigxxu th {
   border-style: none;
 }
 
-#ufiqjezazs p {
+#micxyigxxu p {
   margin: 0;
   padding: 0;
 }
 
-#ufiqjezazs .gt_table {
+#micxyigxxu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1188,12 +1154,12 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_caption {
+#micxyigxxu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ufiqjezazs .gt_title {
+#micxyigxxu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1205,7 +1171,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#ufiqjezazs .gt_subtitle {
+#micxyigxxu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1217,7 +1183,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#ufiqjezazs .gt_heading {
+#micxyigxxu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1229,13 +1195,13 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_bottom_border {
+#micxyigxxu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_col_headings {
+#micxyigxxu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1250,7 +1216,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_col_heading {
+#micxyigxxu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1270,7 +1236,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#ufiqjezazs .gt_column_spanner_outer {
+#micxyigxxu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1282,15 +1248,15 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#ufiqjezazs .gt_column_spanner_outer:first-child {
+#micxyigxxu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ufiqjezazs .gt_column_spanner_outer:last-child {
+#micxyigxxu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ufiqjezazs .gt_column_spanner {
+#micxyigxxu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1302,11 +1268,11 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#ufiqjezazs .gt_spanner_row {
+#micxyigxxu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ufiqjezazs .gt_group_heading {
+#micxyigxxu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1332,7 +1298,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#ufiqjezazs .gt_empty_group_heading {
+#micxyigxxu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1347,15 +1313,15 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#ufiqjezazs .gt_from_md > :first-child {
+#micxyigxxu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ufiqjezazs .gt_from_md > :last-child {
+#micxyigxxu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ufiqjezazs .gt_row {
+#micxyigxxu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1374,7 +1340,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#ufiqjezazs .gt_stub {
+#micxyigxxu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1387,7 +1353,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#ufiqjezazs .gt_stub_row_group {
+#micxyigxxu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1401,15 +1367,15 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#ufiqjezazs .gt_row_group_first td {
+#micxyigxxu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ufiqjezazs .gt_row_group_first th {
+#micxyigxxu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ufiqjezazs .gt_summary_row {
+#micxyigxxu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1419,16 +1385,16 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#ufiqjezazs .gt_first_summary_row {
+#micxyigxxu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_first_summary_row.thick {
+#micxyigxxu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ufiqjezazs .gt_last_summary_row {
+#micxyigxxu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1438,7 +1404,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_grand_summary_row {
+#micxyigxxu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1448,7 +1414,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#ufiqjezazs .gt_first_grand_summary_row {
+#micxyigxxu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1458,7 +1424,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_last_grand_summary_row_top {
+#micxyigxxu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1468,11 +1434,11 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_striped {
+#micxyigxxu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ufiqjezazs .gt_table_body {
+#micxyigxxu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1481,7 +1447,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_footnotes {
+#micxyigxxu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1495,7 +1461,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_footnote {
+#micxyigxxu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1504,7 +1470,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#ufiqjezazs .gt_sourcenotes {
+#micxyigxxu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1518,7 +1484,7 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ufiqjezazs .gt_sourcenote {
+#micxyigxxu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1526,63 +1492,63 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#ufiqjezazs .gt_left {
+#micxyigxxu .gt_left {
   text-align: left;
 }
 
-#ufiqjezazs .gt_center {
+#micxyigxxu .gt_center {
   text-align: center;
 }
 
-#ufiqjezazs .gt_right {
+#micxyigxxu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ufiqjezazs .gt_font_normal {
+#micxyigxxu .gt_font_normal {
   font-weight: normal;
 }
 
-#ufiqjezazs .gt_font_bold {
+#micxyigxxu .gt_font_bold {
   font-weight: bold;
 }
 
-#ufiqjezazs .gt_font_italic {
+#micxyigxxu .gt_font_italic {
   font-style: italic;
 }
 
-#ufiqjezazs .gt_super {
+#micxyigxxu .gt_super {
   font-size: 65%;
 }
 
-#ufiqjezazs .gt_footnote_marks {
+#micxyigxxu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ufiqjezazs .gt_asterisk {
+#micxyigxxu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ufiqjezazs .gt_indent_1 {
+#micxyigxxu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ufiqjezazs .gt_indent_2 {
+#micxyigxxu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ufiqjezazs .gt_indent_3 {
+#micxyigxxu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ufiqjezazs .gt_indent_4 {
+#micxyigxxu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ufiqjezazs .gt_indent_5 {
+#micxyigxxu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1612,9 +1578,9 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Vi ser altså at menn hadde i gjennomsnitt høyere timelønn enn kvinner, nærmere bestemt 21 kroner mer. Dette kan vi også undersøke med lineær regresjon som følger:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lm_est2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> sex , <span class="at">data =</span> abu89)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lm_est2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> sex , <span class="at">data =</span> abu89)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)   sexFemale 
    99.84382   -20.75229 </code></pre>
@@ -1624,16 +1590,16 @@ F-statistic: 249.1 on 4 and 3675 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Vi har allerede sett på alder og lønn, så vi kan utvide dette til å inkludere kjønn samtidig i et scatterplot.</p>
 <p>Grafisk er det da greit å bruke farger og slik vise for menn og kvinner for seg. I <code>ggplot</code> spesifiseres da <code>group = sex</code> og at fargene skal settes etter sammen grupperingen <code>col = sex</code> slik:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abu89, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> time89, <span class="at">group =</span> sex, <span class="at">col =</span> sex)) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abu89, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> time89, <span class="at">group =</span> sex, <span class="at">col =</span> sex)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="linearRegresjon_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lm_est3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> sex <span class="sc">+</span> age, <span class="at">data =</span> abu89)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_est3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lm_est3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time89 <span class="sc">~</span> sex <span class="sc">+</span> age, <span class="at">data =</span> abu89)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_est3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1657,26 +1623,109 @@ F-statistic: 341.7 on 2 and 3756 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
-<section id="pene-tabeller-og-eksport-til-fil" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="pene-tabeller-og-eksport-til-fil"><span class="header-section-number">9.5</span> Pene tabeller og eksport til fil</h2>
+<section id="prediksjon" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="prediksjon"><span class="header-section-number">9.5</span> Prediksjon</h2>
+<p>Lineær regresjon kan også brukes til <em>prediksjon</em> selv om dette i liten grad er hva samfunnsvitere bruker regresjonsmodeller til. Vanligvis vil vi primært være interessert i å tolke regresjonskoeffisientene som sammenligninger mellom grupper. Man kan si at man da er opptatt av <em>forklaringsvariablene</em>. Når man predikerer er man derimot opptatt av <em>utfallsvariabelen</em>. Hvis man skulle være interessert i temaer som maskinlæring, vil dette være en god inngang til det.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<section id="regne-ut-forventet-verdi" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="regne-ut-forventet-verdi"><span class="header-section-number">9.5.1</span> Regne ut forventet verdi</h3>
+<p>Merk at konstantleddet er tolkbart som forventet verdi på utfallsvariabelen når alle andre prediktorer er null. I eksempelet ovenfor med timelønn og klassetilhøringhet, er det altså ikke noen koeffisient for klasse I. Gjennomsnittlig timelønn i klasse I er når de andre dummyene er 0, altså 118.4 kroner. Gjennomsnittlig timelønn for klasse II er tilsvarende 118.4 + (-14.49) = 103.9.</p>
+<p>Hvis du skulle gjette timelønna til en person uten å vite noe annet enn klasseposisjon ville det være fornuftig å gjette på gjennomsnittet for denne klassen. Så vi kan bruke regresjonsmodeller til å regne ut gjennomsnittslønn for gitte verdier av forklaringsvariable. I dette eksempelet er det kanskje litt i overkant komplisert da vi jo også bare kunne regnet ut gjennomsnittet per gruppe i en enkel tabell. Det ville faktisk gitt akkurat samme resultat. Det er mer nyttig med kontinuerlige variable og mer kompliserte modeller.</p>
+<p>La oss se på regresjonsmodellen for hvordan timelønn varierer med alder i stedet. Alder er kontinuerlig, så det er få personer på hvert alderstrinn.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(lm_est1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         age 
+ 71.1101883   0.4828415 </code></pre>
+</div>
+</div>
+<p>Gjennomsnittlig timelønn ved 30 år vil da være 71.1 + 30 <span class="math inline">\(\times\)</span> 0.5 = 86.1 kroner. Ved 35 år blir det tilsvarende 71.1 + 35 <span class="math inline">\(\times\)</span> 0.5 = 88.6 kroner.</p>
+<p>Dette kan vi altså regne ut for hånd, men man kan også bruke en r-funksjon, nemlig <code>predict</code>. Denne funksjonen tar som argument et regresjonsobjekt og en data.frame (altså et datasett eller tilsvarende struktur) med samme variabelnavn som ble brukt i opprinnelig regresjonsmodell.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+</section>
+<section id="predikere-for-kontinuerlig-variabel" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="predikere-for-kontinuerlig-variabel"><span class="header-section-number">9.5.2</span> Predikere for kontinuerlig variabel</h3>
+<p>Koden nedenfor lager først et datasett med én variabel: alder med noen verdier man er interessert i utregning for. Så bruker man <code>mutate</code> til å lage en kolonne til med predikerte verdier.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nyedata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>nyedata <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred =</span> <span class="fu">predict</span>(lm_est1, <span class="at">newdata =</span> nyedata))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age      pred
+1  17  79.31849
+2  20  80.76702
+3  30  85.59543
+4  40  90.42385
+5  50  95.25226
+6  60 100.08068</code></pre>
+</div>
+</div>
+</section>
+<section id="predikere-kategorisk-variabel" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="predikere-kategorisk-variabel"><span class="header-section-number">9.5.3</span> Predikere kategorisk variabel</h3>
+<p>Tilsvarende kan vi predikere for kategoriske variable slik som ble benyttet i regresjonsmodellen for klasse. I det nye datasettet spesifiseres f.eks. alle nivåene av en factor-variabel med funksjonen <code>levels</code> og predikerer for disse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nyedata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">klasse89 =</span> <span class="fu">levels</span>(abu89<span class="sc">$</span>klasse89))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>nyedata <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred =</span> <span class="fu">predict</span>(est2, <span class="at">newdata =</span> nyedata))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  klasse89      pred
+1     I Øvre serviceklasse 118.39851
+2   II Nedre serviceklasse 103.90773
+3   III Rutinefunksjonærer  75.50009
+4  V-VI Faglærte arbeidere  88.71063
+5 VIIa Ufaglærte arbeidere  81.44618</code></pre>
+</div>
+</div>
+</section>
+<section id="predikere-for-multippel-regresjon" class="level3" data-number="9.5.4">
+<h3 data-number="9.5.4" class="anchored" data-anchor-id="predikere-for-multippel-regresjon"><span class="header-section-number">9.5.4</span> Predikere for multippel regresjon</h3>
+<p>Nytten av predict-funksjonen kommer mer til sin rett ved mer kompliserte modeller. Her er et eksempel med flere variable:</p>
+<p>Så kan vi regne ut estimert gjennomsnittlig verdi for de ulike kombinasjonene av utvalgte verdier som følger:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>nyedata <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">age =</span> <span class="dv">30</span><span class="sc">:</span><span class="dv">35</span>, </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>nyedata <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred =</span> <span class="fu">predict</span>(lm_est3, <span class="at">newdata =</span> nyedata))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   age    sex     pred
+1   30 Female 74.69049
+2   31 Female 75.16429
+3   32 Female 75.63810
+4   33 Female 76.11190
+5   34 Female 76.58571
+6   35 Female 77.05951
+7   30   Male 95.31560
+8   31   Male 95.78940
+9   32   Male 96.26320
+10  33   Male 96.73701
+11  34   Male 97.21081
+12  35   Male 97.68462</code></pre>
+</div>
+</div>
+<p>Funksjonen <code>predict</code> fungerer på tilsvarende måte uansett hvor komplisert modellen måtte være. Men det kreves at det nye datasettet har samme variabelnavn og variabeltype som i opprinnelige data.</p>
+</section>
+</section>
+<section id="pene-tabeller-og-eksport-til-fil" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="pene-tabeller-og-eksport-til-fil"><span class="header-section-number">9.6</span> Pene tabeller og eksport til fil</h2>
 <p>Slik resultatene ser ut med bruk av <code>summary</code> er forsåvidt fint, og du får den informasjonen du trenger. Men det er ikke særlig presentabelt som ferdig produkt i en analyse. Du trenger typisk to ting: 1) Samle flere regresjonsmodeller i samme tabell, og 2) gjøre tabellene penere og lettere å lese, og 3) eksportere til det tekstbehandlingsprogrammet du bruker, typisk Microsoft Word.</p>
 <p>R har en hel rekke funksjoner for dette. Det spiller egentlig ingen rolle hvilke funksjoner du bruker da det er noe smak og behag her, så det viktigste er at det fungerer rimelig greit for deg. Nedenfor presenteres tre pakker for dette formålet. Velg én av dem. Hvis du ikke har egne preferanser, så velg det første alternativet: {modelsummary}. Alle disse funksjonene håndterer svært mange typer modeller, gir gode muligheter for å ferdigstille tabellene fullstendig før eksport, og eksporterer til de formatene som er mest aktuelle. De har også mer avansert funksjonalitet som f.eks. å rapportere robuste standardfeil (av forskjellig type) i stedet for vanlige standardfeil (dette er pensum på SOS4020).</p>
-<p>Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på “klipp og lim” eller skjermbilde etc er uaktuelt og må unngås for nærmest enhver pris.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for de fleste, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt. De viktigste formatene som er:</p>
+<p>Vi vil som regel ha behov for å flytte resultatene over til et tekstbehandlingsprogram. En strategi som går ut på “klipp og lim” eller skjermbilde etc er uaktuelt og må unngås for nærmest enhver pris.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> Resultatene skal skrives til en fil på en effektiv måte. Det er en fordel om tabellene da ser ganske ok ut i utgangspunktet og du kan bruke samme prosedyre for å eksportere til flere typer format hvis behovet skulle melde seg. Det er jo MS Word som er viktigst for de fleste, mens de øvrige formatene nedenfor er for spesielt interessert - men noen av dere vil kanskje bli det på et senere tidspunkt. De viktigste formatene som er:</p>
 <ul>
 <li>MS Word - det vanligste tekstbehandlingsprogrammet som de aller fleste av dere bruker.</li>
 <li>rtf - rikt tekstformat. Er et enklere format som fungerer på tvers av de fleste programmer. Kan brukes i Word også.</li>
 <li>html - for websider</li>
 <li>latex - for mer tekniske dokumenter, særlig hvis du har mye formler og stæsj</li>
-<li>Markdown/Quarto - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> Det som fungerer med Markdown fungerer også med Quarto for samme formål.</li>
+<li>Markdown/Quarto - for dynamiske dokumenter med integrert R-kode og tekst, og kan eksportere ferdig dokument til alle ovennevnte formater<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Det som fungerer med Markdown fungerer også med Quarto for samme formål.</li>
 </ul>
-<section id="alt-1-bruke-modelsummary" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1" class="anchored" data-anchor-id="alt-1-bruke-modelsummary"><span class="header-section-number">9.5.1</span> Alt 1: Bruke <code>modelsummary()</code></h3>
+<section id="alt-1-bruke-modelsummary" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="alt-1-bruke-modelsummary"><span class="header-section-number">9.6.1</span> Alt 1: Bruke <code>modelsummary()</code></h3>
 <p>Eksporterer til bl.a. følgende formater: Word, rtf, html, latex, markdown</p>
 <p>Fordel: Gir pene og oversiktlige tabeller med enkel kode, og relativt enkelt å modifisere videre. Eksporterer direkte til alle viktigste formater. Kan også lett integreres med andre eksterne verktøy, først og fremst “grammar of tables” i pakket {gt} Ulempe:</p>
 <p>Her er kode for en enkel tabell med to regresjonsmodeller som vist ovenfor. Merk at objektene med regresjonsresultatene må legges inni funksjonen <code>list()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -1763,17 +1812,17 @@ F-statistic: 341.7 on 2 and 3756 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 </div>
 </div>
-<p>Denne tabellen inneholder mer enn du er interessert i. Nedre del av tabellen inneholder “goodness of fit” statistikker, altså mål på hvordan modellen passer til dataene. Det finnes mange slike, men ingen grunn til å gå seg vill i disse her. De kan fjernes med argumentet <code>gof_omit =</code> og så angis statistikkene med de navnene du ser i tabellen. Det skrives på en spesiell måte: som en tekststreng angitt med anførselstegn rundt, og <code>|</code> mellom hver. I koden nedenfor beholdes kun antall observasjoner, <span class="math inline">\(r^2\)</span> og <span class="math inline">\(F\)</span>.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>Denne tabellen inneholder mer enn du er interessert i. Nedre del av tabellen inneholder “goodness of fit” statistikker, altså mål på hvordan modellen passer til dataene. Det finnes mange slike, men ingen grunn til å gå seg vill i disse her. De kan fjernes med argumentet <code>gof_omit =</code> og så angis statistikkene med de navnene du ser i tabellen. Det skrives på en spesiell måte: som en tekststreng angitt med anførselstegn rundt, og <code>|</code> mellom hver. I koden nedenfor beholdes kun antall observasjoner, <span class="math inline">\(r^2\)</span> og <span class="math inline">\(F\)</span>.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
 <p>Vi gjør et par andre justeringer samtidig for å demonstrere noe funksjonalitet. I stedet for å oppgi estimatet og standardfeil på forskjellig linje kan vi spesifisere å ha det på samme linje med argumentet <code>estimate =</code>. Merk at den statistikken du vil rapportere settes i parentes {…} og mellomrom og parentes er ellers som det står. Man har også andre valg, derav det vanligste i bruk er å angi <em>p</em>-verdier eller <em>stjerner</em> for å vise disse på en forenklet måte. Det angis ved <code>{p.value}</code> eller <code>{stars}</code> på tilsvarende måte.</p>
 <p>I stedet for standardfeil på egen linje er det her angitt konfidensintervall på neste linje. For konfidensintervall vil det som forvalg være 95%, men vi kan angi f.eks. 99% konfidensintervall i stedet ved <code>conf_level =</code>. Hvis man ikke vil ha noe på neste linje kan man angi <code>statistic = NULL</code> i stedet. Man kan også velge å sette inn <code>p.value</code> eller <code>stars</code> på denne linjen.</p>
 <p>Merk at utfallsvariabelen i modellene er timelønn i kroner. I forrige tabell ble estimatene gitt med tre desimaler. Det er i overkant mange desimaler. En desimal er mer passende og nedenfor endres dette med <code>fmt =</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -1900,29 +1949,29 @@ F-statistic: 341.7 on 2 and 3756 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>, </span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"sexFemale"</span> <span class="ot">=</span> <span class="st">"Kvinne"</span>, </span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"age"</span> <span class="ot">=</span> <span class="st">"Alder"</span>, </span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"Konstant"</span>), </span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">output =</span> <span class="st">"output/reg_table.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(lm_est2, lm_est3), </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">1</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">estimate =</span> <span class="st">"{estimate} ({std.error})"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">statistic =</span> <span class="st">'conf.int'</span>, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">conf_level =</span> .<span class="dv">99</span>, </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">'DF|Deviance|R2 Adj.|AIC|BIC|Log.Lik.|RMSE'</span>, </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"sexFemale"</span> <span class="ot">=</span> <span class="st">"Kvinne"</span>, </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"age"</span> <span class="ot">=</span> <span class="st">"Alder"</span>, </span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"Konstant"</span>), </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">output =</span> <span class="st">"output/reg_table.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Merk at Word vil vise tabellen med de fonter etc som er forvalgt for Word. Dette kan du endre i Word etterpå. Det er en rekke funksjoner i Word for å formattere tabeller som du kan bruke.</p>
 <p>Pakken {modelsummary} har også en rekke andre funksjoner for å redigere tabeller som du kan utforske ved behov. For avanserte brukere kan man også gjøre om tabellen til et gt-objekt og redigere videre med pakken {gt} eller tilsvarende med pakken {flextable}. Det er altså tilnærmet uendelige muligheter for avanserte tabeller. Dette går imidlertid langt utenfor hva de fleste av dere vil trenge. {modelsummary} har <a href="https://vincentarelbundock.github.io/modelsummary/index.html">egen hjemmeside</a> med mer detaljer og instruksjoner.</p>
 </section>
-<section id="alt-2-bruke-stargazer" class="level3" data-number="9.5.2">
-<h3 data-number="9.5.2" class="anchored" data-anchor-id="alt-2-bruke-stargazer"><span class="header-section-number">9.5.2</span> Alt 2: Bruke {stargazer}</h3>
+<section id="alt-2-bruke-stargazer" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="alt-2-bruke-stargazer"><span class="header-section-number">9.6.2</span> Alt 2: Bruke {stargazer}</h3>
 <p>Mange R-brukere foretrekker pakken {stargazer}. Dette er en noe eldre funksjon og er derfor godt etablert.</p>
 <p>Eksporterer til bl.a. følgende formater: rtf, html, latex, markdown</p>
 <p>Fordel: Er en stand-alone pakke men gir enkelt veldig fine tabeller som antakeligvis er det du trenger Ulempe: Eksport til Word er ikke den beste, men god nok.</p>
 <p>Stargazer lager tabeller i kun tre formater: latex, html, og ren tekst. Vi velger derfor <code>type = "text"</code> for at det skal se ok ut her.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 =======================================================================
@@ -1953,13 +2002,13 @@ Note:                                       *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01
 <p>Vi kan modifisere tabellen tilsvarende som vi gjorde med {modelsummary}. Forklaringer av de enkelte argumenter finnes i <a href="https://cran.r-project.org/web/packages/stargazer/stargazer.pdf">manualen for stargazer</a>.</p>
 <p><code>covariate.labels =</code> Angir teksten for variabelnavn. Merk at det oppgis i den <em>rekkefølgen</em> det skal stå, så være veldig nøye hvis du har mange variable! <code>report =</code> angir hva som skal inngå i tabellen, der hver bokstav viser til spesifikke deler: v = variabelnavn, c = koeffisient/estimat, s = standardfeil. <code>single.row =</code> setter statistikkene på samme linje fremfor under hverandre. <code>keep.stat =</code> angir hvilke “model fit statistics” som skal rapporteres. Hvis du skriver “all” her får du en lang remse tilsvarende vi fikk med {modelsummary}. <code>digits =</code> angir antall desimaler</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>, </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"ser"</span>),</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"ser"</span>),</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 =====================================================
@@ -1981,66 +2030,66 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 <p>For å eksportere til Word kan man bruke rikt tekstformat (.rtf) eller html. rtf-formatet er som navnet tilsier ren tekst og selv om det ser greit ut, så er videre redigering i et tekstbehandlingsprogram krøkete. (Prøv og se selv). Bruk heller html fordi da beholdes tabell-strukturen. Du kan åpne html-tabeller fra Word og redigere videre der ved behov.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"ser"</span>),</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>, </span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">out =</span> <span class="st">"output/reg_starg.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm_est2, lm_est3, </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">"text"</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Kvinne"</span>, <span class="st">"Alder"</span>, <span class="st">"Konstant"</span>),</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">report =</span> <span class="st">"vcs"</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">single.row =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat =</span> <span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"rsq"</span>, <span class="st">"ser"</span>),</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">out =</span> <span class="st">"output/reg_starg.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Mer detaljer finner du i <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">{stargazer} sin vignette</a>.</p>
 </section>
-<section id="alt-3-bruke-gtsummary" class="level3" data-number="9.5.3">
-<h3 data-number="9.5.3" class="anchored" data-anchor-id="alt-3-bruke-gtsummary"><span class="header-section-number">9.5.3</span> Alt 3: Bruke {gtsummary}</h3>
+<section id="alt-3-bruke-gtsummary" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="alt-3-bruke-gtsummary"><span class="header-section-number">9.6.3</span> Alt 3: Bruke {gtsummary}</h3>
 <p>Vi har tidligere brukt {gtsummary} for å lage deskriptive tabeller, som er det pakken er best til. Men den kan også lage gode regresjonstabeller. Det er imidlertid en stor ulempe for nybegynnere i R: det er ganske krøkete å sette sammen flere regresjonsmodeller i en samlet tabell. Derfor er rådet å <em>ikke bruke</em> denne pakken med mindre du har veldig lyst til å prøve.</p>
 <p>Fordel med å bruke denne pakken er at man slipper å lære enda en ny pakke og slik sett ha ett sett med konsistent syntaks. En mulighet er selvsagt å ikke lage tabellene så ferdig i R, men eksportere til Word og redigere ferdig der mer manuelt.</p>
 <p>{gtsummary} kan eksportere til følgende formater: Word, rtf, html, latex og markdown. Resultatene kan også lett integreres med andre funksjoner, først og fremst “grammar of tables” i pakket {gt} og {flextable} - altså for mer avanserte ting som vi ikke dekker her.</p>
 <p>Prinsippet er å lage hver tabell for seg og så slå dem sammen med <code>tbl_merge</code> etterpå. Det innebærer en del mer kode, rett og slett. I utgangspunktet virker det ganske greit, men det er alltid en del småting som krever litt mer.</p>
 <p>Følgende kode lager først en ryddig tabell for hver regresionsmodell og så kobler sammen disse to tabellene.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lm_tab1 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(lm_est2, <span class="at">intercept =</span> T, </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">estimate_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_number</span>(x, <span class="at">digits =</span> <span class="dv">1</span>),</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_single_row =</span> <span class="st">"sex"</span>,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label =</span> <span class="fu">list</span>(sex <span class="sc">~</span> <span class="st">"Kvinne"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_glance_table</span>(<span class="at">include =</span> <span class="fu">c</span>(nobs, r.squared, sigma))</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                     </span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>lm_tab2 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(lm_est3, <span class="at">intercept =</span> T,</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">estimate_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_number</span>(x, <span class="at">digits =</span> <span class="dv">1</span>), </span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_single_row =</span> <span class="st">"sex"</span>,</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"Alder"</span>, sex <span class="sc">~</span> <span class="st">"Kvinne"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_glance_table</span>(<span class="at">include =</span> <span class="fu">c</span>(nobs, r.squared, sigma)</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_merge</span>(<span class="at">tbls =</span> <span class="fu">list</span>(lm_tab1, lm_tab2)) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_table_body</span>(</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>.x <span class="sc">%&gt;%</span> </span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">arrange</span>(</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        row_type <span class="sc">==</span> <span class="st">"glance_statistic"</span>, <span class="co"># sort glance table to bottom</span></span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        var_label                       <span class="co"># sort by the variable label (a hidden column) </span></span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>lm_tab1 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(lm_est2, <span class="at">intercept =</span> T, </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">estimate_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_number</span>(x, <span class="at">digits =</span> <span class="dv">1</span>),</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_single_row =</span> <span class="st">"sex"</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label =</span> <span class="fu">list</span>(sex <span class="sc">~</span> <span class="st">"Kvinne"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_glance_table</span>(<span class="at">include =</span> <span class="fu">c</span>(nobs, r.squared, sigma))</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                     </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>lm_tab2 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(lm_est3, <span class="at">intercept =</span> T,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">estimate_fun =</span> <span class="cf">function</span>(x) <span class="fu">style_number</span>(x, <span class="at">digits =</span> <span class="dv">1</span>), </span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_single_row =</span> <span class="st">"sex"</span>,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"Alder"</span>, sex <span class="sc">~</span> <span class="st">"Kvinne"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_glance_table</span>(<span class="at">include =</span> <span class="fu">c</span>(nobs, r.squared, sigma)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_merge</span>(<span class="at">tbls =</span> <span class="fu">list</span>(lm_tab1, lm_tab2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_table_body</span>(</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>.x <span class="sc">%&gt;%</span> </span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">arrange</span>(</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>        row_type <span class="sc">==</span> <span class="st">"glance_statistic"</span>, <span class="co"># sort glance table to bottom</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>        var_label                       <span class="co"># sort by the variable label (a hidden column) </span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="keopjladeq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#keopjladeq table {
+<div id="apmbnocnun" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#apmbnocnun table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#keopjladeq thead, #keopjladeq tbody, #keopjladeq tfoot, #keopjladeq tr, #keopjladeq td, #keopjladeq th {
+#apmbnocnun thead, #apmbnocnun tbody, #apmbnocnun tfoot, #apmbnocnun tr, #apmbnocnun td, #apmbnocnun th {
   border-style: none;
 }
 
-#keopjladeq p {
+#apmbnocnun p {
   margin: 0;
   padding: 0;
 }
 
-#keopjladeq .gt_table {
+#apmbnocnun .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2066,12 +2115,12 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#keopjladeq .gt_caption {
+#apmbnocnun .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#keopjladeq .gt_title {
+#apmbnocnun .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2083,7 +2132,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-bottom-width: 0;
 }
 
-#keopjladeq .gt_subtitle {
+#apmbnocnun .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2095,7 +2144,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-top-width: 0;
 }
 
-#keopjladeq .gt_heading {
+#apmbnocnun .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2107,13 +2156,13 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#keopjladeq .gt_bottom_border {
+#apmbnocnun .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#keopjladeq .gt_col_headings {
+#apmbnocnun .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2128,7 +2177,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#keopjladeq .gt_col_heading {
+#apmbnocnun .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2148,7 +2197,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   overflow-x: hidden;
 }
 
-#keopjladeq .gt_column_spanner_outer {
+#apmbnocnun .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2160,15 +2209,15 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 4px;
 }
 
-#keopjladeq .gt_column_spanner_outer:first-child {
+#apmbnocnun .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#keopjladeq .gt_column_spanner_outer:last-child {
+#apmbnocnun .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#keopjladeq .gt_column_spanner {
+#apmbnocnun .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2180,11 +2229,11 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   width: 100%;
 }
 
-#keopjladeq .gt_spanner_row {
+#apmbnocnun .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#keopjladeq .gt_group_heading {
+#apmbnocnun .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2210,7 +2259,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   text-align: left;
 }
 
-#keopjladeq .gt_empty_group_heading {
+#apmbnocnun .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2225,15 +2274,15 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   vertical-align: middle;
 }
 
-#keopjladeq .gt_from_md > :first-child {
+#apmbnocnun .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#keopjladeq .gt_from_md > :last-child {
+#apmbnocnun .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#keopjladeq .gt_row {
+#apmbnocnun .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2252,7 +2301,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   overflow-x: hidden;
 }
 
-#keopjladeq .gt_stub {
+#apmbnocnun .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2265,7 +2314,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#keopjladeq .gt_stub_row_group {
+#apmbnocnun .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2279,15 +2328,15 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   vertical-align: top;
 }
 
-#keopjladeq .gt_row_group_first td {
+#apmbnocnun .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#keopjladeq .gt_row_group_first th {
+#apmbnocnun .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#keopjladeq .gt_summary_row {
+#apmbnocnun .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2297,16 +2346,16 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#keopjladeq .gt_first_summary_row {
+#apmbnocnun .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#keopjladeq .gt_first_summary_row.thick {
+#apmbnocnun .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#keopjladeq .gt_last_summary_row {
+#apmbnocnun .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2316,7 +2365,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#keopjladeq .gt_grand_summary_row {
+#apmbnocnun .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2326,7 +2375,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#keopjladeq .gt_first_grand_summary_row {
+#apmbnocnun .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2336,7 +2385,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#keopjladeq .gt_last_grand_summary_row_top {
+#apmbnocnun .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2346,11 +2395,11 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#keopjladeq .gt_striped {
+#apmbnocnun .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#keopjladeq .gt_table_body {
+#apmbnocnun .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2359,7 +2408,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#keopjladeq .gt_footnotes {
+#apmbnocnun .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2373,7 +2422,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#keopjladeq .gt_footnote {
+#apmbnocnun .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2382,7 +2431,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#keopjladeq .gt_sourcenotes {
+#apmbnocnun .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2396,7 +2445,7 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#keopjladeq .gt_sourcenote {
+#apmbnocnun .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2404,63 +2453,63 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
   padding-right: 5px;
 }
 
-#keopjladeq .gt_left {
+#apmbnocnun .gt_left {
   text-align: left;
 }
 
-#keopjladeq .gt_center {
+#apmbnocnun .gt_center {
   text-align: center;
 }
 
-#keopjladeq .gt_right {
+#apmbnocnun .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#keopjladeq .gt_font_normal {
+#apmbnocnun .gt_font_normal {
   font-weight: normal;
 }
 
-#keopjladeq .gt_font_bold {
+#apmbnocnun .gt_font_bold {
   font-weight: bold;
 }
 
-#keopjladeq .gt_font_italic {
+#apmbnocnun .gt_font_italic {
   font-style: italic;
 }
 
-#keopjladeq .gt_super {
+#apmbnocnun .gt_super {
   font-size: 65%;
 }
 
-#keopjladeq .gt_footnote_marks {
+#apmbnocnun .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#keopjladeq .gt_asterisk {
+#apmbnocnun .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#keopjladeq .gt_indent_1 {
+#apmbnocnun .gt_indent_1 {
   text-indent: 5px;
 }
 
-#keopjladeq .gt_indent_2 {
+#apmbnocnun .gt_indent_2 {
   text-indent: 10px;
 }
 
-#keopjladeq .gt_indent_3 {
+#apmbnocnun .gt_indent_3 {
   text-indent: 15px;
 }
 
-#keopjladeq .gt_indent_4 {
+#apmbnocnun .gt_indent_4 {
   text-indent: 20px;
 }
 
-#keopjladeq .gt_indent_5 {
+#apmbnocnun .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2551,9 +2600,11 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <li id="fn3"><p>Noen ganger sier man at gjennomsnittslønna øker med 0.48 kroner for hvert år eldre man blir. Men det er ikke helt riktig, for dataene beskriver jo ikke individuell endringer over tid! Men hvis du synes det er lettere å tenke på det på den måten er det ok - men prøv å husk at det også er litt feil.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Det er selvsagt ingenting <em>enkelt</em> med slike modeller utover at det finnes mer kompliserte varianter.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Noen kaller dette også for <em>multivariat</em> regresjon, men det er tvetydig da det også kan bety modeller med flere utfallsvariable, som er noe ganske annet.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>F.eks. dette dokumentet er skrevet i Quarto<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>Øvrige statistikker har selvsagt sitt bruksområde. De nevnte holder for de fleste formål.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>f.eks. Et introduksjonskurs i maskinlæring som <a href="https://www.uio.no/studier/emner/sv/iss/SOS2901/index.html">SOS2901</a> starter gjerne med nettopp prediksjon med lineær regresjon.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Hvis man ikke spesifiserer data.frame brukes opprinnelige data og predikerer for hver person. Det kan man også gjøre for å f.eks. regne ut residualer, men vi gjør ikke det her nå.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Hvis du blir tatt i å gjøre slikt vil faglærer sette fyr på datamaskinen din som straff.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>F.eks. dette dokumentet er skrevet i Quarto<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Øvrige statistikker har selvsagt sitt bruksområde. De nevnte holder for de fleste formål.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
