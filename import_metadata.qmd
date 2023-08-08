@@ -1,5 +1,9 @@
 # Import av data fra Sikt - håndtering av formater med metadata 
 
+```{r}
+#| echo: false
+invisible(Sys.setlocale(locale='no_NB.utf8'))
+```
 
 ```{r}
 #| warning: false

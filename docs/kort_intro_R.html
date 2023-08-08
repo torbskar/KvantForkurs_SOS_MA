@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forkurs for kvantitativ metode - 4&nbsp; En veldig kjapp intro til R</title>
+<title>Forkurs for kvantitativ metode - 3&nbsp; En veldig kjapp intro til R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./norlag.html" rel="next">
-<link href="./innlesning_data.html" rel="prev">
+<link href="./Installering.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -143,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -186,17 +186,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./innlesning_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Innlesning av data</span></a>
+  <a href="./kort_intro_R.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./kort_intro_R.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></a>
+  <a href="./norlag.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./norlag.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></a>
+  <a href="./innlesning_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Innlesning av data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -330,22 +330,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#objektorientert" id="toc-objektorientert" class="nav-link active" data-scroll-target="#objektorientert"><span class="toc-section-number">4.1</span>  Objektorientert</a></li>
-  <li><a href="#funksjoner" id="toc-funksjoner" class="nav-link" data-scroll-target="#funksjoner"><span class="toc-section-number">4.2</span>  Funksjoner</a></li>
-  <li><a href="#r-pakker" id="toc-r-pakker" class="nav-link" data-scroll-target="#r-pakker"><span class="toc-section-number">4.3</span>  R-pakker</a></li>
-  <li><a href="#r-dialekter" id="toc-r-dialekter" class="nav-link" data-scroll-target="#r-dialekter"><span class="toc-section-number">4.4</span>  R-dialekter</a></li>
-  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link" data-scroll-target="#tidyverse"><span class="toc-section-number">4.5</span>  Tidyverse</a>
+  <li><a href="#objektorientert" id="toc-objektorientert" class="nav-link active" data-scroll-target="#objektorientert"><span class="toc-section-number">3.1</span>  Objektorientert</a></li>
+  <li><a href="#funksjoner" id="toc-funksjoner" class="nav-link" data-scroll-target="#funksjoner"><span class="toc-section-number">3.2</span>  Funksjoner</a></li>
+  <li><a href="#r-pakker" id="toc-r-pakker" class="nav-link" data-scroll-target="#r-pakker"><span class="toc-section-number">3.3</span>  R-pakker</a></li>
+  <li><a href="#r-dialekter" id="toc-r-dialekter" class="nav-link" data-scroll-target="#r-dialekter"><span class="toc-section-number">3.4</span>  R-dialekter</a></li>
+  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link" data-scroll-target="#tidyverse"><span class="toc-section-number">3.5</span>  Tidyverse</a>
   <ul class="collapse">
-  <li><a href="#datahåndtering-dplyr" id="toc-datahåndtering-dplyr" class="nav-link" data-scroll-target="#datahåndtering-dplyr"><span class="toc-section-number">4.5.1</span>  Datahåndtering: {dplyr}</a></li>
-  <li><a href="#grafikk-ggplot2" id="toc-grafikk-ggplot2" class="nav-link" data-scroll-target="#grafikk-ggplot2"><span class="toc-section-number">4.5.2</span>  Grafikk: {ggplot2}</a></li>
-  <li><a href="#import-av-data-haven" id="toc-import-av-data-haven" class="nav-link" data-scroll-target="#import-av-data-haven"><span class="toc-section-number">4.5.3</span>  Import av data: {haven}</a></li>
+  <li><a href="#datahåndtering-dplyr" id="toc-datahåndtering-dplyr" class="nav-link" data-scroll-target="#datahåndtering-dplyr"><span class="toc-section-number">3.5.1</span>  Datahåndtering: {dplyr}</a></li>
+  <li><a href="#grafikk-ggplot2" id="toc-grafikk-ggplot2" class="nav-link" data-scroll-target="#grafikk-ggplot2"><span class="toc-section-number">3.5.2</span>  Grafikk: {ggplot2}</a></li>
+  <li><a href="#import-av-data-haven" id="toc-import-av-data-haven" class="nav-link" data-scroll-target="#import-av-data-haven"><span class="toc-section-number">3.5.3</span>  Import av data: {haven}</a></li>
   </ul></li>
-  <li><a href="#andre-nyttige-ting" id="toc-andre-nyttige-ting" class="nav-link" data-scroll-target="#andre-nyttige-ting"><span class="toc-section-number">4.6</span>  Andre nyttige ting</a>
+  <li><a href="#andre-nyttige-ting" id="toc-andre-nyttige-ting" class="nav-link" data-scroll-target="#andre-nyttige-ting"><span class="toc-section-number">3.6</span>  Andre nyttige ting</a>
   <ul class="collapse">
-  <li><a href="#hjelpfiler-dokumentasjon" id="toc-hjelpfiler-dokumentasjon" class="nav-link" data-scroll-target="#hjelpfiler-dokumentasjon"><span class="toc-section-number">4.6.1</span>  Hjelpfiler / dokumentasjon</a></li>
-  <li><a href="#bruke-pakker-uten-å-laste-dem" id="toc-bruke-pakker-uten-å-laste-dem" class="nav-link" data-scroll-target="#bruke-pakker-uten-å-laste-dem"><span class="toc-section-number">4.6.2</span>  Bruke pakker uten å laste dem</a></li>
-  <li><a href="#addins" id="toc-addins" class="nav-link" data-scroll-target="#addins"><span class="toc-section-number">4.6.3</span>  Addins</a></li>
-  <li><a href="#få-hjelp-av-chatgpt" id="toc-få-hjelp-av-chatgpt" class="nav-link" data-scroll-target="#få-hjelp-av-chatgpt"><span class="toc-section-number">4.6.4</span>  Få hjelp av chatGPT</a></li>
+  <li><a href="#hjelpfiler-dokumentasjon" id="toc-hjelpfiler-dokumentasjon" class="nav-link" data-scroll-target="#hjelpfiler-dokumentasjon"><span class="toc-section-number">3.6.1</span>  Hjelpfiler / dokumentasjon</a></li>
+  <li><a href="#bruke-pakker-uten-å-laste-dem" id="toc-bruke-pakker-uten-å-laste-dem" class="nav-link" data-scroll-target="#bruke-pakker-uten-å-laste-dem"><span class="toc-section-number">3.6.2</span>  Bruke pakker uten å laste dem</a></li>
+  <li><a href="#addins" id="toc-addins" class="nav-link" data-scroll-target="#addins"><span class="toc-section-number">3.6.3</span>  Addins</a></li>
+  <li><a href="#få-hjelp-av-chatgpt" id="toc-få-hjelp-av-chatgpt" class="nav-link" data-scroll-target="#få-hjelp-av-chatgpt"><span class="toc-section-number">3.6.4</span>  Få hjelp av chatGPT</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -355,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></h1>
 </div>
 
 
@@ -371,21 +371,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Før vi setter igang trengs det en kort introduksjon til noe grunnleggende om hvordan R fungerer. Så lærer man mer underveis, og et senere kapittel går grundigere inn i omkoding av variable.</p>
-<section id="objektorientert" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="objektorientert"><span class="header-section-number">4.1</span> Objektorientert</h2>
+<section id="objektorientert" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="objektorientert"><span class="header-section-number">3.1</span> Objektorientert</h2>
 <p>I de innledende kapitlene ble det vist hvordan man leser inn data i R og dataene ble lagt i et “objekt”. R er bygd opp rundt å bruke slike objekter i den forstand at alt man jobber med (typisk: datasett) ligger i objekter.</p>
 <p>Du kan tenke på objekter som en boks som det står et navn på. Ofte er det bare et datasett oppi boksen, men det kan også være flere ting. Det finnes derfor <em>flere typer objekter</em>. Vi skal primært jobbe med datasett, og slike objekter er av typen “data.frame”. De kan også være av typen “tibble”, men det er for alle praktiske formål på dette nivået akkurat det samme som “data.frame”. Men objekter kan også inneholde resultater fra analyser, som f.eks. grafikk, tabeller eller regresjonsresultater. Man kan også legge enkelttall, vektorer og tekststrenger i objekter.</p>
 <p>Noen ganger vil et objekt inneholde flere forskjellige ting. Et eksempel er resultat fra regresjonsmodeller som både vil inneholde koeffisienter, standardfeil, residualer, en del statistikker, men også selve datasettet. Men for å se på output er det funksjoner som trekker ut akkurat det vi trenger, så du trenger sjelden forholde deg til hvordan et slikt objekt er bygd opp. Men du kan tenke på det som en velorganisert boks med masse mindre rom oppi.</p>
 <p>Men poenget er: Alt du jobber med i R er objekter. Alle objekter har et navn som du velger selv. Du kan legge hva som helst i et objekt. Du kan ikke ha to objekter med samme navn, og hvis du lager et objekt med et navn som eksisterer fra før overskriver du det gamle objektet.</p>
 </section>
-<section id="funksjoner" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="funksjoner"><span class="header-section-number">4.2</span> Funksjoner</h2>
+<section id="funksjoner" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="funksjoner"><span class="header-section-number">3.2</span> Funksjoner</h2>
 <p>Alt man gjør i R gjøres med “funksjoner”, og man bruker funksjonene på objekter eller deler av objekter. Funksjonenen har et navn og etterfulgt av en parentes slik som f.eks. <code>dinfunksjon(...)</code>. Funksjonen starter og slutter med en parentes. Du kan tenke på funksjoner som en liten maskin der du putter noe inn, og så kommer noe annet ut. Det du putter inn skal står inni parentes. Det som kommer ut kan du enten legge i et eget objekt eller la det skrives til output-vinduet.</p>
 <p>Det du legger inn i funksjonen - altså inni parentesn - kalles “argumenter”. Hvert argument har et navn og du skal normalt oppgi i hvert fall hvilket datasett funksjonen skal brukes på. Argumentet for data er nettopp <code>data =</code> og så oppgis navnet på det objektet dataene ligger i. En god del slike argumenter har navn som er standardisert på tvers av funksjoner, og <code>data =</code> er et eksempel på dette.</p>
 <p>I tillegg kan det være en rekke andre argumenter som vi kommer tilbake til i de ulike funksjonene vi bruker. Et poeng er viktig å presisere: argumentene har også en forventet <em>rekkefølge</em>. Man kan også oppgi argumentene uten å angi navnet hvis de kommer i riktig rekkefølge. For eksempel vil en funksjon for regresjon ha den forventede rekkefølgen: 1) Spesifisering av utfallsvariabel og forklaringsvariable på en form som heter “formula”, deretter og 2) Angitt objektnavnet til dataene. Så kan det være andre argumenter i tillegg. Man kan godt oppgi argumentene i annen rekkefølge, men da er man nødt til å bruke argumentnavnet slik at R forstår hva som er hva.</p>
 </section>
-<section id="r-pakker" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="r-pakker"><span class="header-section-number">4.3</span> R-pakker</h2>
+<section id="r-pakker" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="r-pakker"><span class="header-section-number">3.3</span> R-pakker</h2>
 <p>Når man installerer R har man svært mye funksjonalitet tilgjengelig uten videre. Dette kalles “base R”, altså basic installasjon og funksjonalitet. Men R er i praksis basert på å bruke såkalte “pakker”. Dette er funksjoner som utvider R sin funksjonalitet. Så mens “base R” tilbyr infrastrukturen, så er de ulike pakkene laget for spesifikke oppgaver.</p>
 <p>R-pakker er et helt økosystem av funksjonalitet som dekker det aller meste du kan finne på å gjøre, fra bittesmå oppgaver, til avansert statistikk og maskinlæring, til hele systemer for dataanalyse. Det finnes mange hundre R-pakker tilgjengelig, og disse ligger på en server som heter CRAN. Hvis du vil se på hva som finnes kan du se på <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">oversikten over tilgjengelige pakker</a>. For nye brukere av R vil dette fremstå som ganske kaotisk. Det finnes også oversikter der viktigste pakker innenfor ulike typer analyse er gruppert slik at man lettere skal kunne finne frem. Dette kalles <a href="https://cran.r-project.org/index.html">Task Views</a>. Men du trenger ikke forholde deg til slike oversikter på en god stund ennå. Du får beskjed om hvilke pakker du trenger fortløpende, og det er et begrenset antall.</p>
 <p>For å installere en pakke må du vite hva pakken heter og datamaskinen din må være koblet til internett. Funksjonen <code>install.packages</code>:</p>
@@ -409,17 +409,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>En annen grunn til at koden ikke fungerer kan være at det er “konflikt” mellom pakker du har lastet. Hvis du bare laster alle pakker du vet du bruker (og noen ekstra som noen på internett har foreslått), så kan det hende at disse pakkene skaper trøbbel for hverandre. Det er typisk at noen funksjoner har samme navn i ulike pakker, og R bruker da en annen funksjon enn du tror. Så da er rådet: ikke last masse pakker du ikke vet hva er. I det etterfølgende introduseres ulike pakker fortløpende og du får da vite hva de brukes til. Utvalget av pakker er dessuten slik at det ikke skal være noen slike konflikter. De pakkene vi skal bruke jobber veldig fint sammen. (Se avsnitt nedenfor om dialekter).</p>
 <p>Men det er altså et poeng at du må vite hva slags funksjonalitet de ulike pakkene har, og hvilke du faktisk trenger.</p>
 </section>
-<section id="r-dialekter" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="r-dialekter"><span class="header-section-number">4.4</span> R-dialekter</h2>
+<section id="r-dialekter" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="r-dialekter"><span class="header-section-number">3.4</span> R-dialekter</h2>
 <p>De funksjonene som følger med grunnleggende installasjon av R kalles altså “base R” eller bare “base”. Dette er grunnstrukturen for programmeringsspråket. Man kan gjøre svært mye analyser med bare bruk av base R, og en god del lærebøker i statistikk og dataanalyse er lagt opp til hovedsakelig bruk av <em>base</em>.</p>
 <p>Noen R-pakker inneholder ikke bare enkeltfunksjoner, men nesten et helt programmeringsspråk i seg selv. Noen slike pakker er egentlig en hel samling av veldig mange andre pakker som er integrert i hverandre og fungerer sømløst sammen. Det er lurt å holde seg innenfor samme “dialekt” da man ellers kan bli veldig forvirret. I det følgende skal vi holde oss til dialekten “Tidyverse”, som er en dominerende variant i R.</p>
 <p>Merk at det finnes altså flere dialekter som er spesialiserte for spesifikke formål. Et eksempel er {data.table} som er lynrask for store datasett, {caret} som gir et rammeverk for maskinlæring, og {lattice} som er et eget grafikk-system. Det finnes enda flere. Dette gjør at det kan være vanskelig å søke på nettet etter løsninger fordi du kan få svar (som funker!) i en annen dialekt enn den du kan.</p>
 </section>
-<section id="tidyverse" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="tidyverse"><span class="header-section-number">4.5</span> Tidyverse</h2>
+<section id="tidyverse" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="tidyverse"><span class="header-section-number">3.5</span> Tidyverse</h2>
 <p>Når man laster pakken {tidyverse} laster man egentlig flere pakker som også kan lastes individuelt. Merk at “tidy” betyr jo “ryddig” og hensikten her er et språk som er så ryddig og logisk som mulig. Dette innebærer også at det er innarbeidet en del prinsipper for datastruktur og datahåndtering som hovedarkitekten bak har <a href="https://www.jstatsoft.org/article/view/v059i10">redegjort for i en egen artikkel</a>. Full oversikt over pakkene som inngår i <a href="https://www.tidyverse.org/">Tidyverse finner du på deres hjemmeside</a>. Men du trenger ikke sette deg inn i alt det for å bruke softwaren.</p>
-<section id="datahåndtering-dplyr" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="datahåndtering-dplyr"><span class="header-section-number">4.5.1</span> Datahåndtering: {dplyr}</h3>
+<section id="datahåndtering-dplyr" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="datahåndtering-dplyr"><span class="header-section-number">3.5.1</span> Datahåndtering: {dplyr}</h3>
 <p>Grunnleggende datahåndtering inkluderer først og fremst å <em>endre variable</em> ved omkoding, utregninger eller transformasjoner. Pakken {dplyr} inneholder de nødvendige verktøy for dette.</p>
 <p>De grunnleggende funksjonene vi bruker kan ordnes sekvensielt og bindes sammen med en “pipe”. Norsk oversettelse vil være “rørlegging”. Dette er litt rart og uvant, men i første omgang kan du se for deg at det er en flyt av data fra venstre side mot høyre side. Du kan altså gjøre noe med data og “deretter gjøre” noe mer med de dataene du har endret. Vi kommer tilbake til dette nedenfor.</p>
 <p>Vi skal bruke et bittelite datasett for å demonstrere. Det er seks observasjoner og to variable. Observasjonene tilhører gruppe a, b, eller c, og variabelen “varA” har en tallverdi. Dataene ser ut som følger:</p>
@@ -438,8 +438,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 6      c    7</code></pre>
 </div>
 </div>
-<section id="grunnleggende-verb" class="level4" data-number="4.5.1.1">
-<h4 data-number="4.5.1.1" class="anchored" data-anchor-id="grunnleggende-verb"><span class="header-section-number">4.5.1.1</span> Grunnleggende verb</h4>
+<section id="grunnleggende-verb" class="level4" data-number="3.5.1.1">
+<h4 data-number="3.5.1.1" class="anchored" data-anchor-id="grunnleggende-verb"><span class="header-section-number">3.5.1.1</span> Grunnleggende verb</h4>
 <p>For å endre variable brukes funksjonen <code>mutate</code>, som har to argumenter: hvilket datasett som skal endres på, og spesifikasjon av gitte variable.</p>
 <p>Syntaksen er slik at man <em>starter</em> med å angi objektnavnet med dataene, men her skal det <em>ikke</em> skrives <code>data =</code> av grunner vi kommer tilbake til straks. Deretter skriver man navnet på ny variabel “erlik” utregning av ny verdi. I det følgende lages en ny variabel “varB” som er <em>2 ganger varA</em>:</p>
 <div class="cell">
@@ -482,8 +482,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="pipe-med-magrittr" class="level4" data-number="4.5.1.2">
-<h4 data-number="4.5.1.2" class="anchored" data-anchor-id="pipe-med-magrittr"><span class="header-section-number">4.5.1.2</span> Pipe %&gt;% med {magrittr}</h4>
+<section id="pipe-med-magrittr" class="level4" data-number="3.5.1.2">
+<h4 data-number="3.5.1.2" class="anchored" data-anchor-id="pipe-med-magrittr"><span class="header-section-number">3.5.1.2</span> Pipe %&gt;% med {magrittr}</h4>
 <p>Vi bruker en “pipe” for å få lettere lesbare koder og slippe å lage mange nye objekter hele tiden. Vi kan binde sammen flere verb i en arbeidsflyt der man kun angir objektnavnet én gang.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
@@ -512,8 +512,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>varA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="logiske-operatorer" class="level4" data-number="4.5.1.3">
-<h4 data-number="4.5.1.3" class="anchored" data-anchor-id="logiske-operatorer"><span class="header-section-number">4.5.1.3</span> Logiske operatorer</h4>
+<section id="logiske-operatorer" class="level4" data-number="3.5.1.3">
+<h4 data-number="3.5.1.3" class="anchored" data-anchor-id="logiske-operatorer"><span class="header-section-number">3.5.1.3</span> Logiske operatorer</h4>
 <p>I mange sammenhenger setter man <em>hvis</em>-krav. F.eks. at man skal gi en ny variabel en verdi <em>hvis</em> en annen variabel har en bestemt verdig - og en annen verdi hvis ikke. Det kan også gjelde kombinasjoner av variable og verdier. Slike krav er da enten <code>TRUE</code> eller <code>FALSE</code>.</p>
 <p>Her er grunnleggende logiske operatorer.</p>
 <table class="table">
@@ -579,8 +579,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="flere-verb" class="level4" data-number="4.5.1.4">
-<h4 data-number="4.5.1.4" class="anchored" data-anchor-id="flere-verb"><span class="header-section-number">4.5.1.4</span> Flere verb</h4>
+<section id="flere-verb" class="level4" data-number="3.5.1.4">
+<h4 data-number="3.5.1.4" class="anchored" data-anchor-id="flere-verb"><span class="header-section-number">3.5.1.4</span> Flere verb</h4>
 <p>Logiske operatorer brukes også til å filtrere dataene, altså å beholde eller slette rader som oppfyller visse krav. Her er en kode som beholder alle observasjoner om <em>ikke</em> tilhører gruppe “a”:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dinedata <span class="sc">%&gt;%</span> </span>
@@ -681,8 +681,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Det er mulig det ovenstående ikke fremstår veldig nyttig. Men poenget er å introdusere noe grunnleggende om hvordan R og <em>tidyverse</em> fungerer. Det gjør det lettere å forstå det etterfølgende kapitlene - som er konkret nyttige.</p>
 </section>
 </section>
-<section id="grafikk-ggplot2" class="level3" data-number="4.5.2">
-<h3 data-number="4.5.2" class="anchored" data-anchor-id="grafikk-ggplot2"><span class="header-section-number">4.5.2</span> Grafikk: {ggplot2}</h3>
+<section id="grafikk-ggplot2" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="grafikk-ggplot2"><span class="header-section-number">3.5.2</span> Grafikk: {ggplot2}</h3>
 <p>“Base R” har en del innebygde funksjoner for å lage grafikk som vi <em>ikke</em> dekker her. Grunnen til dette er at vi vektlegger funksjonen fra tidyverse <code>ggplot</code>. Det er noen viktige grunner til dette:</p>
 <ol type="1">
 <li><code>ggplot</code> fungerer det sømløst med arbeidsflyten vi har vist over</li>
@@ -692,15 +692,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Første kapittel om deskriptiv statistikk handler om grafikk og vi går inn i detaljene der etterhvert som det trengs der.</p>
 <p>Et viktig moment i <code>ggplot</code> er at det er <em>lagdelt</em> og hvert lag skilles med <code>+</code> på en måte som ligner på “pipe”. Man kan så legge på flere lag oppgå det første laget. En vanlig feilmelding i starten er at man bruker <code>%&gt;%</code> når det skulle vært <code>+</code>.</p>
 </section>
-<section id="import-av-data-haven" class="level3" data-number="4.5.3">
-<h3 data-number="4.5.3" class="anchored" data-anchor-id="import-av-data-haven"><span class="header-section-number">4.5.3</span> Import av data: {haven}</h3>
+<section id="import-av-data-haven" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="import-av-data-haven"><span class="header-section-number">3.5.3</span> Import av data: {haven}</h3>
 <p>R kan importere det aller meste av dataformater, men spesielt for samfunnsvitenskapen er noen formater som primært er brukt i samfunnsvitenskap. Det gjelder Stata, SPSS og SAS. Pakken {haven} er en del av tidyverse og tar seg av dette. Dette er forklart nærmere i kapittelet om import av data.</p>
 </section>
 </section>
-<section id="andre-nyttige-ting" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="andre-nyttige-ting"><span class="header-section-number">4.6</span> Andre nyttige ting</h2>
-<section id="hjelpfiler-dokumentasjon" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="hjelpfiler-dokumentasjon"><span class="header-section-number">4.6.1</span> Hjelpfiler / dokumentasjon</h3>
+<section id="andre-nyttige-ting" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="andre-nyttige-ting"><span class="header-section-number">3.6</span> Andre nyttige ting</h2>
+<section id="hjelpfiler-dokumentasjon" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="hjelpfiler-dokumentasjon"><span class="header-section-number">3.6.1</span> Hjelpfiler / dokumentasjon</h3>
 <p>Dokumentasjonen i R er ofte ganske vanskelig å lese når man ikke er så god (ennå) i å bruke R. Det tar rett og slett litt tid å bli vant til hvordan ting fungerer. Hjelpfilene er skrevet slik at de er lette å finne frem i for erfarne brukere, men du er kanskje ikke der riktig ennå? Her gis en liten introduksjon for å hjelpe deg til å komme igang. Men ellers vil det meste du trenger å kunne forklares fortløpende etterhvert som funksjonene introduseres. Så foreløpig er rådet å ikke stresse med å finne ut av dette ennå. Men det er greit å vite at de finnes!</p>
 <p>Alle R-pakker kommer med egne dokumentasjonsfiler, og det er en slik fil til hver funksjon. Denne åpnes med kommandoen <code>?</code> foran navnet på funksjonen. For å se nærmere på funksjonen for å lese inn csv-filer, <code>read.csv</code> blir det altså <code>?read.csv</code>. Hjelpfilen åpens i en egen fane i Rstudio.</p>
 <p>Noen ganger er det flere funksjoner som er varianter av hverandre som står i samme dokumentasjon. F.eks. vil dokumentasjonen for <code>read.csv</code> også inneholde <code>read.table</code>, <code>read.delim</code> og et par andre. De har samme argumenter og struktur, og altså samme dokumentasjon.</p>
@@ -710,14 +710,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Under overskriften <strong>Value</strong> kan det stå noe mer om hva som kommer <em>ut</em> av funksjonen. Dette kan være hva slags objekt det blir eller andre ting.</p>
 <p>Under overskriften <strong>See Also</strong> vil det være referanser til andre funksjoner som er relevante, enten alternativer eller tilleggsfunksjoner etc.</p>
 <p>Overskriften <strong>Examples</strong> er gjerne den mest nyttige. Det er rett og slett noen korte kodesnutter som illustrerer bruken.</p>
-<section id="vignetter" class="level4" data-number="4.6.1.1">
-<h4 data-number="4.6.1.1" class="anchored" data-anchor-id="vignetter"><span class="header-section-number">4.6.1.1</span> Vignetter</h4>
+<section id="vignetter" class="level4" data-number="3.6.1.1">
+<h4 data-number="3.6.1.1" class="anchored" data-anchor-id="vignetter"><span class="header-section-number">3.6.1.1</span> Vignetter</h4>
 <p>Alle R-pakker publiseres på en server, CRAN, og hver pakke har sin egen side. Du kan gå inn på denne direkte. <a href="https://cran.r-project.org/web/packages/tidyverse/index.html">Her er lenken til tidyverse på CRAN</a>. Under overskriften <strong>Dokumentation</strong> vil det være en lenke til en referansemanual, som er den samme som når du bruker <code>?</code> i R, men her får du alt tilhørende pakken i en samlet pdf-fil.</p>
 <p>For mange pakker vil deg også være lenker til “Vignettes”. Disse er gjerne mer utførlige tekster som forklarer pakkens struktur og viser bruk. Disse er gjerne de mest nyttige for vanlige brukere. Noen ganger er det egne nettsider for disse pakkene og vignettene. Det er lenket til flere slike i det etterfølgende.</p>
 </section>
 </section>
-<section id="bruke-pakker-uten-å-laste-dem" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="bruke-pakker-uten-å-laste-dem"><span class="header-section-number">4.6.2</span> Bruke pakker uten å laste dem</h3>
+<section id="bruke-pakker-uten-å-laste-dem" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="bruke-pakker-uten-å-laste-dem"><span class="header-section-number">3.6.2</span> Bruke pakker uten å laste dem</h3>
 <p>Det hender at man trenger å bruke en funksjon fra en spesifikk pakke én gang og derfor ikke har behov for å laste pakken. Som nevnt ovenfor hender det at funksjoner har samme navn i ulike pakker slik at det finnes en konflikt der R kan komme til å bruke en annen funksjon enn du hadde tenkt. Det burde ikke være et problem i noe av det som dekkes i dette heftet, men kan være greit å vite likevel.</p>
 <p>En funksjon fra en spesifikk pakke kan angis med <code>pakkenavn::funksjon()</code>. Her er et eksempel der man eksplisitt angir å bruke funksjonen <code>summarise</code> fra pakken {dplyr}.</p>
 <div class="cell">
@@ -728,30 +728,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="addins" class="level3" data-number="4.6.3">
-<h3 data-number="4.6.3" class="anchored" data-anchor-id="addins"><span class="header-section-number">4.6.3</span> Addins</h3>
+<section id="addins" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="addins"><span class="header-section-number">3.6.3</span> Addins</h3>
 <p>Rstudio er det mulig å installere såkalte “addins”. Dette gir ikke økt funksjonalitet til R, men til Rstudio. Noen av disse hjelper deg med å skrive kode med bruk av menyer. Dette kan være nyttig for å finne ut av problemer og vanskelig syntaks - men er ikke noe du skal bruke på daglig basis. Det er <em>hjelp</em> til å finne ut av ting, så bruk det til å lære!</p>
 <p>Addins installeres på samme måte som R-pakker med <code>install.packages</code>, men du trenger ikke laste det med <code>library</code> for å brukes. I stedet er funksjonene tilgjengelig i Rstudio-menyen “Addins”. Det er mulig du må søke opp f</p>
 <p>Det er veldig viktig at du bruker slike addins på en måte som gjør at du <em>lærer deg R</em> på ordentlig. Du kan ikke belage deg på å bruke addins i det lange løp. De som nevnes nedenfor genererer kode for deg og du bør så lime den koden inn i scriptet ditt!</p>
-<section id="styler---skriv-pent" class="level4" data-number="4.6.3.1">
-<h4 data-number="4.6.3.1" class="anchored" data-anchor-id="styler---skriv-pent"><span class="header-section-number">4.6.3.1</span> Styler - skriv pent</h4>
+<section id="styler---skriv-pent" class="level4" data-number="3.6.3.1">
+<h4 data-number="3.6.3.1" class="anchored" data-anchor-id="styler---skriv-pent"><span class="header-section-number">3.6.3.1</span> Styler - skriv pent</h4>
 <p>I R spiller det ingen rolle <em>hvordan</em> du skriver kode: linjeskift, innrykk og mellomrom etter parentes osv gir det samme resultatet. (Komma og parenteser er derimot viktig!). Men det er ikke likegyldig for lesbarheten. {styler} kan brukes til å bedre lesbarheten av egen kode. Denne addin’en er laget av de samme som lager tidyverse, og er derfor utmerket verktøy for å skrive bedre kode. “Bedre” er da her i betydningen ryddig og ordentlig, noe som gjør den lettere å lese, de-bugge og at andre forstår koden din.</p>
 <p>Du kan se nærmere på <a href="https://www.tidyverse.org/blog/2017/12/styler-1.0.0/">vignetten til Styler</a></p>
 </section>
-<section id="esquisse---grafikk" class="level4" data-number="4.6.3.2">
-<h4 data-number="4.6.3.2" class="anchored" data-anchor-id="esquisse---grafikk"><span class="header-section-number">4.6.3.2</span> Esquisse - grafikk</h4>
+<section id="esquisse---grafikk" class="level4" data-number="3.6.3.2">
+<h4 data-number="3.6.3.2" class="anchored" data-anchor-id="esquisse---grafikk"><span class="header-section-number">3.6.3.2</span> Esquisse - grafikk</h4>
 <p>Esquisse kan brukes til å lage grafikk med “drag-and-drop”. Noen synes det er lettere i begynnelsen. Men det viktigste med å bruke slike verktøy er at du etterpå kan vise koden slik den lages med <code>ggplot</code>.</p>
 <p>Du kan se nærmere på <a href="https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html">vignetten til Esquisse</a>.</p>
 </section>
-<section id="questionr---omkode-factor" class="level4" data-number="4.6.3.3">
-<h4 data-number="4.6.3.3" class="anchored" data-anchor-id="questionr---omkode-factor"><span class="header-section-number">4.6.3.3</span> Questionr - omkode factor</h4>
+<section id="questionr---omkode-factor" class="level4" data-number="3.6.3.3">
+<h4 data-number="3.6.3.3" class="anchored" data-anchor-id="questionr---omkode-factor"><span class="header-section-number">3.6.3.3</span> Questionr - omkode factor</h4>
 <p>Å omkode factor-variable kan være litt styr. Det er en egen addin for dette formålet.</p>
 <p>OBS! Questionr generer kode i base-R. Det er altså <em>ikke</em> helt den samme dialekten som ellers er dekket her. Men det er likheter, så det kan være til hjelp likevel.</p>
 <p>Du kan se nærmere på <a href="https://cran.r-project.org/web/packages/questionr/vignettes/recoding_addins.html">vignetten til questionr</a>.</p>
 </section>
 </section>
-<section id="få-hjelp-av-chatgpt" class="level3" data-number="4.6.4">
-<h3 data-number="4.6.4" class="anchored" data-anchor-id="få-hjelp-av-chatgpt"><span class="header-section-number">4.6.4</span> Få hjelp av chatGPT</h3>
+<section id="få-hjelp-av-chatgpt" class="level3" data-number="3.6.4">
+<h3 data-number="3.6.4" class="anchored" data-anchor-id="få-hjelp-av-chatgpt"><span class="header-section-number">3.6.4</span> Få hjelp av chatGPT</h3>
 <p>Det er mye snakk om kunstig intelligens for tiden, og AI er overalt. En av de tingene som AI-verktøy som chatGPT faktisk er god på er å skrive kode i mange språk, deriblant R. Det er imidlertid ingenting ved chatGPT som gjør at du ikke trenger å kunne skrive kode selv.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Du må nemlig vite om løsningen gjør det du faktisk ønsker.</p>
 <p>Effektiv bruk av chatGPT innebærer at du kan formulere promptet godt. For å få til det bør du derfor vite hva du driver med. Du trenger også kunnskap og erfaring for å se om kodeforslaget ser rimelig ut, og vurdere om løsningen bruker riktige pakker. Det er ofte lurt å spesifisere at du vil ha en løsning med tidyverse eller andre spesifikke pakker. Oppfølgingsspørsmål kan også være nødvendig.</p>
 <p>Du må <em>aldri</em> bruk kode fra chatGPT (eller andre verktøy) uten at du forstår hva koden faktisk gjør. Det kan innebære at du må teste koden på dine data grundig. Det krever også ferdigheter. Du må rett og slett ha et godt grunnlag for å forstå koden. I mellomtiden kan du godt bruke chatGPT til å <em>lære deg</em> R.</p>
@@ -924,13 +924,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./innlesning_data.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Innlesning av data</span></span>
+      <a href="./Installering.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Installere R og Rstudio</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./norlag.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

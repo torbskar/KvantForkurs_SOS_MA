@@ -17,9 +17,9 @@ book:
       chapters: 
        - oppgaver.qmd
        - Installering.qmd 
-       - innlesning_data.qmd
        - kort_intro_R.qmd
        - norlag.qmd
+       - innlesning_data.qmd
        - oversikt_datasettet.qmd
     - part: "Del 2: Deskriptive teknikker"
       chapters: 

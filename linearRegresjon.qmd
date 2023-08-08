@@ -1,6 +1,11 @@
 # Regresjon: Sammenheng mellom variable
 
 ```{r}
+#| echo: false
+invisible(Sys.setlocale(locale='no_NB.utf8'))
+```
+
+```{r}
 #| warning: false
 #| error: false
 #| message: false

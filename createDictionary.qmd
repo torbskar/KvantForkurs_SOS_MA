@@ -15,10 +15,7 @@ Dette er egentlig en svært enkel introduksjon til webscraping for et spesfikt f
 
 ```{r}
 #| echo: false
-#| message: false
-#| warning: false
-#| error: false
-Sys.setlocale(locale='no_NB.utf8')
+invisible(Sys.setlocale(locale='no_NB.utf8'))
 ```
 
 ```{r}

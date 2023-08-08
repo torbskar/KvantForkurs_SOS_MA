@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forkurs for kvantitativ metode - 5&nbsp; Datasettet NorLAG</title>
+<title>Forkurs for kvantitativ metode - 4&nbsp; Datasettet NorLAG</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./oversikt_datasettet.html" rel="next">
+<link href="./innlesning_data.html" rel="next">
 <link href="./kort_intro_R.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -123,17 +123,17 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./innlesning_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Innlesning av data</span></a>
+  <a href="./kort_intro_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./kort_intro_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></a>
+  <a href="./norlag.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./norlag.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></a>
+  <a href="./innlesning_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Innlesning av data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -267,9 +267,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#tilgang-og-lagring" id="toc-tilgang-og-lagring" class="nav-link active" data-scroll-target="#tilgang-og-lagring"><span class="toc-section-number">5.1</span>  Tilgang og lagring</a>
+  <li><a href="#tilgang-og-lagring" id="toc-tilgang-og-lagring" class="nav-link active" data-scroll-target="#tilgang-og-lagring"><span class="toc-section-number">4.1</span>  Tilgang og lagring</a>
   <ul class="collapse">
-  <li><a href="#innlesning-av-data" id="toc-innlesning-av-data" class="nav-link" data-scroll-target="#innlesning-av-data"><span class="toc-section-number">5.1.1</span>  Innlesning av data</a></li>
+  <li><a href="#innlesning-av-data" id="toc-innlesning-av-data" class="nav-link" data-scroll-target="#innlesning-av-data"><span class="toc-section-number">4.1.1</span>  Innlesning av data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -279,7 +279,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datasettet NorLAG</span></h1>
 </div>
 
 
@@ -296,8 +296,8 @@ ul.task-list li input[type="checkbox"] {
 
 <p>På SOS4020 skal vi bruke et datasett fra surveyen <a href="https://norlag.nsd.no/">NorLAG</a>. Vi bruker det også i forkurset slik at du vil spare litt tid og arbeid når SOS4020 starter for alvor. Dette er ikke offentlig tilgjengelige data, så det er en prosedyre for å få tilgang. Her er instruksjonene for dette kurset.</p>
 <p>Det viktigste for dette kurset er at dere har et rimelig ryddig datasett slik at dere kan fokusere på andre ting. Det opprinnelige datasettet er levert i Stata-format og det er en del utfordringer med å importere disse dataene bl.a. på grunn av hvordan de har valgt å kode <a href="https://norlag.nsd.no/filterverdier">missing og filterverdier</a> og lagt denne typen metadata inn i Stataformatet. I R er det en lite hensiktsmessig måte å jobbe med dataene på, så disse tingene er ryddet opp i her.</p>
-<section id="tilgang-og-lagring" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="tilgang-og-lagring"><span class="header-section-number">5.1</span> Tilgang og lagring</h2>
+<section id="tilgang-og-lagring" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="tilgang-og-lagring"><span class="header-section-number">4.1</span> Tilgang og lagring</h2>
 <p>NorLAG er <a href="https://www.uio.no/tjenester/it/sikkerhet/lsis/tillegg/lagring/infoklasser.html">gule data</a> og har restriksjoner på bruk og lagring. Du er pliktet til å sette deg inn i retningslinjene som du finner <a href="https://www.uio.no/tjenester/it/sikkerhet/lsis/tillegg/lagringsguide.html">på denne siden</a>.</p>
 <p>I denne sammenhengen betyr det i praksis at du bør jobbe på UiO-OneDrive. Altså: ikke lagre data på din personlige datamaskin og ikke skytjeneste med en personlig konto. Merk at det er <em>forskjell</em> på f.eks. OneDrive gjennom UiO og privat, og privat konto er ikke tillatt for slike data.</p>
 <p>For å få tilgang på datasettet må du gjøre følgende:</p>
@@ -309,8 +309,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Emneansvarlig vil dele en mappe med deg i Sharepoint der du kun har lesetilgang. Her ligger tilrettelagte versjoner av datasettet.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Kopier alle filene over til en lokal mappe i din UiO-OneDrive (se ovenfor).</li>
 </ol>
 <p><strong>OBS!!</strong> Dere signerer en avtale om bruk av data som er begrenset til å brukes til metodeundervisningen på master i sosiologi ved UiO. Den avtalen har også en begrensning i tid. Les avtalen nøye. Dere har et selvstendig ansvar for å overholde betingelsene, herunder at dataene skal slettes innen angitt dato. Det er fult mulig å bruke disse dataene til senere prosjekter, f.eks. til masteroppgave, men da må det søkes på nytt.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<section id="innlesning-av-data" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="innlesning-av-data"><span class="header-section-number">5.1.1</span> Innlesning av data</h3>
+<section id="innlesning-av-data" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="innlesning-av-data"><span class="header-section-number">4.1.1</span> Innlesning av data</h3>
 <p>Datasettet norlag.rds er altså konvertert til R-formatet rds. Når dette er gjort er du klar for både forkurset og SOS4020.</p>
 <p>Nest økt vil omhandle innlesning av data: både rds og andre vanlige formater. For eksemplene her vil det brukes noen forenklede datasett med færre variable.</p>
 
@@ -462,12 +462,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./kort_intro_R.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">En veldig kjapp intro til R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./oversikt_datasettet.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Få oversikt over datasettet</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./innlesning_data.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Innlesning av data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

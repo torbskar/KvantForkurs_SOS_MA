@@ -1,5 +1,10 @@
 # Empirisk eksempel
 
+```{r}
+#| echo: false
+invisible(Sys.setlocale(locale='no_NB.utf8'))
+```
+
 Artikkelen ["Human Values and Retirement Experiences: a Longitudinal Analysis of Norwegian Data"](https://link.springer.com/article/10.1007/s11205-021-02687-7) bruker data fra NorLAG, runde 2 og 3. I det som følger vil hovedresultatene fra denne studien replikeres. Stor takk til Morten Blekesaune som var meget velvillig til å dele script slik at reprodusering er praktisk mulig. 
 
 
