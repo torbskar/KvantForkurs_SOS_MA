@@ -30,37 +30,3 @@ summary(gapminder)
 ```
 
 
-## Målsettinger for forkurset
-Overordnet sett skal du denne uken bli kjent med hvordan du bruker R til dataanalyse og repetert grunnleggende statistikk. Du jobber i eget tempo. Bruk tid på det som er krevende og hopp gjerne over deler du synes er enkelt. Så ber du om hjelp når du trenger det. Lærere er tilstede to timer på starten av dagen, og stikker antakeligvis innom en tur på slutten av dagen også. Bruk oss! 
-
-Husk at det er ingen eksamen og krav på et slikt forkurs, så det er opp til deg å bruke tiden som er best for deg. Det blir vesentlig enklere å ta kurset SOS4020 hvis du har det grunnleggende rimelig på plass først. 
-
-Her er en tentativ plan for hva du bør gjennom disse dagene:  
-
-**Dag 1** 
-
-* R og Rstudio er installert riktig på egen maskin. 
-* Mappestruktur og opprettet Rstudio-project.
-* Tilgang til NorLAG og avtale for bruk, regler for datalagring
-* Innlesning av data i .rds og .dta format
-* Startet med praktisk grafikk 
-
-
-**Dag 2** 
-
-* Grafikk og tabeller. 
-* Grunnleggende om objekter og dplyr-verb, inkludert pipe-operator. 
-
-**Dag 3** 
-
-* Grunnleggende regresjon. 
-* Sannsynlighet: standardfeil, p-verdier og konfidensintervall
-
-
-**Dag 4** 
-
-* Sannsynlighet (forts.) 
-* *Anvende* standardfeil, p-verdier og konfidensintervall sammen med teknikker gjennomgått første dag (tabeller og regresjon) 
-
-
-

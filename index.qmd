@@ -10,19 +10,40 @@ En av de store forskjellene fra SPSS og Stata er at R **ikke** har muligheten fo
 
 Datasettet som skal brukes i SOS4020 er tilgangsbegrenset så det er litt formaliteter som må på plass først. Det skal vi gå på plass her slik at dere har lovlig tilgang til dataene. Men gjennomgangen og eksempler i det følgende vil basere seg på det samme datasett som brukes gjennomgående i SOSGEO1120. Til hvert kapittel er det oppgaver. Først og fremst skal dere kunne gjøre de samme operasjonene på egen datamaskin. Dernest skal dere bruke NorLAG til å gjøre noe mer selvstendige analyser med de samme teknikkene. 
 
-Læringsmålene for forkurset er som følger:
+Dette heftet inneholder også bittelitt mer informasjon enn du trenger (f.eks. appendiks), men som du kan ha bruk for hvis du skal gjøre mer selvstendige analyser senere. 
 
-1)  Bli kjent med R og Rstudio, mappestruktur og jobbe med *Rstudio projects*
-1)  Kunne lese inn data i vanlige formater
-1)  Ha lest inn og bli kjent med datasettet som skal brukes videre i SOS4020
-1)  Kunne lage grunnleggende grafikk med `ggplot`
-1)  Kunne lage deskriptive tabeller med `gtsummary` (og litt andre funksjoner)
-1)  Kunne lage grafisk fremstilling av sammenheng mellom inntil 4 variable
-1)  Kunne beskrive sammenhengen mellom variable med lineær regresjon
-1)  Kjenne grunnleggende sammenhengen mellom hvordan *dataene ble til* og hvordan analysene kan *tolkes*
-1) Kjenne til og tolke standardfeil, konfidensintervall og p-verdier
-1) Kunne gjennomføre en t-test for gjennomsnitt og for regresjonsparametre
-1) Kunne grunnleggende datahåndtering med `tidyverse` 
-1) Kunne eksportere alle resultater fra R til Word på en effektiv måte
 
-Dette heftet inneholder også bittelitt mer informasjon enn du trenger (f.eks. appendiks), men som du kan ha bruk for hvis du skal gjøre mer selvstendige analyser senere.
+
+## Målsettinger for forkurset
+Overordnet sett skal du denne uken bli kjent med hvordan du bruker R til dataanalyse og repetert grunnleggende statistikk. Du jobber i eget tempo. Bruk tid på det som er krevende og hopp gjerne over deler du synes er enkelt. Så ber du om hjelp når du trenger det. Lærere er tilstede to timer på starten av dagen, og stikker antakeligvis innom en tur på slutten av dagen også. Bruk oss! 
+
+Husk at det er ingen eksamen og krav på et slikt forkurs, så det er opp til deg å bruke tiden som er best for deg. Det blir vesentlig enklere å ta kurset SOS4020 hvis du har det grunnleggende rimelig på plass først. 
+
+Her er en tentativ plan for hva du bør gjennom disse dagene:  
+
+**Dag 1** 
+
+* R og Rstudio er installert riktig på egen maskin. 
+* Mappestruktur og opprettet Rstudio-project.
+* Tilgang til NorLAG og avtale for bruk, regler for datalagring
+* Innlesning av data i .rds og .dta format
+* Startet med praktisk grafikk 
+
+
+**Dag 2** 
+
+* Grafikk og tabeller. 
+* Grunnleggende om objekter og dplyr-verb, inkludert pipe-operator. 
+
+**Dag 3** 
+
+* Grunnleggende regresjon. 
+* Sannsynlighet: standardfeil, p-verdier og konfidensintervall
+
+
+**Dag 4** 
+
+* Sannsynlighet (forts.) 
+* *Anvende* standardfeil, p-verdier og konfidensintervall sammen med teknikker gjennomgått første dag (tabeller og regresjon) 
+
+

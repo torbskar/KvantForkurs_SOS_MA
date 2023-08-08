@@ -268,7 +268,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#forord" id="toc-forord" class="nav-link active" data-scroll-target="#forord">Forord</a></li>
+  <li><a href="#forord" id="toc-forord" class="nav-link active" data-scroll-target="#forord">Forord</a>
+  <ul class="collapse">
+  <li><a href="#målsettinger-for-forkurset" id="toc-målsettinger-for-forkurset" class="nav-link" data-scroll-target="#målsettinger-for-forkurset">Målsettinger for forkurset</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -312,24 +315,38 @@ ul.task-list li input[type="checkbox"] {
 <p>De som lært annen statistikksoftware enn R på bachelornivå vil ha særlig nytte av dette kurset. Har man tatt bachelorgrad annet sted enn ved UiO kan man ha lært å bruke Stata, SPSS eller noe slikt. Da trenger du en introduksjon til R, men hva vi skal gjøre vil være tilsvarende.</p>
 <p>En av de store forskjellene fra SPSS og Stata er at R <strong>ikke</strong> har muligheten for menybaserte analyser. Du kan altså ikke gjøre analyser med “pek-og-klikk”! Det bør du jo egentlig uansett ikke gjøre i annen software heller. R er altså et programmeringsspråk, og det er viktig å lære å skrive kode både for databehandling og analyse. I tillegg til programmeringsspråket skal du lære å lage en hensiktsmessig mappestruktur og lese inn datasett i R.</p>
 <p>Datasettet som skal brukes i SOS4020 er tilgangsbegrenset så det er litt formaliteter som må på plass først. Det skal vi gå på plass her slik at dere har lovlig tilgang til dataene. Men gjennomgangen og eksempler i det følgende vil basere seg på det samme datasett som brukes gjennomgående i SOSGEO1120. Til hvert kapittel er det oppgaver. Først og fremst skal dere kunne gjøre de samme operasjonene på egen datamaskin. Dernest skal dere bruke NorLAG til å gjøre noe mer selvstendige analyser med de samme teknikkene.</p>
-<p>Læringsmålene for forkurset er som følger:</p>
-<ol type="1">
-<li>Bli kjent med R og Rstudio, mappestruktur og jobbe med <em>Rstudio projects</em></li>
-<li>Kunne lese inn data i vanlige formater</li>
-<li>Ha lest inn og bli kjent med datasettet som skal brukes videre i SOS4020</li>
-<li>Kunne lage grunnleggende grafikk med <code>ggplot</code></li>
-<li>Kunne lage deskriptive tabeller med <code>gtsummary</code> (og litt andre funksjoner)</li>
-<li>Kunne lage grafisk fremstilling av sammenheng mellom inntil 4 variable</li>
-<li>Kunne beskrive sammenhengen mellom variable med lineær regresjon</li>
-<li>Kjenne grunnleggende sammenhengen mellom hvordan <em>dataene ble til</em> og hvordan analysene kan <em>tolkes</em></li>
-<li>Kjenne til og tolke standardfeil, konfidensintervall og p-verdier</li>
-<li>Kunne gjennomføre en t-test for gjennomsnitt og for regresjonsparametre</li>
-<li>Kunne grunnleggende datahåndtering med <code>tidyverse</code></li>
-<li>Kunne eksportere alle resultater fra R til Word på en effektiv måte</li>
-</ol>
 <p>Dette heftet inneholder også bittelitt mer informasjon enn du trenger (f.eks. appendiks), men som du kan ha bruk for hvis du skal gjøre mer selvstendige analyser senere.</p>
+<section id="målsettinger-for-forkurset" class="level2">
+<h2 class="anchored" data-anchor-id="målsettinger-for-forkurset">Målsettinger for forkurset</h2>
+<p>Overordnet sett skal du denne uken bli kjent med hvordan du bruker R til dataanalyse og repetert grunnleggende statistikk. Du jobber i eget tempo. Bruk tid på det som er krevende og hopp gjerne over deler du synes er enkelt. Så ber du om hjelp når du trenger det. Lærere er tilstede to timer på starten av dagen, og stikker antakeligvis innom en tur på slutten av dagen også. Bruk oss!</p>
+<p>Husk at det er ingen eksamen og krav på et slikt forkurs, så det er opp til deg å bruke tiden som er best for deg. Det blir vesentlig enklere å ta kurset SOS4020 hvis du har det grunnleggende rimelig på plass først.</p>
+<p>Her er en tentativ plan for hva du bør gjennom disse dagene:</p>
+<p><strong>Dag 1</strong></p>
+<ul>
+<li>R og Rstudio er installert riktig på egen maskin.</li>
+<li>Mappestruktur og opprettet Rstudio-project.</li>
+<li>Tilgang til NorLAG og avtale for bruk, regler for datalagring</li>
+<li>Innlesning av data i .rds og .dta format</li>
+<li>Startet med praktisk grafikk</li>
+</ul>
+<p><strong>Dag 2</strong></p>
+<ul>
+<li>Grafikk og tabeller.</li>
+<li>Grunnleggende om objekter og dplyr-verb, inkludert pipe-operator.</li>
+</ul>
+<p><strong>Dag 3</strong></p>
+<ul>
+<li>Grunnleggende regresjon.</li>
+<li>Sannsynlighet: standardfeil, p-verdier og konfidensintervall</li>
+</ul>
+<p><strong>Dag 4</strong></p>
+<ul>
+<li>Sannsynlighet (forts.)</li>
+<li><em>Anvende</em> standardfeil, p-verdier og konfidensintervall sammen med teknikker gjennomgått første dag (tabeller og regresjon)</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
