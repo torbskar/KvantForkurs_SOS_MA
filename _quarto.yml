@@ -15,6 +15,7 @@ book:
     - index.qmd
     - part: "Del 1: Kom igang"
       chapters: 
+       - oppgaver.qmd
        - Installering.qmd 
        - innlesning_data.qmd
        - kort_intro_R.qmd

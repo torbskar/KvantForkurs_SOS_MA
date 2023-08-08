@@ -4,6 +4,9 @@ library(haven)
 
 infilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/rOBH3y10/"
 
+list.files(infilbane)
+
+# Leser inn registerdata fra original ####
 register <- read_stata( paste0(infilbane, "NorLAG-lengde-register.dta"), encoding = "utf-8") %>% 
   select(ref_nr, year, 
          inpgivinnt, inwoverfor, inftryg, inwyrkinnt, inwoverfor,    # pensj_ft overf_ft penal_ft penuf_ft penin_ft 
@@ -13,15 +16,45 @@ register <- read_stata( paste0(infilbane, "NorLAG-lengde-register.dta"), encodin
          inftryg = ifelse(inftryg == 999999999, NA, inftryg)) %>% 
   drop_na()
 
+# Leser inn surveydata fra original ####
+survey <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8") %>% 
+  select(ref_nr, round, iointervjuaar,                # ref_nr round  io_intervjuyr  
+         ioalder,                                     # io_ioalder  
+         wb007, wr004,                                # wb007 wr004
+         hcPCS12, starts_with("vahv")                 # hcPCS12 va_bhv*
+         #vahvssen, vahvsstr, vahvsotc, vahvscon
+  ) %>% 
+  filter(round > 1)  %>% 
+  mutate(alder = as.numeric(ioalder), 
+         satis = as.numeric(wb007)) %>% 
+  mutate(ald10 = alder/10, 
+         ald2 = ald10^2,
+         ald3 = ald10^3,
+         year = iointervjuaar) %>% 
+  filter(alder < 86 & satis < 15 &
+         wr004 <= 5 & 
+         !is.na(wr004) & 
+         !is.na(satis))  %>% 
+  arrange(ref_nr, round, year) %>% 
+  filter(complete.cases(.))  
+  
+# Leser inn surveydata, faste opplysninger fra original ####
+faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8") %>% 
+  select(ref_nr, iofodselsaar, iokjonn)
+  
 
-glimpse(register)
-dim(register)
 
-table(as_factor(norlag$iodeltakelse))
+survey %>% 
+  summarise(personer = n_distinct(ref_nr), observasjoner = n())
 
-glimpse(norlag[,1:10])
+faste %>% 
+  summarise(personer = n_distinct(ref_nr), observasjoner = n())
 
-summary(as.numeric(norlag$ioalder))
+glimpse(survey)
+
+
+  
+
 
 # gen ss_con=va_bhvconsp if round==2  
 # gen ss_ope=va_bhvotcp  if round==2

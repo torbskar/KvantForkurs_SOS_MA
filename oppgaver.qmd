@@ -1,0 +1,66 @@
+# Oppgaver 
+
+Man lærer aller best ved å jobbe selv og få hjelp underveis. Dette forkurset er derfor lagt opp til at du skal jobbe på egenhånd, og det blir ingen forelesninger. 
+Dette heftet går gjennom hvordan man gjør en rekke praktiske oppgaver med bruk av softwaren R, og dekker dermed grafikk, deskriptiv statistikk, regresjonsmodeller, og  statistisk tolkning. Tilhørende er grunnleggende databehandling som jo også trengs. 
+
+
+
+## Gjør det på egen datamaskin
+Heftet bruker gjennomgående et enkelt datasett *abu89* og viser R-koden illustrerer dermed hvordan ting gjøres. Det første du skal gjøre er dermed å gjøre det samme på egen datamaskin og sjekke at du får samme resultat. Dette kan gjøres som en enkel "klipp-og-lim" som du neppe lærer så veldig mye av hvis du ikke tenker litt samtidig, men du får i hvert fall sjekket at koden fungerer. For hver operasjon bør du gjøre noen endringer i koden og se hva som skjer. I kapittelet om grafikk kan du f.eks. eksperimentere med å bytte om på variable, endre farger og annet. Slik får du en bedre forståelse av hva de ulike funksjonene og argumentene betyr. En god måte å finne ut av hvordan ting fungerer er å gjøre endringer og se hva som skjer. 
+
+
+## Gjør tilsvarende med datasettet NorLAG
+Jo mer du tenker aktivt selv, jo mer lærer du. Bruk et annet datasett og gjør tilsvarende operasjoner som er vist med *abu89*. Dere får tilgang til et stort datasett fra undersøkelsen NorLAG og kan da undersøke mange muligheter. 
+
+Du kan gjerne prøve å replikere noen tidligere studier som du finner i [denne publikasjonslista](https://norlag.nsd.no/publications).^(OBS! Å replikere andres studier nøyaktig er langt mer krevende enn man skulle tro. Normalt trenger du at forfatter deler originalt script, men det er ikke alltid lett tilgjengelig, skrevet i et annet programmeringsspråk, inkluderer langt mer avanserte teknikker enn du har lært om, eller bare er generelt uryddig. Så ikke sett det som ambisjon, men få heller inspirasjon til å finne et tema som er litt interessant og søk opp aktuelle variable.)  Variabelliste med dokumentasjon finner du filen "Kodebok.html" når du har fått tilgang til delt mappe . 
+
+
+## Bruk helt andre datasett
+Det er en god del innebygde datasett i R og i ulike R-pakker. Du kan få en oversikt over tilgjengelig datasett ved funksjonen `data()` som lister opp de dataene som er tilgjengelig i de pakkene du har lastet for øyeblikket. 
+
+* causaldata: en pakke med diverse datasett brukt i lærebøker for kausalanalyse. Tilgang: `install.packages(causaldata)`. For en oversikt, se pakkes [dokumentasjon](https://cran.r-project.org/web/packages/causaldata/causaldata.pdf).
+* gapminder: en pakke med utdrag av [Gapminder-data](https://www.gapminder.org/data/) med ulike lands levealder, befolkningsstørrelse og brutto nasjonalprodukt over mange år. Tilgang: `install.packages(gapminder)`
+
+Når en pakke, f.eks. gapminder, er lastet har du automatisk tilgang til dataene ved å bruke navnet på datasettet i en funksjon som følger:   
+
+```{r}
+library(gapminder)
+summary(gapminder)
+
+```
+
+
+## Målsettinger for forkurset
+Overordnet sett skal du denne uken bli kjent med hvordan du bruker R til dataanalyse og repetert grunnleggende statistikk. Du jobber i eget tempo. Bruk tid på det som er krevende og hopp gjerne over deler du synes er enkelt. Så ber du om hjelp når du trenger det. Lærere er tilstede to timer på starten av dagen, og stikker antakeligvis innom en tur på slutten av dagen også. Bruk oss! 
+
+Husk at det er ingen eksamen og krav på et slikt forkurs, så det er opp til deg å bruke tiden som er best for deg. Det blir vesentlig enklere å ta kurset SOS4020 hvis du har det grunnleggende rimelig på plass først. 
+
+Her er en tentativ plan for hva du bør gjennom disse dagene:  
+
+**Dag 1** 
+
+* R og Rstudio er installert riktig på egen maskin. 
+* Mappestruktur og opprettet Rstudio-project.
+* Tilgang til NorLAG og avtale for bruk, regler for datalagring
+* Innlesning av data i .rds og .dta format
+* Startet med praktisk grafikk 
+
+
+**Dag 2** 
+
+* Grafikk og tabeller. 
+* Grunnleggende om objekter og dplyr-verb, inkludert pipe-operator. 
+
+**Dag 3** 
+
+* Grunnleggende regresjon. 
+* Sannsynlighet: standardfeil, p-verdier og konfidensintervall
+
+
+**Dag 4** 
+
+* Sannsynlighet (forts.) 
+* *Anvende* standardfeil, p-verdier og konfidensintervall sammen med teknikker gjennomgått første dag (tabeller og regresjon) 
+
+
+

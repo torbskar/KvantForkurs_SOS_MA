@@ -6,24 +6,23 @@ Det anbefales å repetere materiale fra kurs i kvantitative metoder på bachelor
 
 De som lært annen statistikksoftware enn R på bachelornivå vil ha særlig nytte av dette kurset. Har man tatt bachelorgrad annet sted enn ved UiO kan man ha lært å bruke Stata, SPSS eller noe slikt. Da trenger du en introduksjon til R, men hva vi skal gjøre vil være tilsvarende. 
 
-En av de store forskjellene fra SPSS og Stata er at R **ikke** er menybasert. Du kan altså ikke gjøre analyser med "pek-og-klikk"! Det bør du jo egentlig uansett ikke gjøre i andre software heller - så forhåpenligvis har du lært å skrive kode fra før. R er altså et programmeringsspråk, og det er viktig å lære å skrive kode. I tillegg til programmeringsspråket skal du lære å lage en hensiktsmessig mappestruktur og lese inn datasett i R. 
+En av de store forskjellene fra SPSS og Stata er at R **ikke** har muligheten for menybaserte analyser. Du kan altså ikke gjøre analyser med "pek-og-klikk"! Det bør du jo egentlig uansett ikke gjøre i annen software heller. R er altså et programmeringsspråk, og det er viktig å lære å skrive kode både for databehandling og analyse. I tillegg til programmeringsspråket skal du lære å lage en hensiktsmessig mappestruktur og lese inn datasett i R. 
 
 Datasettet som skal brukes i SOS4020 er tilgangsbegrenset så det er litt formaliteter som må på plass først. Det skal vi gå på plass her slik at dere har lovlig tilgang til dataene. Men gjennomgangen og eksempler i det følgende vil basere seg på det samme datasett som brukes gjennomgående i SOSGEO1120. Til hvert kapittel er det oppgaver. Først og fremst skal dere kunne gjøre de samme operasjonene på egen datamaskin. Dernest skal dere bruke NorLAG til å gjøre noe mer selvstendige analyser med de samme teknikkene. 
 
 Læringsmålene for forkurset er som følger:
 
 1)  Bli kjent med R og Rstudio, mappestruktur og jobbe med *Rstudio projects*
-2)  Kunne lese inn data i vanlige formater
-3)  Ha lest inn og bli kjent med datasettet som skal brukes videre i SOS4020
-4)  Kunne lage grunnleggende grafikk med `ggplot`
-5)  Kunne lage deskriptive tabeller med `gtsummary` (og litt andre funksjoner)
-6)  Kunne lage 3-veis krysstabeller
-7)  Kunne lage grafisk fremstilling av sammenheng mellom inntil 4 variable
-8)  Kunne beskrive sammenhengen mellom variable med lineær regresjon
-9)  Kjenne grunnleggende sammenhengen mellom hvordan *dataene ble til* og hvordan analysene kan *tolkes*
-10) Kjenne til hva en samplingfordeling er og kunne tolke standardfeil, konfidensintervall og p-verdier
-11) Kunne gjennomføre en t-test for gjennomsnitt og for regresjonsparametre
-12) Kunne grunnleggende datahåndtering med `tidyverse` for å kunne gjøre selvstendige analyser senere
-13) Kunne eksportere alle resultater fra R til Word på en effektiv måte
+1)  Kunne lese inn data i vanlige formater
+1)  Ha lest inn og bli kjent med datasettet som skal brukes videre i SOS4020
+1)  Kunne lage grunnleggende grafikk med `ggplot`
+1)  Kunne lage deskriptive tabeller med `gtsummary` (og litt andre funksjoner)
+1)  Kunne lage grafisk fremstilling av sammenheng mellom inntil 4 variable
+1)  Kunne beskrive sammenhengen mellom variable med lineær regresjon
+1)  Kjenne grunnleggende sammenhengen mellom hvordan *dataene ble til* og hvordan analysene kan *tolkes*
+1) Kjenne til og tolke standardfeil, konfidensintervall og p-verdier
+1) Kunne gjennomføre en t-test for gjennomsnitt og for regresjonsparametre
+1) Kunne grunnleggende datahåndtering med `tidyverse` 
+1) Kunne eksportere alle resultater fra R til Word på en effektiv måte
 
-
+Dette heftet inneholder også bittelitt mer informasjon enn du trenger (f.eks. appendiks), men som du kan ha bruk for hvis du skal gjøre mer selvstendige analyser senere.
