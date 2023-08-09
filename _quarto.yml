@@ -44,6 +44,7 @@ book:
   appendices:
    - import_metadata.qmd
    - createDictionary.qmd
+  downloads: [pdf, epub]
 
   
 format:
