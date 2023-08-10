@@ -1,5 +1,13 @@
 # Omkoding av variable 
 
+
+```{r}
+#| echo: false
+invisible(Sys.setlocale(locale='no_NB.utf8'))  # Hvis æøå ikke vises riktig kan du endre "locale" til norsk utf8 encoding med denne koden. 
+```
+
+
+
 ```{r }
 #| warning: false
 #| message: false
@@ -10,7 +18,7 @@ library(labelled)    # Håndtering av variable med labler, importert fra annen s
 library(forcats)     # Lettere omkoding av faktorvariable
 library(gtsummary)
 
-Sys.setlocale(locale='no_NB.utf8')  # Hvis æøå ikke vises riktig kan du endre "locale" til norsk utf8 encoding med denne koden. 
+
 
 ```
 
@@ -273,6 +281,7 @@ Denne pakken finnes imidlertid ikke på CRAN i skrivende stund. Derimot finnes d
 
 ```{r}
 #| eval: FALSE
+#| echo: FALSE
 devtools::install_git("https://code.europa.eu/digclass/digclass.git")
 
 ```
@@ -299,7 +308,9 @@ head(polit3)
 Da kan vi lage tabellen omigjen bare for å sjekke at vi får samme svar. 
 
 ```{r}
-
+#| warning: false
+#| error: false
+#| message: false
 polit3 %>% 
   select(orcd, gndr) %>% 
   tbl_summary(by = gndr)

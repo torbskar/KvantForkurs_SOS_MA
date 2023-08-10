@@ -46,11 +46,10 @@ book:
    - createDictionary.qmd
   downloads: [pdf, epub]
 
-  
 format:
-  html:
-    theme: cosmo
-    code-copy: true
+  html: default
+  pdf: default 
 
-
+#     theme: cosmo 
+#     code-copy: true
 #Sys.setlocale(locale='no_NB.utf8')

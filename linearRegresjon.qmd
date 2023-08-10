@@ -11,6 +11,7 @@ invisible(Sys.setlocale(locale='no_NB.utf8'))
 #| message: false
 library(tidyverse)
 library(gtsummary)
+library(modelsummary)
 ```
 
 ```{r}
@@ -85,23 +86,36 @@ coef(lm_est1)
 Regresjonslingningen kan skrives på formel der $\alpha$ er konstantleddet og $\beta$ er stigningstallet slik:
 
 ```{r}
+#| eval: false
 #| warning: false
 #| echo: false
 #| error: false
 #| message: false
-library(equatiomatic)
-extract_eq(lm_est1, use_coefs = FALSE)
+
+# Trbbel med pdf...
+# library(equatiomatic)
+# extract_eq(lm_est1, use_coefs = FALSE)
 ```
+$$
+\operatorname{time89} = \alpha + \beta_{1}(\operatorname{age}) + \epsilon
+$$
 
 Når vi setter inn de estimerte koeffisientene inn i ligningen får vi følgende:
 
 ```{r}
+#| eval: false
 #| warning: false
 #| echo: false
 #| error: false
 #| message: false
+
+# Trbbel med pdf...
 extract_eq(lm_est1, use_coefs = TRUE)
 ```
+
+$$
+\operatorname{\widehat{time89}} = 71.11 + 0.48(\operatorname{age})
+$$
 
 Tolkningen her er at gjennomsnittlig forskjell i timelønn mellom grupper der aldersforskjellen er ett år er 0.48 kroner i favør av den eldre gruppen.[^linearregresjon-3] Merk enheten her: stigningstallet tolkes på den skalaen utfallsvariabelen er på, i dette tilfellet kroner. Det er også uttrykt endring ved at forklaringsvariabelen endres med nøyaktig 1.
 
