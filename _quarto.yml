@@ -49,6 +49,7 @@ book:
 format:
   html: default
   pdf: default 
+  epub: default
 
 #     theme: cosmo 
 #     code-copy: true

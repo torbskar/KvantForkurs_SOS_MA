@@ -281,7 +281,7 @@ Denne pakken finnes imidlertid ikke på CRAN i skrivende stund. Derimot finnes d
 
 ```{r}
 #| eval: FALSE
-#| echo: FALSE
+#| message: false 
 devtools::install_git("https://code.europa.eu/digclass/digclass.git")
 
 ```
