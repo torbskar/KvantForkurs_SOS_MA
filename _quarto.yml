@@ -46,6 +46,9 @@ book:
    - import_metadata.qmd
    - createDictionary.qmd
   downloads: [pdf, epub]
+  
+bibliography: references.bib
+
 
 format:
   html: 

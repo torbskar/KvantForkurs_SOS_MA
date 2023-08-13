@@ -3,7 +3,7 @@
 
 ## Tre nivåer av regresjonanalyse
 
-Richard Berk beskriver i sin lærebok tre nivåer av regresjonsanalyse basert på hvordan dataene ble til. Dette er et godt utgangspunkt som burde klargjøre betydelig, i hvert fall som et først skritt.
+Richard Berk [@berk2010; @berk2016a] beskriver tre nivåer av regresjonsanalyse basert på hvordan dataene ble til. Dette er et godt utgangspunkt som burde klargjøre betydelig, i hvert fall som et først skritt.
 
 ### Nivå I: Ikke tilfeldig utvalg fra en veldefinert populasjon
 

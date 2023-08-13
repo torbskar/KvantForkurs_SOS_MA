@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Forkurs for kvantitativ metode - Appendix A — Import av data fra Sikt - håndtering av formater med metadata</title>
+<title>Forkurs for kvantitativ metode - Appendix B — Import av data fra Sikt - håndtering av formater med metadata</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./createDictionary.html" rel="next">
-<link href="./omkode_factor.html" rel="prev">
+<link href="./appendix_addins.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./import_metadata.html">Appendices</a></li><li class="breadcrumb-item"><a href="./import_metadata.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix_addins.html">Appendices</a></li><li class="breadcrumb-item"><a href="./import_metadata.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -330,14 +330,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./appendix_addins.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Rstudio addins</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./import_metadata.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./createDictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></span></a>
   </div>
 </li>
       </ul>
@@ -352,17 +358,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#håndtering-av-user-nas" id="toc-håndtering-av-user-nas" class="nav-link active" data-scroll-target="#håndtering-av-user-nas"><span class="header-section-number">A.1</span> Håndtering av user-NAs</a></li>
-  <li><a href="#innlesning-av-data" id="toc-innlesning-av-data" class="nav-link" data-scroll-target="#innlesning-av-data"><span class="header-section-number">A.2</span> innlesning av data</a></li>
-  <li><a href="#hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling" id="toc-hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling" class="nav-link" data-scroll-target="#hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling"><span class="header-section-number">A.3</span> Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling</a>
+  <li><a href="#håndtering-av-user-nas" id="toc-håndtering-av-user-nas" class="nav-link active" data-scroll-target="#håndtering-av-user-nas"><span class="header-section-number">B.1</span> Håndtering av user-NAs</a></li>
+  <li><a href="#innlesning-av-data" id="toc-innlesning-av-data" class="nav-link" data-scroll-target="#innlesning-av-data"><span class="header-section-number">B.2</span> innlesning av data</a></li>
+  <li><a href="#hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling" id="toc-hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling" class="nav-link" data-scroll-target="#hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling"><span class="header-section-number">B.3</span> Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling</a>
   <ul class="collapse">
-  <li><a href="#sjekk-datastruktur-og-bruk-av-filter" id="toc-sjekk-datastruktur-og-bruk-av-filter" class="nav-link" data-scroll-target="#sjekk-datastruktur-og-bruk-av-filter"><span class="header-section-number">A.3.1</span> Sjekk datastruktur og bruk av <code>filter</code></a></li>
-  <li><a href="#omkode-bruker-spesifiserte-missing-verdier-til-na" id="toc-omkode-bruker-spesifiserte-missing-verdier-til-na" class="nav-link" data-scroll-target="#omkode-bruker-spesifiserte-missing-verdier-til-na"><span class="header-section-number">A.3.2</span> Omkode bruker-spesifiserte missing-verdier til <code>NA</code></a></li>
-  <li><a href="#kode-om-på-tvers-av-mange-variable-med-across" id="toc-kode-om-på-tvers-av-mange-variable-med-across" class="nav-link" data-scroll-target="#kode-om-på-tvers-av-mange-variable-med-across"><span class="header-section-number">A.3.3</span> Kode om på tvers av mange variable med <code>across</code></a></li>
-  <li><a href="#fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels" id="toc-fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels" class="nav-link" data-scroll-target="#fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels"><span class="header-section-number">A.3.4</span> Fjerne nivåer som ikke brukes: <code>drop_unused_value_labels</code></a></li>
-  <li><a href="#gjør-om-til-factor-med-unlabelled" id="toc-gjør-om-til-factor-med-unlabelled" class="nav-link" data-scroll-target="#gjør-om-til-factor-med-unlabelled"><span class="header-section-number">A.3.5</span> Gjør om til factor med <code>unlabelled</code></a></li>
+  <li><a href="#sjekk-datastruktur-og-bruk-av-filter" id="toc-sjekk-datastruktur-og-bruk-av-filter" class="nav-link" data-scroll-target="#sjekk-datastruktur-og-bruk-av-filter"><span class="header-section-number">B.3.1</span> Sjekk datastruktur og bruk av <code>filter</code></a></li>
+  <li><a href="#omkode-bruker-spesifiserte-missing-verdier-til-na" id="toc-omkode-bruker-spesifiserte-missing-verdier-til-na" class="nav-link" data-scroll-target="#omkode-bruker-spesifiserte-missing-verdier-til-na"><span class="header-section-number">B.3.2</span> Omkode bruker-spesifiserte missing-verdier til <code>NA</code></a></li>
+  <li><a href="#kode-om-på-tvers-av-mange-variable-med-across" id="toc-kode-om-på-tvers-av-mange-variable-med-across" class="nav-link" data-scroll-target="#kode-om-på-tvers-av-mange-variable-med-across"><span class="header-section-number">B.3.3</span> Kode om på tvers av mange variable med <code>across</code></a></li>
+  <li><a href="#fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels" id="toc-fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels" class="nav-link" data-scroll-target="#fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels"><span class="header-section-number">B.3.4</span> Fjerne nivåer som ikke brukes: <code>drop_unused_value_labels</code></a></li>
+  <li><a href="#gjør-om-til-factor-med-unlabelled" id="toc-gjør-om-til-factor-med-unlabelled" class="nav-link" data-scroll-target="#gjør-om-til-factor-med-unlabelled"><span class="header-section-number">B.3.5</span> Gjør om til factor med <code>unlabelled</code></a></li>
   </ul></li>
-  <li><a href="#for-spesielt-interesserte-jobbe-med-labelled-data" id="toc-for-spesielt-interesserte-jobbe-med-labelled-data" class="nav-link" data-scroll-target="#for-spesielt-interesserte-jobbe-med-labelled-data"><span class="header-section-number">A.4</span> For spesielt interesserte: jobbe med labelled-data</a></li>
+  <li><a href="#for-spesielt-interesserte-jobbe-med-labelled-data" id="toc-for-spesielt-interesserte-jobbe-med-labelled-data" class="nav-link" data-scroll-target="#for-spesielt-interesserte-jobbe-med-labelled-data"><span class="header-section-number">B.4</span> For spesielt interesserte: jobbe med labelled-data</a></li>
   </ul>
 </nav>
     </div>
@@ -371,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Appendix A — Import av data fra Sikt - håndtering av formater med metadata</h1>
+<h1 class="title">Appendix B — Import av data fra Sikt - håndtering av formater med metadata</h1>
 </div>
 
 
@@ -395,8 +401,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Fjerner alle labler som ikke er i bruk (altså: labler for ulike missing-verdier)</li>
 <li>Gjør om alle variable av typen “labelled” til factor-variable</li>
 </ul>
-<section id="håndtering-av-user-nas" class="level2" data-number="A.1">
-<h2 data-number="A.1" class="anchored" data-anchor-id="håndtering-av-user-nas"><span class="header-section-number">A.1</span> Håndtering av user-NAs</h2>
+<section id="håndtering-av-user-nas" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="håndtering-av-user-nas"><span class="header-section-number">B.1</span> Håndtering av user-NAs</h2>
 <p>For disse dataene vil det være ulike sett av missing-verdier for de ulike variablene. Dette kan helt fint håndteres manuelt variabel for variabel. Men for å ha ordentlig kontroll på at det blir riktig bør det automatiseres. Logikken i denne delen går et stykke utover hva vi forventer at den jevne sosiologistudent skal lære.</p>
 <p>En første sted er å lese inn dokumentasjonsrapporten fra en html-fil slik den leveres fra Sikt og gjør det om til et håndterbart oppslags-datasett. Dette er beskrevet i eget appendix. Det følgende tar utgangspunkt i at en slik oppslagsfil finnes.</p>
 <p>Det er noen verdier som i dokumentasjonen er spesifisert som spesielle typer missing. Disse skal vi kode om til NA. Disse verdiene har labler som starter med “filter:” eller “vil ikke svare” etc. Disse danner basis for omkoding til <code>NA</code>. Dette er ikke en komplett liste over koder som innebærer at det egentlig mangler informasjon. (Dvs. fordi koden indikerer grunner til at det mangler informasjon). Etter denne oppryddingen kan det altså fremdeles hende at det dukker opp noe slikt, så vær påpasselig med å sjekke variabelens fordeling før du analyserer med regresjonsmodeller.</p>
@@ -430,8 +436,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="innlesning-av-data" class="level2" data-number="A.2">
-<h2 data-number="A.2" class="anchored" data-anchor-id="innlesning-av-data"><span class="header-section-number">A.2</span> innlesning av data</h2>
+<section id="innlesning-av-data" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="innlesning-av-data"><span class="header-section-number">B.2</span> innlesning av data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
@@ -489,26 +495,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Og dermed har vi et datasett i et svært så ryddig R-format.</p>
 </section>
-<section id="hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling" class="level2" data-number="A.3">
-<h2 data-number="A.3" class="anchored" data-anchor-id="hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling"><span class="header-section-number">A.3</span> Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling</h2>
-<section id="sjekk-datastruktur-og-bruk-av-filter" class="level3" data-number="A.3.1">
-<h3 data-number="A.3.1" class="anchored" data-anchor-id="sjekk-datastruktur-og-bruk-av-filter"><span class="header-section-number">A.3.1</span> Sjekk datastruktur og bruk av <code>filter</code></h3>
+<section id="hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling"><span class="header-section-number">B.3</span> Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling</h2>
+<section id="sjekk-datastruktur-og-bruk-av-filter" class="level3" data-number="B.3.1">
+<h3 data-number="B.3.1" class="anchored" data-anchor-id="sjekk-datastruktur-og-bruk-av-filter"><span class="header-section-number">B.3.1</span> Sjekk datastruktur og bruk av <code>filter</code></h3>
 </section>
-<section id="omkode-bruker-spesifiserte-missing-verdier-til-na" class="level3" data-number="A.3.2">
-<h3 data-number="A.3.2" class="anchored" data-anchor-id="omkode-bruker-spesifiserte-missing-verdier-til-na"><span class="header-section-number">A.3.2</span> Omkode bruker-spesifiserte missing-verdier til <code>NA</code></h3>
+<section id="omkode-bruker-spesifiserte-missing-verdier-til-na" class="level3" data-number="B.3.2">
+<h3 data-number="B.3.2" class="anchored" data-anchor-id="omkode-bruker-spesifiserte-missing-verdier-til-na"><span class="header-section-number">B.3.2</span> Omkode bruker-spesifiserte missing-verdier til <code>NA</code></h3>
 </section>
-<section id="kode-om-på-tvers-av-mange-variable-med-across" class="level3" data-number="A.3.3">
-<h3 data-number="A.3.3" class="anchored" data-anchor-id="kode-om-på-tvers-av-mange-variable-med-across"><span class="header-section-number">A.3.3</span> Kode om på tvers av mange variable med <code>across</code></h3>
+<section id="kode-om-på-tvers-av-mange-variable-med-across" class="level3" data-number="B.3.3">
+<h3 data-number="B.3.3" class="anchored" data-anchor-id="kode-om-på-tvers-av-mange-variable-med-across"><span class="header-section-number">B.3.3</span> Kode om på tvers av mange variable med <code>across</code></h3>
 </section>
-<section id="fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels" class="level3" data-number="A.3.4">
-<h3 data-number="A.3.4" class="anchored" data-anchor-id="fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels"><span class="header-section-number">A.3.4</span> Fjerne nivåer som ikke brukes: <code>drop_unused_value_labels</code></h3>
+<section id="fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels" class="level3" data-number="B.3.4">
+<h3 data-number="B.3.4" class="anchored" data-anchor-id="fjerne-nivåer-som-ikke-brukes-drop_unused_value_labels"><span class="header-section-number">B.3.4</span> Fjerne nivåer som ikke brukes: <code>drop_unused_value_labels</code></h3>
 </section>
-<section id="gjør-om-til-factor-med-unlabelled" class="level3" data-number="A.3.5">
-<h3 data-number="A.3.5" class="anchored" data-anchor-id="gjør-om-til-factor-med-unlabelled"><span class="header-section-number">A.3.5</span> Gjør om til factor med <code>unlabelled</code></h3>
+<section id="gjør-om-til-factor-med-unlabelled" class="level3" data-number="B.3.5">
+<h3 data-number="B.3.5" class="anchored" data-anchor-id="gjør-om-til-factor-med-unlabelled"><span class="header-section-number">B.3.5</span> Gjør om til factor med <code>unlabelled</code></h3>
 </section>
 </section>
-<section id="for-spesielt-interesserte-jobbe-med-labelled-data" class="level2" data-number="A.4">
-<h2 data-number="A.4" class="anchored" data-anchor-id="for-spesielt-interesserte-jobbe-med-labelled-data"><span class="header-section-number">A.4</span> For spesielt interesserte: jobbe med labelled-data</h2>
+<section id="for-spesielt-interesserte-jobbe-med-labelled-data" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="for-spesielt-interesserte-jobbe-med-labelled-data"><span class="header-section-number">B.4</span> For spesielt interesserte: jobbe med labelled-data</h2>
 
 
 </section>
@@ -755,13 +761,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./omkode_factor.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Omkoding av variable</span></span>
+      <a href="./appendix_addins.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Rstudio addins</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./createDictionary.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
