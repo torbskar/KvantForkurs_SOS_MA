@@ -8,7 +8,7 @@ invisible(Sys.setlocale(locale='no_NB.utf8'))
 ```
 
 
-Før vi setter igang trengs det en kort introduksjon til noe grunnleggende om hvordan R fungerer. Så lærer man mer underveis, og et senere kapittel går grundigere inn i omkoding av variable.
+Før vi setter igang trengs det en kort introduksjon til noe grunnleggende om hvordan R fungerer. Så lærer man mer underveis, og et senere kapittel går grundigere inn i omkoding av variable. En grundigere gjennomgang av R finner du i @r4ds.
 
 ## Objektorientert
 
@@ -75,7 +75,7 @@ Merk at det finnes altså flere dialekter som er spesialiserte for spesifikke fo
 
 ## Tidyverse
 
-Når man laster pakken {tidyverse} laster man egentlig flere pakker som også kan lastes individuelt. Merk at "tidy" betyr jo "ryddig" og hensikten her er et språk som er så ryddig og logisk som mulig. Dette innebærer også at det er innarbeidet en del prinsipper for datastruktur og datahåndtering som hovedarkitekten bak har [redegjort for i en egen artikkel](https://www.jstatsoft.org/article/view/v059i10). Full oversikt over pakkene som inngår i [Tidyverse finner du på deres hjemmeside](https://www.tidyverse.org/). Men du trenger ikke sette deg inn i alt det for å bruke softwaren.
+Når man laster pakken {tidyverse} laster man egentlig flere pakker som også kan lastes individuelt. Merk at "tidy" betyr jo "ryddig" og hensikten her er et språk som er så ryddig og logisk som mulig. Dette innebærer også at det er innarbeidet en del prinsipper for datastruktur og datahåndtering som er redegjort for i @Wickham2014. Full oversikt over pakkene som inngår i [Tidyverse finner du på deres hjemmeside](https://www.tidyverse.org/). Men du trenger ikke sette deg inn i alt det for å bruke softwaren.
 
 ### Datahåndtering: {dplyr}
 

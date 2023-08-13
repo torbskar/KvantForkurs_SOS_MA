@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -317,6 +336,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Omkoding av variable</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -398,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Før vi setter igang trengs det en kort introduksjon til noe grunnleggende om hvordan R fungerer. Så lærer man mer underveis, og et senere kapittel går grundigere inn i omkoding av variable.</p>
+<p>Før vi setter igang trengs det en kort introduksjon til noe grunnleggende om hvordan R fungerer. Så lærer man mer underveis, og et senere kapittel går grundigere inn i omkoding av variable. En grundigere gjennomgang av R finner du i <span class="citation" data-cites="r4ds">Wickham and Grolemund (<a href="references.html#ref-r4ds" role="doc-biblioref">2017</a>)</span>.</p>
 <section id="objektorientert" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="objektorientert"><span class="header-section-number">3.1</span> Objektorientert</h2>
 <p>I de innledende kapitlene ble det vist hvordan man leser inn data i R og dataene ble lagt i et “objekt”. R er bygd opp rundt å bruke slike objekter i den forstand at alt man jobber med (typisk: datasett) ligger i objekter.</p>
@@ -445,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="tidyverse" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="tidyverse"><span class="header-section-number">3.5</span> Tidyverse</h2>
-<p>Når man laster pakken {tidyverse} laster man egentlig flere pakker som også kan lastes individuelt. Merk at “tidy” betyr jo “ryddig” og hensikten her er et språk som er så ryddig og logisk som mulig. Dette innebærer også at det er innarbeidet en del prinsipper for datastruktur og datahåndtering som hovedarkitekten bak har <a href="https://www.jstatsoft.org/article/view/v059i10">redegjort for i en egen artikkel</a>. Full oversikt over pakkene som inngår i <a href="https://www.tidyverse.org/">Tidyverse finner du på deres hjemmeside</a>. Men du trenger ikke sette deg inn i alt det for å bruke softwaren.</p>
+<p>Når man laster pakken {tidyverse} laster man egentlig flere pakker som også kan lastes individuelt. Merk at “tidy” betyr jo “ryddig” og hensikten her er et språk som er så ryddig og logisk som mulig. Dette innebærer også at det er innarbeidet en del prinsipper for datastruktur og datahåndtering som er redegjort for i <span class="citation" data-cites="Wickham2014">Wickham (<a href="references.html#ref-Wickham2014" role="doc-biblioref">2014</a>)</span>. Full oversikt over pakkene som inngår i <a href="https://www.tidyverse.org/">Tidyverse finner du på deres hjemmeside</a>. Men du trenger ikke sette deg inn i alt det for å bruke softwaren.</p>
 <section id="datahåndtering-dplyr" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="datahåndtering-dplyr"><span class="header-section-number">3.5.1</span> Datahåndtering: {dplyr}</h3>
 <p>Grunnleggende datahåndtering inkluderer først og fremst å <em>endre variable</em> ved omkoding, utregninger eller transformasjoner. Pakken {dplyr} inneholder de nødvendige verktøy for dette.</p>
@@ -791,6 +816,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Du skal altså <em>ikke</em> bruke chatGPT code interpreter!</strong> Ikke under noen omstendighet, egentlig.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Wickham2014" class="csl-entry" role="listitem">
+Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical Software</em> 59. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>.
+</div>
+<div id="ref-r4ds" class="csl-entry" role="listitem">
+Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science</em>. Beijing, China: <a href="https://r4ds.had.co.nz/index.html" class="uri">https://r4ds.had.co.nz/index.html</a>; O’Reilley.
+</div>
+</div>
 </section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
