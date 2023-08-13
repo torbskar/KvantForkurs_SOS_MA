@@ -1,5 +1,13 @@
 # En veldig kjapp intro til R
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+invisible(Sys.setlocale(locale='no_NB.utf8'))
+```
+
+
 Før vi setter igang trengs det en kort introduksjon til noe grunnleggende om hvordan R fungerer. Så lærer man mer underveis, og et senere kapittel går grundigere inn i omkoding av variable.
 
 ## Objektorientert
@@ -309,33 +317,6 @@ dplyr::summarise(dinedata, antall = n(), snitt = mean(varA))
 ```
 
 
-### Addins 
-Rstudio er det mulig å installere såkalte "addins". Dette gir ikke økt funksjonalitet til R, men til Rstudio. Noen av disse hjelper deg med å skrive kode med bruk av menyer. Dette kan være nyttig for å finne ut av problemer og vanskelig syntaks - men er ikke noe du skal bruke på daglig basis. Det er *hjelp* til å finne ut av ting, så bruk det til å lære!  
-
-Addins installeres på samme måte som R-pakker med `install.packages`, men du trenger ikke laste det med `library` for å brukes. I stedet er funksjonene tilgjengelig i Rstudio-menyen "Addins". Det er mulig du må søke opp f
-
-Det er veldig viktig at du bruker slike addins på en måte som gjør at du *lærer deg R* på ordentlig. Du kan ikke belage deg på å bruke addins i det lange løp. De som nevnes nedenfor genererer kode for deg og du bør så lime den koden inn i scriptet ditt! 
-
-#### Styler - skriv pent 
-I R spiller det ingen rolle *hvordan* du skriver kode: linjeskift, innrykk og mellomrom etter parentes osv gir det samme resultatet. (Komma og parenteser er derimot viktig!). Men det er ikke likegyldig for lesbarheten. {styler} kan brukes til å bedre lesbarheten av egen kode. Denne addin'en er laget av de samme som lager tidyverse, og er derfor utmerket verktøy for å skrive bedre kode. "Bedre" er da her i betydningen ryddig og ordentlig, noe som gjør den lettere å lese, de-bugge og at andre forstår koden din. 
-
-Du kan se nærmere på [vignetten til Styler](https://www.tidyverse.org/blog/2017/12/styler-1.0.0/) 
-
-
-#### Esquisse - grafikk 
-Esquisse kan brukes til å lage grafikk med "drag-and-drop". Noen synes det er lettere i begynnelsen. Men det viktigste med å bruke slike verktøy er at du etterpå kan vise koden slik den lages med `ggplot`.  
-
-Du kan se nærmere på [vignetten til Esquisse](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html). 
-
-#### Questionr - omkode factor
-Å omkode factor-variable kan være litt styr. Det er en egen addin for dette formålet. 
-
-OBS! Questionr generer kode i base-R. Det er altså *ikke* helt den samme dialekten som ellers er dekket her. Men det er likheter, så det kan være til hjelp likevel. 
-
-Du kan se nærmere på [vignetten til questionr](https://cran.r-project.org/web/packages/questionr/vignettes/recoding_addins.html). 
-
-
-
 ### Få hjelp av chatGPT 
 Det er mye snakk om kunstig intelligens for tiden, og AI er overalt. En av de tingene som AI-verktøy som chatGPT faktisk er god på er å skrive kode i mange språk, deriblant R. Det er imidlertid ingenting ved chatGPT som gjør at du ikke trenger å kunne skrive kode selv.^[Nei, heller ikke med *code interpreter*.] Du må nemlig vite om løsningen gjør det du faktisk ønsker. 
 
@@ -349,6 +330,7 @@ Hvis du skal bruke chatGPT så bør du starte med å bruke det til å forstå in
 #| eval: false
 #| warning: false
 #| error: false
+#| message: false
 
 Kan du forklare følgende kode? 
   dinedata %>% 
@@ -359,6 +341,7 @@ Kan du forklare følgende kode?
   filter(row_number() == 1)
 
 ```
+![](images/chatgpt1.png)
 
 
 Du kan også bruke chatGPT til å finne feil i koden du ikke klarer å finne ut av selv. Du kan legge til en "kontekst" og be chatGPT om å finne feilen som gjør at du ikke får det resultatet du forventer. Prøv ut med følgende prompt: 
@@ -367,7 +350,8 @@ Du kan også bruke chatGPT til å finne feil i koden du ikke klarer å finne ut 
 #| eval: false
 #| warning: false
 #| error: false
-Jeg ønsker å få aggregerte statistikker for et datasett, men det blir ikke riktig. Kan du finne feilen i følgende kode? 
+#| message: false
+Jeg ønsker å få aggregerte statistikker for et datasett, men det blir ikke riktig. Jeg ønsker å få en linje per gruppe, men resultatet gir aggregering per observasjon i stedet for en linje per gruppe. Kan du finne feilen i følgende kode?  
   dinedata %>% 
   group_by(gruppe) %>% 
   mutate(antall = n(), gjennomsnitt = mean(varA), 
@@ -376,7 +360,20 @@ Jeg ønsker å få aggregerte statistikker for et datasett, men det blir ikke ri
   filter(row_number() == 1)
 
 ```
+![](images/chatgpt1.png)
 
-Merk at chatGPT da vil foreslå en løsning. Denne er ikke nødvendigvis riktig! Da jeg testet på ovenstående ga chatGPT råd om å bruke funksjonen `reframe` i stedet. Det er ikke riktig, selv om det også er mulig. Funksjonen `summarise` ville være en bedre løsning. 
+Merk at chatGPT da vil foreslå en løsning, men det kan godt hende du får et litt annet svar enn det som er gjengitt ovenfor. Det er ikke gitt at den forstår problemet ditt korrekt og løsningen er heller ikke nødvendigvis riktig! 
+
+For å få et godt svar er det viktig at du i promptet gir en god beskrivelse av *konteksten*, som innebærer hva du ønsker å gjøre, hva resultatet blir og hva du tror er feil. For at dette skal fungere godt trenger du altså å forstå problemet ditt og beskrive det så tydelig som mulig. Så må du teste løsningen på din egen datamaskin og sjekke at det faktisk fungerer. 
+
+
+### **OBS**! chatGPT code interpreter 
+I betalingsversjonen av chatGPT får man tilgang til appen code interpreter der man kan laste opp data og få dem analysert "ferdig". Eller: tilsynelatende ferdig. Det finnes helt sikkert også andre tilsvarende AI-verktøy. 
+
+Merk at alt du laster opp eller skriver inn i chatGPT innebærer å dele data både med tjenesten og potensielt senere brukere. Å laste opp persondata er slik sett i utgangspunktet et brudd med GDPR og de tillaltelsene du har til bruk av data. For å bruke slike tjenester bør du være *veldig sikker* på de dataene du bruker kan deles *helt fritt*. 
+
+I tillegg er det selvsagt også slik at 
+
+**Du skal altså *ikke* bruke chatGPT code interpreter!** Ikke under noen omstendighet, egentlig. 
 
 

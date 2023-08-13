@@ -1,5 +1,12 @@
 # Oppgaver 
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+invisible(Sys.setlocale(locale='no_NB.utf8'))
+```
+
 Man lærer aller best ved å jobbe selv og få hjelp underveis. Dette forkurset er derfor lagt opp til at du skal jobbe på egenhånd, og det blir ingen forelesninger. 
 Dette heftet går gjennom hvordan man gjør en rekke praktiske oppgaver med bruk av softwaren R, og dekker dermed grafikk, deskriptiv statistikk, regresjonsmodeller, og  statistisk tolkning. Tilhørende er grunnleggende databehandling som jo også trengs. 
 
@@ -12,14 +19,14 @@ Heftet bruker gjennomgående et enkelt datasett *abu89* og viser R-koden illustr
 ## Gjør tilsvarende med datasettet NorLAG
 Jo mer du tenker aktivt selv, jo mer lærer du. Bruk et annet datasett og gjør tilsvarende operasjoner som er vist med *abu89*. Dere får tilgang til et stort datasett fra undersøkelsen NorLAG og kan da undersøke mange muligheter. 
 
-Du kan gjerne prøve å replikere noen tidligere studier som du finner i [denne publikasjonslista](https://norlag.nsd.no/publications).^(OBS! Å replikere andres studier nøyaktig er langt mer krevende enn man skulle tro. Normalt trenger du at forfatter deler originalt script, men det er ikke alltid lett tilgjengelig, skrevet i et annet programmeringsspråk, inkluderer langt mer avanserte teknikker enn du har lært om, eller bare er generelt uryddig. Så ikke sett det som ambisjon, men få heller inspirasjon til å finne et tema som er litt interessant og søk opp aktuelle variable.)  Variabelliste med dokumentasjon finner du filen "Kodebok.html" når du har fått tilgang til delt mappe . 
+Du kan gjerne prøve å replikere noen tidligere studier som du finner i [denne publikasjonslista](https://norlag.nsd.no/publications).^[OBS! Å replikere andres studier nøyaktig er langt mer krevende enn man skulle tro. Normalt trenger du at forfatter deler originalt script, men det er ikke alltid lett tilgjengelig, skrevet i et annet programmeringsspråk, inkluderer langt mer avanserte teknikker enn du har lært om, eller bare er generelt uryddig. Så ikke sett det som ambisjon, men få heller inspirasjon til å finne et tema som er litt interessant og søk opp aktuelle variable.]  Variabelliste med dokumentasjon finner du filen "Kodebok.html" når du har fått tilgang til delt mappe . 
 
 
 ## Bruk helt andre datasett
 Det er en god del innebygde datasett i R og i ulike R-pakker. Du kan få en oversikt over tilgjengelig datasett ved funksjonen `data()` som lister opp de dataene som er tilgjengelig i de pakkene du har lastet for øyeblikket. 
 
-* causaldata: en pakke med diverse datasett brukt i lærebøker for kausalanalyse. Tilgang: `install.packages(causaldata)`. For en oversikt, se pakkes [dokumentasjon](https://cran.r-project.org/web/packages/causaldata/causaldata.pdf).
-* gapminder: en pakke med utdrag av [Gapminder-data](https://www.gapminder.org/data/) med ulike lands levealder, befolkningsstørrelse og brutto nasjonalprodukt over mange år. Tilgang: `install.packages(gapminder)`
+* causaldata: en pakke med diverse datasett brukt i lærebøker for kausalanalyse. Tilgang: `install.packages("causaldata")`. For en oversikt, se pakkes [dokumentasjon](https://cran.r-project.org/web/packages/causaldata/causaldata.pdf).
+* gapminder: en pakke med utdrag av [Gapminder-data](https://www.gapminder.org/data/) med ulike lands levealder, befolkningsstørrelse og brutto nasjonalprodukt over mange år. Tilgang: `install.packages("gapminder")`
 
 Når en pakke, f.eks. gapminder, er lastet har du automatisk tilgang til dataene ved å bruke navnet på datasettet i en funksjon som følger:   
 

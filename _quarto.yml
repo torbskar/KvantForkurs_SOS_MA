@@ -42,15 +42,16 @@ book:
         - tidyverse.qmd
         - omkode_factor.qmd
   appendices:
+   - appendix_addins.qmd
    - import_metadata.qmd
    - createDictionary.qmd
   downloads: [pdf, epub]
 
 format:
-  html: default
+  html: 
+    theme: cosmo
+    code-copy: true
   pdf: default 
-  epub: default
+  epub: 
+   toc: true 
 
-#     theme: cosmo 
-#     code-copy: true
-#Sys.setlocale(locale='no_NB.utf8')

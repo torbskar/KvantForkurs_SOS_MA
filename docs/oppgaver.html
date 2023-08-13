@@ -330,14 +330,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./appendix_addins.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Rstudio addins</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./import_metadata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Import av data fra Sikt - håndtering av formater med metadata</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./createDictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Lage dictionary-fil</span></span></a>
   </div>
 </li>
       </ul>
@@ -386,14 +392,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="gjør-tilsvarende-med-datasettet-norlag" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="gjør-tilsvarende-med-datasettet-norlag"><span class="header-section-number">1.2</span> Gjør tilsvarende med datasettet NorLAG</h2>
 <p>Jo mer du tenker aktivt selv, jo mer lærer du. Bruk et annet datasett og gjør tilsvarende operasjoner som er vist med <em>abu89</em>. Dere får tilgang til et stort datasett fra undersøkelsen NorLAG og kan da undersøke mange muligheter.</p>
-<p>Du kan gjerne prøve å replikere noen tidligere studier som du finner i <a href="https://norlag.nsd.no/publications">denne publikasjonslista</a>.^(OBS! Å replikere andres studier nøyaktig er langt mer krevende enn man skulle tro. Normalt trenger du at forfatter deler originalt script, men det er ikke alltid lett tilgjengelig, skrevet i et annet programmeringsspråk, inkluderer langt mer avanserte teknikker enn du har lært om, eller bare er generelt uryddig. Så ikke sett det som ambisjon, men få heller inspirasjon til å finne et tema som er litt interessant og søk opp aktuelle variable.) Variabelliste med dokumentasjon finner du filen “Kodebok.html” når du har fått tilgang til delt mappe .</p>
+<p>Du kan gjerne prøve å replikere noen tidligere studier som du finner i <a href="https://norlag.nsd.no/publications">denne publikasjonslista</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Variabelliste med dokumentasjon finner du filen “Kodebok.html” når du har fått tilgang til delt mappe .</p>
 </section>
 <section id="bruk-helt-andre-datasett" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="bruk-helt-andre-datasett"><span class="header-section-number">1.3</span> Bruk helt andre datasett</h2>
 <p>Det er en god del innebygde datasett i R og i ulike R-pakker. Du kan få en oversikt over tilgjengelig datasett ved funksjonen <code>data()</code> som lister opp de dataene som er tilgjengelig i de pakkene du har lastet for øyeblikket.</p>
 <ul>
-<li>causaldata: en pakke med diverse datasett brukt i lærebøker for kausalanalyse. Tilgang: <code>install.packages(causaldata)</code>. For en oversikt, se pakkes <a href="https://cran.r-project.org/web/packages/causaldata/causaldata.pdf">dokumentasjon</a>.</li>
-<li>gapminder: en pakke med utdrag av <a href="https://www.gapminder.org/data/">Gapminder-data</a> med ulike lands levealder, befolkningsstørrelse og brutto nasjonalprodukt over mange år. Tilgang: <code>install.packages(gapminder)</code></li>
+<li>causaldata: en pakke med diverse datasett brukt i lærebøker for kausalanalyse. Tilgang: <code>install.packages("causaldata")</code>. For en oversikt, se pakkes <a href="https://cran.r-project.org/web/packages/causaldata/causaldata.pdf">dokumentasjon</a>.</li>
+<li>gapminder: en pakke med utdrag av <a href="https://www.gapminder.org/data/">Gapminder-data</a> med ulike lands levealder, befolkningsstørrelse og brutto nasjonalprodukt over mange år. Tilgang: <code>install.packages("gapminder")</code></li>
 </ul>
 <p>Når en pakke, f.eks. gapminder, er lastet har du automatisk tilgang til dataene ved å bruke navnet på datasettet i en funksjon som følger:</p>
 <div class="cell">
@@ -420,6 +426,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>OBS! Å replikere andres studier nøyaktig er langt mer krevende enn man skulle tro. Normalt trenger du at forfatter deler originalt script, men det er ikke alltid lett tilgjengelig, skrevet i et annet programmeringsspråk, inkluderer langt mer avanserte teknikker enn du har lært om, eller bare er generelt uryddig. Så ikke sett det som ambisjon, men få heller inspirasjon til å finne et tema som er litt interessant og søk opp aktuelle variable.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
