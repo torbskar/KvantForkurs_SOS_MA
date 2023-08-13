@@ -258,6 +258,33 @@ dinedata %>%
 
 Det er mulig det ovenstående ikke fremstår veldig nyttig. Men poenget er å introdusere noe grunnleggende om hvordan R og *tidyverse* fungerer. Det gjør det lettere å forstå det etterfølgende kapitlene - som er konkret nyttige.   
 
+
+#### Lagre data
+Du kan som et utgangspunkt tenke at du *ikke* skal lagre data på disk unntatt det originale datasettet. Scriptet ditt (evt. flere script) starter med å lese inn dataene i R og gjør så alt du trenger av databearbeiding og analyser fra start til slutt. På den måten har du også sikret at du har reproduserbare script som både dokumenterer jobben du gjør og muliggjør at andre kan ettergå analysene. Dette er veldig viktig for alt vitenskapelig arbeid. 
+
+Hvis du likevel trenger å lagre data til disk, så bør det primært være fordi det tar for lang tid å kjøre gjennom fra start. Med store datasett, kompliserte operasjoner og tidkrevende estimeringer kan det være et reelt behov. 
+
+I slike tilfeller bør du lagre datasett i .rds-formatet fordi det er veldig greit å lese inn igjen. Det er R sitt eget format. 
+
+```{r}
+#| eval: false
+
+saveRDS(dinedata, "data/dinedata_temp.rds")
+```
+
+
+Hvis du skal lagre et bearbeidet datasett *permanent* (f.eks. hos sikt.no) for å dele med andre, så er det helt andre prosedyrer som gjelder særlig med tanke på dokumentasjon og at filene skal være software-uavhengige. Da vil csv-format ofte være å foretrekke hvis dokumentasjonen og kodelister er på hensiktsmessig format. 
+
+
+```{r}
+#| eval: false
+write_csv(dinedata, "data/dinedata_temp.csv")
+```
+
+Det kan være andre grunner til å lagre i helt andre formater. R støtter mange forskjellige, men du må la behovet styre hvilket format du velger. Foreløpig kan du tenke at du primært bruker .rds. Bare hvis du bare skal skal lagre et datasett permanent skal du bruker .rds. For å bruke noe annet trenger du en god grunn.  
+
+
+
 ### Grafikk: {ggplot2}
 
 "Base R" har en del innebygde funksjoner for å lage grafikk som vi *ikke* dekker her. Grunnen til dette er at vi vektlegger funksjonen fra tidyverse `ggplot`. Det er noen viktige grunner til dette: 
