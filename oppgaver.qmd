@@ -38,7 +38,7 @@ summary(gapminder)
 
 ## Oppgave
 
-Last ned datafilen med navnet smoking.csv i R. Datasettet inneholder 1000 observasjoner basert på et utvalg fra en større populasjon. Det inneholder tre variabler: (1) alder på personen (*age*), (2) en binær (0 v. 1) indikator på om personen røyker (*smoker*) og (3) antall gjenstående forventet levealder til personen (*years*). Utforsk datasettet med *tidyverse*-kommandoer du har lær. 
+Last ned datafilen med navnet [smoking.csv](https://github.com/torbskar/KvantForkurs_SOS_MA/blob/master/aapne_data/smoking.csv) i R. Datasettet inneholder 1000 observasjoner basert på et utvalg fra en større populasjon. Det inneholder tre variabler: (1) alder på personen (*age*), (2) en binær (0 v. 1) indikator på om personen røyker (*smoker*) og (3) antall gjenstående forventet levealder til personen (*years*). Utforsk datasettet med *tidyverse*-kommandoer du har lær. 
 
 Lag et plot som visualiserer sammenhengen mellom røyking og forventet levealder for hver aldersgruppe (lag passende aldersgrupper selv). Hva finner du? Forklar.
 
