@@ -22,6 +22,23 @@ Dernest avhenger feilmarginen av utvalgsstørrelsen. Det er rett og slett slik a
 
 Til sist avhenger feilmarginen av en grense vi selv setter, som gjerne kalles *konfidensgrad*. Denne setter vi selv, men det er vanlig å sette denne til 95%. Det gjør at man noen ganger sier "95% sikker", hvilket er en nokså sleivete måte å si det på, men ikke helt galt under visse forutsetninger som vi kommer tilbake til. 
 
+## Stokastiske variabler og sannsynlighetsfordelinger
+ 
+En stokastisk variabel er en funksjon som tilordner en numerisk verdi til utfallet av et eksperiment. For eksempel, et terningkast er et eksperiment med et utfallsrom som omfatter tallene 1 til 6. Det er usikkerhet knyttet til utfallet av eksperimentet (vi vet ikke på forhånd hva utfallet er, altså om vi kaster 2 eller 5 eller noe annet). La oss si at jeg kaster terningen 100 ganger og teller antall ganger jeg får 6. Vi kan se på denne prosessen som en stokastisk variabel som måler antall 6'ere (den gir utfallet en numerisk verdi).
+ 
+Hvis vi kaster en vanlig terning, har alle mulige utfall den samme sannsynligheten (1/6). I andre tilfeller, dvs. for andre stokastiske variabler, kan det hende at noen utfall er mer sannsynlige enn andre. Alle stokastiske variabler er derfor forbundet med en tilsvarende sannsynlighetsfordeling. En sannsynlighetsfordeling er en funksjon som tilordner en sannsynlighetsverdi (et tall mellom 0 og 1) til alle mulige verdier av den stokastiske variabelen. Et terningkast følger en binomisk fordeling. Andre fordelinger du kanskje har hørt om er Bernoulli-fordelingen, uniformfordelingen, Poisson-fordelingen og selsvsagt normalfordelingen. 
+ 
+Mini-oppgave: Kan du tenke på og forklare hvordan en survey er et stokastisk utfall (en realisering) av et eksperiment?
+ 
+ 
+### Estimater som stokastiske variabler
+ 
+Når vi produserer statistiske estimater, er vi som oftest avhengige av et (tilfeldig) utvalg fra en større populasjon (vi måler som regel utdanningsnivået til et utvalg mennesker, ikke for hele befolkningen). Dette betyr at et estimat kan variere fra ett utvalg til et annet: det er usikkerhet knyttet til det. Med andre ord, kan selve estimatet anses som en stokastisk variabel. Med nok observasjoner, forteller sentralgrenseteoremet at denne stokastiske variabelen følger en normalfordeling med to viktige parametere: en gjennomsnittlig (forventet) verdi og en varians. Denne variansen kvantifiserer hvor mye estimatene våre kan variere dersom vi trekker et nytt (hypotetisk) utvalg fra populasjonen. I praksis, forholder vi oss som regel til standardavviket og ikke variansen til denne utvalgsfordelingen. Standardavviket til denne fordelingen kalles *standardfeilen* (se under).
+ 
+Standardfeilen forbundet med et estimat kan brukes til å bygge et konfidensintervall (jfr. §12.1.3). Dette er et intervall som med en gitt sannsynlighet inneholder den sanne verdien av det vi prøver å estimere (gitt antakelsene som vår statistiske modell legger til grunn). Et 95 prosent konfidensintervall er definert som et intervall som gjennom hypotetisk repeterte datasamlinger, "fanger" denne sanne verdien med 95 prosent sannsynlighet. Som en røff tommelfingerregel, tilsvarer et slikt intervall estimatet ± 2 ganger standardfeilen.
+ 
+Mini-oppgave: Gitt det du vet om normalfordelingen, forklar hvorfor vi er 95 prosent sikre på at den sanne verdien til det vi estimerer faller innenfor ca. 2 ganger standardfeilen.
+
 ## Estimater og feilmarginer
 
 ### Estimat 
