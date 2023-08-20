@@ -316,11 +316,10 @@ polit3 %>%
   tbl_summary(by = gndr)
 
 ```
-```
 
 
 
-## Gjøre samme ting med mange variable med `across()`
+## Gjøre samme ting med mange variable med `across`
 
 
 

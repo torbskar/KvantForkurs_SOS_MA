@@ -394,7 +394,7 @@ Merk at chatGPT da vil foreslå en løsning, men det kan godt hende du får et l
 For å få et godt svar er det viktig at du i promptet gir en god beskrivelse av *konteksten*, som innebærer hva du ønsker å gjøre, hva resultatet blir og hva du tror er feil. For at dette skal fungere godt trenger du altså å forstå problemet ditt og beskrive det så tydelig som mulig. Så må du teste løsningen på din egen datamaskin og sjekke at det faktisk fungerer. 
 
 
-### **OBS**! chatGPT code interpreter 
+#### **OBS**! chatGPT code interpreter 
 I betalingsversjonen av chatGPT får man tilgang til appen code interpreter der man kan laste opp data og få dem analysert "ferdig". Eller: tilsynelatende ferdig. Det finnes helt sikkert også andre tilsvarende AI-verktøy. 
 
 Merk at alt du laster opp eller skriver inn i chatGPT innebærer å dele data både med tjenesten og potensielt senere brukere. Å laste opp persondata er slik sett i utgangspunktet et brudd med GDPR og de tillaltelsene du har til bruk av data. For å bruke slike tjenester bør du være *veldig sikker* på de dataene du bruker kan deles *helt fritt*. 
