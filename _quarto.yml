@@ -32,7 +32,6 @@ book:
         - linearRegresjon_kat.qmd
     - part: "Del 4: statistisk tolkning"
       chapters: 
-        - grunnleggendeDesign.qmd
         - statistiskTolkning.qmd
     - part: "Del 5: Setter det hele sammen"
       chapters: 
@@ -43,6 +42,7 @@ book:
         - omkode_factor.qmd
         - references.qmd
   appendices:
+   - grunnleggendeDesign.qmd
    - appendix_addins.qmd
    - import_metadata.qmd
    - createDictionary.qmd

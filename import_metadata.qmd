@@ -16,7 +16,7 @@ library(labelled)
 ```
 
 
-For de som vil ha en litt mer utfordring kan man lese inn filen i Stata-format. Dette er slik det blir levert fra Sikt^[Det kan sies mye om å levere ut data på denne måten, men det vil ikke ta seg ut å gjøre det i undervisningsmateriale.]
+For de som vil ha en litt mer utfordring kan man lese inn filen i Stata-format. Dette er slik det blir levert fra Sikt^[Det kan sies mye om å levere ut data på denne måten, men det vil ikke ta seg ut å gjøre det i undervisningsmaterialet.]
 
 Stata-formatet dta har to utfordringer når vi importerer til R. Det er tilsvarende problemstilling hvis man importerer fra SPSS eller SAS. For det første er det noen ganger gitt en egen kode for manglende verdi, såkalt "missing". For det andre lagres informasjonen på en annen måte enn i R. I Stata er ofte kategoriske variable lagret som en numerisk variabel med en tilhørende "label". Når man leser inn dta-fil til R vil disse variablene være av typen "labelled". I R er det langt bedre å gjøre de om til factor-variable, men det er litt styr å kode om hvis det er veldig mange variable i datasettet - slik det ofte er i surveydata. 
 
@@ -28,14 +28,34 @@ Vi presenterer en samlet løsning først, så tar vi hver del for seg etterpå f
 * Gjør om alle variable av typen "labelled" til factor-variable 
 
 
+### Hvorfor så vanskelig? 
+Nedenfor vil det vises en god del komplisert kode bare for å få datasettet over i et håndterbart R-format. Mye styr her. Dette gjør at du lett kan få inntrykk av at R er lite egnet til å håndtere slike data når det trengs så mye jobb. **Men**: Hvis dataene var lagret på en annen måte ville det vært vesentlig enklere. La oss derfor vise hvordan koden ville vært hvis NorLAG var lagret i Stata-format med følgende forutsetninger: 
+
+* Ingen rare bruker-definerte missing-verdier
+* Alle variable er *enten* kun kontinuerlig *eller* kun kategorisk (dvs. ikke noen spesielle verdier på en annen skala, f.eks. missing-verdier) 
+* Alle data er samlet i én fil
+
+Hvis dataene er konsekvent kodet på denne måten kunne en innlesning se omtrent slik ut: 
+
+```{r}
+#| eval: false
+norlag <- read_stata("data/norlag.dta") %>% 
+  mutate(across(where(is.labelled), ~as_factor(.))) 
+```
+
+Første linje importerer dataene. Andre linje går gjennom samtlige variable etter tur, sjekker om variabelen har 'labler' (dvs. er kategoriske) og i så fall gjør om variabelen til factor der lablene blir "factor-levels". Dette er da alt som trengs. 
+
+Men i den virkelige verden er det sjelden så enkelt. Alle datasett har en del mikk-makk ved seg av både gode og dårlige grunner. Hvordan dataene har blitt til og hvem som har lagt til rette for videre bruk av andre er de to store avgjørende faktorene her. 
+
+
 ## Håndtering av user-NAs
-For disse dataene vil det være ulike sett av missing-verdier for de ulike variablene. Dette kan helt fint håndteres manuelt variabel for variabel. Men for å ha ordentlig kontroll på at det blir riktig bør det automatiseres. Logikken i denne delen går et stykke utover hva vi forventer at den jevne sosiologistudent skal lære. 
+For datasettet NorLAG vil det være ulike sett av missing-verdier for de ulike variablene. Dette kan helt fint håndteres manuelt variabel for variabel. Men for å ha ordentlig kontroll på at det blir riktig bør det automatiseres. Logikken i denne delen går et stykke utover hva vi forventer at den jevne sosiologistudent skal lære. 
 
 En første sted er å lese inn dokumentasjonsrapporten fra en html-fil slik den leveres fra Sikt og gjør det om til et håndterbart oppslags-datasett. Dette er beskrevet i eget appendix. Det følgende tar utgangspunkt i at en slik oppslagsfil finnes.
 
 Det er noen verdier som i dokumentasjonen er spesifisert som spesielle typer missing. Disse skal vi kode om til NA. Disse verdiene har labler som starter med "filter:" eller "vil ikke svare" etc. Disse danner basis for omkoding til `NA`. Dette er ikke en komplett liste over koder som innebærer at det egentlig mangler informasjon. (Dvs. fordi koden indikerer grunner til at det mangler informasjon). Etter denne oppryddingen kan det altså fremdeles hende at det dukker opp noe slikt, så vær påpasselig med å sjekke variabelens fordeling før du analyserer med regresjonsmodeller. 
 
-Funksjonen nedenfor skal brukes innenfor et steg der man går gjennom alle variablene en om gangen. For hver variabel slås det opp de aktuelle missing-verdiene som gjelder for denne og bruker `replace` til å omkode til `NA` for disse verdiene. Når denne funksjonen kalles for hver variabel senere, så brukes det altså ulike definisjoner av missing-verdier for hver variabel.^(Basert på kode fra https://tim-tiefenbach.de/post/2023-recode-columns/ ) 
+Funksjonen nedenfor skal brukes innenfor et steg der man går gjennom alle variablene en om gangen. For hver variabel slås det opp de aktuelle missing-verdiene som gjelder for denne og bruker `replace` til å omkode til `NA` for disse verdiene. Når denne funksjonen kalles for hver variabel senere, så brukes det altså ulike definisjoner av missing-verdier for hver variabel.^[Basert på kode fra https://tim-tiefenbach.de/post/2023-recode-columns/ ] 
 
 ```{r}
 # leser inn kodeliste/dokumentasjon
@@ -78,24 +98,30 @@ infilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Under
 
 utfilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/"
 
+# data
+faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
+
+lang <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
+
 ```
 
 
 ```{r}
+#| eval: false
 #| warning: false
 #| error: false
 library(tidyverse)
 library(haven)
 library(labelled)
 
-
 # data
-faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
+faste <- read_stata( "data/NorLAG-lengde-faste.dta", encoding = "utf-8")
 
-lang <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
+lang <- read_stata( "data/NorLAG-lengde-intervju.dta", encoding = "utf-8")
+```
 
 
-
+```{r}
 norlag_lbl <- merge(faste, lang, by = c("ref_nr"), all.y = TRUE) %>% 
   filter(iodeltakelse == 1 |  
            iodeltakelse == 2 & round %in% c(1, 3) | 

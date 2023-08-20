@@ -30,16 +30,23 @@ library(tidyverse)   # generell databehandling
 Første sted er å lese inn html-filen. Funksjonen `read_html()` gjør dette. For å skjønne litt mer av hvordan dette ser ut kan du åpne den opprinnelige html-filen i ren tekst, f.eks. med bruk av Notepad. Det er dette som leses inn. Jeg legger det i et nytt objekt som jeg har kalt `cb` (forkortelse for codebook). 
 
 ```{r}
+#| echo: false
 #| message: false
 #| error: false
-
-#library(XML)
-
 # read html file
 u <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/Kodebok.html"
 
 cb <- read_html(u)
 ```
+```{r}
+#| eval: false
+#| message: false
+#| error: false
+# read html file
+
+cb <- read_html("data/Kodebok.html")
+```
+
 For NorLAG er dokumentasjonsdokumentet inndelt i flere deler, og det er bare den siste delen som inneholder kodeskjemaene. Det er denne siste delen vi trenger, så første utfordring er å plukke ut denne delen. 
 
 En html-fil er strukturert innenfor "noder" som har en start og en slutt. Et avsnitt starter med en kode `<a>` og avsluttes med `</a>`. Tilsvarende koder finnes for tabeller og andre elementer. Disse delene har er oftest gitt et navn som man kan identififiseres og brukes til lage lenker til spesifikke deler av siden (jf. innholdsfortegnelsen). Vi bruker denne til å filtrere filen. 

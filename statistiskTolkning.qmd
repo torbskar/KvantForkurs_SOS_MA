@@ -1,13 +1,18 @@
 # Statistisk tolkning
 
-Det vi omtaler som *statistisk tolkning* eller *statistisk inferens* handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. Dette er relevant for analyser på nivå II og III (se forrige kapittel). På nivå II handler det om å *generalisere* til en veldefinert populasjon, mens det på nivå III handler om å si om en kausal effekten kan skilles fra tilfeldig støy. De statistiske teknikken er imidlertid de samme. I praksis handler dette om (på dette nivået) følgende:
+Det vi omtaler som *statistisk tolkning* eller *statistisk inferens* handler om å skille systematikk fra støy. Altså: håndtering av usikkerhet ved estimeringen. 
+
+1) "Bekvemmelighetsutvalg": Dataene er ikke et tilfeldig utvalg fra noen bestemt populasjon, og det er ikke randomisert til f.eks. kontrollgruppe. I slike utvalg er det ikke den typen usikkerhet ved estimeringen at vi kan regne på usikkerhet på meningsfull måte. Statistisk tolkning er lite relevant.   
+1) Data er et tilfeldig utvalg fra en veldefinert populasjon. Altså: det vi vanligvis mener med "tilfeldig utvalg". Hvis ikke populasjonen er veldefinert spørs det om det heller er er utvalg av type 2). Usikkerheten er knyttet til tilfeldigheter i hvem som ble med i utvalget. Statistisk tolkning for generalisering gjelder. 
+1) Data er fra et eksperiment eller kvasieksperiment der det er tilfeldig fordeling av hvem som er i behandlingsgruppen og kontrollgruppen (evt. flere grupper). Usikkerhet er knyttet til måling av kausaleffekter, og statistisk tolkning gjelder. 
+
+På nivå 2 handler det om å *generalisere* til en veldefinert populasjon, mens det på nivå 3 handler om å si om en kausal effekten kan skilles fra tilfeldig støy. De statistiske teknikken er imidlertid de samme. I praksis handler dette om følgende:
 
 1)  standardfeil
-2)  konfidensintervall
-3)  p-verdi
+1)  konfidensintervall
+1)  p-verdi
 
 Disse tre henger nøye sammen og er forskjellige uttrykk for *feilmarginen* ved et estimat. Her skal vi ikke gjennomgå begrunnelsene og det teoretiske grunnlaget for hvordan dette fungerer, men hoppe rett til det praktiske. En skikkelig forklaring følger fra *sentralgrenseteoremet*^[Hvis dette er ukjent stoff for deg kan du se f.eks. @bps, kapittel 15, etterfulgt av forlengelsen til konfidensintervall og statistiske tester i kapittel 16 og 17.].
-
 
 Litt enkelt kan vi si at det hvis man gjør en studie på en ordenlig måte, så er ganske sannsynlig at man får en estimat som er lik den sanne verdien. Men det er også ganske *lite sannsynlig* at man får et estimat som er *nøyaktig* lik den sanne verdien. Vi må regne med at estimatet avviker noe på grunn av *tilfeldigheter*! Det er veldig nyttig å vite noe om hvor mye feil man kan forvente å få av tilfeldige grunner. Altså: hva er feilmarginen til den metoden vi bruker til å estimere? 
 

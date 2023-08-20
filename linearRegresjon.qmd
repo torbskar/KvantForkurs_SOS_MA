@@ -307,9 +307,52 @@ ggplot(abu89, aes(x = age, y = time89, group = sex, col = sex)) +
 ```{r}
 lm_est3 <- lm(time89 ~ sex + age, data = abu89)
 
-summary(lm_est3)
+coef(lm_est3)
 ```
 
+
+### Interaksjonsledd 
+
+Det kan tenkes at hvordan inntekten varierer med alder er *forskjellig* for menn og kvinner. I modellen ovenfor er det derimot antatt at denne er *lik*. Vi kan beskrive forskjellen i aldersgradienten i inntekt mellom menn og kvinner ved å inkludere interaksjonsledd (samspill) mellom kjønn og alder. 
+
+Dette gjør vi ved å spesifisere en regresjonslikning som følger: 
+
+$$
+time89 = \alpha + \beta_{1}(age) + \beta_{2}(sex) + \beta_{3}(age \times sex)
+$$
+Eller med andre ord: timelønn varierer med *alder* og *kjønn*, og *kombinasjonen* av disse. Merk hvordan dette skrives i R: 
+
+```{r}
+lm_est4 <- lm(time89 ~ sex + age + sex * age, data = abu89)
+
+coef(lm_est4)
+```
+Merk nå at referansekategorien for kjønn er menn, så den estimerte koeffisienten er for kvinner. Det betyr at i utregningen får menn verdien 0 og kvinner får verdien 1. Sette man det inn i regresjonslikningen for menn blir det da som følger: 
+
+$$
+time89 = \alpha + \beta_{1}(age) + \beta_{2}\times 0 + \beta_{3}(age \times 0)
+$$
+Siden alt som multipliseres med 0 blir 0 kan vi også skrive dette som: 
+
+$$
+time89 = \alpha + \beta_{1}(age) 
+$$
+For kvinner skal det derimot multipliseres med 1 og vi får: 
+
+$$
+time89 = \alpha + \beta_{1}(age) + \beta_{2}\times 1 + \beta_{3}(age \times 1)
+$$
+Det som multipliseres med 1 endres jo ikke, så da kan det skrives som:
+
+$$
+time89 = \alpha + \beta_{1}(age) + \beta_{2} + \beta_{3}(age)
+$$
+Men siden vi har to termer for alder kan det forkortes til: 
+
+$$
+time89 = \alpha + (\beta_{1} + \beta_{3})(age) + \beta_{2} 
+$$
+Kortere sagt: forskjellen i stigningstallet mellom menn og kvinner er $\beta_{3}$. I det empiriske eksempelet over betyr det at timelønn øker med alder for begge kjønn, men for kvinner øker det med 0.27 kroner mindre per år sammenlignet med menn. Eller sagt motsatt: menns lønn øker med 0.27 mer enn kvinner per år.  
 
 
 ## Prediksjon 

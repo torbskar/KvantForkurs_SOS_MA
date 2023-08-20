@@ -12,6 +12,7 @@ invisible(Sys.setlocale(locale='no_NB.utf8'))
 #| message: false
 library(tidyverse)
 library(gtsummary)
+library(modelsummary)
 
 ```
 
@@ -98,4 +99,44 @@ abu89 %>%
   add_overall() %>% 
   add_p() 
 ```
+
+
+## Regresjon 
+For regresjon er det i prinsippet det samme: regresjonskoeffisientene er estimater med usikkerhet som uttrykkes med standardfeil og tilhørende konfidenstintervaller og p-verdier. Merk at p-verdiene er resultat av en helt ordinær t-test: 
+
+$$
+t = \frac{\beta}{se_\beta} 
+$$
+
+Husk at $\beta$ er et estimat på en forskjell mellom grupper eller nivåer på en kontinuerlig variabel. Tolkningen er derfor lik som for t-test: kan denne *forskjellen* skyldes tilfeldig variasjon? Eller er forskjellen såpass stor i forhold til feilmarginen at vi velger å tolke det som en systematisk forskjell? Hvis p-verdien er høy (typisk: større enn 0.05), så er vi ikke tilstrekkelig sikker på at det ikke bare er tilfeldig støy. 
+
+
+
+```{r}
+lm_est1 <- lm(time89 ~ female , data = abu89)
+modelsummary(lm_est1)
+```
+
+
+### Multippel regresjon 
+
+```{r}
+lm_est2 <- lm(time89 ~ female + age , data = abu89)
+modelsummary(lm_est2)
+```
+
+### Interaksjonsledd 
+
+```{r}
+lm_est3 <- lm(time89 ~ female + age + female * age , data = abu89)
+modelsummary(lm_est3)
+```
+
+
+
+```{r}
+modelsummary(list(lm_est1, lm_est2, lm_est3))
+```
+
+
 
