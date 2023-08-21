@@ -35,7 +35,7 @@ Mini-oppgave: Kan du tenke på og forklare hvordan en survey er et stokastisk ut
  
 Når vi produserer statistiske estimater, er vi som oftest avhengige av et (tilfeldig) utvalg fra en større populasjon (vi måler som regel utdanningsnivået til et utvalg mennesker, ikke for hele befolkningen). Dette betyr at et estimat kan variere fra ett utvalg til et annet: det er usikkerhet knyttet til det. Med andre ord, kan selve estimatet anses som en stokastisk variabel. Med nok observasjoner, forteller sentralgrenseteoremet at denne stokastiske variabelen følger en normalfordeling med to viktige parametere: en gjennomsnittlig (forventet) verdi og en varians. Denne variansen kvantifiserer hvor mye estimatene våre kan variere dersom vi trekker et nytt (hypotetisk) utvalg fra populasjonen. I praksis, forholder vi oss som regel til standardavviket og ikke variansen til denne utvalgsfordelingen. Standardavviket til denne fordelingen kalles *standardfeilen* (se under).
  
-Standardfeilen forbundet med et estimat kan brukes til å bygge et konfidensintervall (jfr. §12.1.3). Dette er et intervall som med en gitt sannsynlighet inneholder den sanne verdien av det vi prøver å estimere (gitt antakelsene som vår statistiske modell legger til grunn). Et 95 prosent konfidensintervall er definert som et intervall som gjennom hypotetisk repeterte datasamlinger, "fanger" denne sanne verdien med 95 prosent sannsynlighet. Som en røff tommelfingerregel, tilsvarer et slikt intervall estimatet ± 2 ganger standardfeilen.
+Standardfeilen forbundet med et estimat kan brukes til å bygge et konfidensintervall (se under). Dette er et intervall som med en gitt sannsynlighet inneholder den sanne verdien av det vi prøver å estimere (gitt antakelsene som vår statistiske modell legger til grunn). Et 95 prosent konfidensintervall er definert som et intervall som gjennom hypotetisk repeterte datasamlinger, "fanger" denne sanne verdien med 95 prosent sannsynlighet. Som en røff tommelfingerregel, tilsvarer et slikt intervall estimatet ± 2 ganger standardfeilen.
  
 Mini-oppgave: Gitt det du vet om normalfordelingen, forklar hvorfor vi er 95 prosent sikre på at den sanne verdien til det vi estimerer faller innenfor ca. 2 ganger standardfeilen.
 
@@ -47,9 +47,9 @@ La oss si at du ønsker å si noe om gjennomsnittet i *populasjonen*, men har ba
 ### Standardfeil 
 Standardfeilen uttrykker usikkerheten ved *estimatet*. Standardfeilen til estimatet er et mål på usikkerheten ved målemetoden. Usikker målemetode gjør at feilen kan være større.
 
-Ordet standard*feil* er lett å blande sammen med standard*avvik*, så la oss ta det med det samme. Standardavviket beskriver variasjon i data, f.eks. hvis man vil beskrive hvordan personers inntekt varierer rundt gjennomsnittet. Standardavviket beskriver altå variasjon i *data*. 
+Ordet standard*feil* er lett å blande sammen med standard*avvik* i mer generell forstand, så la oss ta det med det samme. Standardavviket beskriver som regel variasjon i observerte data, f.eks. hvis man vil beskrive hvordan personers inntekt varierer rundt gjennomsnittet. Standardavviket beskriver altå variasjon i *data*. 
 
-Standard*feilen* beskriver derimot ikke data, men sannsynlighetsfordelingen for hvordan vi forventer at **estimatet** vil kunne avvike fra den sanne verdien på grunn av tilfeldigheter. 
+Standard*feilen* beskriver derimot ikke data, men *sannsynlighetsfordelingen* for hvordan vi forventer at **estimatet** vil kunne avvike fra den sanne verdien på grunn av tilfeldigheter. 
 
 Sentralgrenseteoremet sier at estimatet på et gjennomsnitt vil ha tilfeldige feil som er *normalfordelt*, og dermed kan vi bruke normalfordelingen til å si noe om usikkerheten ved estimatet. Dette er forsøkt illustrert nedenfor der x-aksen viser hvor mye estimatet kan avvike fra den sanne verdien, mens kurven viser hvor sannsynligsfordelingen til avviket. Den stiplede linjen viser den sanne verdien. Når x-aksen er avvik fra sanne verdien, så vil altså $x = 0$ bety null avvik fra sanne verdien: helt riktig estimat. 
 
