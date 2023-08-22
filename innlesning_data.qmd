@@ -9,6 +9,7 @@ Vi skal bruke følgende pakker i dette kapittelet
 library(tidyverse)
 library(haven)
 library(labelled)
+library(readxl)
 
 ```
 
@@ -24,7 +25,7 @@ library(labelled)
 
 utfilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/"
 
-norlag <- readRDS(paste0(utfilbane, "norlag.rds")) %>% 
+norlag_eksempel <- readRDS(paste0(utfilbane, "norlag.rds")) %>% 
   select(ref_nr, round, ioalder, iolandb, iokjonn, pa001c, pa300, hc230, hc231, va207, hcMCS12, hcPCS12 )
 
 
@@ -33,24 +34,26 @@ norlag <- readRDS(paste0(utfilbane, "norlag.rds")) %>%
 # library(labelled)
 
 
-saveRDS(norlag, "data/norlag_panel.rds")
+saveRDS(norlag_eksempel, "data/norlag_eksempel.rds")
 
-save(norlag, file = "data/norlag_panel.Rdata")
+norlag_eksempel_rdata <- norlag_eksempel 
+save(norlag_eksempel_rdata, file = "data/norlag_eksempel.Rdata")
 
-write_csv(norlag, "data/norlag_panel.csv")
+write_csv(norlag_eksempel, "data/norlag_eksempel.csv")
 
-openxlsx::write.xlsx(norlag, file = "data/norlag_panel.xlsx")
+openxlsx::write.xlsx(norlag_eksempel, file = "data/norlag_eksempel.xlsx")
 
 
-write_dta(norlag, path = "data/norlag_panel.dta")
+write_dta(norlag_eksempel, path = "data/norlag_eksempel.dta")
 
-write_sav(norlag, path = "data/norlag_panel.sav")
+write_sav(norlag_eksempel, path = "data/norlag_eksempel.sav")
 
-write_sas(norlag, path = "data/norlag_panel.sas7bdat")
+write_sas(norlag_eksempel, path = "data/norlag_eksempel.sas7bdat")
 
 
 ```
 
+## Generelt om ulike dataformat
 Data kan være lagret i mange ulike formater, men det er også problemstillinger knyttet til *hvordan* dataene er lagret i et gitt format. Dette handler delvis om hvordan noen har valgt å lagre og distribuere data, ikke bare om dataformatet i seg selv.
 
 Det kan være vanskelig å skille mellom hvorvidt utfordringene du møter skyldes dataformatet, softwaren man bruker eller valg andre har tatt. Det kan være flere av disse, men som hovedregel er problemet at data ofte ikke er distribuert i et universelt format. Permanent lagring og distribusjon av data er krevende, men ikke temaet her.
@@ -61,11 +64,18 @@ Dette kan være krøkete og du har virkelig muligheten til å kløne det til ski
 
 R kan imidlertid håndtere det aller meste av dataformater på en eller annen måte, men vi ser bare på de aller mest vanlige her.
 
-## Generelt om ulike dataformat
 
 ### rds
 
-Rds-formatet er et format særlig egnet for R.
+Rds-formatet er et format særlig egnet for R. Her er et eksempel med et lite utdrag fra NorLAG
+
+```{r}
+norlag_rds <- readRDS("data/norlag_eksempel.rds")
+glimpse(norlag_rds)
+
+```
+
+
 
 ### Laste workspace med `load()`
 
@@ -73,13 +83,28 @@ Filer av typen .Rdat eller .Rdata er egentlig ikke et dataformat, men brukes tid
 
 Du kan også lagre et "speilbilde" av hele ditt workspace på denne måten slik at du kan lukke R og så åpne R senere akkurat på det stedet du var i arbeidet. Det kan være kjekt, men forutsetter at du husker hva du drev med forrige gang. Den klare anbefalingen er derfor å ikke bruke dette rutinemessig.
 
+Her bruker man `load` som laster dette speilbildet og objektet med dataene i beholder det navnet de hadde da de ble laget. Se i fanen "Environment" i Rstudio om det har dukket opp noe nytt der, for å finne navnet hvis du ikke vet det fra før. I dette eksempelet er dataene lagret i et objekt som "norlag_eksempel_rdata" som altså er lagret i en fil som hetere "norlag_eksempel.Rdata". Ved lasting av filen dukker objektet opp under "Enviroment"-fanen, men du får ikke noen melding av noe slag. Men er altså tilgjengelig i minnet i R. Her er koden: 
+
+```{r}
+load("data/norlag_eksempel.Rdata")
+glimpse(norlag_eksempel_rdata)
+
+```
+
+
+
 ### csv-filer
 
-Såkalte csv-format er ren tekstformat der verdiene i kollonnene har skilletegn. Skilletegnet er nesten alltid komma eller semikolon, men kan i prinsippet være hva som helst. Noen ganger vil slike
+Såkalte csv-format er ren tekstformat der verdiene i kollonnene har skilletegn. Skilletegnet er nesten alltid komma eller semikolon, men kan i prinsippet være hva som helst. Hvis du får feilmeldinger og det ser skikkelig rart ut, så åpen filen i Notepad (eller annet ren-tekst program) og sjekk. I koden nedenfor er det spesifisert komma som skilletegn, men hvis det er semikolon endrer du det til `sep =","`.  I utgangspunket forventer `read.csv` at det er kommaseparert, så koden vil funkere her uten den delen. 
+
+```{r}
+norlag_eksempel_csv <- read.csv("data/norlag_eksempel.csv", sep =",")
+glimpse(norlag_eksempel_csv)
+```
 
 ### Excel
 
-Forbløffende mye data foreligger i Excel-format. Det finnes egne funksjoner for å jobbe direkte med excel-filer. Blant annet pakken `readxl` gir funksjoner til å lese inn denne typen filer. Her er et eksempel. 
+Forbløffende mye data foreligger i Excel-format. Det finnes egne funksjoner for å jobbe direkte med excel-filer. Blant annet pakken `readxl` gir funksjoner til å lese inn denne typen filer. Det finnes også andre pakker for å håndtere Excel-filer, men hvis formålet bare er å lese inn data, så gjør denne pakken jobben. Husk å laste pakken først. Her er et eksempel:
 
 ```{r}
 library(readxl)
@@ -91,7 +116,6 @@ glimpse(norlag_xlsx)
 Men Excel-filer kan ha en litt mer komplisert struktur enn dette eksempelet. Data kan ligge i ulike faner i Excel-filen, men det kan da håndteres med å legge til argumentet `sheet = ...`. Hvis excel-arket inneholder mye tekst eller andre ting som gjør at de faktiske dataene kommer litt lengre ned, så kan det spesifiseres hvilket celleområde som det skal leses inn fra ved `range = ...` eller bare hoppe over noen rader med `skip = ...`. 
 
 På dette kurset skal vi ikke bruke Excel-filer, men det er stor sannsynlighet for at du vil få bruk for dette senere en gang. 
-
 
 
 ### Proprietære format: Stata, SPSS og SAS
@@ -112,14 +136,13 @@ Andre vanlige dataformater er formater fra statistikkpakkene SPSS og SAS, med fi
 ```{r}
 #| eval: FALSE
 norlag_sav <- read_spss("data/norlag_panel.sav")
-
+glimpse(norlag_sav)
 ```
 Her er eksempel for innlesning av SAS-fil: 
 
 ```{r}
-#| eval: FALSE
 norlag_sas <- read_sas("data/norlag_panel.sas7bdat")
-
+glimpse(norlag_sas)
 ```
 
 ### Dataformater for store data
@@ -128,18 +151,3 @@ Det finnes en hel rekke andre formater for spesielle formål, derav formater for
 For mer spesielle behov går det også an å koble mot databaser som MySQL, Spark, Oracle eller noe helt annet, og en oversikt [finnes her](https://cran.r-project.org/web/views/Databases.html).
 
 Eneste du trenger være klar over akkurat nå er at R kan håndtere svært mange forskjellige dataformater og koble mot andre løsninger. Kanskje vil du trenge det en gang - kanskje ikke. 
-
-
-## Oppgaver
-
-::: {#exr-}
-Les inn datasettet... i rds-format
-:::
-
-::: {#exr-}
-Les inn datasettet... i xlsx-format
-:::
-
-::: {#exr-}
-Noen ganger vil datamaskiner være konfigurert slik at filhalene ikke synes. Det betyr jo ikke at de ikke er der, men du ser ikke umiddelbart hva slags fil det er. Finn ut hvordan du endrer dette på din datamaskin. Prøv å skru det av og på. For å finne det ut, søk på internett med søkestrengen "how to display file extension" eller tilsvarende.
-:::
