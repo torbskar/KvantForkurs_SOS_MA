@@ -52,6 +52,23 @@ Når du installerer pakker får du noen ganger spørsmål om du vil installere "
 
 Når en pakke er installert på datamaskinen din er disse funksjonalitetene tilgjengelig i R, men ikke helt automatisk. Pakkene ligger i en egen mappe i filstrukturen på datamaskinen og R vet selvsagt hvor dette er. For at pakkene skal være tilgjengelig for deg må du fortelle R at du skal bruke en slik pakke. Vi sier at vi "laster en pakke" (engelsk: "load") og da er disse funksjonene tilgjengelig for deg i hele R-sesjonen. Hvis du restarter R, så må du laste pakkene på nytt før du kan fortsette der du slapp.
 
+For dette kurset skal vi bruker flere pakker og de kan installeres samlet med koden nedenfor. Hvis du har behov for andre pakker enn dette (f.eks. at vi har glemt å ta med noe i koden), så installerer du det som er angitt på samme måten. 
+
+```{r}
+#| eval: false
+install.packages( c("tidyverse", "haven", "gtsummary", "modelsummary", "stargazer", 
+                    "ggthemes", "ggforce",  
+                    "labelled", "memisc", 
+                    "causaldata", "gapminder") 
+            )
+
+
+```
+
+Installering av pakker gjør du bare én gang. Hvis du oppdaterer R til en nyere versjon må du imidlertid installere pakkene på nytt. Det er alltid en fordel å ha oppdatert software. 
+
+
+Du må derimot laste en pakke hver gang du starter R på nytt. Det betyr at du gjør pakkens funksjoner tilgjengelig for denne arbeidsøkten. 
 Du laster en pakke med funksjonen `library`.
 
 ```{r}
@@ -64,6 +81,9 @@ Hvis en kode ikke fungerer og du får feilmelding kan dette være grunnen: du ha
 En annen grunn til at koden ikke fungerer kan være at det er "konflikt" mellom pakker du har lastet. Hvis du bare laster alle pakker du vet du bruker (og noen ekstra som noen på internett har foreslått), så kan det hende at disse pakkene skaper trøbbel for hverandre. Det er typisk at noen funksjoner har samme navn i ulike pakker, og R bruker da en annen funksjon enn du tror. Så da er rådet: ikke last masse pakker du ikke vet hva er. I det etterfølgende introduseres ulike pakker fortløpende og du får da vite hva de brukes til. Utvalget av pakker er dessuten slik at det ikke skal være noen slike konflikter. De pakkene vi skal bruke jobber veldig fint sammen. (Se avsnitt nedenfor om dialekter).
 
 Men det er altså et poeng at du må vite hva slags funksjonalitet de ulike pakkene har, og hvilke du faktisk trenger.
+
+
+
 
 ## R-dialekter
 

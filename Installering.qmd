@@ -20,10 +20,10 @@ OBS! Det er mange csv-filer tilknyttet oppgaver i læreboken. Sørg for å laste
 
 
 ## Installasjon 
-Installer nyeste versjon av R herfra: https://cran.uib.no/ Du trenger det som heter «base» når man installerer for første gang. Hvis du har R installert på maskinen din fra før, sørg for at du har siste versjon installert. Siste versjon er 4.1.2. Versjon etter 4.0 bør gå bra, men tidligere versjoner vil kunne gi problemer. 
-Installer nyeste versjon av RStudio (gratisversjon) herfra: https://rstudio.com/products/rstudio/download/ 
+Installer nyeste versjon av R herfra: [https://cran.uib.no/](https://cran.uib.no/) Du trenger det som heter «base» når man installerer for første gang. Hvis du har R installert på maskinen din fra før, sørg for at du har siste versjon installert. Siste versjon er 4.1.2. Versjon etter 4.0 bør gå bra, men tidligere versjoner vil kunne gi problemer. 
+Installer nyeste versjon av RStudio (gratisversjon) herfra: [https://rstudio.com/products/rstudio/download/](https://rstudio.com/products/rstudio/download/ )
 Viktig: du må installere R før du installerer Rstudio for Rstudio finner R på din datamaskin og vil gi feilmelding hvis den ikke finner R. 
-Hvis du har en eldre datamaskin og du får feilmelding ved installasjon av RStudio kan du vurdere å installere forrige versjon av Rstudio herfra: https://www.rstudio.com/products/rstudio/older-versions/ 
+Hvis du har en eldre datamaskin og du får feilmelding ved installasjon av RStudio kan du vurdere å installere forrige versjon av Rstudio herfra: [https://www.rstudio.com/products/rstudio/older-versions/](https://www.rstudio.com/products/rstudio/older-versions/) 
 
 R og Rstudio er to programmer er integrert i hverandre og du åpner heretter R ved å åpne RStudio. Merk: 
 R er navnet på programmeringsspråket og programmet som gjør selve utregningene. Det kjører fra en kommandolinje og er ikke veldig brukervennlig alene. 
@@ -31,21 +31,36 @@ RStudio er et "integrated development environment" (IDE) til R. Det integrerer R
 
 Det finnes også andre IDE for R, men vi skal bruke RStudio gjennomgående på dette kurset. (RStudio inneholder også masse annen funksjonalitet vi ikke trenger til dette kurset). 
 
+Du skal også installere noen R-pakker. Det er omtalt [i et annet kapittel](https://torbskar.github.io/KvantForkurs_SOS_MA/kort_intro_R.html#r-pakker) med oversikt over hva det er og hvilke du trenger. 
+
+### Ikke alle feilmeldinger er like nøye
+Mange av dere vil få en feilmelding av denne typen når dere starter R: 
+
+```{r}
+#| eval: false
+Error in file.exists(pythonPath) : 
+  file name conversion problem -- name too long?
+```
+
+Ikke bry dere om akkurat den. Det spiller ingen rolle. 
+
 ### Spesielt om Windows-maskiner: installer Rtools
-Hvis du jobber på en Windows-maskin må du også installere Rtools herfra: https://cran.r-project.org/bin/windows/Rtools/ 
+Hvis du jobber på en Windows-maskin må du også installere Rtools herfra: [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/)
 
 ### Spesielt om Mac-maskiner
 R skal normalt installere på Mac uten problemer. 
-Noen har fått beskjed om at de også trenger å installere XQuartz eller Xcode. I så fall installerer du de også. Se mer informasjon her: https://cran.r-project.org/bin/macosx/tools/ 
+Noen har fått beskjed om at de også trenger å installere XQuartz eller Xcode. I så fall installerer du de også. Se mer informasjon her: [https://cran.r-project.org/bin/macosx/tools/](https://cran.r-project.org/bin/macosx/tools/)
 
 ### Spesielt om Linux-maskiner
 Har du Linux vet du antakelig hva du driver med. Siste versjon av R og Rstudio kan antakeligvis installeres fra distroens repository. 
 
 ###	Spesielt om Chromebook 
 Chromebook kjører et annet operativsystem og R vil ikke uten videre fungere. Derimot kan man på de fleste slike maskiner åpne opp for å kjøre Linux og da kan man installere linux-versjon av R og Rstudio. 
-https://blog.sellorm.com/2018/12/20/installing-r-and-rstudio-on-a-chromebook/ 
+[https://blog.sellorm.com/2018/12/20/installing-r-and-rstudio-on-a-chromebook/](https://blog.sellorm.com/2018/12/20/installing-r-and-rstudio-on-a-chromebook/) 
 Eller se nedenfor hvordan du kan kjøre R i skyen. 
 
+
+## Hvis du har problemer med installasjon som vi ikke får løst
 
 ### Rstudio workbench i UiO-skyen
 Hvis du opplever uløselige problemer med å kjøre R og Rstudio på din datamaskin, så finnes det en krise-løsning. Rstudio har også en versjon som kjører i skyen via nettleser. UiO har en slik versjon installert på sine servere som vi kan bruke. Du logger da inn på [Rstudio Workbench](https://rstudio-workbench.uio.no/) med ditt Feide brukernavn og passord. (Det er sendt inn beskjed om at alle på SOS4020 skal ha tilgang, og håper det er i orden nå eller veldig snart). 
@@ -57,6 +72,8 @@ Rstudio workbench fungerer på samme måte som Rstudio ellers, men du kan ikke i
 
 ## Oppsett og forberedelser 
 Dette oppsettet gjelder både hvis du har en lokal installasjon og for skyløsninger. Utseendet spiller ingen rolle, og R kan også fungere uten å opprette «projects» som beskrevet her. Men det er lettere å bruke og du har bedre orden hvis du gjør dette. 
+
+
 
 ###	Utseende i Rstudio
 Endre gjerne på oppsettet i RStudio ved å gå til Tools og deretter Global options, så Pane Layout. 
@@ -72,12 +89,12 @@ Det spiller ingen rolle for funksjonaliteten hvor du har hvilken fane, men her e
 Dette kan også endres senere og har altså bare med hvordan Rstudio ser ut. 
 
 ##	Rstudio projects 
-Når du åpner Rstudio skal du alltid åpne som «project» (se video med instruksjon og i R4DS). Arbeidsområdet er da definert og du kan åpne data ved å bruke relative filbaner, dvs. at du oppgir hvor dataene ligger med utgangspunkt i prosjektmappen.
+Når du åpner Rstudio skal du alltid åpne som «project» (se [video](https://www-int.uio.no/studier/emner/sv/iss/SOSGEO1120/undervisningsvideoer/OpenR_forsteGang.mp4) med instruksjon og i R4DS (@r4ds)). Arbeidsområdet er da definert og du kan åpne data ved å bruke relative filbaner, dvs. at du oppgir hvor dataene ligger med utgangspunkt i prosjektmappen.
 Se kursvideo og instruksjoner i R4DS og gjør følgende: 
 
 
 
-Opprettet mappestruktur med SOSGEO1120 som øverste nivå og egne undermapper for data, script, og output. 
+Opprettet mappestruktur med prosjektmappen som øverste nivå og egne undermapper for data, script, og output. 
 
 
 
@@ -91,7 +108,7 @@ Bruk funksjonen `getwd()` og se at du har riktig filbane til arbeidsområdet. Hv
 
 Det første dere må gjøre er å sørge for å ha orden i datasett, script og annet på din egen datamaskin. Å f.eks. lagre alle filer på skrivebordet bør du aldri gjøre, og særlig ikke i dette kurset eller når man jobber med større prosjekter og datasett. 
 
-For dette kurset skal du ha en mappestruktur med en hovedmappe for SOSGEO1120 og tilhørende undermapper. Det spiller ingen rolle hvor på datamaskinen du legger disse mappene, men du må vite hvor det er. Lag første en mappe som heter SOSGEO1120, og innunder denne mappen lager du tre andre mapper med navnene data, output og script. Du kan ha andre mapper i tillegg ved behov. Det kan se slik ut: 
+For dette kurset skal du ha en mappestruktur med en hovedmappe for dette kurset og tilhørende undermapper. Det spiller ingen rolle hvor på datamaskinen du legger disse mappene, men du må vite hvor det er. Lag første en mappe med et hensiktsmessig navn for kurset, og innunder denne mappen lager du tre andre mapper med navnene data, output og script. Du kan ha andre mapper i tillegg ved behov. Det kan se slik ut: 
 
 ![](images/proj1.png) 
 
@@ -104,7 +121,7 @@ Deretter klikker du du «Existing Directory»
 
 ![](images/proj3.png) 
 
-Klikk «Browse» og bla deg så frem til mappen du har laget for SOSGEO1120. 
+Klikk «Browse» og bla deg så frem til mappen du har laget for dette kurset. 
 
 
 RStudio-prosjektet ligger så i den mappen du har valgt. I filutforsker på datamaskinen vil nå disse to filene dukke opp: 

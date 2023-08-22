@@ -12,6 +12,8 @@ Datasettet som skal brukes i SOS4020 er tilgangsbegrenset så det er litt formal
 
 Dette heftet inneholder også bittelitt mer informasjon enn du trenger (f.eks. appendiks), men som du kan ha bruk for hvis du skal gjøre mer selvstendige analyser senere. 
 
+På kurset i kvantitative metoder på bachelor brukes det en del [undervisningsvideoer](https://www-int.uio.no/studier/emner/sv/iss/SOSGEO1120/undervisningsvideoer/) som er tilgjengelige hvis du er logget inn som UiO-bruker. Se på det ved behov. 
+
 
 
 ## Målsettinger for forkurset
