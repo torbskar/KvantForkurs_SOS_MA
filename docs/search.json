@@ -494,7 +494,7 @@
     "href": "import_metadata.html#hvordan-fungerer-koden-ovenfor-en-intro-til-mer-avansert-databehandling",
     "title": "Appendix C — Import av data fra Sikt - håndtering av formater med metadata",
     "section": "C.3 Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling",
-    "text": "C.3 Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling\n\nC.3.1 Sjekk datastruktur og bruk av filter\n\n\nC.3.2 Omkode bruker-spesifiserte missing-verdier til NA\n\n\nC.3.3 Kode om på tvers av mange variable med across\n\n\nC.3.4 Fjerne nivåer som ikke brukes: drop_unused_value_labels\n\n\nC.3.5 Gjør om til factor med unlabelled"
+    "text": "C.3 Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling\n\nC.3.1 Omkode bruker-spesifiserte missing-verdier til NA\n\n\nC.3.2 Kode om på tvers av mange variable med across"
   },
   {
     "objectID": "import_metadata.html#for-spesielt-interesserte-jobbe-med-labelled-data",

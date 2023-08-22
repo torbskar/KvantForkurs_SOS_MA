@@ -40,12 +40,13 @@ Hvis dataene er konsekvent kodet på denne måten kunne en innlesning se omtrent
 ```{r}
 #| eval: false
 norlag <- read_stata("data/norlag.dta") %>% 
-  mutate(across(where(is.labelled), ~as_factor(.))) 
+  unlabelled()
+
 ```
 
-Første linje importerer dataene. Andre linje går gjennom samtlige variable etter tur, sjekker om variabelen har 'labler' (dvs. er kategoriske) og i så fall gjør om variabelen til factor der lablene blir "factor-levels". Dette er da alt som trengs. 
+Første linje importerer dataene. Andre linje gjør om alle variable av typen "labelled" til factor-variable der lablene blir omgjort til "factor-levels". Dette er da alt som trengs.
 
-Men i den virkelige verden er det sjelden så enkelt. Alle datasett har en del mikk-makk ved seg av både gode og dårlige grunner. Hvordan dataene har blitt til og hvem som har lagt til rette for videre bruk av andre er de to store avgjørende faktorene her. 
+Men i den virkelige verden er det sjelden så enkelt. Alle datasett har en del mikk-makk ved seg av både gode og dårlige grunner. Hvordan dataene har blitt til og hvem som har lagt til rette for videre bruk for andre er de to store avgjørende faktorene her. 
 
 
 ## Håndtering av user-NAs
@@ -174,7 +175,10 @@ norlag <- norlag %>%
 ```{r}
 #| echo: false
 #| eval: false
-saveRDS(norlag_lbl, paste0(utfilbane, "norlag_labelled.rds"))
+write_delim(norlag_lbl, "data/norlag.dta")                # Stata-format
+write_delim(norlag_lbl, paste0(utfilbane, "norlag.dta"))  # Stata-format
+
+saveRDS(norlag_lbl, paste0(utfilbane, "norlag_labelled.rds")) 
 saveRDS(norlag_lbl, "data/norlag_labelled.rds")
 
 saveRDS(norlag, paste0(utfilbane, "norlag.rds"))
@@ -204,21 +208,10 @@ Og dermed har vi et datasett i et svært så ryddig R-format.
 ## Hvordan fungerer koden ovenfor?? En intro til mer avansert databehandling
 
 
-### Sjekk datastruktur og bruk av `filter`
-
-
 ### Omkode bruker-spesifiserte missing-verdier til `NA`
 
 
 ### Kode om på tvers av mange variable med `across` 
 
-
-### Fjerne nivåer som ikke brukes: `drop_unused_value_labels`
-
-
-### Gjør om til factor med `unlabelled`
-
-
-## For spesielt interesserte: jobbe med labelled-data
 
 
