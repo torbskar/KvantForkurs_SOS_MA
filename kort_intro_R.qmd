@@ -10,6 +10,23 @@ invisible(Sys.setlocale(locale='no_NB.utf8'))
 
 Før vi setter igang trengs det en kort introduksjon til noe grunnleggende om hvordan R fungerer. Så lærer man mer underveis, og et senere kapittel går grundigere inn i omkoding av variable. En grundigere gjennomgang av R finner du i @r4ds.
 
+### Et par hurtigtaster
+Du skriver altså kode i script-vinduet i RStudio. For å kjøre koden kan du klikke på "Run" opp i høyre hjørne av script-vinduet. Det kan være lurt å markere det du vil kjøre før du klikker "Run" slik at du bare kjører akkurat det du har tenkt til. Man blir fort lei av å klikke på den måten. En hurtigtast er **Ctlr + Enter** som altså gjør det samme. 
+
+Du vil komme til å skrive '%>%' ganske mange ganger etterhvert. Det er litt styrete å skrive pga hvordan tastene ligger på tastaturet ditt. En hurtigtast for dette tegnet er **Ctrl + Shift + M**. 
+
+Det er mange andre hurtigtaster tilgjengelig, men det er disse to du vil ha mest bruk for. 
+
+### Problemer med æøå?
+På noen datamaskiner vil æøå vises feil. Det er jo veldig irriterende. R henter informasjon fra operativsystemet ditt for å vite hva slags tegnsetting som skal brukes. Noen ganger skjer det feil. Her er en kode for å sette tegnsetting til norsk: 
+
+```{r}
+#| eval: false
+Sys.setlocale(locale='no_NB.utf8')
+```
+Det kan hende du må kjøre denne koden hver gang du starter R. 
+
+
 ## Objektorientert
 
 I de innledende kapitlene ble det vist hvordan man leser inn data i R og dataene ble lagt i et "objekt". R er bygd opp rundt å bruke slike objekter i den forstand at alt man jobber med (typisk: datasett) ligger i objekter.
