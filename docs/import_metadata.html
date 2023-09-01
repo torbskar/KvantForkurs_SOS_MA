@@ -463,33 +463,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># data</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>faste <span class="ot">&lt;-</span> <span class="fu">read_stata</span>( <span class="st">"data/NorLAG-lengde-faste.dta"</span>, <span class="at">encoding =</span> <span class="st">"utf-8"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>lang <span class="ot">&lt;-</span> <span class="fu">read_stata</span>( <span class="st">"data/NorLAG-lengde-intervju.dta"</span>, <span class="at">encoding =</span> <span class="st">"utf-8"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>faste <span class="ot">&lt;-</span> <span class="fu">read_stata</span>( <span class="st">"data/NorLAG-lengde-faste.dta"</span>, <span class="at">encoding =</span> <span class="st">"utf-8"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>lang <span class="ot">&lt;-</span> <span class="fu">read_stata</span>( <span class="st">"data/NorLAG-lengde-intervju.dta"</span>, <span class="at">encoding =</span> <span class="st">"utf-8"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>register <span class="ot">&lt;-</span> <span class="fu">read_stata</span>(<span class="fu">paste0</span>(infilbane, <span class="st">"NorLAG-lengde-register.dta"</span>), <span class="at">encoding =</span> <span class="st">"utf-8"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>norlag_lbl <span class="ot">&lt;-</span> <span class="fu">merge</span>(faste, lang, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"ref_nr"</span>), <span class="at">all.y =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>norlag_lbl1 <span class="ot">&lt;-</span> <span class="fu">merge</span>(faste, lang, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"ref_nr"</span>), <span class="at">all.x =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(iodeltakelse <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span>  </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>           iodeltakelse <span class="sc">==</span> <span class="dv">2</span> <span class="sc">&amp;</span> round <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">|</span> </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>           iodeltakelse <span class="sc">==</span> <span class="dv">3</span> <span class="sc">&amp;</span> round <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>) <span class="sc">|</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>           iodeltakelse <span class="sc">==</span> <span class="dv">4</span> <span class="sc">&amp;</span> round <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>) <span class="sc">|</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>           iodeltakelse <span class="sc">==</span> <span class="dv">5</span> <span class="sc">&amp;</span> round <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>) <span class="sc">|</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>           iodeltakelse <span class="sc">==</span> <span class="dv">6</span> <span class="sc">&amp;</span> round <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> iointervjuaar)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># vektorer av variable som skal omkodes</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>cols_vec_all <span class="ot">&lt;-</span> <span class="fu">unique</span>(dat_dict<span class="sc">$</span>col_nm)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">names</span>(norlag_lbl))</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>cols_vec <span class="ot">&lt;-</span> cols_vec_all[cols_vec_all <span class="sc">%in%</span> vars]</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>cols_vec_na <span class="ot">&lt;-</span> cols_vec[(cols_vec <span class="sc">%in%</span> <span class="fu">unique</span>(dat_dict_na<span class="sc">$</span>col_nm))]</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>norlag <span class="ot">&lt;-</span> norlag_lbl <span class="sc">%&gt;%</span> </span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(cols_vec_na), </span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>              \(x,dic) <span class="fu">recode_col_na</span>(x, .env<span class="sc">$</span>dat_dict_na))) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), <span class="sc">~</span><span class="fu">as_factor</span>(.))) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.factor), <span class="sc">~</span><span class="fu">fct_drop</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>norlag_lbl <span class="ot">&lt;-</span> <span class="fu">merge</span>(norlag_lbl1, register, <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"ref_nr"</span>, <span class="st">"year"</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># vektorer av variable som skal omkodes</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>cols_vec_all <span class="ot">&lt;-</span> <span class="fu">unique</span>(dat_dict<span class="sc">$</span>col_nm)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">names</span>(norlag_lbl))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>cols_vec <span class="ot">&lt;-</span> cols_vec_all[cols_vec_all <span class="sc">%in%</span> vars]</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>cols_vec_na <span class="ot">&lt;-</span> cols_vec[(cols_vec <span class="sc">%in%</span> <span class="fu">unique</span>(dat_dict_na<span class="sc">$</span>col_nm))]</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>norlag <span class="ot">&lt;-</span> norlag_lbl <span class="sc">%&gt;%</span> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(cols_vec_na), </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>              \(x,dic) <span class="fu">recode_col_na</span>(x, .env<span class="sc">$</span>dat_dict_na))) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), <span class="sc">~</span><span class="fu">as_factor</span>(.))) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.factor), <span class="sc">~</span><span class="fu">fct_drop</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I tilegg skal vi lage en variabel for det vi kan kalle hovedaktivitet som sysselsettingsstatus. Det er om man er yrkesaktiv, arbeidsledig, student eller annet. I hver runde av NorLAG ble svarkategoriene utformet litt forskjellig, så derfor er svarene fordelt over tre variable. Nedenfor samles disse sammen og kodes om basert på tekststrenger.</p>
 <div class="cell">

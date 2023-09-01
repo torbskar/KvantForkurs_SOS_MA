@@ -99,10 +99,13 @@ infilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Under
 
 utfilbane <- "C:/Users/torbskar/OneDrive - Universitetet i Oslo/Dokumenter/Undervisning/SOS4020_forkurs/data2023/data_tilDeling/"
 
+
 # data
 faste <- read_stata( paste0(infilbane, "NorLAG-lengde-faste.dta"), encoding = "utf-8")
 
 lang <- read_stata( paste0(infilbane, "NorLAG-lengde-intervju.dta"), encoding = "utf-8")
+
+register <- read_stata(paste0(infilbane, "NorLAG-lengde-register.dta"), encoding = "utf-8")
 
 ```
 
@@ -116,22 +119,27 @@ library(haven)
 library(labelled)
 
 # data
+
 faste <- read_stata( "data/NorLAG-lengde-faste.dta", encoding = "utf-8")
 
 lang <- read_stata( "data/NorLAG-lengde-intervju.dta", encoding = "utf-8")
+
+register <- read_stata(paste0(infilbane, "NorLAG-lengde-register.dta"), encoding = "utf-8")
 ```
 
 
 ```{r}
-norlag_lbl <- merge(faste, lang, by = c("ref_nr"), all.y = TRUE) %>% 
+norlag_lbl1 <- merge(faste, lang, by = c("ref_nr"), all.x = TRUE) %>% 
   filter(iodeltakelse == 1 |  
            iodeltakelse == 2 & round %in% c(1, 3) | 
            iodeltakelse == 3 & round %in% c(2, 3) |
            iodeltakelse == 4 & round %in% c(1) |
            iodeltakelse == 5 & round %in% c(1, 2) |
            iodeltakelse == 6 & round %in% c(2)
-  ) 
+  ) %>% 
+  mutate(year = iointervjuaar)
 
+norlag_lbl <- merge(norlag_lbl1, register, all.x = TRUE, by = c("ref_nr", "year"))
 
 
 # vektorer av variable som skal omkodes
